@@ -2,6 +2,10 @@ import Foundation
 import SwiftUI
 import core
 
+public typealias FlowerAdsManagerListener = core.FlowerAdsManagerListener
+public typealias MediaPlayerHook = core.MediaPlayerHook
+public typealias FlowerError = core.FlowerError
+
 class DefaultSdkLifecycleListener: SdkLifecycleListener {
     func onDestroyed() {
         // TODO("Not yet implemented")
@@ -24,7 +28,7 @@ public class FlowerSdk {
 //                    core.SdkContainer.ClassName.httpClient: "TODO",
                     core.SdkContainer.ClassName.cacheManager: CacheManagerImpl(appContext: appContext),
                     core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(appContext: appContext),
-                    core.SdkContainer.ClassName.mediaPlayerAdapter: NoopMediaPlayerAdapter(),
+                    core.SdkContainer.ClassName.mediaPlayerAdapter: AvPlayerAdapter(),
                 ]),
                 factories: PlatformMap(storage: [
                     core.SdkContainer.ClassName.manipulationServer: ManipulationServerImplFactory(),
@@ -54,20 +58,13 @@ public class FlowerSdk {
         }
     }
 
-    static func setLogLevel(level: String) {
-        // TODO: Implement
-        /*
-         SdkContainer.getInstance().setLogLevel(
-             when (level) {
-                 "Verbose" -> org.lighthousegames.logging.LogLevel.Verbose
-                 "Debug" -> org.lighthousegames.logging.LogLevel.Debug
-                 "Info" -> org.lighthousegames.logging.LogLevel.Info
-                 "Warn" -> org.lighthousegames.logging.LogLevel.Warn
-                 "Error" -> org.lighthousegames.logging.LogLevel.Error
-                 "Off" -> org.lighthousegames.logging.LogLevel.Off
-                 else -> throw IllegalArgumentException("unknown log level")
-             }
-         )
-         */
+    public static func setLogLevel(level: String) {
+        let logLevels = SdkContainer.LogLevel.entries
+
+        guard let logLevel = logLevels.first(where: { $0.name == level }) else {
+            fatalError("log level must be one of \(logLevels.map { $0.name }.joined(separator: ", "))")
+        }
+
+        SdkContainer.companion.getInstance().setLogLevel(level: logLevel)
     }
 }

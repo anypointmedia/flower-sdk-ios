@@ -2,8 +2,6 @@ import Foundation
 import SwiftUI
 import core
 
-public typealias MediaPlayerHook = core.MediaPlayerHook
-
 public struct FlowerAdViewBody: View {
     public var body: some View {
         ZStack {
@@ -19,7 +17,7 @@ public class FlowerAdView: FlowerAdViewInterface {
 
     public var body = FlowerAdViewBody()
 
-    public lazy var adManager: FlowerAdManager = FlowerAdManagerImpl(flowerAdView: self, playerView: playerView, googleAdView: googleAdView, flowerAdUIView: flowerAdUIView)
+    public lazy var adsManager: FlowerAdsManager = FlowerAdsManagerImpl(flowerAdView: self, playerView: playerView, googleAdView: googleAdView, flowerAdUIView: flowerAdUIView)
 
     public init(/* context: any View */) {
         // TODO: Implement
@@ -41,15 +39,12 @@ public class FlowerAdView: FlowerAdViewInterface {
 //        addView(flowerAdUIView)
     }
 
-    // TODO: Implement
-    // override
     public func hide() {
+        // TODO implement
     }
 
-    // TODO: Implement
-    // override
     public func show() {
-
+        // TODO implement
     }
 
     public func getHeight() -> Int32 {

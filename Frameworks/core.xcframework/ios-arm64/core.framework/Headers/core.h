@@ -6,9 +6,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class CoreManipulationServerHandler, CoreManipulator, CoreFlowerAdManagerImpl, CoreHlsManipulatorCompanion, CoreLoggingKmLog, CoreFLogging, CoreScte35DecoderCompanion, CoreSpliceInfoSection, CoreKotlinByteArray, CoreKotlinThrowable, CoreKotlinArray<T>, CoreKotlinException, CoreAvailDescriptor, CoreSpliceInsert, CoreSpliceTime, CoreBreakDuration, CoreKotlinx_datetimeInstant, CoreOffsetDateTimeCompanion, CoreOffsetDateTime, CoreMediaType, CoreAlternativeRenditionBuilderCompanion, CoreAlternativeRenditionBuilder_, CoreAlternativeRenditionBuilder, CoreAlternativeRenditionCompanion, CoreByteRangeBuilderCompanion, CoreByteRangeBuilder_, CoreByteRangeBuilder, CoreByteRangeCompanion, CoreChannelsBuilderCompanion, CoreChannelsBuilder_, CoreChannelsBuilder, CoreChannelsCompanion, CoreCueOutBuilder, CoreCueOutBuilder_, CoreCueOutCompanion, CoreCueOutContBuilderCompanion, CoreCueOutContBuilder_, CoreCueOutContBuilder, CoreCueOutContCompanion, CoreDateRangeBuilderCompanion, CoreDateRangeBuilder_, CoreDateRangeBuilder, CoreDateRangeCompanion, CoreVideoRange, CoreIFrameVariantBuilderCompanion, CoreIFrameVariantBuilder_, CoreIFrameVariantBuilder, CoreIFrameVariantCompanion, CoreKotlinEnumCompanion, CoreKotlinEnum<E>, CoreKeyMethodCompanion, CoreKeyMethod, CoreMasterPlaylistBuilderCompanion, CoreMasterPlaylistBuilder_, CoreMasterPlaylistBuilder, CoreMasterPlaylistCompanion, CorePlaylistType, CoreMediaPlaylistBuilderCompanion, CoreMediaPlaylistBuilder_, CoreMediaSegmentBuilder, CoreMediaPlaylistBuilder, CoreMediaPlaylistCompanion, CoreMediaSegmentBuilder_Companion, CoreMediaSegmentBuilder_, CoreMediaSegmentCompanion, CoreMediaTypeCompanion, CorePartialSegmentBuilderCompanion, CorePartialSegmentBuilder_, CorePartialSegmentBuilder, CorePartialSegmentCompanion, CorePartialSegmentInformationBuilderCompanion, CorePartialSegmentInformationBuilder_, CorePartialSegmentInformationBuilder, CorePartialSegmentInformationCompanion, CorePlaylistVariableBuilder, CorePlaylistVariableBuilder_, CorePlaylistVariableCompanion, CorePreloadHintType, CorePreloadHintBuilderCompanion, CorePreloadHintBuilder_, CorePreloadHintBuilder, CorePreloadHintCompanion, CoreRenditionReportBuilderCompanion, CoreRenditionReportBuilder_, CoreRenditionReportBuilder, CoreRenditionReportCompanion, CoreResolutionBuilderCompanion, CoreResolutionBuilder_, CoreResolutionBuilder, CoreResolutionCompanion, CoreScte35BuilderCompanion, CoreScte35Builder_, CoreScte35Builder, CoreScte35Companion, CoreSegmentKeyBuilderCompanion, CoreSegmentKeyBuilder_, CoreSegmentKeyBuilder, CoreSegmentKeyCompanion, CoreSegmentMapBuilderCompanion, CoreSegmentMapBuilder_, CoreSegmentMapBuilder, CoreSegmentMapCompanion, CoreServerControlBuilderCompanion, CoreServerControlBuilder_, CoreServerControlBuilder, CoreServerControlCompanion, CoreSessionDataBuilderCompanion, CoreSessionDataBuilder_, CoreSessionDataBuilder, CoreSessionDataCompanion, CoreSkipBuilderCompanion, CoreSkipBuilder_, CoreSkipBuilder, CoreSkipCompanion, CoreStartTimeOffsetBuilderCompanion, CoreStartTimeOffsetBuilder_, CoreStartTimeOffsetBuilder, CoreStartTimeOffsetCompanion, CoreVariantBuilderCompanion, CoreVariantBuilder_, CoreVariantBuilder, CoreVariantCompanion, CoreVideoRangeCompanion, CoreAbstractPlaylistParserCompanion, CoreTextBuilder, CoreAbstractPlaylistParser<T, B>, CoreParsingMode, CoreMediaPlaylistParserBuilder, CoreParsingModeCompanion, CorePartialSegmentAttributeCompanion, CorePartialSegmentAttribute, CorePartialSegmentInformationAttributeCompanion, CorePartialSegmentInformationAttribute, CoreKtor_ioIOException, CorePlaylistVariableAttributeCompanion, CorePlaylistVariableAttribute, CorePreloadHintAttributeCompanion, CorePreloadHintAttribute, CoreRenditionReportAttributeCompanion, CoreRenditionReportAttribute, CoreSegmentKeyAttributeCompanion, CoreSegmentKeyAttribute, CoreServerControlAttributeCompanion, CoreServerControlAttribute, CoreSkipAttributeCompanion, CoreSkipAttribute, CoreKotlinStringBuilder, CoreHex, CoreLifecycleManager, CoreSdkContainerClassName, CorePlatformMap<K, V>, CoreAdHandlerCompanion, CoreAd, CoreAdUrlMacroValue, CoreAdTrackingEvent, CoreAdList, CoreAdUrlMacroCompanion, CoreAdUrlMacroType, CoreErrorCode, CoreErrorLog, CoreFillerAdsManagerCompanion, CoreFlowerAdManagerImplCompanion, CoreAdHandler, CoreLinearTVAdHandlerCompanion, CoreLinearTVAdHandlerAdHandlerAndJobs, CoreMPD, CoreNormalAdHandlerCompanion, CoreVastParserCompanion, CoreCreative, CorePlatformList<E>, CoreAdBreak, CoreNormalAdHandler, CoreVodAdHandlerCompanion, CoreAdClick, CoreAdCompanion, CoreCacheAdMediaSegmentServiceAdMediaSegment, CoreConvertCreativeRequest, CoreKotlinPair<__covariant A, __covariant B>, CoreCreativeResponseAsset, CoreCreativeResponse, CoreCurrentPlayItem, CoreKtor_client_coreHttpRequestBuilder, CoreKtor_httpHttpStatusCode, CoreStreamCacheResponse, CoreStringCacheResponse, CoreSdkContainerCompanion, CoreLoggingLogLevel, CoreVastParser, CoreAdUrlMacro, CoreFillerAdsManager, CoreKtor_client_coreHttpClient, CoreKotlinx_serialization_jsonJson, CoreSdkContainer, CoreGoogleAdReportLogEvent, CoreAdProgressCompanion, CoreAdProgress, CoreManipulationServerHandlerCompanion, CoreManipulationServerHandlerManipulationType, CoreXmlNode, CoreRepresentation, CoreSegmentTemplate, CoreDashManipulatorCompanion, CoreDashManipulatorPeriodInformation, CoreDashManipulatorResponseAds, CoreMPDCompanion, CorePeriod, CoreNodeCompanion, CorePeriodCompanion, CoreAdaptationSet, CoreSpliceInfoSection_, CoreCacheAdMediaSegmentServiceCompanion, CoreCacheAdMediaSegmentServiceAdGroup, CoreCacheAdMediaSegmentService, CoreMediaPlaylistManipulatorCompanion, CoreMediaPlaylistManipulatorCueOutMarker, CoreMediaPlaylistManipulatorCueInMarker, CoreMediaPlaylistManipulatorCueEvent, CoreMediaPlaylistManipulatorHistoryMediaSegment, CoreStringUtils, CorePlatformSet<E>, CoreKtor_client_coreHttpClientEngineConfig, CoreKtor_client_coreHttpClientConfig<T>, CoreKtor_eventsEvents, CoreKtor_client_coreHttpReceivePipeline, CoreKtor_client_coreHttpRequestPipeline, CoreKtor_client_coreHttpResponsePipeline, CoreKtor_client_coreHttpSendPipeline, CoreKtor_client_coreHttpResponse, CoreKtor_httpHeadersBuilder, CoreKtor_client_coreHttpRequestBuilderCompanion, CoreKtor_client_coreHttpRequestData, CoreKtor_httpURLBuilder, CoreKtor_utilsTypeInfo, CoreKtor_httpHttpMethod, CoreKtor_client_coreHttpClientCall, CoreKtor_utilsGMTDate, CoreKtor_httpHttpProtocolVersion, CoreKotlinByteIterator, NSData, CoreKotlinStringCompanion, CoreKotlinx_datetimeInstantCompanion, CoreKotlinCharArray, CoreKotlinRuntimeException, CoreKotlinIllegalStateException, CoreKotlinCancellationException, CoreKtor_httpHttpStatusCodeCompanion, CoreKtor_ioMemory, CoreKtor_ioChunkBuffer, CoreKtor_ioBuffer, CoreKtor_ioByteReadPacket, CoreKotlinx_serialization_coreSerializersModule, CoreKotlinx_serialization_jsonJsonDefault, CoreKotlinx_serialization_jsonJsonElement, CoreKotlinx_serialization_jsonJsonConfiguration, CoreKtor_client_coreHttpResponseData, CoreKotlinx_coroutines_coreCoroutineDispatcher, CoreKtor_client_coreProxyConfig, CoreKtor_utilsAttributeKey<T>, CoreKtor_eventsEventDefinition<T>, CoreKtor_utilsPipelinePhase, CoreKtor_utilsPipeline<TSubject, TContext>, CoreKtor_client_coreHttpReceivePipelinePhases, CoreKotlinUnit, CoreKtor_client_coreHttpRequestPipelinePhases, CoreKtor_client_coreHttpResponsePipelinePhases, CoreKtor_client_coreHttpResponseContainer, CoreKtor_client_coreHttpSendPipelinePhases, CoreKtor_utilsStringValuesBuilderImpl, CoreKtor_httpUrl, CoreKtor_httpOutgoingContent, CoreKtor_httpURLProtocol, CoreKtor_httpURLBuilderCompanion, CoreKtor_httpHttpMethodCompanion, CoreKtor_client_coreHttpClientCallCompanion, CoreKtor_utilsGMTDateCompanion, CoreKtor_utilsWeekDay, CoreKtor_utilsMonth, CoreKtor_httpHttpProtocolVersionCompanion, CoreKotlinCharIterator, CoreKtor_ioMemoryCompanion, CoreKtor_ioBufferCompanion, CoreKtor_ioChunkBufferCompanion, CoreKtor_ioInputCompanion, CoreKtor_ioInput, CoreKtor_ioByteReadPacketCompanion, CoreKotlinx_serialization_jsonJsonElementCompanion, CoreKotlinAbstractCoroutineContextElement, CoreKotlinx_coroutines_coreCoroutineDispatcherKey, CoreKtor_httpUrlCompanion, CoreKtor_httpContentType, CoreKtor_httpURLProtocolCompanion, CoreKotlinKTypeProjection, CoreKtor_utilsWeekDayCompanion, CoreKtor_utilsMonthCompanion, CoreKotlinNothing, CoreKotlinx_serialization_coreSerialKind, CoreKotlinAbstractCoroutineContextKey<B, E>, CoreKtor_httpHeaderValueParam, CoreKtor_httpHeaderValueWithParametersCompanion, CoreKtor_httpHeaderValueWithParameters, CoreKtor_httpContentTypeCompanion, CoreKotlinKVariance, CoreKotlinKTypeProjectionCompanion;
+@class CoreManipulationServerHandler, CoreManipulator, CoreFlowerAdsManagerImpl, CoreHlsManipulatorCompanion, CoreLoggingKmLog, CoreFLogging, CoreScte35DecoderCompanion, CoreSpliceInfoSection, CoreKotlinByteArray, CoreKotlinThrowable, CoreKotlinArray<T>, CoreKotlinException, CoreAvailDescriptor, CoreSpliceInsert, CoreSpliceTime, CoreBreakDuration, CoreKotlinx_datetimeInstant, CoreOffsetDateTimeCompanion, CoreOffsetDateTime, CoreMediaType, CoreAlternativeRenditionBuilderCompanion, CoreAlternativeRenditionBuilder_, CoreAlternativeRenditionBuilder, CoreAlternativeRenditionCompanion, CoreByteRangeBuilderCompanion, CoreByteRangeBuilder_, CoreByteRangeBuilder, CoreByteRangeCompanion, CoreChannelsBuilderCompanion, CoreChannelsBuilder_, CoreChannelsBuilder, CoreChannelsCompanion, CoreCueOutBuilder, CoreCueOutBuilder_, CoreCueOutCompanion, CoreCueOutContBuilderCompanion, CoreCueOutContBuilder_, CoreCueOutContBuilder, CoreCueOutContCompanion, CoreDateRangeBuilderCompanion, CoreDateRangeBuilder_, CoreDateRangeBuilder, CoreDateRangeCompanion, CoreVideoRange, CoreIFrameVariantBuilderCompanion, CoreIFrameVariantBuilder_, CoreIFrameVariantBuilder, CoreIFrameVariantCompanion, CoreKotlinEnumCompanion, CoreKotlinEnum<E>, CoreKeyMethodCompanion, CoreKeyMethod, CoreMasterPlaylistBuilderCompanion, CoreMasterPlaylistBuilder_, CoreMasterPlaylistBuilder, CoreMasterPlaylistCompanion, CorePlaylistType, CoreMediaPlaylistBuilderCompanion, CoreMediaPlaylistBuilder_, CoreMediaSegmentBuilder, CoreMediaPlaylistBuilder, CoreMediaPlaylistCompanion, CoreMediaSegmentBuilder_Companion, CoreMediaSegmentBuilder_, CoreMediaSegmentCompanion, CoreMediaTypeCompanion, CorePartialSegmentBuilderCompanion, CorePartialSegmentBuilder_, CorePartialSegmentBuilder, CorePartialSegmentCompanion, CorePartialSegmentInformationBuilderCompanion, CorePartialSegmentInformationBuilder_, CorePartialSegmentInformationBuilder, CorePartialSegmentInformationCompanion, CorePlaylistVariableBuilder, CorePlaylistVariableBuilder_, CorePlaylistVariableCompanion, CorePreloadHintType, CorePreloadHintBuilderCompanion, CorePreloadHintBuilder_, CorePreloadHintBuilder, CorePreloadHintCompanion, CoreRenditionReportBuilderCompanion, CoreRenditionReportBuilder_, CoreRenditionReportBuilder, CoreRenditionReportCompanion, CoreResolutionBuilderCompanion, CoreResolutionBuilder_, CoreResolutionBuilder, CoreResolutionCompanion, CoreScte35BuilderCompanion, CoreScte35Builder_, CoreScte35Builder, CoreScte35Companion, CoreSegmentKeyBuilderCompanion, CoreSegmentKeyBuilder_, CoreSegmentKeyBuilder, CoreSegmentKeyCompanion, CoreSegmentMapBuilderCompanion, CoreSegmentMapBuilder_, CoreSegmentMapBuilder, CoreSegmentMapCompanion, CoreServerControlBuilderCompanion, CoreServerControlBuilder_, CoreServerControlBuilder, CoreServerControlCompanion, CoreSessionDataBuilderCompanion, CoreSessionDataBuilder_, CoreSessionDataBuilder, CoreSessionDataCompanion, CoreSkipBuilderCompanion, CoreSkipBuilder_, CoreSkipBuilder, CoreSkipCompanion, CoreStartTimeOffsetBuilderCompanion, CoreStartTimeOffsetBuilder_, CoreStartTimeOffsetBuilder, CoreStartTimeOffsetCompanion, CoreVariantBuilderCompanion, CoreVariantBuilder_, CoreVariantBuilder, CoreVariantCompanion, CoreVideoRangeCompanion, CoreAbstractPlaylistParserCompanion, CoreTextBuilder, CoreAbstractPlaylistParser<T, B>, CoreParsingMode, CoreMediaPlaylistParserBuilder, CoreParsingModeCompanion, CorePartialSegmentAttributeCompanion, CorePartialSegmentAttribute, CorePartialSegmentInformationAttributeCompanion, CorePartialSegmentInformationAttribute, CoreKtor_ioIOException, CorePlaylistVariableAttributeCompanion, CorePlaylistVariableAttribute, CorePreloadHintAttributeCompanion, CorePreloadHintAttribute, CoreRenditionReportAttributeCompanion, CoreRenditionReportAttribute, CoreSegmentKeyAttributeCompanion, CoreSegmentKeyAttribute, CoreServerControlAttributeCompanion, CoreServerControlAttribute, CoreSkipAttributeCompanion, CoreSkipAttribute, CoreKotlinStringBuilder, CoreHex, CoreLifecycleManager, CoreSdkContainerClassName, CorePlatformMap<K, V>, CoreAdHandlerCompanion, CoreAd, CoreAdUrlMacroValue, CoreAdTrackingEvent, CoreAdList, CoreAdUrlMacroCompanion, CoreAdUrlMacroType, CoreErrorCode, CoreErrorLog, CoreFillerAdsManagerCompanion, CoreFlowerAdsManagerImplCompanion, CoreAdHandler, CoreLinearTVAdHandlerCompanion, CoreLinearTVAdHandlerAdHandlerAndJobs, CoreMPD, CoreNormalAdHandlerCompanion, CoreVastParserCompanion, CoreCreative, CorePlatformList<E>, CoreAdBreak, CoreNormalAdHandler, CoreVodAdHandlerCompanion, CoreAdClick, CoreAdCompanion, CoreCacheAdMediaSegmentServiceAdMediaSegment, CoreConvertCreativeRequest, CoreKotlinPair<__covariant A, __covariant B>, CoreCreativeResponseAsset, CoreCreativeResponse, CoreCurrentPlayItem, CoreFlowerError, CoreKtor_client_coreHttpRequestBuilder, CoreKtor_httpHttpStatusCode, CoreStreamCacheResponse, CoreStringCacheResponse, CoreSdkContainerCompanion, CoreSdkContainerLogLevel, CoreVastParser, CoreAdUrlMacro, CoreFillerAdsManager, CoreKtor_client_coreHttpClient, CoreKotlinx_serialization_jsonJson, CoreSdkContainer, CoreLoggingLogLevel, CoreGoogleAdReportLogEvent, CoreAdProgressCompanion, CoreAdProgress, CoreManipulationServerHandlerCompanion, CoreManipulationServerHandlerManipulationType, CoreMediaPlaylistManipulatorHistoryMediaSegment, CoreXmlNode, CoreRepresentation, CoreSegmentTemplate, CoreDashManipulatorCompanion, CoreDashManipulatorPeriodInformation, CoreDashManipulatorResponseAds, CoreMPDCompanion, CorePeriod, CoreNodeCompanion, CorePeriodCompanion, CoreAdaptationSet, CoreSpliceInfoSection_, CoreCacheAdMediaSegmentServiceCompanion, CoreCacheAdMediaSegmentServiceAdGroup, CoreCacheAdMediaSegmentService, CoreMediaPlaylistManipulatorCompanion, CoreMediaPlaylistManipulatorCueOutMarker, CoreMediaPlaylistManipulatorCueInMarker, CoreMediaPlaylistManipulatorCueEvent, CorePlatformCompanion, CoreStringUtils, CorePlatformSet<E>, CoreKtor_client_coreHttpClientEngineConfig, CoreKtor_client_coreHttpClientConfig<T>, CoreKtor_eventsEvents, CoreKtor_client_coreHttpReceivePipeline, CoreKtor_client_coreHttpRequestPipeline, CoreKtor_client_coreHttpResponsePipeline, CoreKtor_client_coreHttpSendPipeline, CoreKtor_client_coreHttpResponse, CoreKtor_httpHeadersBuilder, CoreKtor_client_coreHttpRequestBuilderCompanion, CoreKtor_client_coreHttpRequestData, CoreKtor_httpURLBuilder, CoreKtor_utilsTypeInfo, CoreKtor_httpHttpMethod, CoreKtor_client_coreHttpClientCall, CoreKtor_utilsGMTDate, CoreKtor_httpHttpProtocolVersion, CoreKotlinByteIterator, NSData, CoreKotlinStringCompanion, CoreKotlinx_datetimeInstantCompanion, CoreKotlinCharArray, CoreKotlinRuntimeException, CoreKotlinIllegalStateException, CoreKotlinCancellationException, CoreKtor_httpHttpStatusCodeCompanion, CoreKtor_ioMemory, CoreKtor_ioChunkBuffer, CoreKtor_ioBuffer, CoreKtor_ioByteReadPacket, CoreKotlinx_serialization_coreSerializersModule, CoreKotlinx_serialization_jsonJsonDefault, CoreKotlinx_serialization_jsonJsonElement, CoreKotlinx_serialization_jsonJsonConfiguration, CoreKtor_client_coreHttpResponseData, CoreKotlinx_coroutines_coreCoroutineDispatcher, CoreKtor_client_coreProxyConfig, CoreKtor_utilsAttributeKey<T>, CoreKtor_eventsEventDefinition<T>, CoreKtor_utilsPipelinePhase, CoreKtor_utilsPipeline<TSubject, TContext>, CoreKtor_client_coreHttpReceivePipelinePhases, CoreKotlinUnit, CoreKtor_client_coreHttpRequestPipelinePhases, CoreKtor_client_coreHttpResponsePipelinePhases, CoreKtor_client_coreHttpResponseContainer, CoreKtor_client_coreHttpSendPipelinePhases, CoreKtor_utilsStringValuesBuilderImpl, CoreKtor_httpUrl, CoreKtor_httpOutgoingContent, CoreKtor_httpURLProtocol, CoreKtor_httpURLBuilderCompanion, CoreKtor_httpHttpMethodCompanion, CoreKtor_client_coreHttpClientCallCompanion, CoreKtor_utilsGMTDateCompanion, CoreKtor_utilsWeekDay, CoreKtor_utilsMonth, CoreKtor_httpHttpProtocolVersionCompanion, CoreKotlinCharIterator, CoreKtor_ioMemoryCompanion, CoreKtor_ioBufferCompanion, CoreKtor_ioChunkBufferCompanion, CoreKtor_ioInputCompanion, CoreKtor_ioInput, CoreKtor_ioByteReadPacketCompanion, CoreKotlinx_serialization_jsonJsonElementCompanion, CoreKotlinAbstractCoroutineContextElement, CoreKotlinx_coroutines_coreCoroutineDispatcherKey, CoreKtor_httpUrlCompanion, CoreKtor_httpContentType, CoreKtor_httpURLProtocolCompanion, CoreKotlinKTypeProjection, CoreKtor_utilsWeekDayCompanion, CoreKtor_utilsMonthCompanion, CoreKotlinNothing, CoreKotlinx_serialization_coreSerialKind, CoreKotlinAbstractCoroutineContextKey<B, E>, CoreKtor_httpHeaderValueParam, CoreKtor_httpHeaderValueWithParametersCompanion, CoreKtor_httpHeaderValueWithParameters, CoreKtor_httpContentTypeCompanion, CoreKotlinKVariance, CoreKotlinKTypeProjectionCompanion;
 
-@protocol CoreChannels, CoreAlternativeRendition, CoreByteRange, CoreCueOut, CoreScte35, CoreCueOutCont, CoreDateRange, CoreKotlinMapEntry, CoreResolution, CoreIFrameVariant, CoreKotlinComparable, CoreSessionData, CoreSegmentKey, CoreVariant, CoreStartTimeOffset, CorePlaylistVariable, CorePlaylist, CoreMasterPlaylist, CoreMediaSegment, CorePartialSegmentInformation, CorePartialSegment, CorePreloadHint, CoreRenditionReport, CoreServerControl, CoreSkip, CoreMediaPlaylist, CoreSegmentMap, CoreKotlinIterator, CoreAttribute, CoreSdkLifecycleListener, CoreSdkContainerBeanFactory, CoreGoogleAdView, CoreKotlinx_coroutines_coreJob, CoreKotlinx_coroutines_coreFlow, CoreUIButton, CoreUIView, CoreFlowerAdsManagerListener, CoreMediaPlayerHook, CoreFlowerAdManager, CoreFlowerAdPlayerCallback, CoreFlowerAdViewInterface, CoreAdPlayerView, CoreFlowerAdUIView, CoreErrorLogSender, CoreXmlNodeWrapper, CoreCacheManager, CoreCommonJob, CoreMediaPlayerAdapter, CoreKtor_httpHeaders, CoreCacheResponse, CoreKtor_ioByteReadChannel, CoreDeviceService, CoreGoogleAdsManager, CoreMpdParser, CoreGoogleAdsLoaderListener, CoreNode, CoreDocument, CoreKotlinCoroutineContext, CoreKotlinx_coroutines_coreCoroutineScope, CoreKtor_ioCloseable, CoreKtor_client_coreHttpClientEngine, CoreKtor_client_coreHttpClientEngineCapability, CoreKtor_utilsAttributes, CoreKtor_httpHttpMessageBuilder, CoreKtor_httpHttpMessage, CoreKotlinCharSequence, CoreKotlinAppendable, CoreKotlinx_coroutines_coreChildHandle, CoreKotlinx_coroutines_coreChildJob, CoreKotlinx_coroutines_coreDisposableHandle, CoreKotlinSequence, CoreKotlinx_coroutines_coreSelectClause0, CoreKotlinCoroutineContextKey, CoreKotlinCoroutineContextElement, CoreKotlinx_coroutines_coreFlowCollector, CoreKtor_utilsStringValues, CoreKtor_ioReadSession, CoreKotlinSuspendFunction1, CoreKotlinx_serialization_coreDeserializationStrategy, CoreKotlinx_serialization_coreSerializationStrategy, CoreKotlinx_serialization_coreSerialFormat, CoreKotlinx_serialization_coreStringFormat, CoreKtor_client_coreHttpClientPlugin, CoreKotlinSuspendFunction2, CoreKtor_utilsStringValuesBuilder, CoreKtor_httpParameters, CoreKtor_httpParametersBuilder, CoreKotlinKClass, CoreKotlinKType, CoreKtor_client_coreHttpRequest, CoreKotlinx_serialization_coreKSerializer, CoreKotlinx_coroutines_coreParentJob, CoreKotlinx_coroutines_coreSelectInstance, CoreKotlinx_coroutines_coreSelectClause, CoreKtor_ioObjectPool, CoreKotlinFunction, CoreKotlinx_serialization_coreDecoder, CoreKotlinx_serialization_coreSerialDescriptor, CoreKotlinx_serialization_coreEncoder, CoreKotlinx_serialization_coreSerializersModuleCollector, CoreKotlinx_serialization_jsonJsonNamingStrategy, CoreKotlinContinuation, CoreKotlinContinuationInterceptor, CoreKotlinx_coroutines_coreRunnable, CoreKotlinKDeclarationContainer, CoreKotlinKAnnotatedElement, CoreKotlinKClassifier, CoreKotlinx_serialization_coreCompositeDecoder, CoreKotlinAnnotation, CoreKotlinx_serialization_coreCompositeEncoder;
+@protocol CoreChannels, CoreAlternativeRendition, CoreByteRange, CoreCueOut, CoreScte35, CoreCueOutCont, CoreDateRange, CoreKotlinMapEntry, CoreResolution, CoreIFrameVariant, CoreKotlinComparable, CoreSessionData, CoreSegmentKey, CoreVariant, CoreStartTimeOffset, CorePlaylistVariable, CorePlaylist, CoreMasterPlaylist, CoreMediaSegment, CorePartialSegmentInformation, CorePartialSegment, CorePreloadHint, CoreRenditionReport, CoreServerControl, CoreSkip, CoreMediaPlaylist, CoreSegmentMap, CoreKotlinIterator, CoreAttribute, CoreSdkLifecycleListener, CoreSdkContainerBeanFactory, CoreGoogleAdView, CoreKotlinx_coroutines_coreJob, CoreKotlinx_coroutines_coreFlow, CoreUIButton, CoreUIView, CoreFlowerAdsManagerListener, CoreMediaPlayerHook, CoreFlowerAdsManager, CoreFlowerAdPlayerCallback, CoreFlowerAdViewInterface, CoreAdPlayerView, CoreFlowerAdUIView, CoreErrorLogSender, CoreXmlNodeWrapper, CoreCacheManager, CoreCommonJob, CoreMediaPlayerAdapter, CoreKtor_httpHeaders, CoreCacheResponse, CoreKtor_ioByteReadChannel, CoreDeviceService, CoreGoogleAdsManager, CoreMpdParser, CoreGoogleAdsLoaderListener, CoreNode, CoreDocument, CoreKotlinCoroutineContext, CoreKotlinx_coroutines_coreCoroutineScope, CoreKtor_ioCloseable, CoreKtor_client_coreHttpClientEngine, CoreKtor_client_coreHttpClientEngineCapability, CoreKtor_utilsAttributes, CoreKtor_httpHttpMessageBuilder, CoreKtor_httpHttpMessage, CoreKotlinCharSequence, CoreKotlinAppendable, CoreKotlinx_coroutines_coreChildHandle, CoreKotlinx_coroutines_coreChildJob, CoreKotlinx_coroutines_coreDisposableHandle, CoreKotlinSequence, CoreKotlinx_coroutines_coreSelectClause0, CoreKotlinCoroutineContextKey, CoreKotlinCoroutineContextElement, CoreKotlinx_coroutines_coreFlowCollector, CoreKtor_utilsStringValues, CoreKtor_ioReadSession, CoreKotlinSuspendFunction1, CoreKotlinx_serialization_coreDeserializationStrategy, CoreKotlinx_serialization_coreSerializationStrategy, CoreKotlinx_serialization_coreSerialFormat, CoreKotlinx_serialization_coreStringFormat, CoreKtor_client_coreHttpClientPlugin, CoreKotlinSuspendFunction2, CoreKtor_utilsStringValuesBuilder, CoreKtor_httpParameters, CoreKtor_httpParametersBuilder, CoreKotlinKClass, CoreKotlinKType, CoreKtor_client_coreHttpRequest, CoreKotlinx_serialization_coreKSerializer, CoreKotlinx_coroutines_coreParentJob, CoreKotlinx_coroutines_coreSelectInstance, CoreKotlinx_coroutines_coreSelectClause, CoreKtor_ioObjectPool, CoreKotlinFunction, CoreKotlinx_serialization_coreDecoder, CoreKotlinx_serialization_coreSerialDescriptor, CoreKotlinx_serialization_coreEncoder, CoreKotlinx_serialization_coreSerializersModuleCollector, CoreKotlinx_serialization_jsonJsonNamingStrategy, CoreKotlinContinuation, CoreKotlinContinuationInterceptor, CoreKotlinx_coroutines_coreRunnable, CoreKotlinKDeclarationContainer, CoreKotlinKAnnotatedElement, CoreKotlinKClassifier, CoreKotlinx_serialization_coreCompositeDecoder, CoreKotlinAnnotation, CoreKotlinx_serialization_coreCompositeEncoder;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -163,7 +163,7 @@ __attribute__((swift_name("Manipulator")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("HlsManipulator")))
 @interface CoreHlsManipulator : CoreManipulator
-- (instancetype)initWithManipulationServerHandler:(CoreManipulationServerHandler *)manipulationServerHandler flowerAdManager:(CoreFlowerAdManagerImpl *)flowerAdManager __attribute__((swift_name("init(manipulationServerHandler:flowerAdManager:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithManipulationServerHandler:(CoreManipulationServerHandler *)manipulationServerHandler flowerAdsManager:(CoreFlowerAdsManagerImpl *)flowerAdsManager __attribute__((swift_name("init(manipulationServerHandler:flowerAdsManager:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithManipulationServerHandler:(CoreManipulationServerHandler *)manipulationServerHandler __attribute__((swift_name("init(manipulationServerHandler:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) CoreHlsManipulatorCompanion *companion __attribute__((swift_name("companion")));
 
@@ -2357,12 +2357,6 @@ __attribute__((swift_name("LifecycleManager")))
 - (void)doInitListener:(id<CoreSdkLifecycleListener>)listener instances:(CorePlatformMap<CoreSdkContainerClassName *, id> *)instances factories:(CorePlatformMap<CoreSdkContainerClassName *, id<CoreSdkContainerBeanFactory>> *)factories __attribute__((swift_name("doInit(listener:instances:factories:)")));
 @end
 
-__attribute__((swift_name("Platform")))
-@protocol CorePlatform
-@required
-- (NSString *)hello __attribute__((swift_name("hello()")));
-@end
-
 __attribute__((swift_name("SdkLifecycleListener")))
 @protocol CoreSdkLifecycleListener
 @required
@@ -2598,19 +2592,6 @@ __attribute__((swift_name("FillerAdsManager.Companion")))
 @property (class, readonly, getter=shared) CoreFillerAdsManagerCompanion *shared __attribute__((swift_name("shared")));
 @end
 
-__attribute__((swift_name("FlowerAdManager")))
-@protocol CoreFlowerAdManager
-@required
-- (void)addListenerAdsManagerListener:(id<CoreFlowerAdsManagerListener>)adsManagerListener __attribute__((swift_name("addListener(adsManagerListener:)")));
-- (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<CoreMediaPlayerHook>)mediaPlayerHook __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:)")));
-- (void)notifyContentEnded __attribute__((swift_name("notifyContentEnded()")));
-- (void)play __attribute__((swift_name("play()")));
-- (void)removeListenerAdsManagerListener:(id<CoreFlowerAdsManagerListener>)adsManagerListener __attribute__((swift_name("removeListener(adsManagerListener:)")));
-- (void)requestAdAdTagUrl:(NSString *)adTagUrl extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams __attribute__((swift_name("requestAd(adTagUrl:extraParams:)")));
-- (void)requestVodAdAdTagUrl:(NSString *)adTagUrl contentId:(NSString *)contentId durationMs:(int64_t)durationMs extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<CoreMediaPlayerHook>)mediaPlayerHook __attribute__((swift_name("requestVodAd(adTagUrl:contentId:durationMs:extraParams:mediaPlayerHook:)")));
-- (void)stop __attribute__((swift_name("stop()")));
-@end
-
 __attribute__((swift_name("FlowerAdPlayerCallback")))
 @protocol CoreFlowerAdPlayerCallback
 @required
@@ -2622,11 +2603,24 @@ __attribute__((swift_name("FlowerAdPlayerCallback")))
 - (void)onStopped __attribute__((swift_name("onStopped()")));
 @end
 
+__attribute__((swift_name("FlowerAdsManager")))
+@protocol CoreFlowerAdsManager
+@required
+- (void)addListenerAdsManagerListener:(id<CoreFlowerAdsManagerListener>)adsManagerListener __attribute__((swift_name("addListener(adsManagerListener:)")));
+- (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<CoreMediaPlayerHook>)mediaPlayerHook __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:)")));
+- (void)notifyContentEnded __attribute__((swift_name("notifyContentEnded()")));
+- (void)play __attribute__((swift_name("play()")));
+- (void)removeListenerAdsManagerListener:(id<CoreFlowerAdsManagerListener>)adsManagerListener __attribute__((swift_name("removeListener(adsManagerListener:)")));
+- (void)requestAdAdTagUrl:(NSString *)adTagUrl extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams __attribute__((swift_name("requestAd(adTagUrl:extraParams:)")));
+- (void)requestVodAdAdTagUrl:(NSString *)adTagUrl contentId:(NSString *)contentId durationMs:(int64_t)durationMs extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<CoreMediaPlayerHook>)mediaPlayerHook __attribute__((swift_name("requestVodAd(adTagUrl:contentId:durationMs:extraParams:mediaPlayerHook:)")));
+- (void)stop __attribute__((swift_name("stop()")));
+@end
+
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("FlowerAdManagerImpl")))
-@interface CoreFlowerAdManagerImpl : CoreBase <CoreFlowerAdManager, CoreFlowerAdPlayerCallback>
+__attribute__((swift_name("FlowerAdsManagerImpl")))
+@interface CoreFlowerAdsManagerImpl : CoreBase <CoreFlowerAdsManager, CoreFlowerAdPlayerCallback>
 - (instancetype)initWithFlowerAdView:(id<CoreFlowerAdViewInterface>)flowerAdView playerView:(id<CoreAdPlayerView>)playerView googleAdView:(id<CoreGoogleAdView>)googleAdView flowerAdUIView:(id<CoreFlowerAdUIView>)flowerAdUIView __attribute__((swift_name("init(flowerAdView:playerView:googleAdView:flowerAdUIView:)"))) __attribute__((objc_designated_initializer));
-@property (class, readonly, getter=companion) CoreFlowerAdManagerImplCompanion *companion __attribute__((swift_name("companion")));
+@property (class, readonly, getter=companion) CoreFlowerAdsManagerImplCompanion *companion __attribute__((swift_name("companion")));
 - (void)addListenerAdsManagerListener:(id<CoreFlowerAdsManagerListener>)adsManagerListener __attribute__((swift_name("addListener(adsManagerListener:)")));
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<CoreMediaPlayerHook>)mediaPlayerHook __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:)")));
 - (void)notifyContentEnded __attribute__((swift_name("notifyContentEnded()")));
@@ -2646,20 +2640,20 @@ __attribute__((swift_name("FlowerAdManagerImpl")))
 @end
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("FlowerAdManagerImpl.Companion")))
-@interface CoreFlowerAdManagerImplCompanion : CoreFLogging
+__attribute__((swift_name("FlowerAdsManagerImpl.Companion")))
+@interface CoreFlowerAdsManagerImplCompanion : CoreFLogging
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 + (instancetype)new __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) CoreFlowerAdManagerImplCompanion *shared __attribute__((swift_name("shared")));
+@property (class, readonly, getter=shared) CoreFlowerAdsManagerImplCompanion *shared __attribute__((swift_name("shared")));
 @end
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("LinearTVAdHandler")))
 @interface CoreLinearTVAdHandler : CoreAdHandler
-- (instancetype)initWithFlowerAdManager:(CoreFlowerAdManagerImpl *)flowerAdManager flowerAdView:(id<CoreFlowerAdViewInterface>)flowerAdView flowerAdUIView:(id<CoreFlowerAdUIView>)flowerAdUIView googleAdView:(id<CoreGoogleAdView>)googleAdView __attribute__((swift_name("init(flowerAdManager:flowerAdView:flowerAdUIView:googleAdView:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithFlowerAdsManager:(CoreFlowerAdsManagerImpl *)flowerAdsManager flowerAdView:(id<CoreFlowerAdViewInterface>)flowerAdView flowerAdUIView:(id<CoreFlowerAdUIView>)flowerAdUIView googleAdView:(id<CoreGoogleAdView>)googleAdView __attribute__((swift_name("init(flowerAdsManager:flowerAdView:flowerAdUIView:googleAdView:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithGoogleAdView:(id<CoreGoogleAdView>)googleAdView __attribute__((swift_name("init(googleAdView:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) CoreLinearTVAdHandlerCompanion *companion __attribute__((swift_name("companion")));
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl adUrlMacroValue:(CoreAdUrlMacroValue *)adUrlMacroValue extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:adUrlMacroValue:extraParams:)")));
@@ -2711,7 +2705,7 @@ __attribute__((swift_name("NoopErrorLogSender")))
 
 __attribute__((swift_name("NormalAdHandler")))
 @interface CoreNormalAdHandler : CoreAdHandler
-- (instancetype)initWithFlowerAdManager:(CoreFlowerAdManagerImpl *)flowerAdManager flowerAdView:(id<CoreFlowerAdViewInterface>)flowerAdView flowerAdUIView:(id<CoreFlowerAdUIView>)flowerAdUIView googleAdView:(id<CoreGoogleAdView>)googleAdView __attribute__((swift_name("init(flowerAdManager:flowerAdView:flowerAdUIView:googleAdView:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithFlowerAdsManager:(CoreFlowerAdsManagerImpl *)flowerAdsManager flowerAdView:(id<CoreFlowerAdViewInterface>)flowerAdView flowerAdUIView:(id<CoreFlowerAdUIView>)flowerAdUIView googleAdView:(id<CoreGoogleAdView>)googleAdView __attribute__((swift_name("init(flowerAdsManager:flowerAdView:flowerAdUIView:googleAdView:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithGoogleAdView:(id<CoreGoogleAdView>)googleAdView __attribute__((swift_name("init(googleAdView:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) CoreNormalAdHandlerCompanion *companion __attribute__((swift_name("companion")));
 - (NSString * _Nullable)click __attribute__((swift_name("click()")));
@@ -2798,7 +2792,7 @@ __attribute__((swift_name("VmapParser")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("VodAdHandler")))
 @interface CoreVodAdHandler : CoreNormalAdHandler
-- (instancetype)initWithFlowerAdManager:(CoreFlowerAdManagerImpl *)flowerAdManager flowerAdView:(id<CoreFlowerAdViewInterface>)flowerAdView flowerAdUIView:(id<CoreFlowerAdUIView>)flowerAdUIView googleAdView:(id<CoreGoogleAdView>)googleAdView __attribute__((swift_name("init(flowerAdManager:flowerAdView:flowerAdUIView:googleAdView:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithFlowerAdsManager:(CoreFlowerAdsManagerImpl *)flowerAdsManager flowerAdView:(id<CoreFlowerAdViewInterface>)flowerAdView flowerAdUIView:(id<CoreFlowerAdUIView>)flowerAdUIView googleAdView:(id<CoreGoogleAdView>)googleAdView __attribute__((swift_name("init(flowerAdsManager:flowerAdView:flowerAdUIView:googleAdView:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) CoreVodAdHandlerCompanion *companion __attribute__((swift_name("companion")));
 - (void)doDestroy __attribute__((swift_name("doDestroy()")));
 - (void)notifycontentEnded __attribute__((swift_name("notifycontentEnded()")));
@@ -3043,9 +3037,19 @@ __attribute__((swift_name("FlowerAdsManagerListener")))
 @protocol CoreFlowerAdsManagerListener
 @required
 - (void)onCompleted __attribute__((swift_name("onCompleted()")));
-- (void)onErrorT:(CoreKotlinThrowable * _Nullable)t __attribute__((swift_name("onError(t:)")));
+- (void)onErrorError:(CoreFlowerError * _Nullable)error __attribute__((swift_name("onError(error:)")));
 - (void)onPlay __attribute__((swift_name("onPlay()")));
-- (BOOL)onPrepareAdDurationMs:(int32_t)adDurationMs __attribute__((swift_name("onPrepare(adDurationMs:)")));
+- (void)onPrepareAdDurationMs:(int32_t)adDurationMs __attribute__((swift_name("onPrepare(adDurationMs:)")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowerError")))
+@interface CoreFlowerError : CoreKotlinThrowable
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(CoreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (instancetype)initWithCause:(CoreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @end
 
 __attribute__((swift_name("MediaPlayerAdapter")))
@@ -3130,7 +3134,7 @@ __attribute__((swift_name("SdkContainer")))
 - (id _Nullable)doNewClassName:(CoreSdkContainerClassName *)className args:(CoreKotlinArray<id> *)args __attribute__((swift_name("doNew(className:args:)")));
 - (void)setClassName:(CoreSdkContainerClassName *)className object:(id)object __attribute__((swift_name("set(className:object:)")));
 - (void)setEnvironmentEnv:(NSString *)env __attribute__((swift_name("setEnvironment(env:)")));
-- (void)setLogLevelLevel:(CoreLoggingLogLevel *)level __attribute__((swift_name("setLogLevel(level:)")));
+- (void)setLogLevelLevel:(CoreSdkContainerLogLevel *)level __attribute__((swift_name("setLogLevel(level:)")));
 - (CoreVastParser *)vastParserAdUrlMacroValue:(CoreAdUrlMacroValue *)adUrlMacroValue mediaType:(NSString *)mediaType adPrefix:(NSString * _Nullable)adPrefix __attribute__((swift_name("vastParser(adUrlMacroValue:mediaType:adPrefix:)")));
 @property (readonly) CoreAdUrlMacro *adUrlMacro __attribute__((swift_name("adUrlMacro")));
 @property (readonly) id<CoreCacheManager> cacheManager __attribute__((swift_name("cacheManager")));
@@ -3184,6 +3188,23 @@ __attribute__((swift_name("SdkContainer.Companion")))
 @property (class, readonly, getter=shared) CoreSdkContainerCompanion *shared __attribute__((swift_name("shared")));
 - (CoreSdkContainer *)getInstance __attribute__((swift_name("getInstance()")));
 @property (readonly) int64_t DEFAULT_TIME_OUT __attribute__((swift_name("DEFAULT_TIME_OUT")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SdkContainer.LogLevel")))
+@interface CoreSdkContainerLogLevel : CoreKotlinEnum<CoreSdkContainerLogLevel *>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (class, readonly) CoreSdkContainerLogLevel *verbose __attribute__((swift_name("verbose")));
+@property (class, readonly) CoreSdkContainerLogLevel *debug __attribute__((swift_name("debug")));
+@property (class, readonly) CoreSdkContainerLogLevel *info __attribute__((swift_name("info")));
+@property (class, readonly) CoreSdkContainerLogLevel *warn __attribute__((swift_name("warn")));
+@property (class, readonly) CoreSdkContainerLogLevel *error __attribute__((swift_name("error")));
+@property (class, readonly) CoreSdkContainerLogLevel *off __attribute__((swift_name("off")));
++ (CoreKotlinArray<CoreSdkContainerLogLevel *> *)values __attribute__((swift_name("values()")));
+@property (class, readonly) NSArray<CoreSdkContainerLogLevel *> *entries __attribute__((swift_name("entries")));
+@property (readonly, getter=value_) CoreLoggingLogLevel *value __attribute__((swift_name("value")));
 @end
 
 __attribute__((swift_name("DeviceService")))
@@ -3271,7 +3292,7 @@ __attribute__((swift_name("FlowerAdPlayer")))
 __attribute__((swift_name("ManipulationServer")))
 @protocol CoreManipulationServer
 @required
-- (void)doInitFlowerAdManager:(CoreFlowerAdManagerImpl *)flowerAdManager __attribute__((swift_name("doInit(flowerAdManager:)")));
+- (void)doInitFlowerAdsManager:(CoreFlowerAdsManagerImpl *)flowerAdsManager __attribute__((swift_name("doInit(flowerAdsManager:)")));
 - (void)stop __attribute__((swift_name("stop()")));
 @property (readonly) CoreManipulationServerHandler *manipulationServerHandler __attribute__((swift_name("manipulationServerHandler")));
 @end
@@ -3283,8 +3304,10 @@ __attribute__((swift_name("ManipulationServerHandler")))
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (class, readonly, getter=companion) CoreManipulationServerHandlerCompanion *companion __attribute__((swift_name("companion")));
 - (NSString *)convertProxyUrlVideoUrl:(NSString *)videoUrl __attribute__((swift_name("convertProxyUrl(videoUrl:)")));
+- (int64_t)getAccumulatedDuration __attribute__((swift_name("getAccumulatedDuration()")));
 - (CoreManipulationServerHandlerManipulationType *)getManipulationTypeRequestUri:(NSString *)requestUri __attribute__((swift_name("getManipulationType(requestUri:)")));
 - (CoreManipulator *)getManipulatorManipulationType:(CoreManipulationServerHandlerManipulationType *)manipulationType __attribute__((swift_name("getManipulator(manipulationType:)")));
+- (CoreMediaPlaylistManipulatorHistoryMediaSegment *)getSegmentByAccumulatedDuration __attribute__((swift_name("getSegmentByAccumulatedDuration()")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
@@ -3305,12 +3328,13 @@ __attribute__((swift_name("ManipulationServerHandler")))
  * Other uncaught Kotlin exceptions are fatal.
 */
 - (void)handleRequestRequestUri:(NSString *)requestUri headers:(NSDictionary<NSString *, NSString *> *)headers completionHandler:(void (^)(id<CoreCacheResponse> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("handleRequest(requestUri:headers:completionHandler:)")));
-- (void)doInitFlowerAdManager:(CoreFlowerAdManagerImpl *)flowerAdManager __attribute__((swift_name("doInit(flowerAdManager:)")));
+- (void)doInitFlowerAdsManager:(CoreFlowerAdsManagerImpl *)flowerAdsManager __attribute__((swift_name("doInit(flowerAdsManager:)")));
 - (BOOL)isHls __attribute__((swift_name("isHls()")));
 @property NSString * _Nullable baseOriginalUrlKey __attribute__((swift_name("baseOriginalUrlKey")));
-@property CoreFlowerAdManagerImpl *flowerAdManager __attribute__((swift_name("flowerAdManager")));
+@property CoreFlowerAdsManagerImpl *flowerAdsManager __attribute__((swift_name("flowerAdsManager")));
 @property NSString *localEndpoint __attribute__((swift_name("localEndpoint")));
 @property (readonly) CoreMutableDictionary<NSString *, NSString *> *originalUrlPrefixes __attribute__((swift_name("originalUrlPrefixes")));
+@property (readonly) CoreMutableDictionary<CoreLong *, CoreMediaPlaylistManipulatorHistoryMediaSegment *> *responseSegments __attribute__((swift_name("responseSegments")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -3364,7 +3388,7 @@ __attribute__((swift_name("AdaptationSet")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("DashManipulator")))
 @interface CoreDashManipulator : CoreManipulator
-- (instancetype)initWithManipulationServer:(CoreManipulationServerHandler *)manipulationServer adManager:(CoreFlowerAdManagerImpl *)adManager __attribute__((swift_name("init(manipulationServer:adManager:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithManipulationServer:(CoreManipulationServerHandler *)manipulationServer adsManager:(CoreFlowerAdsManagerImpl *)adsManager __attribute__((swift_name("init(manipulationServer:adsManager:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithManipulationServerHandler:(CoreManipulationServerHandler *)manipulationServerHandler __attribute__((swift_name("init(manipulationServerHandler:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) CoreDashManipulatorCompanion *companion __attribute__((swift_name("companion")));
 
@@ -3576,7 +3600,7 @@ __attribute__((swift_name("SpliceInfoSection_")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("CacheAdMediaSegmentService")))
 @interface CoreCacheAdMediaSegmentService : CoreBase
-- (instancetype)initWithAdManager:(CoreFlowerAdManagerImpl *)adManager __attribute__((swift_name("init(adManager:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithAdsManager:(CoreFlowerAdsManagerImpl *)adsManager __attribute__((swift_name("init(adsManager:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) CoreCacheAdMediaSegmentServiceCompanion *companion __attribute__((swift_name("companion")));
 - (CoreCacheAdMediaSegmentServiceAdGroup *)getAdEventId:(int32_t)adEventId __attribute__((swift_name("get(adEventId:)")));
 - (void)removeAdEventId:(CoreInt * _Nullable)adEventId delayMs:(int64_t)delayMs __attribute__((swift_name("remove(adEventId:delayMs:)")));
@@ -3627,7 +3651,7 @@ __attribute__((swift_name("CacheAdMediaSegmentService.Companion")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("MediaPlaylistManipulator")))
 @interface CoreMediaPlaylistManipulator : CoreManipulator
-- (instancetype)initWithManipulationServerHandler:(CoreManipulationServerHandler * _Nullable)manipulationServerHandler cacheAdMediaSegmentService:(CoreCacheAdMediaSegmentService *)cacheAdMediaSegmentService flowerAdManager:(CoreFlowerAdManagerImpl *)flowerAdManager __attribute__((swift_name("init(manipulationServerHandler:cacheAdMediaSegmentService:flowerAdManager:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithManipulationServerHandler:(CoreManipulationServerHandler * _Nullable)manipulationServerHandler cacheAdMediaSegmentService:(CoreCacheAdMediaSegmentService *)cacheAdMediaSegmentService flowerAdsManager:(CoreFlowerAdsManagerImpl *)flowerAdsManager __attribute__((swift_name("init(manipulationServerHandler:cacheAdMediaSegmentService:flowerAdsManager:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithManipulationServerHandler:(CoreManipulationServerHandler *)manipulationServerHandler __attribute__((swift_name("init(manipulationServerHandler:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) CoreMediaPlaylistManipulatorCompanion *companion __attribute__((swift_name("companion")));
 
@@ -3697,14 +3721,15 @@ __attribute__((swift_name("MediaPlaylistManipulator.CueOutMarker")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("MediaPlaylistManipulator.HistoryMediaSegment")))
 @interface CoreMediaPlaylistManipulatorHistoryMediaSegment : CoreBase
-- (instancetype)initWithMediaSequence:(int64_t)mediaSequence discontinuityMediaSequence:(int64_t)discontinuityMediaSequence disappeared:(BOOL)disappeared mediaSegments:(CoreMutableSet<id<CoreMediaSegment>> *)mediaSegments mediaSegmentUrls:(CoreMutableSet<NSString *> *)mediaSegmentUrls originalMediaSequence:(CoreLong * _Nullable)originalMediaSequence __attribute__((swift_name("init(mediaSequence:discontinuityMediaSequence:disappeared:mediaSegments:mediaSegmentUrls:originalMediaSequence:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithMediaSequence:(int64_t)mediaSequence discontinuityMediaSequence:(int64_t)discontinuityMediaSequence disappeared:(BOOL)disappeared mediaSegments:(CoreMutableSet<id<CoreMediaSegment>> *)mediaSegments mediaSegmentUrls:(CoreMutableSet<NSString *> *)mediaSegmentUrls originalMediaSequence:(CoreLong * _Nullable)originalMediaSequence accumulatedDuration:(int64_t)accumulatedDuration __attribute__((swift_name("init(mediaSequence:discontinuityMediaSequence:disappeared:mediaSegments:mediaSegmentUrls:originalMediaSequence:accumulatedDuration:)"))) __attribute__((objc_designated_initializer));
 - (void)addMediaSegment:(id<CoreMediaSegment>)mediaSegment __attribute__((swift_name("add(mediaSegment:)")));
 - (BOOL)containsMediaSegment:(id<CoreMediaSegment>)mediaSegment __attribute__((swift_name("contains(mediaSegment:)")));
-- (CoreMediaPlaylistManipulatorHistoryMediaSegment *)doCopyMediaSequence:(int64_t)mediaSequence discontinuityMediaSequence:(int64_t)discontinuityMediaSequence disappeared:(BOOL)disappeared mediaSegments:(CoreMutableSet<id<CoreMediaSegment>> *)mediaSegments mediaSegmentUrls:(CoreMutableSet<NSString *> *)mediaSegmentUrls originalMediaSequence:(CoreLong * _Nullable)originalMediaSequence __attribute__((swift_name("doCopy(mediaSequence:discontinuityMediaSequence:disappeared:mediaSegments:mediaSegmentUrls:originalMediaSequence:)")));
+- (CoreMediaPlaylistManipulatorHistoryMediaSegment *)doCopyMediaSequence:(int64_t)mediaSequence discontinuityMediaSequence:(int64_t)discontinuityMediaSequence disappeared:(BOOL)disappeared mediaSegments:(CoreMutableSet<id<CoreMediaSegment>> *)mediaSegments mediaSegmentUrls:(CoreMutableSet<NSString *> *)mediaSegmentUrls originalMediaSequence:(CoreLong * _Nullable)originalMediaSequence accumulatedDuration:(int64_t)accumulatedDuration __attribute__((swift_name("doCopy(mediaSequence:discontinuityMediaSequence:disappeared:mediaSegments:mediaSegmentUrls:originalMediaSequence:accumulatedDuration:)")));
 - (int64_t)duration __attribute__((swift_name("duration()")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) int64_t accumulatedDuration __attribute__((swift_name("accumulatedDuration")));
 @property BOOL disappeared __attribute__((swift_name("disappeared")));
 @property int64_t discontinuityMediaSequence __attribute__((swift_name("discontinuityMediaSequence")));
 @property (readonly) CoreMutableSet<NSString *> *mediaSegmentUrls __attribute__((swift_name("mediaSegmentUrls")));
@@ -3727,6 +3752,26 @@ __attribute__((swift_name("CommonJob")))
  * Other uncaught Kotlin exceptions are fatal.
 */
 - (void)joinWithCompletionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("join(completionHandler:)")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Platform")))
+@interface CorePlatform : CoreBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+@property (class, readonly, getter=companion) CorePlatformCompanion *companion __attribute__((swift_name("companion")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Platform.Companion")))
+@interface CorePlatformCompanion : CoreBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) CorePlatformCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) BOOL isAndroid __attribute__((swift_name("isAndroid")));
+@property (readonly) BOOL isHtml5 __attribute__((swift_name("isHtml5")));
+@property (readonly) BOOL isIos __attribute__((swift_name("isIos")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -4498,22 +4543,6 @@ __attribute__((swift_name("Ktor_ioByteReadChannel")))
 @property (readonly) int64_t totalBytesRead __attribute__((swift_name("totalBytesRead")));
 @end
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("LoggingLogLevel")))
-@interface CoreLoggingLogLevel : CoreKotlinEnum<CoreLoggingLogLevel *>
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-@property (class, readonly) CoreLoggingLogLevel *verbose __attribute__((swift_name("verbose")));
-@property (class, readonly) CoreLoggingLogLevel *debug __attribute__((swift_name("debug")));
-@property (class, readonly) CoreLoggingLogLevel *info __attribute__((swift_name("info")));
-@property (class, readonly) CoreLoggingLogLevel *warn __attribute__((swift_name("warn")));
-@property (class, readonly) CoreLoggingLogLevel *error __attribute__((swift_name("error")));
-@property (class, readonly) CoreLoggingLogLevel *off __attribute__((swift_name("off")));
-+ (CoreKotlinArray<CoreLoggingLogLevel *> *)values __attribute__((swift_name("values()")));
-@property (readonly) int32_t level __attribute__((swift_name("level")));
-@end
-
 __attribute__((swift_name("Kotlinx_serialization_coreSerialFormat")))
 @protocol CoreKotlinx_serialization_coreSerialFormat
 @required
@@ -4538,6 +4567,22 @@ __attribute__((swift_name("Kotlinx_serialization_jsonJson")))
 - (CoreKotlinx_serialization_jsonJsonElement *)parseToJsonElementString:(NSString *)string __attribute__((swift_name("parseToJsonElement(string:)")));
 @property (readonly) CoreKotlinx_serialization_jsonJsonConfiguration *configuration __attribute__((swift_name("configuration")));
 @property (readonly) CoreKotlinx_serialization_coreSerializersModule *serializersModule __attribute__((swift_name("serializersModule")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("LoggingLogLevel")))
+@interface CoreLoggingLogLevel : CoreKotlinEnum<CoreLoggingLogLevel *>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (class, readonly) CoreLoggingLogLevel *verbose __attribute__((swift_name("verbose")));
+@property (class, readonly) CoreLoggingLogLevel *debug __attribute__((swift_name("debug")));
+@property (class, readonly) CoreLoggingLogLevel *info __attribute__((swift_name("info")));
+@property (class, readonly) CoreLoggingLogLevel *warn __attribute__((swift_name("warn")));
+@property (class, readonly) CoreLoggingLogLevel *error __attribute__((swift_name("error")));
+@property (class, readonly) CoreLoggingLogLevel *off __attribute__((swift_name("off")));
++ (CoreKotlinArray<CoreLoggingLogLevel *> *)values __attribute__((swift_name("values()")));
+@property (readonly) int32_t level __attribute__((swift_name("level")));
 @end
 
 __attribute__((swift_name("Ktor_client_coreHttpClientEngine")))
