@@ -22,11 +22,11 @@ class CacheManagerImpl: CacheManager {
         }
     }
 
-    func loadData(key: String, url: String) -> CommonJob {
-        return CommonJobImpl(
-                originalJob: Task {
+    func loadData(key: String, url: String) -> DeferredStub {
+        return DeferredStubImpl(
+                task: Task {
                     logger.verbose {
-                        "loadData - key: $key, url: $url"
+                        "loadData - key: \(key), url: \(url)"
                     }
                     let requestBuilder = Ktor_client_coreHttpRequestBuilder()
                     requestBuilder.ios_url(urlString: url)
@@ -43,9 +43,9 @@ class CacheManagerImpl: CacheManager {
     }
 
     // TODO: Implement loadStream
-    func loadStream(originalUrl: String, requestBuilder: Ktor_client_coreHttpRequestBuilder) -> CommonJob {
-        return CommonJobImpl(
-                originalJob: Task {
+    func loadStream(originalUrl: String, requestBuilder: Ktor_client_coreHttpRequestBuilder) -> DeferredStub {
+        return DeferredStubImpl(
+                task: Task {
                     let key = originalUrl.hash
                     var originalResponse = try await httpClient.ios_request(builder: requestBuilder)
 

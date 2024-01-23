@@ -10,7 +10,7 @@ public struct FlowerAdViewBody: View {
 }
 
 // TODO: Implement class FlowerAdViewImpl : FrameLayout, FlowerAdView {
-public class FlowerAdView: FlowerAdViewInterface {
+public class FlowerAdView: FlowerAdViewStub {
     var flowerAdUIView: FlowerAdUIView = FlowerAdUIViewImpl()
     var playerView: AdPlayerView = AdPlayerViewImpl()
     var googleAdView: GoogleAdView = GoogleAdViewImpl()

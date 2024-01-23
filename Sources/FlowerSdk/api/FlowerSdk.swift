@@ -29,10 +29,10 @@ public class FlowerSdk {
                     core.SdkContainer.ClassName.cacheManager: CacheManagerImpl(appContext: appContext),
                     core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(appContext: appContext),
                     core.SdkContainer.ClassName.mediaPlayerAdapter: AvPlayerAdapter(),
+                    core.SdkContainer.ClassName.xmlUtil: XmlUtilImpl(),
                 ]),
                 factories: PlatformMap(storage: [
                     core.SdkContainer.ClassName.manipulationServer: ManipulationServerImplFactory(),
-                    core.SdkContainer.ClassName.vastParser: VastParserImplFactory(),
                 ])
         )
 

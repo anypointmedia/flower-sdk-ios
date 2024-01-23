@@ -87,9 +87,7 @@ open class HttpServerIO {
                         strongSelf.sockets.insert(socket)
                     }
 
-                    Task {
-                        await strongSelf.handleConnection(socket)
-                    }
+                    strongSelf.handleConnection(socket)
 
                     strongSelf.queue.async {
                         strongSelf.sockets.remove(socket)
@@ -114,18 +112,18 @@ open class HttpServerIO {
         self.state = .stopped
     }
 
-    open func dispatch(_ request: HttpRequest) -> ([String: String], (HttpRequest) async -> HttpResponse) {
+    open func dispatch(_ request: HttpRequest) -> ([String: String], (HttpRequest) -> HttpResponse) {
         return ([:], { _ in HttpResponse.notFound })
     }
 
-    private func handleConnection(_ socket: Socket) async {
+    private func handleConnection(_ socket: Socket) {
         let parser = HttpParser()
         while self.operating, let request = try? parser.readHttpRequest(socket) {
             let request = request
             request.address = try? socket.peername()
             let (params, handler) = self.dispatch(request)
             request.params = params
-            let response = await handler(request)
+            let response = handler(request)
             var keepConnection = parser.supportsKeepAlive(request.headers)
             do {
                 if self.operating {

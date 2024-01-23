@@ -14,11 +14,15 @@ class PlayerObserver: NSObject {
     }
 
     deinit {
-        player.removeObserver(self, forKeyPath: "rate")
+        destroy()
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         callback(player, keyPath!)
+    }
+
+    public func destroy() {
+        player.removeObserver(self, forKeyPath: "rate")
     }
 }
 
@@ -34,6 +38,7 @@ class ManipulationServerImpl: ManipulationServer {
     private let server = HttpServer()
     private lazy var httpClient = sdkContainer.httpClient
     private var observer: PlayerObserver?
+    var logger = core.LoggingKmLog()
 
     private var lastServerPort: in_port_t = 0
 
@@ -47,9 +52,7 @@ class ManipulationServerImpl: ManipulationServer {
         observer = PlayerObserver(player: flowerAdsManager.mediaPlayerHook.getPlayer() as! AVPlayer) { player, keyPath in
             if keyPath == "rate" {
                 if player.status == .readyToPlay && player.rate > 0.0 {
-                    Task {
-                        await self.checkServerAliveAndRestart()
-                    }
+                    self.checkServerAliveAndRestart()
                 }
             }
         }
@@ -121,20 +124,16 @@ class ManipulationServerImpl: ManipulationServer {
         return port
     }
 
-    private func checkServerAliveAndRestart() async {
+    private func checkServerAliveAndRestart() {
         let requestBuilder = Ktor_client_coreHttpRequestBuilder()
         requestBuilder.ios_url(urlString: manipulationServerHandler.localEndpoint + "/ping")
-        do {
-            var response = try? await httpClient.ios_request(builder: requestBuilder)
 
-            if (response != nil) {
-                return
-            }
+        logger.verbose { "ping to server: \(self.manipulationServerHandler.localEndpoint)"}
 
+        var response = try? httpClient.ios_requestSync(builder: requestBuilder)
+
+        if (response == nil) {
             startServer(address: "127.0.0.1", port: lastServerPort)
-        } catch {
-            print("Catch block")
-            print("Error: \(error)")
         }
     }
 
@@ -146,21 +145,31 @@ class ManipulationServerImpl: ManipulationServer {
             lastServerPort = port
         } catch {
             print("Failed to run server.")
+            print(error)
             return
         }
 
-        server["/"] = { [self] request async in
+        server["/"] = { [self] request in
             if request.path == "/ping" {
+                logger.verbose { "pong from server" }
                 return HttpResponse.ok(.data("pong".data(using: .utf8)!))
             }
 
-            let cachedResponse = try! await manipulationServerHandler.handleRequest(
-                    requestUri: request.path + (request.queryParams.count == 0 ? "" : "?" + request.queryParams.reduce("") { (result, param) in
-                        result + (result.isEmpty ? "" : "&") + param.0 + "=" + param.1
-                    }),
-                    headers: request.headers
-            )
-            let contentType = cachedResponse.headers.get(name: "Content-Type") as! String
+            let requestUri = request.path + (request.queryParams.count == 0 ? "" : "?" + request.queryParams.reduce("") { (result, param) in
+                result + (result.isEmpty ? "" : "&") + param.0 + "=" + param.1
+            })
+
+            logger.verbose { "requestUri: \(server.listenAddressIPv4!):\(lastServerPort)\(requestUri)" }
+
+            var cachedResponse: CacheResponse!
+
+            do {
+                cachedResponse = try? manipulationServerHandler.ios_handleRequestSync(requestUri: requestUri, headers: request.headers)
+            } catch {
+                logger.warn { "failed to get cached response" }
+                print(error)
+                return HttpResponse.notFound
+            }
 
             switch cachedResponse.statusCode {
             case Ktor_httpHttpStatusCode.Companion().OK:
@@ -176,11 +185,8 @@ class ManipulationServerImpl: ManipulationServer {
     }
 
     func stop() {
+        observer?.destroy()
         server.stop()
-    }
-
-    func convertProxyUrl(videoUrl: String) -> String {
-        manipulationServerHandler.convertProxyUrl(videoUrl: videoUrl)
     }
 }
 
