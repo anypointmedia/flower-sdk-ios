@@ -1,8 +1,9 @@
 import Foundation
-import core
+import sdk_core
 import AVKit
+import OSLog
 
-class PlayerObserver: NSObject {
+class MSPlayerObserver: NSObject {
     var player: AVPlayer
     var callback: (_ player: AVPlayer, _ keyPath: String) -> Void
 
@@ -26,19 +27,20 @@ class PlayerObserver: NSObject {
     }
 }
 
-class ManipulationServerImplFactory: core.SdkContainerBeanFactory {
-    func create(args: KotlinArray<AnyObject>) -> Any {
+class ManipulationServerImplFactory: sdk_core.SdkContainerBeanFactory {
+    func create() -> Any {
         return ManipulationServerImpl()
     }
 }
 
 class ManipulationServerImpl: ManipulationServer {
+    
     private let sdkContainer = SdkContainer.Companion().getInstance()
     public let manipulationServerHandler = ManipulationServerHandler()
     private let server = HttpServer()
     private lazy var httpClient = sdkContainer.httpClient
-    private var observer: PlayerObserver?
-    var logger = core.LoggingKmLog()
+    private var observer: MSPlayerObserver?
+    var logger = sdk_core.LoggingKmLog()
 
     private var lastServerPort: in_port_t = 0
 
@@ -47,12 +49,19 @@ class ManipulationServerImpl: ManipulationServer {
 
         let freePort = findFreePort()
         startServer(address: "127.0.0.1", port: freePort)
-        manipulationServerHandler.localEndpoint = "http://\(server.listenAddressIPv4!)\(freePort != nil ? ":\(freePort)" : "")"
 
-        observer = PlayerObserver(player: flowerAdsManager.mediaPlayerHook.getPlayer() as! AVPlayer) { player, keyPath in
-            if keyPath == "rate" {
-                if player.status == .readyToPlay && player.rate > 0.0 {
-                    self.checkServerAliveAndRestart()
+        if freePort == 0 {
+            logger.error{"Error: No free port available."}
+            // Can't declare throw/throws, instead set to "" and in LinearTVAdHandler.kt check for .localEndpoint == ""
+            manipulationServerHandler.localEndpoint = ""
+        } else {
+            manipulationServerHandler.localEndpoint = "http://\(server.listenAddressIPv4!):\(freePort)"
+            
+            observer = MSPlayerObserver(player: flowerAdsManager.mediaPlayerHook.getPlayer() as! AVPlayer) { player, keyPath in
+                if keyPath == "rate" {
+                    if player.status == .readyToPlay && player.rate > 0.0 {
+                        self.checkServerAliveAndRestart()
+                    }
                 }
             }
         }
@@ -63,7 +72,7 @@ class ManipulationServerImpl: ManipulationServer {
 
         let socketFD = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
         if socketFD == -1 {
-            //print("Error creating socket: \(errno)")
+            logger.error{"Error creating socket"}
             return 0
         }
 
@@ -81,7 +90,7 @@ class ManipulationServerImpl: ManipulationServer {
         var addressInfo: UnsafeMutablePointer<addrinfo>? = nil
         var result = getaddrinfo(nil, "0", &hints, &addressInfo)
         if result != 0 {
-            //print("Error getting address info: \(errno)")
+            logger.error{"Error getting address info \(addressInfo)"}
             close(socketFD)
 
             return 0
@@ -89,7 +98,7 @@ class ManipulationServerImpl: ManipulationServer {
 
         result = Darwin.bind(socketFD, addressInfo!.pointee.ai_addr, socklen_t(addressInfo!.pointee.ai_addrlen))
         if result == -1 {
-            //print("Error binding socket to an address: \(errno)")
+            logger.error{"Error binding socket to an address"}
             close(socketFD)
 
             return 0;
@@ -97,7 +106,7 @@ class ManipulationServerImpl: ManipulationServer {
 
         result = Darwin.listen(socketFD, 1)
         if result == -1 {
-            //print("Error setting socket to listen: \(errno)")
+            logger.error{"Error setting socket to listen"}
             close(socketFD)
 
             return 0;
@@ -144,7 +153,7 @@ class ManipulationServerImpl: ManipulationServer {
             try server.start(port, forceIPv4: true)
             lastServerPort = port
         } catch {
-            print("Failed to run server.")
+            logger.error {"Failed to run server \(error)"}
             print(error)
             return
         }
@@ -166,7 +175,7 @@ class ManipulationServerImpl: ManipulationServer {
             do {
                 cachedResponse = try? manipulationServerHandler.ios_handleRequestSync(requestUri: requestUri, headers: request.headers)
             } catch {
-                logger.warn { "failed to get cached response" }
+                logger.warn { "failed to get cached response \(error)" }
                 print(error)
                 return HttpResponse.notFound
             }
@@ -187,6 +196,7 @@ class ManipulationServerImpl: ManipulationServer {
     func stop() {
         observer?.destroy()
         server.stop()
+        manipulationServerHandler.stop()
     }
 }
 

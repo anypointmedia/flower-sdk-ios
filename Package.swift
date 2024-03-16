@@ -17,20 +17,14 @@ let package = Package(
     ],
     targets: [
         .binaryTarget(
-            name: "core",
-            path: "Frameworks/core.xcframework"
+            name: "sdk_core",
+            path: "Frameworks/sdk_core.xcframework"
         ),
         .target(
             name: "FlowerSdk",
             dependencies: [
-                "core",
+                "sdk_core",
                 "Fuzi"
-            ]
-        ),
-        .testTarget(
-            name: "FlowerSdkTests",
-            dependencies: [
-                "FlowerSdk"
             ]
         ),
     ]

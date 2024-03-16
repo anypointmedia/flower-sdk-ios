@@ -1,10 +1,10 @@
 import Foundation
 import SwiftUI
-import core
+import sdk_core
 
-public typealias FlowerAdsManagerListener = core.FlowerAdsManagerListener
-public typealias MediaPlayerHook = core.MediaPlayerHook
-public typealias FlowerError = core.FlowerError
+public typealias FlowerAdsManagerListener = sdk_core.FlowerAdsManagerListener
+public typealias MediaPlayerHook = sdk_core.MediaPlayerHook
+public typealias FlowerError = sdk_core.FlowerError
 
 class DefaultSdkLifecycleListener: SdkLifecycleListener {
     func onDestroyed() {
@@ -17,30 +17,31 @@ class DefaultSdkLifecycleListener: SdkLifecycleListener {
 }
 
 public class FlowerSdk {
-    // TODO: Implement
-//    private const val DEFAULT_TIMEOUT = 3_000
 
     public static func doInit(appContext: Any) {
-        let lm: Void = core.LifecycleManager().doInit(
+        var DEFAULT_TIMEOUT: TimeInterval = 3_000
+
+        let lm: Void = sdk_core.LifecycleManager().doInit(
                 listener: DefaultSdkLifecycleListener(),
                 instances: PlatformMap(storage: [
-                    // TODO Implement
-//                    core.SdkContainer.ClassName.httpClient: "TODO",
-                    core.SdkContainer.ClassName.cacheManager: CacheManagerImpl(appContext: appContext),
-                    core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(appContext: appContext),
-                    core.SdkContainer.ClassName.mediaPlayerAdapter: AvPlayerAdapter(),
-                    core.SdkContainer.ClassName.xmlUtil: XmlUtilImpl(),
+                    // Note: Let kmp core handle creating HttpClient[io.ktor.client.engine.darwin.DarwinClientEngine
+                    // Thus, do not add instance sdk_core.SdkContainer.ClassName.httpClient: ,
+                    sdk_core.SdkContainer.ClassName.cacheManager: CacheManagerImpl(appContext: appContext),
+                    sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(),
+                    sdk_core.SdkContainer.ClassName.xmlUtil: XmlUtilImpl(),
+                    sdk_core.SdkContainer.ClassName.adPlayer: FlowerAdPlayerImpl(context: appContext),
+                    sdk_core.SdkContainer.ClassName.errorLogSender: ErrorLogSenderImpl(),
                 ]),
                 factories: PlatformMap(storage: [
-                    core.SdkContainer.ClassName.manipulationServer: ManipulationServerImplFactory(),
+                    sdk_core.SdkContainer.ClassName.manipulationServer: ManipulationServerImplFactory(),
+                    sdk_core.SdkContainer.ClassName.mediaPlayerAdapter: AvPlayerAdapterFactory(),
                 ])
         )
 
     }
 
-    // TODO: Implement
     static func getEnv() -> String {
-        return "" // FlowerSdk.getEnv()
+        return sdk_core.SdkContainer.companion.getInstance().env
     }
 
 
@@ -49,9 +50,8 @@ public class FlowerSdk {
         case "local",
              "dev",
              "prod":
+            sdk_core.SdkContainer.companion.getInstance().env = env
             break;
-                // TODO: Implement
-                // SdkContainer.getInstance().setEnvironment(env)
         default:
             // Throw an error if env is not one of "local", "dev", or "prod"
             fatalError("env must be one of local, dev, prod")

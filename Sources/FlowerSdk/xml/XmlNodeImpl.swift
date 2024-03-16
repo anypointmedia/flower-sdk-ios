@@ -1,5 +1,5 @@
 import Foundation
-import core
+import sdk_core
 import Fuzi
 
 class XmlNodeImpl: XmlNode {
@@ -9,7 +9,7 @@ class XmlNodeImpl: XmlNode {
     }
 
     override func childNodes() -> PlatformList<XmlNode> {
-        PlatformList(storage: (node as! XMLElement).children.map({ XmlNodeImpl(node: $0, rootNode: rootNode) }))
+        PlatformList(array: (node as! XMLElement).children.map({ XmlNodeImpl(node: $0, rootNode: rootNode) }))
     }
 
     override func getAttribute(name: String) -> String? {
@@ -37,7 +37,7 @@ class XmlNodeImpl: XmlNode {
             nodeSet = (node as! XMLElement).xpath(xpathExp)
         }
 
-        return PlatformList(storage: nodeSet.map { XmlNodeImpl(node: $0, rootNode: rootNode) })
+        return PlatformList(array: nodeSet.map { XmlNodeImpl(node: $0, rootNode: rootNode) })
     }
 
     override func nodeName() -> String {

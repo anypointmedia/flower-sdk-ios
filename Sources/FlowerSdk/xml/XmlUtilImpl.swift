@@ -1,5 +1,5 @@
 import Foundation
-import core
+import sdk_core
 import Fuzi
 
 class XmlUtilImpl: XmlUtil {

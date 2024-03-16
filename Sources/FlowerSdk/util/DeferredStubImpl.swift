@@ -1,5 +1,5 @@
 import Foundation
-import core
+import sdk_core
 
 class DeferredStubImpl: DeferredStub {
     var task: Task<Any?, Error>

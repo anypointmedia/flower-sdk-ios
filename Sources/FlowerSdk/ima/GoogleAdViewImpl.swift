@@ -1,25 +1,53 @@
 import Foundation
-import core
+import SwiftUI
+import sdk_core
 
-// TODO: Implement GoogleAdViewImpl(context: Context?) : RelativeLayout(context), GoogleAdView
-class GoogleAdViewImpl: GoogleAdView {
+class GoogleAdViewImpl: UIView, GoogleAdView {
+    func addView(view: GoogleAdView) {
+    }
+    
+    func removeView(view: GoogleAdView) {
+    }
+    
     func getHeight() -> Int32 {
-        // TODO: Implement
-        return 0
+        return Int32(frame.height)
     }
 
     func getWidth() -> Int32 {
-        // TODO: Implement
-        return 0
+        return Int32(frame.width)
     }
 
-    // override
     func hide() {
-        // TODO: Implement
+        isHidden = true
+        self.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     }
 
-    // override
     func show() {
-        // TODO: Implement
+        isHidden = false
+        
+        var screenWidth: CGFloat
+        var screenHeight: CGFloat
+        
+        if let parentView = self.superview {
+            screenWidth = parentView.bounds.width
+            screenHeight = parentView.bounds.height
+        } else {
+            screenWidth = UIScreen.main.bounds.width
+            screenHeight = UIScreen.main.bounds.height
+        }
+
+        // Calculate height based on the assumed 16:9 aspect ratio
+        let height = screenWidth * (9.0 / 16.0)
+        
+        if height <= screenHeight {
+            self.frame = CGRect(x: 0, y: 0, width: screenWidth, height: height)
+        } else {
+            let width = screenHeight * (16.0 / 9.0)
+            self.frame = CGRect(x: 0, y: 0, width: width, height: screenHeight)
+        }
+    }
+
+    func isShow() -> Bool {
+        return !isHidden
     }
 }
