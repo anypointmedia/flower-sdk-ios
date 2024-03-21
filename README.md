@@ -1,3 +1,4 @@
 # Flower iOS SDK
 
-See [FLOWER Tech. Document](https://anypointmedia.atlassian.net/wiki/x/KIBGf)
+- [FLOWER Tech. Document](https://anypointmedia.atlassian.net/wiki/x/KIBGf) (English)
+- [FLOWER 기술 문서](https://anypointmedia.atlassian.net/wiki/x/FwDgeg) (한글)
