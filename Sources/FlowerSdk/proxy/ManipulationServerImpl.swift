@@ -28,7 +28,7 @@ class MSPlayerObserver: NSObject {
 }
 
 class ManipulationServerImplFactory: sdk_core.SdkContainerBeanFactory {
-    func create() -> Any {
+    func create(args: KotlinArray<AnyObject>) -> Any? {
         return ManipulationServerImpl()
     }
 }

@@ -2,52 +2,62 @@ import Foundation
 import SwiftUI
 import sdk_core
 
-class GoogleAdViewImpl: UIView, GoogleAdView {
-    func addView(view: GoogleAdView) {
+class GoogleAdViewImpl: GoogleAdView {
+    let logger = sdk_core.LoggingKmLog()
+
+    var flowerAdView: FlowerAdView
+    lazy var googleAdViewImplBody = GoogleAdViewImplBody(flowerAdView: flowerAdView)
+
+    public var body: some View {
+        googleAdViewImplBody
     }
-    
-    func removeView(view: GoogleAdView) {
-    }
-    
-    func getHeight() -> Int32 {
-        return Int32(frame.height)
+
+    init(flowerAdView: FlowerAdView) {
+        self.flowerAdView = flowerAdView
     }
 
     func getWidth() -> Int32 {
-        return Int32(frame.width)
+        return googleAdViewImplBody.width
     }
 
-    func hide() {
-        isHidden = true
-        self.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+    func getHeight() -> Int32 {
+        return googleAdViewImplBody.height
     }
 
     func show() {
-        isHidden = false
-        
-        var screenWidth: CGFloat
-        var screenHeight: CGFloat
-        
-        if let parentView = self.superview {
-            screenWidth = parentView.bounds.width
-            screenHeight = parentView.bounds.height
-        } else {
-            screenWidth = UIScreen.main.bounds.width
-            screenHeight = UIScreen.main.bounds.height
-        }
+        logger.debug { "Showing GoogleAdView" }
+        flowerAdView.isGoogleAdViewVisible = true
+    }
 
-        // Calculate height based on the assumed 16:9 aspect ratio
-        let height = screenWidth * (9.0 / 16.0)
-        
-        if height <= screenHeight {
-            self.frame = CGRect(x: 0, y: 0, width: screenWidth, height: height)
-        } else {
-            let width = screenHeight * (16.0 / 9.0)
-            self.frame = CGRect(x: 0, y: 0, width: width, height: screenHeight)
-        }
+    func hide() {
+        logger.debug { "Hiding GoogleAdView" }
+        flowerAdView.isGoogleAdViewVisible = false
     }
 
     func isShow() -> Bool {
-        return !isHidden
+        return flowerAdView.isGoogleAdViewVisible
+    }
+
+    func addView(view: any GoogleAdView) {
+    }
+
+    func removeView(view: any GoogleAdView) {
+    }
+
+    struct GoogleAdViewImplBody: View {
+        @ObservedObject var flowerAdView: FlowerAdView
+        @State var width: Int32 = 0
+        @State var height: Int32 = 0
+
+        var body: some View {
+            GeometryReader { geometry in
+                Color.clear
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onAppear {
+                    width = Int32(geometry.size.width)
+                    height = Int32(geometry.size.height)
+                }
+            }
+        }
     }
 }

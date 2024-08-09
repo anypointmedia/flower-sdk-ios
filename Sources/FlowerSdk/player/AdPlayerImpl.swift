@@ -115,8 +115,7 @@ class FlowerAdPlayerImpl: AdPlayer {
             do {
                 self.adPlayerView.show()
                 let playerLayer = AVPlayerLayer(player: player)
-                playerLayer.frame = self.adPlayerView.bounds
-                self.adPlayerView.layer.addSublayer(playerLayer)
+                self.adPlayerView.addPlayerLayer(playerLayer: playerLayer)
                 try player.play()
                 self.logger.info { "ad player start to play" }
                 self.adPlayerCallbacks.onPlay(mediaUrl: self.mediaUrls[0] as! String)

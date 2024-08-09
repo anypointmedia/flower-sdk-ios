@@ -1,50 +1,96 @@
 import Foundation
+import AVKit
 import SwiftUI
-import UIKit
 import sdk_core
 
-class AdPlayerViewImpl: UIView, AdPlayerView {
+class AdPlayerViewImpl: AdPlayerView {
+    let logger = sdk_core.LoggingKmLog()
 
-    func getHeight() -> Int32 {
-        return Int32(frame.height)
+    var flowerAdView: FlowerAdView
+    lazy var adPlayerViewImplBody = AdPlayerViewImplBody(flowerAdView: flowerAdView)
+
+    public var body: some View {
+        adPlayerViewImplBody
+    }
+
+    init(flowerAdView: FlowerAdView) {
+        self.flowerAdView = flowerAdView
     }
 
     func getWidth() -> Int32 {
-        return Int32(frame.width)
+        return adPlayerViewImplBody.width
     }
 
-    func hide() {
-        isHidden = true
-        self.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+    func getHeight() -> Int32 {
+        return adPlayerViewImplBody.height
     }
 
     func show() {
-        isHidden = false
+        logger.debug { "Showing AdPlayerView" }
+        flowerAdView.isAdPlayerViewVisible = true
+    }
 
-        var screenWidth: CGFloat
-        var screenHeight: CGFloat
-
-        if let parentView = self.superview {
-            screenWidth = parentView.bounds.width
-            screenHeight = parentView.bounds.height
-        } else {
-            screenWidth = UIScreen.main.bounds.width
-            screenHeight = UIScreen.main.bounds.height
-        }
-
-        // Calculate height based on the assumed 16:9 aspect ratio
-        let height = screenWidth * (9.0 / 16.0)
-
-        if height <= screenHeight {
-            self.frame = CGRect(x: 0, y: 0, width: screenWidth, height: height)
-        } else {
-            let width = screenHeight * (16.0 / 9.0)
-            self.frame = CGRect(x: 0, y: 0, width: width, height: screenHeight)
-        }
+    func hide() {
+        logger.debug { "Hiding AdPlayerView" }
+        flowerAdView.isAdPlayerViewVisible = false
     }
 
     func isShow() -> Bool {
-        return !isHidden
+        return flowerAdView.isAdPlayerViewVisible
     }
 
+    func addPlayerLayer(playerLayer: AVPlayerLayer) {
+        adPlayerViewImplBody.observer.playerLayerRepresentable = AVPlayerLayerRepresentable(playerLayer: playerLayer)
+    }
+
+    struct AVPlayerLayerRepresentable: UIViewRepresentable {
+        let playerLayer: AVPlayerLayer
+
+        func makeUIView(context: Context) -> UIView {
+            return PlayerContainer(playerLayer: playerLayer)
+        }
+
+        func updateUIView(_ uiView: UIView, context: Context) {
+        }
+
+        class PlayerContainer: UIView {
+
+            init(playerLayer: AVPlayerLayer) {
+                super.init(frame: .zero)
+                layer.addSublayer(playerLayer)
+            }
+
+            required init?(coder: NSCoder) {
+                fatalError("init(coder:) has not been implemented")
+            }
+
+            override func layoutSubviews() {
+                super.layoutSubviews()
+                layer.sublayers?.first?.frame = frame
+            }
+        }
+    }
+
+    class AdPlayerViewImplBodyObserver: ObservableObject {
+        @Published var playerLayerRepresentable: AVPlayerLayerRepresentable?
+    }
+
+    struct AdPlayerViewImplBody: View {
+        @ObservedObject var flowerAdView: FlowerAdView
+        @ObservedObject var observer = AdPlayerViewImplBodyObserver()
+        @State var width: Int32 = 0
+        @State var height: Int32 = 0
+
+        var body: some View {
+            GeometryReader { geometry in
+                observer.playerLayerRepresentable
+                .background(Color.black)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onAppear {
+                    width = Int32(geometry.size.width)
+                    height = Int32(geometry.size.height)
+                }
+            }
+        }
+    }
 }

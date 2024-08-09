@@ -2,14 +2,28 @@ import Foundation
 import sdk_core
 import UIKit
 import AdSupport
+import Combine
+import DeviceKit
 
 class DeviceServiceImpl: DeviceService {
     private let logger = sdk_core.LoggingKmLog()
 
     private var deviceUuid: String? = nil
+    private var fingerPrintId: String? = nil
 
-    init () {
-        loadDeviceUuid()
+    init(fingerPrintResolverViewModel: FingerPrintResolverViewModel) {
+        var fingerPrintSub: AnyCancellable?
+        fingerPrintSub = fingerPrintResolverViewModel.fingerPrintId
+        .receive(on: RunLoop.main)
+        .sink(receiveValue: { value in
+            if value != nil {
+                self.logger.info { "Load fingerprint id:: \(value!)" }
+                self.fingerPrintId = value
+            }
+
+            self.loadDeviceUuid()
+            fingerPrintSub?.cancel()
+        })
     }
 
     private func loadDeviceUuid() {
@@ -19,6 +33,7 @@ class DeviceServiceImpl: DeviceService {
             setDeviceId(deviceId: UUID().uuidString)
         } else {
             logger.info { "exist deviceId: \(savedDeviceId!)" }
+            deviceUuid = savedDeviceId
         }
     }
 
@@ -88,8 +103,17 @@ class DeviceServiceImpl: DeviceService {
         UIDevice().model
     }
 
-    func getUserAgent() -> String? {
-        nil
+    func getUserAgent() -> String {
+        let appPackage = Bundle.main.bundleIdentifier ?? "unknown"
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
+        let iosVersion = UIDevice().systemVersion
+        let deviceModel = Device.current
+
+        if UIDevice.current.userInterfaceIdiom == .tv {
+            return "\(appPackage)/\(appVersion) Smart-TV (iOS \(iosVersion)) CTV(Connected TV)"
+        } else {
+            return "\(appPackage)/\(appVersion) (iOS \(iosVersion);\(deviceModel))"
+        }
     }
 
     func getPlatformAdId() -> String? {

@@ -15,30 +15,35 @@ struct DASHManifestForParsing {
 }
 
 class AvPlayerAdapterFactory: sdk_core.SdkContainerBeanFactory {
-    func create() -> Any {
-        return AvPlayerAdapter()
+    func create(args: KotlinArray<AnyObject>) -> Any? {
+        return AvPlayerAdapter(
+            mediaPlayerHook: args.get(index: 0) as! MediaPlayerHook,
+            flowerAdsManager: args.get(index: 1) as! FlowerAdsManagerImpl
+        )
     }
 }
 
 class AvPlayerAdapter: MediaPlayerAdapter {
-    
+
     private var mediaPlayerHook: MediaPlayerHook!
+    private var flowerAdsManager: FlowerAdsManagerImpl!
     private var trackingDelayCounter: Int64 = 0
 
-    func doInit(mediaPlayerHook: MediaPlayerHook) {
+    init(mediaPlayerHook: MediaPlayerHook, flowerAdsManager: FlowerAdsManagerImpl) {
         self.mediaPlayerHook = mediaPlayerHook
+        self.flowerAdsManager = flowerAdsManager
     }
 
 
-    func getAccumulatedDuration() -> Int32 {
+    func getCurrentPosition() -> Int32 {
         if mediaPlayerHook.getPlayer() is AVPlayer {
             return Int32(CMTimeGetSeconds((mediaPlayerHook.getPlayer() as! AVPlayer).currentTime()) * 1000)
         }
         return 0
     }
 
-    func getCurrentPlayingChunk() -> MediaPlayerChunk {
-        return MediaPlayerChunk(position: getAccumulatedDuration(), url: nil, periodId: nil)
+    func getCurrentMediaChunk() -> MediaChunk {
+        return MediaChunk(currentPosition: getCurrentPosition(), url: nil, periodId: nil)
 //        guard let avPlayer = mediaPlayerHook.getPlayer() as? AVPlayer else {
 //            return CurrentPlayItem(currentPosition: getCurrentPosition(), url: nil, periodId: nil)
 //        }

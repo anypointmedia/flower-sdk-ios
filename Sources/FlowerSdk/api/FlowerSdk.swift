@@ -17,6 +17,11 @@ class DefaultSdkLifecycleListener: SdkLifecycleListener {
 }
 
 public class FlowerSdk {
+    private static var fingerPrintResolverViewModel = FingerPrintResolverViewModel()
+
+    public static var root: some View {
+        FingerPrintResolver(viewModel: fingerPrintResolverViewModel)
+    }
 
     public static func doInit(appContext: Any) {
         var DEFAULT_TIMEOUT: TimeInterval = 3_000
@@ -27,7 +32,7 @@ public class FlowerSdk {
                     // Note: Let kmp core handle creating HttpClient[io.ktor.client.engine.darwin.DarwinClientEngine
                     // Thus, do not add instance sdk_core.SdkContainer.ClassName.httpClient: ,
                     sdk_core.SdkContainer.ClassName.cacheManager: CacheManagerImpl(appContext: appContext),
-                    sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(),
+                    sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(fingerPrintResolverViewModel: fingerPrintResolverViewModel),
                     sdk_core.SdkContainer.ClassName.xmlUtil: XmlUtilImpl(),
                     sdk_core.SdkContainer.ClassName.adPlayer: FlowerAdPlayerImpl(context: appContext),
                     sdk_core.SdkContainer.ClassName.errorLogSender: ErrorLogSenderImpl(),
