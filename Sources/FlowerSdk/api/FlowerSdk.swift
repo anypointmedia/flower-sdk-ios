@@ -4,7 +4,23 @@ import sdk_core
 
 public typealias FlowerAdsManagerListener = sdk_core.FlowerAdsManagerListener
 public typealias MediaPlayerHook = sdk_core.MediaPlayerHook
+public typealias MediaPlayerAdapter = sdk_core.MediaPlayerAdapter
+public typealias MediaChunkStub = sdk_core.MediaChunkStub
 public typealias FlowerError = sdk_core.FlowerError
+
+public class MediaChunk: MediaChunkStub {
+    public var currentPosition: Int32
+
+    public var url: String?
+
+    public var periodId: String?
+
+    public init(currentPosition: Int32, url: String?, periodId: String?) {
+        self.currentPosition = currentPosition
+        self.url = url
+        self.periodId = periodId
+    }
+}
 
 class DefaultSdkLifecycleListener: SdkLifecycleListener {
     func onDestroyed() {
@@ -23,7 +39,7 @@ public class FlowerSdk {
         FingerPrintResolver(viewModel: fingerPrintResolverViewModel)
     }
 
-    public static func doInit(appContext: Any) {
+    public static func doInit() {
         var DEFAULT_TIMEOUT: TimeInterval = 3_000
 
         let lm: Void = sdk_core.LifecycleManager().doInit(
@@ -31,10 +47,10 @@ public class FlowerSdk {
                 instances: PlatformMap(storage: [
                     // Note: Let kmp core handle creating HttpClient[io.ktor.client.engine.darwin.DarwinClientEngine
                     // Thus, do not add instance sdk_core.SdkContainer.ClassName.httpClient: ,
-                    sdk_core.SdkContainer.ClassName.cacheManager: CacheManagerImpl(appContext: appContext),
+                    sdk_core.SdkContainer.ClassName.cacheManager: CacheManagerImpl(),
                     sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(fingerPrintResolverViewModel: fingerPrintResolverViewModel),
                     sdk_core.SdkContainer.ClassName.xmlUtil: XmlUtilImpl(),
-                    sdk_core.SdkContainer.ClassName.adPlayer: FlowerAdPlayerImpl(context: appContext),
+                    sdk_core.SdkContainer.ClassName.adPlayer: FlowerAdPlayerImpl(),
                     sdk_core.SdkContainer.ClassName.errorLogSender: ErrorLogSenderImpl(),
                 ]),
                 factories: PlatformMap(storage: [

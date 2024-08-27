@@ -5,7 +5,6 @@ import SwiftUI
 import sdk_core
 
 class FlowerAdPlayerImpl: AdPlayer {
-    private let context: any App
     private var logger = sdk_core.LoggingKmLog()
     private let sdkContainer = sdk_core.SdkContainer.companion.getInstance()
     private var isAdPlaying = false
@@ -20,10 +19,6 @@ class FlowerAdPlayerImpl: AdPlayer {
     private var adPlayerView: AdPlayerViewImpl!
     
     private var durations: [Double] = []
-    
-    init (context: Any) {
-        self.context = context as! any App
-    }
     
     func load(mediaUrls: PlatformList<NSString>, totalDuration: Int32, playerView: AdPlayerView) {
         let mediaUrls = mediaUrls.array as! [String]

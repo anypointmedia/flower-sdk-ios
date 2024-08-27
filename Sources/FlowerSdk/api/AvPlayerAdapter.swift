@@ -42,7 +42,7 @@ class AvPlayerAdapter: MediaPlayerAdapter {
         return 0
     }
 
-    func getCurrentMediaChunk() -> MediaChunk {
+    func getCurrentMediaChunk() -> MediaChunkStub {
         return MediaChunk(currentPosition: getCurrentPosition(), url: nil, periodId: nil)
 //        guard let avPlayer = mediaPlayerHook.getPlayer() as? AVPlayer else {
 //            return CurrentPlayItem(currentPosition: getCurrentPosition(), url: nil, periodId: nil)

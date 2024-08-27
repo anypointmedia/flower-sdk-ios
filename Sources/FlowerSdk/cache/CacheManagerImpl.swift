@@ -17,7 +17,7 @@ class CacheManagerImpl: sdk_core.CacheManager {
         static let maxCacheSize = 200 * 1024 * 1024 // 200MB
     }
 
-    init(appContext: Any) {
+    init() {
         do {
             // Get the URL to the app's cache directory
             rootDir = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
