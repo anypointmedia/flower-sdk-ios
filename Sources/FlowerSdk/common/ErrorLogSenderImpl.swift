@@ -2,7 +2,7 @@ import Foundation
 import sdk_core
 
 class ErrorLogSenderImpl: sdk_core.ErrorLogSender {
-    
+
     func resolvePlatformFields() -> ErrorLogPlatformFields {
         ErrorLogPlatformFields(
                 sdkType: "iOS",

@@ -17,9 +17,9 @@ class FlowerAdPlayerImpl: AdPlayer {
     private var loadJob: DispatchWorkItem?
     private var playStartTime: Int64 = 0
     private var adPlayerView: AdPlayerViewImpl!
-    
+
     private var durations: [Double] = []
-    
+
     func load(mediaUrls: PlatformList<NSString>, totalDuration: Int32, playerView: AdPlayerView) {
         let mediaUrls = mediaUrls.array as! [String]
         if mediaUrls.count == 0 {
@@ -30,24 +30,24 @@ class FlowerAdPlayerImpl: AdPlayer {
         loadJob?.cancel()
         loadJob = DispatchWorkItem { [weak self] in
             guard let self = self else {return}
-            
+
             do {
                 self.release()
-                                
+
                 self.mediaUrls = mediaUrls
                 self.totalDuration = totalDuration
                 self.durations = []
-                                
-                
+
+
                 let mediaSources = convertMediaSource()
                 for source in mediaSources {
                     durations.append(CMTimeGetSeconds(source.asset.duration)*1000)
                 }
-                
+
                 // Note: Initialize in this order
                 // AVQueuePlayer > AVPlayerLayer > adPlayerView.layer.addSublayer(playerLayer)
                 player = AVQueuePlayer(items: mediaSources)
-                
+
                 for item in player!.items() {
                     NotificationCenter.default.addObserver(self, selector: #selector(adPlayerDidFinishPlaying(_:)), name: .AVPlayerItemDidPlayToEndTime, object: item)
                 }
@@ -60,12 +60,12 @@ class FlowerAdPlayerImpl: AdPlayer {
         }
         DispatchQueue.main.async(execute: loadJob!)
     }
-    
+
     // Note: Due to OS differences, returning [AVPlayerItem] instead of MediaSource
     func convertMediaSource() -> [AVPlayerItem] {
         return mediaUrls.map { AVPlayerItem(url: URL(string: $0)!) }
     }
-    
+
     func next() {
         // In the case of AVPlayer
 //        guard let player = player else {
@@ -88,7 +88,7 @@ class FlowerAdPlayerImpl: AdPlayer {
 //            // No next item, stop playback
 //            stop()
 //        }
-        
+
         // In the case of AVQueuePlayer
         if player?.canInsert(player!.currentItem!, after: nil) == true {
             player?.advanceToNextItem()
@@ -96,11 +96,11 @@ class FlowerAdPlayerImpl: AdPlayer {
             stop()
         }
     }
-    
+
     func play() {
         logger.info { "play flower ads" }
         self.isAdPlaying = true
-        
+
         guard let player = self.player else {
             logger.warn { "ad player is not initialized" }
             return
@@ -120,7 +120,7 @@ class FlowerAdPlayerImpl: AdPlayer {
             }
         }
     }
-    
+
     func stop() {
         logger.info { "stop flower ads" }
         guard let player = self.player else {
@@ -140,7 +140,7 @@ class FlowerAdPlayerImpl: AdPlayer {
         }
         DispatchQueue.main.async(execute: stopJob!)
     }
-    
+
     func cancelPlayerJobs() {
         logger.info { "cancel load playSet job..." }
         if loadJob != nil {
@@ -149,7 +149,7 @@ class FlowerAdPlayerImpl: AdPlayer {
         }
         playStartTime = 0
     }
-    
+
     func release() {
         if player == nil {
             logger.warn { "ad player is not initialized" }
@@ -158,7 +158,7 @@ class FlowerAdPlayerImpl: AdPlayer {
         cancelReleaseAndStopJob()
         releasePlayer()
     }
-    
+
     func releasePlayer() {
         do {
             if player != nil {
@@ -187,16 +187,16 @@ class FlowerAdPlayerImpl: AdPlayer {
             logger.warn { "releaseJob canceled" }
         }
     }
-    
+
     func addCallback(adPlayerCallback: AdPlayerCallback) {
         adPlayerCallbacks.addCallback(callback: adPlayerCallback)
     }
-    
+
     func removeCallback(adPlayerCallback: AdPlayerCallback) {
         adPlayerCallbacks.removeCallback(callback: adPlayerCallback)
     }
-    
-    
+
+
     func getProgress() -> AdProgress {
         if player == nil {
             return AdProgress.companion.NOT_READY
@@ -204,9 +204,9 @@ class FlowerAdPlayerImpl: AdPlayer {
         let playTime: Double = player!.currentTime().seconds * 1000
 
         return AdProgress(currentTime: Int32(exactly: playTime.rounded() ) ?? 0, duration: Int32(durations[durations.count - (player?.items().count)!]))
-        
+
     }
-    
+
     func getCurrentPeriodIndex() -> Int {
         guard let currentItem = player?.currentItem else {
             return 0
@@ -218,25 +218,25 @@ class FlowerAdPlayerImpl: AdPlayer {
         }
         return 0
     }
-    
+
 //    var volume
-    
+
     func currentMediaUrl() -> String? {
         return nil
     }
-    
+
     func onPlayerError(error: Any) { // Expect error: Kotlin.PlaybackException
         let nsMutableArray = NSMutableArray(array: [])
         adPlayerCallbacks.onStopped()
     }
-    
+
     func onPlayWhenReadyChange(playWhenReady: Bool, reason: Int) {
         logger.debug { "onPlayWhenReadyChanged: playWhenReady=\(playWhenReady), reason=\(reason)" }
     }
 //    func onVideoSizeChanged(videoSize: VideoSize) {
-//        
+//
 //    }
-    
+
     /* Author: SEUNG
      * Note: As defined in Player.java
      *  int STATE_IDLE = 1;
@@ -258,9 +258,9 @@ class FlowerAdPlayerImpl: AdPlayer {
 //        default:
 //            print( "" )
 //        }
-//        
+//
 //    }
-    
+
     @objc func adPlayerDidFinishPlaying(_ notification: Notification) {
         // if player has completed the last ad
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: player!.currentItem)
@@ -272,13 +272,13 @@ class FlowerAdPlayerImpl: AdPlayer {
     func pause() {
         player?.pause()
     }
-    
+
     func resume() {
         player?.play()
     }
-    
+
     func isPause() -> Bool {
         return player?.rate == 0.0
     }
-    
+
 }

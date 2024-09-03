@@ -34,7 +34,7 @@ class ManipulationServerImplFactory: sdk_core.SdkContainerBeanFactory {
 }
 
 class ManipulationServerImpl: ManipulationServer {
-    
+
     private let sdkContainer = SdkContainer.Companion().getInstance()
     public let manipulationServerHandler = ManipulationServerHandler()
     private let server = HttpServer()
@@ -56,11 +56,13 @@ class ManipulationServerImpl: ManipulationServer {
             manipulationServerHandler.localEndpoint = ""
         } else {
             manipulationServerHandler.localEndpoint = "http://\(server.listenAddressIPv4!):\(freePort)"
-            
-            observer = MSPlayerObserver(player: flowerAdsManager.mediaPlayerHook.getPlayer() as! AVPlayer) { player, keyPath in
-                if keyPath == "rate" {
-                    if player.status == .readyToPlay && player.rate > 0.0 {
-                        self.checkServerAliveAndRestart()
+
+            if let player = flowerAdsManager.mediaPlayerHook.getPlayer() as? AVPlayer {
+                observer = MSPlayerObserver(player: player) { player, keyPath in
+                    if keyPath == "rate" {
+                        if player.status == .readyToPlay && player.rate > 0.0 {
+                            self.checkServerAliveAndRestart()
+                        }
                     }
                 }
             }
@@ -173,7 +175,7 @@ class ManipulationServerImpl: ManipulationServer {
             var cachedResponse: CacheResponse!
 
             do {
-                cachedResponse = try? manipulationServerHandler.ios_handleRequestSync(requestUri: requestUri, headers: request.headers)
+                cachedResponse = try manipulationServerHandler.ios_handleRequestSync(requestUri: requestUri, headers: request.headers)
             } catch {
                 logger.warn { "failed to get cached response \(error)" }
                 print(error)
