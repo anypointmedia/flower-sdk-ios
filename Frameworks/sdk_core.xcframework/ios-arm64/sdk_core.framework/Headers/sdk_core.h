@@ -3895,7 +3895,6 @@ __attribute__((swift_name("LoggingKmLog")))
  * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
 - (void)infoTag:(NSString *)tag msg_:(NSString *)msg __attribute__((swift_name("info(tag:msg_:)")));
-- (NSString *)description __attribute__((swift_name("description()")));
 - (void)vTag:(NSString * _Nullable)tag msg:(id _Nullable (^)(void))msg __attribute__((swift_name("v(tag:msg:)")));
 - (void)verboseMsg:(id _Nullable (^)(void))msg __attribute__((swift_name("verbose(msg:)")));
 - (void)verboseTag:(NSString *)tag msg:(id _Nullable (^)(void))msg __attribute__((swift_name("verbose(tag:msg:)")));
