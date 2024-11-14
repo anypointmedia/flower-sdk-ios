@@ -5,7 +5,7 @@ import SwiftUI
 import sdk_core
 
 class FlowerAdPlayerImpl: AdPlayer {
-    private var logger = sdk_core.LoggingKmLog()
+    private var logger = sdk_core.KmLog()
     private let sdkContainer = sdk_core.SdkContainer.companion.getInstance()
     private var isAdPlaying = false
     private var totalDuration: Int32 = -1

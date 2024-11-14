@@ -3,7 +3,7 @@ import SwiftUI
 import sdk_core
 
 class GoogleAdViewImpl: GoogleAdView {
-    let logger = sdk_core.LoggingKmLog()
+    let logger = sdk_core.KmLog()
 
     var flowerAdView: FlowerAdView
     lazy var googleAdViewImplBody = GoogleAdViewImplBody(flowerAdView: flowerAdView)

@@ -3,7 +3,7 @@ import SwiftUI
 import sdk_core
 
 public class FlowerAdView: FlowerAdViewStub, ObservableObject {
-    let logger = sdk_core.LoggingKmLog()
+    let logger = sdk_core.KmLog()
 
     @Published var isFlowerAdViewVisible = false
     @Published var isAdPlayerViewVisible = false

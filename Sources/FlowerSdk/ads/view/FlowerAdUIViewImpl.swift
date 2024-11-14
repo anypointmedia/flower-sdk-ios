@@ -3,7 +3,7 @@ import sdk_core
 import SwiftUI
 
 class FlowerAdUIViewImpl: FlowerAdUIView {
-    let logger = sdk_core.LoggingKmLog()
+    let logger = sdk_core.KmLog()
 
     var flowerAdView: FlowerAdView
     var isShowingQR = false
@@ -53,7 +53,7 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
     }
 
     struct FlowerAdUIViewImplBody: View {
-        let logger = sdk_core.LoggingKmLog()
+        let logger = sdk_core.KmLog()
 
         @ObservedObject var flowerAdView: FlowerAdView
         @ObservedObject var observer = FlowerAdUIViewImplBodyObserver()

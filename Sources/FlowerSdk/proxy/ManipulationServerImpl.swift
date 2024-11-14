@@ -40,7 +40,7 @@ class ManipulationServerImpl: ManipulationServer {
     private let server = HttpServer()
     private lazy var httpClient = sdkContainer.httpClient
     private var observer: MSPlayerObserver?
-    var logger = sdk_core.LoggingKmLog()
+    var logger = sdk_core.KmLog()
 
     private var lastServerPort: in_port_t = 0
 

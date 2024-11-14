@@ -6,7 +6,7 @@ import Combine
 import DeviceKit
 
 class DeviceServiceImpl: DeviceService {
-    private let logger = sdk_core.LoggingKmLog()
+    private let logger = sdk_core.KmLog()
 
     private var deviceUuid: String? = nil
     private var fingerPrintId: String? = nil

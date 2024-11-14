@@ -51,4 +51,8 @@ class XmlNodeImpl: XmlNode {
     override func textContent() -> String {
         (node as! XMLNode).stringValue
     }
+
+    override func clone() -> XmlNode {
+        XmlNodeImpl(node: (node as! XMLNode), rootNode: rootNode)
+    }
 }

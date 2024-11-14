@@ -4,7 +4,7 @@ import SwiftUI
 import sdk_core
 
 class AdPlayerViewImpl: AdPlayerView {
-    let logger = sdk_core.LoggingKmLog()
+    let logger = sdk_core.KmLog()
 
     var flowerAdView: FlowerAdView
     lazy var adPlayerViewImplBody = AdPlayerViewImplBody(flowerAdView: flowerAdView)

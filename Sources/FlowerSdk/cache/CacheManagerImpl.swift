@@ -7,7 +7,7 @@ import OSLog
 class CacheManagerImpl: sdk_core.CacheManager {
     var rootDir: URL?
     lazy var httpClient: Ktor_client_coreHttpClient = SdkContainer.Companion().getInstance().httpClient
-    var logger = sdk_core.LoggingKmLog()
+    var logger = sdk_core.KmLog()
 
     class CacheManagerImplCompanion {
         static let isCachable = true
