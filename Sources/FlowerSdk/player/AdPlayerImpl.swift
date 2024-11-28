@@ -198,13 +198,18 @@ class FlowerAdPlayerImpl: AdPlayer {
 
 
     func getProgress() -> AdProgress {
-        if player == nil {
+        guard let player = self.player else {
             return AdProgress.companion.NOT_READY
         }
-        let playTime: Double = player!.currentTime().seconds * 1000
-
-        return AdProgress(currentTime: Int32(exactly: playTime.rounded() ) ?? 0, duration: Int32(durations[durations.count - (player?.items().count)!]))
-
+        
+        let playTime: Double = player.currentTime().seconds * 1000
+        let playingItemCount = player.items().count
+        
+        if playingItemCount == 0 {
+            return AdProgress.companion.NOT_READY
+        }
+                
+        return AdProgress(currentTime: Int32(exactly: playTime.rounded() ) ?? 0, duration: Int32(durations[durations.count - playingItemCount]))
     }
 
     func getCurrentPeriodIndex() -> Int {
