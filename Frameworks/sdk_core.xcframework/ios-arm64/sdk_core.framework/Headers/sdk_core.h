@@ -1083,10 +1083,13 @@ __attribute__((swift_name("Ad")))
 - (Sdk_coreAd *)doCopyId:(NSString * _Nullable)id creatives:(NSArray<Sdk_coreCreative *> *)creatives trackingUrls:(Sdk_coreMutableDictionary<Sdk_coreAdTrackingEvent *, NSMutableArray<NSString *> *> *)trackingUrls duration:(int64_t)duration skipDuration:(int64_t)skipDuration progressTrackingUrls:(Sdk_coreMutableDictionary<Sdk_coreLong *, NSMutableArray<NSString *> *> *)progressTrackingUrls click:(Sdk_coreAdClick * _Nullable)click companionAds:(NSArray<Sdk_coreAd *> *)companionAds isFiller:(BOOL)isFiller isWrapper:(BOOL)isWrapper adUrlMacroValue:(Sdk_coreAdUrlMacroValue *)adUrlMacroValue adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders url:(NSString * _Nullable)url isGoogle:(BOOL)isGoogle fallbackUrl:(NSString * _Nullable)fallbackUrl isFallbackGoogle:(BOOL)isFallbackGoogle adNetworkId:(int64_t)adNetworkId deviceId:(int64_t)deviceId deviceTypeId:(int32_t)deviceTypeId placementId:(int64_t)placementId transactionId:(NSString *)transactionId minReqDuration:(int64_t)minReqDuration assetProfileIds:(NSArray<Sdk_coreLong *> *)assetProfileIds beaconRetryCount:(Sdk_coreInt * _Nullable)beaconRetryCount __attribute__((swift_name("doCopy(id:creatives:trackingUrls:duration:skipDuration:progressTrackingUrls:click:companionAds:isFiller:isWrapper:adUrlMacroValue:adTagHeaders:url:isGoogle:fallbackUrl:isFallbackGoogle:adNetworkId:deviceId:deviceTypeId:placementId:transactionId:minReqDuration:assetProfileIds:beaconRetryCount:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (Sdk_coreCreative *)getDashCreative __attribute__((swift_name("getDashCreative()")));
+- (Sdk_coreCreative * _Nullable)getDashCreativeOrNull __attribute__((swift_name("getDashCreativeOrNull()")));
 - (Sdk_coreCreative * _Nullable)getFitCreativePlayerView:(id<Sdk_coreAdPlayerView>)playerView __attribute__((swift_name("getFitCreative(playerView:)")));
 - (Sdk_coreCreative *)getHlsCreative __attribute__((swift_name("getHlsCreative()")));
+- (Sdk_coreCreative * _Nullable)getHlsCreativeOrNull __attribute__((swift_name("getHlsCreativeOrNull()")));
 - (Sdk_coreCreative *)getSingleMediaCreative __attribute__((swift_name("getSingleMediaCreative()")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (Sdk_coreCreative *)resolveOverlayVideoCreative __attribute__((swift_name("resolveOverlayVideoCreative()")));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) int64_t adNetworkId __attribute__((swift_name("adNetworkId")));
 @property (readonly) NSDictionary<NSString *, NSString *> *adTagHeaders __attribute__((swift_name("adTagHeaders")));
@@ -3081,7 +3084,6 @@ __attribute__((swift_name("ManipulationServerHandler")))
 @property NSString *localEndpoint __attribute__((swift_name("localEndpoint")));
 @property (readonly) Sdk_coreMutableDictionary<NSString *, NSString *> *originalUrlPrefixes __attribute__((swift_name("originalUrlPrefixes")));
 @property (readonly) Sdk_coreMutableDictionary<Sdk_coreLong *, Sdk_coreMediaPlaylistManipulatorHistoryMediaSegment *> *responseSegments __attribute__((swift_name("responseSegments")));
-@property id<Sdk_coreKotlinx_coroutines_coreJob> _Nullable segmentUrlCheckJob __attribute__((swift_name("segmentUrlCheckJob")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -3570,6 +3572,12 @@ __attribute__((swift_name("LogLevelKt")))
 @property (class, readonly) int32_t INFO_MASK __attribute__((swift_name("INFO_MASK")));
 @property (class, readonly) int32_t VERBOSE_MASK __attribute__((swift_name("VERBOSE_MASK")));
 @property (class, readonly) int32_t WARN_MASK __attribute__((swift_name("WARN_MASK")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("MediaChunkStubExtKt")))
+@interface Sdk_coreMediaChunkStubExtKt : Sdk_coreBase
++ (id<Sdk_coreMediaChunkStub>)fixHlsChunk:(id<Sdk_coreMediaChunkStub>)receiver manipulationServerHandler:(Sdk_coreManipulationServerHandler *)manipulationServerHandler mediaPlayerAdapter:(id<Sdk_coreMediaPlayerAdapter>)mediaPlayerAdapter __attribute__((swift_name("fixHlsChunk(_:manipulationServerHandler:mediaPlayerAdapter:)")));
 @end
 
 __attribute__((objc_subclassing_restricted))
