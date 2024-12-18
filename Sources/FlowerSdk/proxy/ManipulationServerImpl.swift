@@ -139,7 +139,7 @@ class ManipulationServerImpl: ManipulationServer {
         let requestBuilder = Ktor_client_coreHttpRequestBuilder()
         requestBuilder.ios_url(urlString: manipulationServerHandler.localEndpoint + "/ping")
 
-        logger.verbose { "ping to server: \(self.manipulationServerHandler.localEndpoint)"}
+        logger.info { "ping to server: \(self.manipulationServerHandler.localEndpoint)"}
 
         var response = try? httpClient.ios_requestSync(builder: requestBuilder)
 
@@ -162,7 +162,7 @@ class ManipulationServerImpl: ManipulationServer {
 
         server["/"] = { [self] request in
             if request.path == "/ping" {
-                logger.verbose { "pong from server" }
+                logger.info { "pong from server" }
                 return HttpResponse.ok(.data("pong".data(using: .utf8)!))
             }
 
@@ -170,7 +170,7 @@ class ManipulationServerImpl: ManipulationServer {
                 result + (result.isEmpty ? "" : "&") + param.0 + "=" + param.1
             })
 
-            logger.verbose { "requestUri: \(server.listenAddressIPv4!):\(lastServerPort)\(requestUri)" }
+            logger.info { "requestUri: \(server.listenAddressIPv4!):\(lastServerPort)\(requestUri)" }
 
             var cachedResponse: CacheResponse!
 

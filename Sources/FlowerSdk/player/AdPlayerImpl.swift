@@ -236,7 +236,7 @@ class FlowerAdPlayerImpl: AdPlayer {
     }
 
     func onPlayWhenReadyChange(playWhenReady: Bool, reason: Int) {
-        logger.debug { "onPlayWhenReadyChanged: playWhenReady=\(playWhenReady), reason=\(reason)" }
+        logger.info { "onPlayWhenReadyChanged: playWhenReady=\(playWhenReady), reason=\(reason)" }
     }
 //    func onVideoSizeChanged(videoSize: VideoSize) {
 //

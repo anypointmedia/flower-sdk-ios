@@ -25,12 +25,12 @@ class GoogleAdViewImpl: GoogleAdView {
     }
 
     func show() {
-        logger.debug { "Showing GoogleAdView" }
+        logger.info { "Showing GoogleAdView" }
         flowerAdView.isGoogleAdViewVisible = true
     }
 
     func hide() {
-        logger.debug { "Hiding GoogleAdView" }
+        logger.info { "Hiding GoogleAdView" }
         flowerAdView.isGoogleAdViewVisible = false
     }
 

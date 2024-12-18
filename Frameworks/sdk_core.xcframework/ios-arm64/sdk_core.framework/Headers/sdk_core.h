@@ -3209,6 +3209,14 @@ __attribute__((swift_name("UIButton")))
 @required
 @end
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CommonMutex")))
+@interface Sdk_coreCommonMutex : Sdk_coreBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (id _Nullable)withLockTask:(id _Nullable (^)(void))task __attribute__((swift_name("withLock(task:)")));
+@end
+
 __attribute__((swift_name("DeferredStub")))
 @protocol Sdk_coreDeferredStub
 @required
