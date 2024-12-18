@@ -1544,9 +1544,11 @@ __attribute__((swift_name("ErrorLogSender")))
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("ErrorLogSender.Companion")))
-@interface Sdk_coreErrorLogSenderCompanion : Sdk_coreBase
+@interface Sdk_coreErrorLogSenderCompanion : Sdk_coreFLogging
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) Sdk_coreErrorLogSenderCompanion *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *S3_BUCKET_HOST __attribute__((swift_name("S3_BUCKET_HOST")));
