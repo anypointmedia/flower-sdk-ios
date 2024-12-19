@@ -51,7 +51,7 @@ public class FlowerSdk {
                     sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(fingerPrintResolverViewModel: fingerPrintResolverViewModel),
                     sdk_core.SdkContainer.ClassName.xmlUtil: XmlUtilImpl(),
                     sdk_core.SdkContainer.ClassName.adPlayer: FlowerAdPlayerImpl(),
-                    sdk_core.SdkContainer.ClassName.errorLogSender: ErrorLogSenderImpl(),
+                    sdk_core.SdkContainer.ClassName.platformAnalyticsResolver: PlatformAnalyticsResolverImpl(),
                 ]),
                 factories: PlatformMap(storage: [
                     sdk_core.SdkContainer.ClassName.manipulationServer: ManipulationServerImplFactory(),

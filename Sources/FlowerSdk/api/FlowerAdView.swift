@@ -38,7 +38,7 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
     }
 
     public func show() {
-        logger.info { "Showing FlowerAdView" }
+        logger.debug { "Showing FlowerAdView" }
         self.isFlowerAdViewVisible = true
         self.flowerAdUIView.show()
         self.playerView.show()
@@ -46,7 +46,7 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
     }
 
     public func hide() {
-        logger.info { "Hiding FlowerAdView" }
+        logger.debug { "Hiding FlowerAdView" }
         self.isFlowerAdViewVisible = false
         self.flowerAdUIView.hide()
         self.playerView.hide()

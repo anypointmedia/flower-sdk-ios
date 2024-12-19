@@ -26,12 +26,12 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
     }
 
     func show() {
-        logger.info { "Showing FlowerAdUIView" }
+        logger.debug { "Showing FlowerAdUIView" }
         flowerAdView.isFlowerAdUIViewVisible = true
     }
 
     func hide() {
-        logger.info { "Hiding FlowerAdUIView" }
+        logger.debug { "Hiding FlowerAdUIView" }
         flowerAdView.isFlowerAdUIViewVisible = false
     }
 
@@ -103,7 +103,7 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
                 return
             }
 
-            logger.info { "Showing FlowerAdUIView click ui" }
+            logger.debug { "Showing FlowerAdUIView click ui" }
 
             observer.currentVisibleAd = ad
             observer.postClick = postClick
@@ -111,7 +111,7 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
 
         func hideClickUi(ad: Ad) {
             if observer.currentVisibleAd == ad {
-                logger.info { "Hiding FlowerAdUIView click ui" }
+                logger.debug { "Hiding FlowerAdUIView click ui" }
                 observer.currentVisibleAd = nil
                 observer.postClick = nil
             }

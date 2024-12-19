@@ -26,12 +26,12 @@ class AdPlayerViewImpl: AdPlayerView {
     }
 
     func show() {
-        logger.info { "Showing AdPlayerView" }
+        logger.debug { "Showing AdPlayerView" }
         flowerAdView.isAdPlayerViewVisible = true
     }
 
     func hide() {
-        logger.info { "Hiding AdPlayerView" }
+        logger.debug { "Hiding AdPlayerView" }
         flowerAdView.isAdPlayerViewVisible = false
     }
 

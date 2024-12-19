@@ -33,14 +33,14 @@ class CacheManagerImpl: sdk_core.CacheManager {
     func loadData(key: String, url: String) -> DeferredStub {
         return DeferredStubImpl(
             task: Task {
-                logger.info { "loadData - key: \(key), url: \(url)"}
+                logger.verbose { "loadData - key: \(key), url: \(url)"}
                 let hash = url.hashValue
                 let cacheFileURL = self.rootDir!.appendingPathComponent("\(key)/\(hash)")
 
                 if CacheManagerImpl.CacheManagerImplCompanion.isCachable, FileManager.default.fileExists(atPath: cacheFileURL.path) {
                     do {
                         try FileManager.default.setAttributes([.modificationDate: Date()], ofItemAtPath: cacheFileURL.path)
-                        logger.info { "read from cache - url: \(url)" }
+                        logger.verbose { "read from cache - url: \(url)" }
                         let cachedContent = try String(contentsOf: cacheFileURL, encoding: .utf8)
                         return cachedContent
                     } catch {
@@ -67,7 +67,7 @@ class CacheManagerImpl: sdk_core.CacheManager {
 
                 let body = try await response.ios_bodyAsUtf8Text()
                 if CacheManagerImpl.CacheManagerImplCompanion.isCachable, makeRoom(size: body.count) {
-                    logger.info { "CacheManager: write to cache - url: \(url)" }
+                    logger.verbose { "CacheManager: write to cache - url: \(url)" }
                     do {
                         // atmoically set to false since write is called multiple times in a row which will throw write error
                         try body.write(to: cacheFileURL, atomically: false, encoding: .utf8)
@@ -117,12 +117,12 @@ class CacheManagerImpl: sdk_core.CacheManager {
                     logger.error { "CacheManager: makeRoom Error deleting old file: \(error)" }
                 }
             } else {
-                logger.info { "CacheManager: can't cache - cache size: \(size), freeSize: \(freeSize), usedSize: \(usedSize)" }
+                logger.debug { "CacheManager: can't cache - cache size: \(size), freeSize: \(freeSize), usedSize: \(usedSize)" }
                 return false
             }
         }
 
-        logger.info { "CacheManager: can cache - cache size: \(size), freeSize: \(freeSize), usedSize: \(usedSize)" }
+        logger.verbose { "CacheManager: can cache - cache size: \(size), freeSize: \(freeSize), usedSize: \(usedSize)" }
         return true
     }
 
@@ -160,7 +160,7 @@ class CacheManagerImpl: sdk_core.CacheManager {
                 let dataFile = cacheDir.appendingPathComponent("data")
 
                 if CacheManagerImpl.CacheManagerImplCompanion.isCachable, CacheManagerImpl.CacheManagerImplCompanion.isContentCachable, FileManager.default.fileExists(atPath: cacheDir.path) {
-                    logger.info { "CacheManager: load from cache - key: \(key), url: \(requestBuilder.url)" }
+                    logger.verbose { "CacheManager: load from cache - key: \(key), url: \(requestBuilder.url)" }
 
                     let headersFileURL = cacheDir.appendingPathComponent("headers")
 
