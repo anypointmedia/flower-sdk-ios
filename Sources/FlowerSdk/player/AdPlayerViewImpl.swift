@@ -43,6 +43,10 @@ class AdPlayerViewImpl: AdPlayerView {
         adPlayerViewImplBody.observer.playerLayerRepresentable = AVPlayerLayerRepresentable(playerLayer: playerLayer)
     }
 
+    func removePlayerLayer() {
+        adPlayerViewImplBody.observer.playerLayerRepresentable = nil
+    }
+
     struct AVPlayerLayerRepresentable: UIViewRepresentable {
         let playerLayer: AVPlayerLayer
 

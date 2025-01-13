@@ -10,14 +10,14 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
     @Published var isGoogleAdViewVisible = false
     @Published var isFlowerAdUIViewVisible = false
 
-    lazy var playerView: AdPlayerViewImpl = AdPlayerViewImpl(flowerAdView: self)
+    lazy var adPlayerView: AdPlayerViewImpl = AdPlayerViewImpl(flowerAdView: self)
     lazy var googleAdView: GoogleAdViewImpl = GoogleAdViewImpl(flowerAdView: self)
     lazy var flowerAdUIView: FlowerAdUIViewImpl = FlowerAdUIViewImpl(flowerAdView: self)
     lazy var flowerAdViewBody: FlowerAdViewBody = FlowerAdViewBody(flowerAdView: self)
 
     public lazy var adsManager: FlowerAdsManager = FlowerAdsManagerImpl(
         flowerAdView: self,
-        playerView: playerView,
+        adPlayerView: adPlayerView,
         googleAdView: googleAdView,
         flowerAdUIView: flowerAdUIView
     )
@@ -41,7 +41,7 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
         logger.debug { "Showing FlowerAdView" }
         self.isFlowerAdViewVisible = true
         self.flowerAdUIView.show()
-        self.playerView.show()
+        self.adPlayerView.show()
         self.googleAdView.show()
     }
 
@@ -49,7 +49,7 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
         logger.debug { "Hiding FlowerAdView" }
         self.isFlowerAdViewVisible = false
         self.flowerAdUIView.hide()
-        self.playerView.hide()
+        self.adPlayerView.hide()
         self.googleAdView.hide()
     }
 
@@ -66,7 +66,7 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
             if (flowerAdView.isFlowerAdViewVisible) {
                 GeometryReader { geometry in
                     ZStack {
-                        flowerAdView.playerView.body
+                        flowerAdView.adPlayerView.body
                         flowerAdView.googleAdView.body
                         flowerAdView.flowerAdUIView.body
                     }

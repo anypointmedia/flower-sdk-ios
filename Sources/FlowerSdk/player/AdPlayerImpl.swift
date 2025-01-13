@@ -20,13 +20,13 @@ class FlowerAdPlayerImpl: AdPlayer {
 
     private var durations: [Double] = []
 
-    func load(mediaUrls: PlatformList<NSString>, totalDuration: Int32, playerView: AdPlayerView) {
+    func load(mediaUrls: PlatformList<NSString>, totalDuration: Int32, adPlayerView: AdPlayerView) {
         let mediaUrls = mediaUrls.array as! [String]
         if mediaUrls.count == 0 {
             logger.warn { "empty mediaUrls" }
             fatalError("empty mediaUrls")
         }
-        self.adPlayerView = playerView as? AdPlayerViewImpl
+        self.adPlayerView = adPlayerView as? AdPlayerViewImpl
         loadJob?.cancel()
         loadJob = DispatchWorkItem { [weak self] in
             guard let self = self else {return}
@@ -165,6 +165,7 @@ class FlowerAdPlayerImpl: AdPlayer {
                 player!.pause()
                 player!.replaceCurrentItem(with: nil)
                 player!.removeAllItems()
+                adPlayerView.removePlayerLayer()
                 logger.info { "ad player release" }
             }
         } catch {
