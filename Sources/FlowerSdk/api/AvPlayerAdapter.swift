@@ -27,6 +27,7 @@ class AvPlayerAdapter: MediaPlayerAdapter {
 
     private var mediaPlayerHook: MediaPlayerHook!
     private var flowerAdsManager: FlowerAdsManagerImpl!
+    private var trackingDelayCounter: Int64 = 0
 
     init(mediaPlayerHook: MediaPlayerHook, flowerAdsManager: FlowerAdsManagerImpl) {
         self.mediaPlayerHook = mediaPlayerHook
@@ -44,6 +45,49 @@ class AvPlayerAdapter: MediaPlayerAdapter {
     func getCurrentMediaChunk() -> MediaChunkStub {
         return MediaChunk(currentPosition: getCurrentPosition(), url: nil, periodId: nil)
     }
+
+    func parseHLSManifest(_ manifest: String) -> HLSManifestForParsing? {
+        var segments: [HLSManifestForParsing.HLSSegment] = []
+
+            let lines = manifest.components(separatedBy: .newlines)
+
+            var currentSegmentDuration: Double = 0
+            var currentSegmentURL: String?
+
+            for line in lines {
+                if line.hasPrefix("#EXTINF:") {
+                    // Extract segment duration
+                    let durationString = line.replacingOccurrences(of: "#EXTINF:", with: "").components(separatedBy: ",").first ?? "0"
+                    currentSegmentDuration = Double(durationString) ?? 0
+                } else if line.hasPrefix("http") {
+                    // Assume the URL directly follows the #EXTINF line
+                    currentSegmentURL = line
+                    // Add the completed segment to the list
+                    segments.append(HLSManifestForParsing.HLSSegment(duration: currentSegmentDuration, url: currentSegmentURL!))
+                    // Reset values for the next segment
+                    currentSegmentDuration = 0
+                    currentSegmentURL = nil
+                }
+            }
+
+            return HLSManifestForParsing(segments: segments)
+    }
+
+    func parseDASHManifest(_ manifest: String) -> DASHManifestForParsing? {
+        let lines = manifest.components(separatedBy: .newlines)
+
+        for line in lines {
+            if line.contains("Period id") {
+                let components = line.components(separatedBy: "\"")
+                if components.count > 1 {
+                    return DASHManifestForParsing(periodID: components[1])
+                }
+            }
+        }
+
+        return nil
+    }
+
 
     func isPlaying() -> Bool {
         var player: AVPlayer {
