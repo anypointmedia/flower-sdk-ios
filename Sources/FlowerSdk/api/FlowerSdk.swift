@@ -7,6 +7,8 @@ public typealias MediaPlayerHook = sdk_core.MediaPlayerHook
 public typealias MediaPlayerAdapter = sdk_core.MediaPlayerAdapter
 public typealias MediaChunkStub = sdk_core.MediaChunkStub
 public typealias FlowerError = sdk_core.FlowerError
+public typealias Media = sdk_core.Media
+public typealias MediaPlayerItem = sdk_core.MediaPlayerItem
 
 public class MediaChunk: MediaChunkStub {
     public var currentPosition: Int32
@@ -47,15 +49,16 @@ public class FlowerSdk {
                 instances: PlatformMap(storage: [
                     // Note: Let kmp core handle creating HttpClient[io.ktor.client.engine.darwin.DarwinClientEngine
                     // Thus, do not add instance sdk_core.SdkContainer.ClassName.httpClient: ,
-                    sdk_core.SdkContainer.ClassName.cacheManager: CacheManagerImpl(),
                     sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(fingerPrintResolverViewModel: fingerPrintResolverViewModel),
                     sdk_core.SdkContainer.ClassName.xmlUtil: XmlUtilImpl(),
                     sdk_core.SdkContainer.ClassName.adPlayer: FlowerAdPlayerImpl(),
                     sdk_core.SdkContainer.ClassName.platformAnalyticsResolver: PlatformAnalyticsResolverImpl(),
+                    sdk_core.SdkContainer.ClassName.manipulationProxy: ManipulationServerImpl(),
+                    sdk_core.SdkContainer.ClassName.cacheService: CacheServiceImpl(),
                 ]),
                 factories: PlatformMap(storage: [
-                    sdk_core.SdkContainer.ClassName.manipulationServer: ManipulationServerImplFactory(),
-                    sdk_core.SdkContainer.ClassName.mediaPlayerAdapter: AvPlayerAdapterFactory(),
+                    sdk_core.SdkContainer.ClassName.mediaPlayerAdapter: MediaPlayerAdapterFactory(),
+                    sdk_core.SdkContainer.ClassName.platformFile: PlatformFileImplFactory(),
                 ])
         )
 

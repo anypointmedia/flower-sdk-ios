@@ -14,10 +14,6 @@ class MSPlayerObserver: NSObject {
         player.addObserver(self, forKeyPath: "rate", options: NSKeyValueObservingOptions.new, context: nil)
     }
 
-    deinit {
-        destroy()
-    }
-
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         callback(player, keyPath!)
     }
@@ -27,37 +23,23 @@ class MSPlayerObserver: NSObject {
     }
 }
 
-class ManipulationServerImplFactory: sdk_core.SdkContainerBeanFactory {
-    func create(args: KotlinArray<AnyObject>) -> Any? {
-        return ManipulationServerImpl()
-    }
-}
-
 class ManipulationServerImpl: ManipulationServer {
-
-    private let sdkContainer = SdkContainer.Companion().getInstance()
-    public let manipulationServerHandler = ManipulationServerHandler()
     private let server = HttpServer()
-    private lazy var httpClient = sdkContainer.httpClient
     private var observer: MSPlayerObserver?
-    var logger = sdk_core.KmLog()
+    var logger = FLogging().logger
 
     private var lastServerPort: in_port_t = 0
 
-    func doInit(flowerAdsManager: FlowerAdsManagerImpl) {
-        manipulationServerHandler.doInit(flowerAdsManager: flowerAdsManager)
-
+    override func serve() -> String? {
         let freePort = findFreePort()
         startServer(address: "127.0.0.1", port: freePort)
 
         if freePort == 0 {
             logger.error{"Error: No free port available."}
             // Can't declare throw/throws, instead set to "" and in LinearTVAdHandler.kt check for .localEndpoint == ""
-            manipulationServerHandler.localEndpoint = ""
+            return nil
         } else {
-            manipulationServerHandler.localEndpoint = "http://\(server.listenAddressIPv4!):\(freePort)"
-
-            if let player = flowerAdsManager.mediaPlayerHook.getPlayer() as? AVPlayer {
+            if let player = flowerAdsManager.mediaPlayerHook?.getPlayer() as? AVPlayer {
                 observer = MSPlayerObserver(player: player) { player, keyPath in
                     if keyPath == "rate" {
                         if player.status == .readyToPlay && player.rate > 0.0 {
@@ -66,6 +48,8 @@ class ManipulationServerImpl: ManipulationServer {
                     }
                 }
             }
+
+            return "http://\(server.listenAddressIPv4!):\(freePort)"
         }
     }
 
@@ -137,9 +121,9 @@ class ManipulationServerImpl: ManipulationServer {
 
     private func checkServerAliveAndRestart() {
         let requestBuilder = Ktor_client_coreHttpRequestBuilder()
-        requestBuilder.ios_url(urlString: manipulationServerHandler.localEndpoint + "/ping")
+        requestBuilder.ios_url(urlString: localEndpoint! + "/ping")
 
-        logger.verbose { "ping to server: \(self.manipulationServerHandler.localEndpoint)"}
+        logger.verbose { "ping to server: \(self.localEndpoint)"}
 
         var response = try? httpClient.ios_requestSync(builder: requestBuilder)
 
@@ -172,50 +156,29 @@ class ManipulationServerImpl: ManipulationServer {
 
             logger.verbose { "requestUri: \(server.listenAddressIPv4!):\(lastServerPort)\(requestUri)" }
 
-            var cachedResponse: CacheResponse!
+            var response: ManipulationServerResponse
 
             do {
-                cachedResponse = try manipulationServerHandler.ios_handleRequestSync(requestUri: requestUri, headers: request.headers)
+                response = try ios_handleRequestSync(requestUri: requestUri, headers: request.headers)
             } catch {
                 logger.warn { "failed to get cached response \(error)" }
                 print(error)
                 return HttpResponse.notFound
             }
 
-            switch cachedResponse.statusCode {
-            case Ktor_httpHttpStatusCode.Companion().OK:
-                return HttpResponse.ok(.data((cachedResponse.data as! String).data(using: .utf8)!))
-            default:
-                if (cachedResponse.statusCode != Ktor_httpHttpStatusCode.Companion().ServiceUnavailable) {
-//                    logger.warn("original response status code: \(cachedResponse.statusCode). Fallback to InternalServerError")
+            return HttpResponse.raw(
+                Int(response.statusCode.value),
+                response.statusCode.description(),
+                KtorExt_iosKt.HeadersToStringMap(headers: response.headers),
+                { writer in
+                    try writer.write(KtorExt_iosKt.ByteReadChannelToNSData(channel: response.data))
                 }
-
-                return HttpResponse.internalServerError
-            }
+            )
         }
     }
 
-    func stop() {
+    override func stop() {
         observer?.destroy()
         server.stop()
-        manipulationServerHandler.stop()
-    }
-}
-
-enum ManipulationType {
-    case mpd
-    case m3u8
-    case other
-}
-
-class ResponsePlaylistCache {
-    var playlistText: String
-//    var headers: Ktor_httpHeaders
-//    var contentType: String
-
-    init(manipulatedPlayList: String/*, headers: Ktor_httpHeaders, contentType: String */) {
-        self.playlistText = manipulatedPlayList
-//        self.headers = headers
-//        self.contentType = contentType
     }
 }

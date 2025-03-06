@@ -6,7 +6,9 @@ import Combine
 import DeviceKit
 
 class DeviceServiceImpl: DeviceService {
-    private let logger = sdk_core.KmLog()
+    let keyValueStore: KeyValueStore = KeyValueStoreImpl(prefix: "FlowerSDK_")
+
+    private let logger = FLogging().logger
 
     private var deviceUuid: String? = nil
     private var fingerPrintId: String? = nil
@@ -27,8 +29,7 @@ class DeviceServiceImpl: DeviceService {
     }
 
     private func loadDeviceUuid() {
-        let userDefaults = UserDefaults.standard
-        let savedDeviceId = userDefaults.string(forKey: DeviceServiceCompanion().DEVICE_ID_KEY)
+        let savedDeviceId = keyValueStore.getString(key: DeviceServiceCompanion().DEVICE_ID_KEY)
         if savedDeviceId == nil {
             setDeviceId(deviceId: UUID().uuidString)
         } else {
@@ -44,9 +45,7 @@ class DeviceServiceImpl: DeviceService {
     func setDeviceId(deviceId: String) {
         logger.info { "reset deviceId: \(deviceId)" }
         deviceUuid = deviceId
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(deviceUuid, forKey: DeviceServiceCompanion().DEVICE_ID_KEY)
-        userDefaults.synchronize()
+        keyValueStore.putString(key: DeviceServiceCompanion().DEVICE_ID_KEY, value: deviceId)
     }
 
     func getFwVer() -> String? {

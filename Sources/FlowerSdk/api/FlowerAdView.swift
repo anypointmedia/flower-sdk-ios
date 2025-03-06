@@ -3,7 +3,7 @@ import SwiftUI
 import sdk_core
 
 public class FlowerAdView: FlowerAdViewStub, ObservableObject {
-    let logger = sdk_core.KmLog()
+    let logger = FLogging().logger
 
     @Published var isFlowerAdViewVisible = false
     @Published var isAdPlayerViewVisible = false
@@ -63,18 +63,19 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
         @State var height: Int32 = 0
 
         var body: some View {
-            if (flowerAdView.isFlowerAdViewVisible) {
-                GeometryReader { geometry in
-                    ZStack {
+            GeometryReader { geometry in
+                ZStack {
+                    if (flowerAdView.isFlowerAdViewVisible) {
+                        Color.clear
                         flowerAdView.adPlayerView.body
                         flowerAdView.googleAdView.body
                         flowerAdView.flowerAdUIView.body
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .onAppear {
-                        width = Int32(geometry.size.width)
-                        height = Int32(geometry.size.height)
-                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onAppear {
+                    width = Int32(geometry.size.width)
+                    height = Int32(geometry.size.height)
                 }
             }
         }

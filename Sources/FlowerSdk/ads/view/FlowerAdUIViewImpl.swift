@@ -3,7 +3,7 @@ import sdk_core
 import SwiftUI
 
 class FlowerAdUIViewImpl: FlowerAdUIView {
-    let logger = sdk_core.KmLog()
+    let logger = FLogging().logger
 
     var flowerAdView: FlowerAdView
     var isShowingQR = false
@@ -43,7 +43,7 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
         flowerAdUIViewImplBody.showClickUi(ad: ad, postClick: postClick)
     }
 
-    func hideClickUi(ad: Ad) {
+    func hideClickUi(ad_ ad: Ad) {
         flowerAdUIViewImplBody.hideClickUi(ad: ad)
     }
 
@@ -53,7 +53,7 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
     }
 
     struct FlowerAdUIViewImplBody: View {
-        let logger = sdk_core.KmLog()
+        let logger = FLogging().logger
 
         @ObservedObject var flowerAdView: FlowerAdView
         @ObservedObject var observer = FlowerAdUIViewImplBodyObserver()
@@ -63,6 +63,7 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
         var body: some View {
             GeometryReader { geometry in
                 ZStack {
+                    Color.clear.contentShape(Rectangle())
                     if observer.currentVisibleAd != nil {
                         Button(action: {
                             if let ad = observer.currentVisibleAd {
