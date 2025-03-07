@@ -13,8 +13,6 @@ let package = Package(
             targets: ["FlowerSdk"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/cezheng/Fuzi", from: "3.1.3"),
-        .package(url: "https://github.com/devicekit/DeviceKit", from: "5.2.3"),
     ],
     targets: [
         .binaryTarget(
@@ -24,9 +22,7 @@ let package = Package(
         .target(
             name: "FlowerSdk",
             dependencies: [
-                "sdk_core",
-                "Fuzi",
-                "DeviceKit"
+                "sdk_core"
             ]
         ),
     ]

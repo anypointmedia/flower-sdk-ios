@@ -1,11 +1,10 @@
 import Foundation
 import sdk_core
-import Fuzi
 
 class XmlUtilImpl: XmlUtil {
     func parseXml(text: String) throws -> XmlNode {
-        let xmlDocument = try XMLDocument(string: text, encoding: .utf8)
+        let xmlDocument = try RefOtt_XMLDocument(string: text, encoding: .utf8)
 
-        return XmlNodeImpl(node: xmlDocument.root as! XMLNode, rootNode: xmlDocument)
+        return XmlNodeImpl(node: xmlDocument.root as! RefOtt_XMLNode, rootNode: xmlDocument)
     }
 }

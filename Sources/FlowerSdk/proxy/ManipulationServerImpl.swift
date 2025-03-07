@@ -159,7 +159,7 @@ class ManipulationServerImpl: ManipulationServer {
             var response: ManipulationServerResponse
 
             do {
-                response = try ios_handleRequestSync(requestUri: requestUri, headers: request.headers)
+                response = try ios_handleRequestSync(requestUri: requestUri, requestHeaders: request.headers)
             } catch {
                 logger.warn { "failed to get cached response \(error)" }
                 print(error)

@@ -3418,7 +3418,7 @@ __attribute__((swift_name("ManipulationServer")))
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)handleRequestRequestUri:(NSString *)requestUri headers:(NSDictionary<NSString *, NSString *> *)headers completionHandler:(void (^)(id<Sdk_coreManipulationServerResponse> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("handleRequest(requestUri:headers:completionHandler:)")));
+- (void)handleRequestRequestUri:(NSString *)requestUri requestHeaders:(NSDictionary<NSString *, NSString *> *)requestHeaders completionHandler:(void (^)(id<Sdk_coreManipulationServerResponse> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("handleRequest(requestUri:requestHeaders:completionHandler:)")));
 - (void)doInitFlowerAdsManager:(Sdk_coreFlowerAdsManagerImpl *)flowerAdsManager __attribute__((swift_name("doInit(flowerAdsManager:)")));
 - (NSString * _Nullable)serve __attribute__((swift_name("serve()")));
 - (void)stop __attribute__((swift_name("stop()")));
@@ -3532,11 +3532,6 @@ __attribute__((swift_name("AdProgress.Companion")))
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) Sdk_coreAdProgressCompanion *shared __attribute__((swift_name("shared")));
 @property (readonly) Sdk_coreAdProgress *NOT_READY __attribute__((swift_name("NOT_READY")));
-@end
-
-__attribute__((swift_name("UIButton")))
-@protocol Sdk_coreUIButton <Sdk_coreUIElement>
-@required
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -3891,7 +3886,7 @@ __attribute__((swift_name("Kotlinx_datetimeInstant")))
 /**
  * @note This method converts all Kotlin exceptions to errors.
 */
-- (id<Sdk_coreManipulationServerResponse> _Nullable)ios_handleRequestSyncRequestUri:(NSString *)requestUri headers:(NSDictionary<NSString *, NSString *> *)headers error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("ios_handleRequestSync(requestUri:headers:)")));
+- (id<Sdk_coreManipulationServerResponse> _Nullable)ios_handleRequestSyncRequestUri:(NSString *)requestUri requestHeaders:(NSDictionary<NSString *, NSString *> *)requestHeaders error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("ios_handleRequestSync(requestUri:requestHeaders:)")));
 @end
 
 __attribute__((objc_subclassing_restricted))

@@ -3,7 +3,6 @@ import sdk_core
 import UIKit
 import AdSupport
 import Combine
-import DeviceKit
 
 class DeviceServiceImpl: DeviceService {
     let keyValueStore: KeyValueStore = KeyValueStoreImpl(prefix: "FlowerSDK_")
@@ -106,7 +105,7 @@ class DeviceServiceImpl: DeviceService {
         let appPackage = Bundle.main.bundleIdentifier ?? "unknown"
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0"
         let iosVersion = UIDevice().systemVersion
-        let deviceModel = Device.current
+        let deviceModel = RefOtt_Device.current
 
         if UIDevice.current.userInterfaceIdiom == .tv {
             return "\(appPackage)/\(appVersion) Smart-TV (iOS \(iosVersion)) CTV(Connected TV)"
