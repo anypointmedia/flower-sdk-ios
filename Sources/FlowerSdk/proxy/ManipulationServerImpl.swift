@@ -178,6 +178,7 @@ class ManipulationServerImpl: ManipulationServer {
     }
 
     override func stop() {
+        super.stop()
         observer?.destroy()
         server.stop()
     }

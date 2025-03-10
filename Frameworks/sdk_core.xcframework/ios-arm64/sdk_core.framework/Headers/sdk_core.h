@@ -326,6 +326,10 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("SpliceInsert")))
 @interface Sdk_coreSpliceInsert : Sdk_coreBase
 - (instancetype)initWithSpliceEventID:(int32_t)spliceEventID spliceEventCancelIndicator:(int32_t)spliceEventCancelIndicator reserved1:(int32_t)reserved1 outOfNetworkIndicator:(int32_t)outOfNetworkIndicator programSpliceFlag:(int32_t)programSpliceFlag sisp:(Sdk_coreSpliceTime *)sisp durationFlag:(int32_t)durationFlag spliceImmediateFlag:(int32_t)spliceImmediateFlag breakDuration:(Sdk_coreBreakDuration *)breakDuration reserved2:(int32_t)reserved2 uniqueProgramID:(int32_t)uniqueProgramID availNum:(int32_t)availNum availsExpected:(int32_t)availsExpected __attribute__((swift_name("init(spliceEventID:spliceEventCancelIndicator:reserved1:outOfNetworkIndicator:programSpliceFlag:sisp:durationFlag:spliceImmediateFlag:breakDuration:reserved2:uniqueProgramID:availNum:availsExpected:)"))) __attribute__((objc_designated_initializer));
+- (Sdk_coreSpliceInsert *)doCopySpliceEventID:(int32_t)spliceEventID spliceEventCancelIndicator:(int32_t)spliceEventCancelIndicator reserved1:(int32_t)reserved1 outOfNetworkIndicator:(int32_t)outOfNetworkIndicator programSpliceFlag:(int32_t)programSpliceFlag sisp:(Sdk_coreSpliceTime *)sisp durationFlag:(int32_t)durationFlag spliceImmediateFlag:(int32_t)spliceImmediateFlag breakDuration:(Sdk_coreBreakDuration *)breakDuration reserved2:(int32_t)reserved2 uniqueProgramID:(int32_t)uniqueProgramID availNum:(int32_t)availNum availsExpected:(int32_t)availsExpected __attribute__((swift_name("doCopy(spliceEventID:spliceEventCancelIndicator:reserved1:outOfNetworkIndicator:programSpliceFlag:sisp:durationFlag:spliceImmediateFlag:breakDuration:reserved2:uniqueProgramID:availNum:availsExpected:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
 @property int32_t availNum __attribute__((swift_name("availNum")));
 @property int32_t availsExpected __attribute__((swift_name("availsExpected")));
 @property Sdk_coreBreakDuration *breakDuration __attribute__((swift_name("breakDuration")));
@@ -911,6 +915,7 @@ __attribute__((swift_name("FlowerAdsManagerImpl")))
 - (void)stopLinearTvAdTransactionRequestId:(NSString *)requestId __attribute__((swift_name("stopLinearTvAdTransaction(requestId:)")));
 @property Sdk_coreFlowerAdsManagerListeners *adsManagerListeners __attribute__((swift_name("adsManagerListeners")));
 @property BOOL isSkipTracking __attribute__((swift_name("isSkipTracking")));
+@property NSMutableArray<id<Sdk_coreKotlinx_coroutines_coreJob>> *linearTvPlaylistJobs __attribute__((swift_name("linearTvPlaylistJobs")));
 @property id<Sdk_coreMediaPlayerAdapter> _Nullable mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
 @property id<Sdk_coreMediaPlayerHook> _Nullable mediaPlayerHook __attribute__((swift_name("mediaPlayerHook")));
 @end
