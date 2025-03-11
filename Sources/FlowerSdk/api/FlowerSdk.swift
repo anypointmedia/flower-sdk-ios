@@ -91,4 +91,34 @@ public class FlowerSdk {
 
         SdkContainer.companion.getInstance().setLogLevel(level: logLevel)
     }
+
+    public static func setPrecacheAdChunk(precacheAdChunk: Bool) {
+        sdk_core.SdkContainer.companion
+            .getInstance().flowerConfigService
+            .saveEphemeralStartupConfig(block: { startupConfig in
+                startupConfig
+                    .doCopy(
+                        version: startupConfig.version,
+                        maxCacheStorage: startupConfig.maxCacheStorage,
+                        minFreeStorage: startupConfig.minFreeStorage,
+                        precacheAdChunk: precacheAdChunk,
+                        useCachedAdsOnly: startupConfig.useCachedAdsOnly
+                    )
+            })
+    }
+
+    public static func setUseCachedAdsOnly(useCachedAdsOnly: Bool) {
+        sdk_core.SdkContainer.companion
+            .getInstance().flowerConfigService
+            .saveEphemeralStartupConfig(block: { startupConfig in
+                startupConfig
+                    .doCopy(
+                        version: startupConfig.version,
+                        maxCacheStorage: startupConfig.maxCacheStorage,
+                        minFreeStorage: startupConfig.minFreeStorage,
+                        precacheAdChunk: startupConfig.precacheAdChunk,
+                        useCachedAdsOnly: useCachedAdsOnly
+                    )
+            })
+    }
 }

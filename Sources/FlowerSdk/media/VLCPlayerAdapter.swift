@@ -88,6 +88,8 @@ class VLCPlayerAdapter: MediaPlayerAdapter {
             "clock-synchro": 0
         ])
 
+        media.parse(options: [ .fetchLocal, .parseNetwork, .fetchNetwork ])
+
         if let mediaListPlayer = self.mediaPlayerHook.getPlayer() as? VLCMediaListPlayer {
             DispatchQueue.main.async {
                 mediaListPlayer.mediaList!.add(media)
