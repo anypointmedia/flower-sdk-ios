@@ -85,7 +85,8 @@ class VLCPlayerAdapter: MediaPlayerAdapter {
             "network-caching": 1500,
             "live-caching": 1500,
             "clock-jitter": 0,
-            "clock-synchro": 0
+            "clock-synchro": 0,
+            "adaptive-logic": "highest"
         ])
 
         media.parse(options: [ .fetchLocal, .parseNetwork, .fetchNetwork ])
