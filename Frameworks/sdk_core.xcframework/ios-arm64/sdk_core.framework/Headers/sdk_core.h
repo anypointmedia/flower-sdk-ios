@@ -1498,11 +1498,12 @@ __attribute__((swift_name("MediaPlayerHook")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("MediaPlayerItem")))
 @interface Sdk_coreMediaPlayerItem : Sdk_coreBase
-- (instancetype)initWithUrl:(NSString *)url __attribute__((swift_name("init(url:)"))) __attribute__((objc_designated_initializer));
-- (Sdk_coreMediaPlayerItem *)doCopyUrl:(NSString *)url __attribute__((swift_name("doCopy(url:)")));
+- (instancetype)initWithUrl:(NSString *)url isAd:(BOOL)isAd __attribute__((swift_name("init(url:isAd:)"))) __attribute__((objc_designated_initializer));
+- (Sdk_coreMediaPlayerItem *)doCopyUrl:(NSString *)url isAd:(BOOL)isAd __attribute__((swift_name("doCopy(url:isAd:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) BOOL isAd __attribute__((swift_name("isAd")));
 @property (readonly) NSString *url __attribute__((swift_name("url")));
 @end
 

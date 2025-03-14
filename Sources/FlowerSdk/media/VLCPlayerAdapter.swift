@@ -80,14 +80,22 @@ class VLCPlayerAdapter: MediaPlayerAdapter {
 
     func enqueue(mediaPlayerItem: MediaPlayerItem) throws {
         let media = VLCMedia(url: URL(string: mediaPlayerItem.url)!)
-        media.addOptions([
+        var commonMediaOptions: [String:Any] = [
             "file-caching": 1500,
             "network-caching": 1500,
             "live-caching": 1500,
             "clock-jitter": 0,
             "clock-synchro": 0,
-            "adaptive-logic": "highest"
-        ])
+            "network-timeout": 10000,
+        ]
+
+        if (mediaPlayerItem.isAd) {
+            commonMediaOptions["adaptive-logic"] = "rate"
+        } else {
+            commonMediaOptions["adaptive-logic"] = "highest"
+        }
+
+        media.addOptions(commonMediaOptions)
 
         media.parse(options: [ .fetchLocal, .parseNetwork, .fetchNetwork ])
 
