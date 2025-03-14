@@ -14,7 +14,7 @@ struct DASHManifestForParsing {
     let periodID: String
 }
 
-class AVQueuePlayerAdapter: MediaPlayerAdapter {
+class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
     private var mediaPlayerHook: MediaPlayerHook
     private var flowerAdsManager: FlowerAdsManagerImpl
 
@@ -48,14 +48,25 @@ class AVQueuePlayerAdapter: MediaPlayerAdapter {
     }
 
     func getCurrentMedia() throws -> Media {
-        let duration = CMTimeGetSeconds(try player.currentItem?.asset.duration ?? CMTime.zero) * 1000
+        if let asset = try player.currentItem?.asset as? AVURLAsset {
+            if case .loaded(let _duration) = asset.status(of: .duration) {
+                let duration = CMTimeGetSeconds(_duration) * 1000
+                let position = CMTimeGetSeconds(try player.currentTime()) * 1000
 
-        return Media(
-            url: try player.currentItem?.asset as? AVURLAsset == nil ? "" : (player.currentItem?.asset as! AVURLAsset).url.absoluteString,
-            duration: (duration.isInfinite || duration.isNaN) ? 0 : Int32(duration),
-            position: Int32(CMTimeGetSeconds(try player.currentTime()) * 1000)
-        )
-    }
+                return Media(
+                    url:  asset.url.absoluteString,
+                    duration: (duration.isInfinite || duration.isNaN) ? -1 : Int32(duration),
+                    position: (position.isInfinite || position.isNaN) ? -1 : Int32(position)
+                )
+            }
+
+            Task {
+                try await asset.load(.duration)
+            }
+        }
+
+        throw KotlinException(message: "No media available")
+}
 
     func isPlaying() throws -> KotlinWrapped<KotlinBoolean> {
         KotlinWrapped(value: KotlinBoolean(value: try player.rate != 0.0))
@@ -78,6 +89,35 @@ class AVQueuePlayerAdapter: MediaPlayerAdapter {
     }
 
     func enqueue(mediaPlayerItem: MediaPlayerItem) throws {
-        try player.insert(AVPlayerItem(url: URL(string: mediaPlayerItem.url)!), after: nil)
+        let playerItem = AVPlayerItem(url: URL(string: mediaPlayerItem.url)!)
+        Task {
+            try await playerItem.asset.load(.duration)
+        }
+
+        playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new], context: nil)
+        try player.insert(playerItem, after: nil)
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard let player = try? self.player else {
+            return
+        }
+
+        if keyPath == #keyPath(AVPlayerItem.status) {
+            let status: AVPlayerItem.Status
+            if let statusNumber = change?[.newKey] as? NSNumber {
+                status = AVPlayerItem.Status(rawValue: statusNumber.intValue)!
+            } else {
+                status = .unknown
+            }
+
+            switch status {
+            case .readyToPlay: break
+            @unknown default:
+                if let playerItem = object as? AVPlayerItem {
+                    player.remove(playerItem)
+                }
+            }
+        }
     }
 }
