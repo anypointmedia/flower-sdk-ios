@@ -63,7 +63,6 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
         var body: some View {
             GeometryReader { geometry in
                 ZStack {
-                    Color.clear.contentShape(Rectangle())
                     if observer.currentVisibleAd != nil {
                         Button(action: {
                             if let ad = observer.currentVisibleAd {

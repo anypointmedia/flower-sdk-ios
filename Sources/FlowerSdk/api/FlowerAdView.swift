@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 import SwiftUI
 import sdk_core
 
@@ -25,7 +26,7 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
     public init() {
     }
 
-    public var body: some View {
+    public var body: FlowerAdViewBody {
         flowerAdViewBody
     }
 
@@ -57,16 +58,16 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
         return isFlowerAdViewVisible
     }
 
-    struct FlowerAdViewBody: View {
+    public struct FlowerAdViewBody: View {
         @ObservedObject var flowerAdView: FlowerAdView
         @State var width: Int32 = 0
         @State var height: Int32 = 0
 
-        var body: some View {
+        public var body: some View {
             GeometryReader { geometry in
                 ZStack {
                     if (flowerAdView.isFlowerAdViewVisible) {
-                        Color.clear
+                        Color.black.opacity(0.0001)
                         flowerAdView.adPlayerView.body
                         flowerAdView.googleAdView.body
                         flowerAdView.flowerAdUIView.body
@@ -78,6 +79,32 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
                     height = Int32(geometry.size.height)
                 }
             }
+        }
+    }
+
+    public class HostingController: UIHostingController<FlowerAdViewBody> {
+        public let adView = FlowerAdView()
+
+        var cancellables = Set<AnyCancellable>()
+
+        public init() {
+            super.init(rootView: adView.body)
+        }
+
+        @MainActor @preconcurrency required dynamic init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder, rootView: adView.body)
+        }
+
+        public override func viewDidLoad() {
+            super.viewDidLoad()
+
+            view.backgroundColor = .clear
+
+            adView.$isFlowerAdUIViewVisible
+                .sink { [weak self] isFlowerAdUIViewVisible in
+                    self?.view.isUserInteractionEnabled = isFlowerAdUIViewVisible
+                }
+                .store(in: &cancellables)
         }
     }
 }
