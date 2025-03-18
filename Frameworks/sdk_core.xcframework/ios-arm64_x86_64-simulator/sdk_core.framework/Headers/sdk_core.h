@@ -1912,6 +1912,16 @@ __attribute__((swift_name("SdkContainer.LogLevel")))
 @property (readonly) Sdk_coreLogLevel *value __attribute__((swift_name("value")));
 @end
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SdkNotInitializedException")))
+@interface Sdk_coreSdkNotInitializedException : Sdk_coreKotlinException
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (instancetype)initWithCause:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@end
+
 __attribute__((swift_name("DeviceService")))
 @protocol Sdk_coreDeviceService
 @required
