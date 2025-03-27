@@ -47,14 +47,26 @@ class VLCPlayerAdapter: MediaPlayerAdapter {
     }
 
     func getCurrentMedia() throws -> Media {
-        guard let media = try mediaPlayer.media else {
+        let player = try mediaPlayer
+
+        guard let media = player.media else {
             throw KotlinException(message: "No media available")
         }
 
+        guard let url = media.url else {
+            throw KotlinException(message: "No media.url available")
+        }
+
+        let absoluteUrl = url.absoluteString
+        let mediaLength = media.length
+        let duration = mediaLength.intValue
+        let playerTime = player.time
+        let position = playerTime.intValue
+
         return Media(
-            url: media.url!.absoluteString,
-            duration: media.length.intValue,
-            position: try mediaPlayer.time.intValue
+            url: absoluteUrl,
+            duration: duration,
+            position: position
         )
     }
 
