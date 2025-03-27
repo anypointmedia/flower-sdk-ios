@@ -25,13 +25,17 @@ class VLCPlayerAdapter: MediaPlayerAdapter {
         }
     }
 
+    private var referenceGuard: Any? = nil
+
     init(mediaPlayerHook: MediaPlayerHook, flowerAdsManager: FlowerAdsManagerImpl) {
         self.mediaPlayerHook = mediaPlayerHook
         self.flowerAdsManager = flowerAdsManager
     }
 
     func getCurrentPosition() throws -> KotlinWrapped<KotlinInt> {
-        KotlinWrapped(value: KotlinInt(value: try mediaPlayer.time.intValue))
+        let returnValue = KotlinWrapped(value: KotlinInt(value: try mediaPlayer.time.intValue))
+        referenceGuard = returnValue
+        return returnValue
     }
 
     func getCurrentMediaChunk() throws -> any MediaChunkStub {
@@ -39,11 +43,13 @@ class VLCPlayerAdapter: MediaPlayerAdapter {
             throw KotlinException(message: "No media available")
         }
 
-        return MediaChunk(
+        let returnValue = MediaChunk(
             currentPosition: try getCurrentPosition().value!.int32Value,
             url: nil,
             periodId: nil
         )
+        referenceGuard = returnValue
+        return returnValue
     }
 
     func getCurrentMedia() throws -> Media {
@@ -54,32 +60,34 @@ class VLCPlayerAdapter: MediaPlayerAdapter {
         }
 
         guard let url = media.url else {
-            throw KotlinException(message: "No media.url available")
+            throw KotlinException(message: "No media URL available")
         }
 
-        let absoluteUrl = url.absoluteString
-        let mediaLength = media.length
-        let duration = mediaLength.intValue
-        let playerTime = player.time
-        let position = playerTime.intValue
-
-        return Media(
-            url: absoluteUrl,
-            duration: duration,
-            position: position
+        let returnValue = Media(
+            url: url.absoluteString,
+            duration: media.length.intValue,
+            position: player.time.intValue
         )
+        referenceGuard = returnValue
+        return returnValue
     }
 
     func getVolume() throws -> KotlinWrapped<KotlinFloat> {
-        KotlinWrapped(value: KotlinFloat(value: AVAudioSession.sharedInstance().outputVolume))
+        let returnValue = KotlinWrapped(value: KotlinFloat(value: AVAudioSession.sharedInstance().outputVolume))
+        referenceGuard = returnValue
+        return returnValue
     }
 
     func getHeight_() throws -> KotlinWrapped<KotlinInt> {
-        KotlinWrapped(value: KotlinInt(value: Int32(try mediaPlayer.videoSize.height)))
+        let returnValue = KotlinWrapped(value: KotlinInt(value: Int32(try mediaPlayer.videoSize.height)))
+        referenceGuard = returnValue
+        return returnValue
     }
 
     func isPlaying() throws -> KotlinWrapped<KotlinBoolean> {
-        KotlinWrapped(value: KotlinBoolean(value: try mediaPlayer.isPlaying))
+        let returnValue = KotlinWrapped(value: KotlinBoolean(value: try mediaPlayer.isPlaying))
+        referenceGuard = returnValue
+        return returnValue
     }
 
     func pause_() throws {
