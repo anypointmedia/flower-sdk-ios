@@ -110,7 +110,7 @@ class VLCPlayerAdapter: MediaPlayerAdapter {
         ]
 
         if (mediaPlayerItem.isAd) {
-            commonMediaOptions["adaptive-logic"] = "rate"
+            commonMediaOptions["adaptive-logic"] = "highest"
         } else {
             commonMediaOptions["adaptive-logic"] = "highest"
         }
