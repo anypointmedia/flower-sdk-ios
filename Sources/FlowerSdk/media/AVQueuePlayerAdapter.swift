@@ -1,19 +1,6 @@
 import AVFoundation
 import sdk_core
 
-struct HLSManifestForParsing {
-    struct HLSSegment {
-        let duration: Double
-        let url: String
-    }
-
-    let segments: [HLSSegment]
-}
-
-struct DASHManifestForParsing {
-    let periodID: String
-}
-
 class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
     private var mediaPlayerHook: MediaPlayerHook
     private var flowerAdsManager: FlowerAdsManagerImpl
@@ -23,8 +10,12 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
             let player = mediaPlayerHook.getPlayer()
 
             guard let player = player as? AVQueuePlayer else {
-                throw MediaPlayerHookException(expected: "AVPlayer", actual: player == nil ? "nil" : String(describing: type(of: player!)))
-            }
+                throw Throwable(
+                    message: MediaPlayerHookExceptionKt.formatMediaPlayerHookExceptionString(
+                        expected: "AVQueuePlayer",
+                        received: player == nil ? "nil" : String(describing: type(of: player!))
+                    )
+                )            }
 
             return player
         }
@@ -35,11 +26,12 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
         self.flowerAdsManager = flowerAdsManager
     }
 
+
     func getCurrentPosition() throws -> KotlinWrapped<KotlinInt> {
         KotlinWrapped(value: KotlinInt(value: Int32(CMTimeGetSeconds(try player.currentTime()) * 1000)))
     }
 
-    func getCurrentMediaChunk() throws -> MediaChunkStub {
+    func getCurrentMediaChunk() throws -> MediaChunk {
         MediaChunk(
             currentPosition: Int32(CMTimeGetSeconds(try player.currentTime()) * 1000),
             url: nil,
@@ -65,19 +57,19 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
             }
         }
 
-        throw KotlinException(message: "No media available")
+        throw Throwable(message: "No media available")
 }
 
     func isPlaying() throws -> KotlinWrapped<KotlinBoolean> {
         KotlinWrapped(value: KotlinBoolean(value: try player.rate != 0.0))
     }
 
-    func getHeight_() throws -> KotlinWrapped<KotlinInt> {
-        KotlinWrapped(value: KotlinInt(value: Int32(try player.currentItem?.presentationSize.height ?? 0)))
-    }
-
     func getVolume() throws -> KotlinWrapped<KotlinFloat> {
         KotlinWrapped(value: KotlinFloat(value: try player.volume))
+    }
+
+    func getHeight_() throws -> KotlinWrapped<KotlinInt> {
+        KotlinWrapped(value: KotlinInt(value: Int32(try player.currentItem?.presentationSize.height ?? 0)))
     }
 
     func pause_() throws {
@@ -88,14 +80,27 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
         try player.play()
     }
 
-    func enqueue(mediaPlayerItem: MediaPlayerItem) throws {
-        let playerItem = AVPlayerItem(url: URL(string: mediaPlayerItem.url)!)
+    func enqueuePlayItem(playItem: PlayItem) throws {
+        let playerItem = AVPlayerItem(url: URL(string: playItem.url)!)
         Task {
             try await playerItem.asset.load(.duration)
         }
 
         playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new], context: nil)
         try player.insert(playerItem, after: nil)
+    }
+
+    func removePlayItem(playItem: PlayItem) throws {
+        guard let playerItem = try player.items().first(where: { item in
+            if let urlAsset = item.asset as? AVURLAsset {
+                return urlAsset.url.absoluteString == playItem.url
+            }
+            return false
+        }) else {
+            throw Throwable(message: "No media available")
+        }
+
+        try player.remove(playerItem)
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -119,5 +124,9 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
                 }
             }
         }
+    }
+
+    func playNextItem() throws {
+        try player.advanceToNextItem()
     }
 }

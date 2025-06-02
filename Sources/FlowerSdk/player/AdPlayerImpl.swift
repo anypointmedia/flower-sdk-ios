@@ -4,8 +4,8 @@ import AVFoundation
 import SwiftUI
 import sdk_core
 
-class FlowerAdPlayerImpl: AdPlayer {
-    private var logger = FLogging().logger
+class AdPlayerImpl: AdPlayer {
+    private var logger = FLogging(tag: nil).logger
     private let sdkContainer = sdk_core.SdkContainer.companion.getInstance()
     private var isAdPlaying = false
     private var totalDuration: Int32 = -1
@@ -67,31 +67,13 @@ class FlowerAdPlayerImpl: AdPlayer {
     }
 
     func next() {
-        // In the case of AVPlayer
-//        guard let player = player else {
-//            return
-//        }
-//
-//        guard let currentItem = player.currentItem else {
-//           return
-//        }
-//
-//        if let currentAsset = currentItem.asset as? AVURLAsset,
-//           let currentIndex = mediaUrls.firstIndex(where: { $0 == currentAsset.url.absoluteString }),
-//           currentIndex < mediaUrls.count - 1 {
-//            // There is a next item in the queue
-//            let nextItem = AVPlayerItem(url: URL(string: mediaUrls[currentIndex + 1])!)
-//            player.replaceCurrentItem(with: nextItem)
-//            player.seek(to: .zero)
-//            play()
-//        } else {
-//            // No next item, stop playback
-//            stop()
-//        }
+        guard let player = self.player else {
+            stop()
+            return
+        }
 
-        // In the case of AVQueuePlayer
-        if player?.canInsert(player!.currentItem!, after: nil) == true {
-            player?.advanceToNextItem()
+        if player.items().index(of: player.currentItem!)! < player.items().count - 1 {
+            player.advanceToNextItem()
         } else {
             stop()
         }
@@ -287,4 +269,7 @@ class FlowerAdPlayerImpl: AdPlayer {
         return player?.rate == 0.0
     }
 
+    func playNextItem_() {
+        next()
+    }
 }
