@@ -2,7 +2,7 @@ import SwiftUI
 import AVFoundation
 import sdk_core
 
-public class FlowerAVPlayer: AVQueuePlayer {
+open class FlowerAVPlayer: AVQueuePlayer {
     let logger = FLogging(tag: nil).logger
 
     private var adConfig: FlowerAdConfig?
@@ -30,7 +30,7 @@ public class FlowerAVPlayer: AVQueuePlayer {
         adView.adsManager.removeListener(adsManagerListener: listener)
     }
 
-    public override func play() {
+    open override func play() {
         guard let item = currentItem else {
             logger.warn { "FlowerAVPlayer will play without FlowerAds since currentItem is nil" }
             super.play()
@@ -71,7 +71,7 @@ public class FlowerAVPlayer: AVQueuePlayer {
         super.play()
     }
 
-    public override func replaceCurrentItem(with item: AVPlayerItem?) {
+    open override func replaceCurrentItem(with item: AVPlayerItem?) {
         if item == nil {
             adView.adsManager.stop()
             changedChannelUrl = nil
@@ -80,29 +80,29 @@ public class FlowerAVPlayer: AVQueuePlayer {
     }
 
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")
-    public override nonisolated func items() -> [AVPlayerItem] {
+    open override nonisolated func items() -> [AVPlayerItem] {
         return []
     }
 
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")
-    public override nonisolated func advanceToNextItem() {
+    open override nonisolated func advanceToNextItem() {
     }
 
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")
-    public override nonisolated func canInsert(_ item: AVPlayerItem, after afterItem: AVPlayerItem?) -> Bool {
+    open override nonisolated func canInsert(_ item: AVPlayerItem, after afterItem: AVPlayerItem?) -> Bool {
         false
     }
 
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")
-    public override nonisolated func insert(_ item: AVPlayerItem, after afterItem: AVPlayerItem?) {
+    open override nonisolated func insert(_ item: AVPlayerItem, after afterItem: AVPlayerItem?) {
     }
 
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")
-    public override nonisolated func remove(_ item: AVPlayerItem) {
+    open override nonisolated func remove(_ item: AVPlayerItem) {
     }
 
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")
-    public override nonisolated func removeAllItems() {
+    open override nonisolated func removeAllItems() {
     }
 
     private class MediaPlayerHookImpl: MediaPlayerHook {
