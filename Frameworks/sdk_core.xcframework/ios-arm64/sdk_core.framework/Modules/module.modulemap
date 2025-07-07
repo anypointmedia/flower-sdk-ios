@@ -1,4 +1,4 @@
-framework module sdk_core {
+framework module "sdk_core" {
     umbrella header "sdk_core.h"
 
     export *

@@ -6,9 +6,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class Sdk_coreScte35DecoderCompanion, Sdk_coreSpliceInfoSection, Sdk_coreKotlinByteArray, Sdk_coreKotlinThrowable, Sdk_coreKotlinArray<T>, Sdk_coreKotlinException, Sdk_coreSpliceInsert, Sdk_coreSpliceTime, Sdk_coreBreakDuration, Sdk_coreKmLogging, Sdk_coreKotlinPair<__covariant A, __covariant B>, Sdk_coreLogLevel, Sdk_coreKmLog, Sdk_coreKotlinEnumCompanion, Sdk_coreKotlinEnum<E>, Sdk_corePlatform, Sdk_coreTimingLogCompanion, Sdk_coreTimingLogTiming, Sdk_coreHex, Sdk_coreLifecycleManager, Sdk_coreSdkContainerClassName, Sdk_corePlatformMap<K, V>, Sdk_coreFlowerAdsManagerImpl, Sdk_coreAdTracker, Sdk_coreAdHandlerCompanion, Sdk_coreAdsLoader, Sdk_coreManipulationProxy, Sdk_coreSdkContainer, Sdk_coreAdList, Sdk_coreWrapperAdsLoader, Sdk_coreLogger, Sdk_coreFLogging, Sdk_coreAdTrackerCompanion, Sdk_coreAd, Sdk_coreGoogleAdReportLogEvent, Sdk_coreAdUrlMacroCompanion, Sdk_coreAdUrlMacroValue, Sdk_coreAdUrlMacroType, Sdk_coreAdsFillingServiceCompanion, Sdk_coreAdHandler, Sdk_coreAdsLoaderCompanion, Sdk_coreCacheConfig, Sdk_coreCreativeConvertServiceCompanion, Sdk_coreKotlinUnit, Sdk_coreFillerAdsManagerCompanion, Sdk_coreFlowerAdsManagerImplCompanion, Sdk_coreFlowerAdsManagerListeners, Sdk_coreMediaTrackManageService, Sdk_coreFlowerError, Sdk_coreFlowerAdsManagerListenersCompanion, Sdk_corePlatformList<E>, Sdk_coreLinearTVAdHandlerCompanion, Sdk_coreLinearTVAdHandlerLinearTvAdRequest, Sdk_coreCreativeType, Sdk_coreNormalAdHandlerCompanion, Sdk_coreVastParserCompanion, Sdk_coreVmapParserCompanion, Sdk_coreAdBreak, Sdk_coreNormalAdHandler, Sdk_coreVodAdHandlerCompanion, Sdk_coreWrapperAdsLoaderCompanion, Sdk_coreCreative, Sdk_coreAdTrackingEvent, Sdk_coreAdClick, Sdk_coreAdCompanion, Sdk_coreConvertCreativeRequestCompanion, Sdk_coreCreativeMedia, Sdk_coreCreativeMediaCompanion, Sdk_coreManifestLoader, Sdk_coreCreativeMediaM3u8Companion, Sdk_coreVariant, Sdk_coreMediaPlaylist, Sdk_coreMPD, Sdk_coreCreativeResponseAsset, Sdk_coreCreativeResponseCompanion, Sdk_coreCreativeResponseAssetCompanion, Sdk_coreCreativeTypeCompanion, Sdk_coreUiTextEn, Sdk_coreUiTextKo, Sdk_coreAdInfo, Sdk_coreFlowerEventInfo, Sdk_coreFlowerEventInfoAdBreakStarted, Sdk_coreFlowerEventInfoAdCompleted, Sdk_coreFlowerEventInfoAdPlay, Sdk_coreCacheConfigStrategy, Sdk_coreCacheConfigCompanion, Sdk_coreCacheServiceCompanion, Sdk_coreKotlinWrapped<T>, Sdk_coreConcurrentQueue, Sdk_coreFlowerConfigService, Sdk_coreKtor_client_coreHttpClient, Sdk_coreCachedHttpClientCompanion, Sdk_coreKtor_client_coreHttpRequestBuilder, Sdk_coreCachedHttpClientResponse, Sdk_coreKtor_httpHttpStatusCode, Sdk_coreErrorCodeCompanion, Sdk_coreErrorCode, Sdk_coreErrorLogCompanion, Sdk_coreErrorLogSenderCompanion, Sdk_coreErrorLog, Sdk_coreFlowerConfigServiceCompanion, Sdk_coreXmlNode, Sdk_coreFlowerConfigServiceStartupConfig, Sdk_coreFlowerConfigServiceStartupConfigKey, Sdk_corePlatformAnalytics, Sdk_coreSdkContainerCompanion, Sdk_coreSdkContainerLogLevel, Sdk_coreAdUrlMacro, Sdk_coreCacheService, Sdk_coreCachedHttpClient, Sdk_coreErrorLogSender, Sdk_coreFillerAdsManager, Sdk_coreKotlinx_serialization_jsonJson, Sdk_coreDeviceServiceCompanion, Sdk_coreManipulatorCompanion, Sdk_coreLinearTVAdHandler, Sdk_coreKotlinx_datetimeInstant, Sdk_coreManipulator, Sdk_coreDashManipulatorCompanion, Sdk_coreTimeScaled, Sdk_coreHlsManipulatorSharedState, Sdk_coreHlsManipulatorCompanion, Sdk_coreHlsManipulatorCueOutMarker, Sdk_coreHlsManipulatorCueInMarker, Sdk_coreHlsManipulatorCueEvent, Sdk_coreManifestLoaderCompanion, Sdk_coreRepresentation, Sdk_coreSegmentTemplate, Sdk_coreMPDCompanion, Sdk_corePeriod, Sdk_corePeriodCompanion, Sdk_coreAdaptationSet, Sdk_coreSpliceInfoSection_, Sdk_coreMediaType, Sdk_coreChannels, Sdk_coreAlternativeRendition, Sdk_coreByteRange, Sdk_coreCueOut, Sdk_coreScte35, Sdk_coreCueOutCont, Sdk_coreDateRange, Sdk_coreResolution, Sdk_coreVideoRange, Sdk_coreIFrameVariant, Sdk_coreKeyMethodCompanion, Sdk_coreKeyMethod, Sdk_coreStartTimeOffset, Sdk_corePlaylistVariable, Sdk_corePlaylist, Sdk_coreSessionData, Sdk_coreSegmentKey, Sdk_coreMasterPlaylist, Sdk_corePlaylistType, Sdk_coreMediaSegment, Sdk_coreServerControl, Sdk_corePartialSegmentInformation, Sdk_corePartialSegment, Sdk_coreSkip, Sdk_corePreloadHint, Sdk_coreRenditionReport, Sdk_coreSegmentMap, Sdk_coreMediaTypeCompanion, Sdk_corePreloadHintType, Sdk_coreAbstractPlaylistParserCompanion, Sdk_coreTextBuilder, Sdk_coreAbstractPlaylistParser<T, B>, Sdk_coreParsingMode, Sdk_coreMasterPlaylistParserCompanion, Sdk_coreMediaPlaylistParserCompanion, Sdk_coreMediaPlaylistParserBuilder, Sdk_coreParsingModeCompanion, Sdk_corePartialSegmentAttributeCompanion, Sdk_corePartialSegmentAttribute, Sdk_corePartialSegmentInformationAttributeCompanion, Sdk_corePartialSegmentInformationAttribute, Sdk_coreKtor_ioIOException, Sdk_corePlaylistVariableAttributeCompanion, Sdk_corePlaylistVariableAttribute, Sdk_corePreloadHintAttributeCompanion, Sdk_corePreloadHintAttribute, Sdk_coreRenditionReportAttributeCompanion, Sdk_coreRenditionReportAttribute, Sdk_coreSegmentKeyAttributeCompanion, Sdk_coreSegmentKeyAttribute, Sdk_coreServerControlAttributeCompanion, Sdk_coreServerControlAttribute, Sdk_coreSkipAttributeCompanion, Sdk_coreSkipAttribute, Sdk_coreKotlinStringBuilder, Sdk_coreManipulationProxyCompanion, Sdk_coreManipulationProxyProxyType, Sdk_coreManipulationProxyProxyTypeCompanion, Sdk_coreManipulationServerCompanion, Sdk_coreKotlinRegex, Sdk_coreMedia, Sdk_coreMediaChunk, Sdk_corePlayItem, Sdk_coreMediaTrackManageServiceCompanion, Sdk_coreMediaTrackManageServiceSubTrack, Sdk_coreMediaTrackManageServiceMediaTrack, Sdk_coreAdProgress, Sdk_coreAdPlayerCallbacksCompanion, Sdk_coreAdProgressCompanion, Sdk_coreConcurrentQueueCompanion, Sdk_corePlatform_Companion, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher, Sdk_coreStringUtils, Sdk_coreKtor_client_coreHttpClientEngineConfig, Sdk_coreKtor_client_coreHttpClientConfig<T>, Sdk_coreKtor_eventsEvents, Sdk_coreKtor_client_coreHttpReceivePipeline, Sdk_coreKtor_client_coreHttpRequestPipeline, Sdk_coreKtor_client_coreHttpResponsePipeline, Sdk_coreKtor_client_coreHttpSendPipeline, Sdk_coreKtor_client_coreHttpResponse, Sdk_coreKtor_httpHeadersBuilder, Sdk_coreKtor_client_coreHttpRequestBuilderCompanion, Sdk_coreKtor_client_coreHttpRequestData, Sdk_coreKtor_httpURLBuilder, Sdk_coreKtor_utilsTypeInfo, Sdk_coreKtor_httpHttpMethod, Sdk_coreKtor_httpUrlCompanion, Sdk_coreKtor_httpURLProtocol, Sdk_coreKtor_httpUrl, Sdk_coreKotlinByteIterator, NSData, Sdk_coreKotlinx_coroutines_coreDispatchers, Sdk_coreKotlinx_coroutines_coreMainCoroutineDispatcher, Sdk_corePlatformSet<E>, Sdk_coreManipulationServer, Sdk_coreKotlinNothing, Sdk_coreKotlinCancellationException, Sdk_coreKotlinRuntimeException, Sdk_coreKotlinIllegalStateException, Sdk_coreKtor_httpHttpStatusCodeCompanion, Sdk_coreKotlinx_serialization_coreSerializersModule, Sdk_coreKotlinx_serialization_jsonJsonDefault, Sdk_coreKotlinx_serialization_jsonJsonElement, Sdk_coreKotlinx_serialization_jsonJsonConfiguration, Sdk_coreKotlinx_datetimeInstantCompanion, Sdk_coreKotlinCharArray, Sdk_coreKotlinRegexOption, Sdk_coreKotlinRegexCompanion, Sdk_coreKtor_ioMemory, Sdk_coreKtor_ioChunkBuffer, Sdk_coreKtor_ioBuffer, Sdk_coreKtor_ioByteReadPacket, Sdk_coreKotlinAbstractCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcherKey, Sdk_coreKtor_client_coreHttpResponseData, Sdk_coreKtor_client_coreProxyConfig, Sdk_coreKtor_utilsAttributeKey<T>, Sdk_coreKtor_eventsEventDefinition<T>, Sdk_coreKtor_utilsPipelinePhase, Sdk_coreKtor_utilsPipeline<TSubject, TContext>, Sdk_coreKtor_client_coreHttpReceivePipelinePhases, Sdk_coreKtor_client_coreHttpRequestPipelinePhases, Sdk_coreKtor_client_coreHttpResponsePipelinePhases, Sdk_coreKtor_client_coreHttpResponseContainer, Sdk_coreKtor_client_coreHttpClientCall, Sdk_coreKtor_client_coreHttpSendPipelinePhases, Sdk_coreKtor_utilsGMTDate, Sdk_coreKtor_httpHttpProtocolVersion, Sdk_coreKtor_utilsStringValuesBuilderImpl, Sdk_coreKtor_httpOutgoingContent, Sdk_coreKtor_httpURLBuilderCompanion, Sdk_coreKtor_httpHttpMethodCompanion, Sdk_coreKtor_httpURLProtocolCompanion, Sdk_coreKotlinx_serialization_coreSerialKind, Sdk_coreKotlinx_serialization_jsonJsonElementCompanion, Sdk_coreKotlinx_serialization_jsonClassDiscriminatorMode, Sdk_coreKotlinCharIterator, Sdk_coreKotlinMatchResultDestructured, Sdk_coreKotlinIntRange, Sdk_coreKtor_ioMemoryCompanion, Sdk_coreKtor_ioBufferCompanion, Sdk_coreKtor_ioChunkBufferCompanion, Sdk_coreKtor_ioInputCompanion, Sdk_coreKtor_ioInput, Sdk_coreKtor_ioByteReadPacketCompanion, Sdk_coreKotlinAbstractCoroutineContextKey<B, E>, Sdk_coreKtor_client_coreHttpClientCallCompanion, Sdk_coreKtor_utilsGMTDateCompanion, Sdk_coreKtor_utilsWeekDay, Sdk_coreKtor_utilsMonth, Sdk_coreKtor_httpHttpProtocolVersionCompanion, Sdk_coreKtor_httpContentType, Sdk_coreKotlinKTypeProjection, Sdk_coreKotlinMatchGroup, Sdk_coreKotlinIntProgressionCompanion, Sdk_coreKotlinIntIterator, Sdk_coreKotlinIntProgression, Sdk_coreKotlinIntRangeCompanion, Sdk_coreKtor_utilsWeekDayCompanion, Sdk_coreKtor_utilsMonthCompanion, Sdk_coreKtor_httpHeaderValueParam, Sdk_coreKtor_httpHeaderValueWithParametersCompanion, Sdk_coreKtor_httpHeaderValueWithParameters, Sdk_coreKtor_httpContentTypeCompanion, Sdk_coreKotlinKVariance, Sdk_coreKotlinKTypeProjectionCompanion;
+@class Sdk_coreScte35DecoderCompanion, Sdk_coreSpliceInfoSection, Sdk_coreKotlinByteArray, Sdk_coreKotlinThrowable, Sdk_coreKotlinArray<T>, Sdk_coreKotlinException, Sdk_coreSpliceInsert, Sdk_coreSpliceTime, Sdk_coreBreakDuration, Sdk_coreKmLogging, Sdk_coreKotlinPair<__covariant A, __covariant B>, Sdk_coreLogLevel, Sdk_coreKmLog, Sdk_coreKotlinEnumCompanion, Sdk_coreKotlinEnum<E>, Sdk_corePlatform, Sdk_coreTimingLogCompanion, Sdk_coreTimingLogTiming, Sdk_coreHex, Sdk_coreLifecycleManager, Sdk_coreSdkContainerClassName, Sdk_corePlatformMap<K, V>, Sdk_coreFlowerAdsManagerImpl, Sdk_coreAdTracker, Sdk_coreAdHandlerCompanion, Sdk_coreAdsLoader, Sdk_coreManipulationProxy, Sdk_coreSdkContainer, Sdk_coreAdList, Sdk_coreWrapperAdsLoader, Sdk_coreLogger, Sdk_coreFLogging, Sdk_coreAdTrackerCompanion, Sdk_coreAd, Sdk_coreGoogleAdReportLogEvent, Sdk_coreAdUrlMacroCompanion, Sdk_coreAdUrlMacroValue, Sdk_coreAdUrlMacroType, Sdk_coreAdsFillingServiceCompanion, Sdk_coreAdHandler, Sdk_coreAdsLoaderCompanion, Sdk_coreCacheConfig, Sdk_coreCreativeConvertServiceCompanion, Sdk_coreKotlinUnit, Sdk_coreFillerAdsManagerCompanion, Sdk_coreFlowerAdsManagerImplCompanion, Sdk_coreFlowerAdsManagerListeners, Sdk_coreMediaTrackManageService, Sdk_coreFlowerError, Sdk_coreFlowerAdsManagerListenersCompanion, Sdk_corePlatformList<E>, Sdk_coreLinearTVAdHandlerCompanion, Sdk_coreLinearTVAdHandlerLinearTvAdRequest, Sdk_coreCreativeType, Sdk_coreNormalAdHandlerCompanion, Sdk_coreVastParserCompanion, Sdk_coreVmapParserCompanion, Sdk_coreAdBreak, Sdk_coreNormalAdHandler, Sdk_coreVodAdHandlerCompanion, Sdk_coreWrapperAdsLoaderCompanion, Sdk_coreCreative, Sdk_coreAdTrackingEvent, Sdk_coreAdClick, Sdk_coreAdCompanion, Sdk_coreConvertCreativeRequestCompanion, Sdk_coreCreativeMedia, Sdk_coreCreativeMediaCompanion, Sdk_coreManifestLoader, Sdk_coreCreativeMediaM3u8Companion, Sdk_coreVariant, Sdk_coreMediaPlaylist, Sdk_coreMPD, Sdk_coreCreativeResponseAsset, Sdk_coreCreativeResponseCompanion, Sdk_coreCreativeResponseAssetCompanion, Sdk_coreCreativeTypeCompanion, Sdk_coreUiTextEn, Sdk_coreUiTextKo, Sdk_coreAdInfo, Sdk_coreFlowerEventInfo, Sdk_coreFlowerEventInfoAdBreakStarted, Sdk_coreFlowerEventInfoAdCompleted, Sdk_coreFlowerEventInfoAdPlay, Sdk_coreCacheConfigStrategy, Sdk_coreCacheConfigCompanion, Sdk_coreCacheServiceCompanion, Sdk_coreKotlinWrapped<T>, Sdk_coreConcurrentQueue, Sdk_coreFlowerConfigService, Sdk_coreKtor_client_coreHttpClient, Sdk_coreCachedHttpClientCompanion, Sdk_coreKtor_client_coreHttpRequestBuilder, Sdk_coreCachedHttpClientResponse, Sdk_coreKtor_httpHttpStatusCode, Sdk_coreErrorCodeCompanion, Sdk_coreErrorCode, Sdk_coreErrorLogCompanion, Sdk_coreErrorLogSenderCompanion, Sdk_coreErrorLog, Sdk_coreFlowerConfigServiceCompanion, Sdk_coreXmlNode, Sdk_coreFlowerConfigServiceStartupConfig, Sdk_coreFlowerConfigServiceStartupConfigKey, Sdk_corePlatformAnalytics, Sdk_coreSdkContainerCompanion, Sdk_coreSdkContainerLogLevel, Sdk_coreAdUrlMacro, Sdk_coreCacheService, Sdk_coreCachedHttpClient, Sdk_coreErrorLogSender, Sdk_coreFillerAdsManager, Sdk_coreKotlinx_serialization_jsonJson, Sdk_coreDeviceServiceCompanion, Sdk_coreManipulatorCompanion, Sdk_coreLinearTVAdHandler, Sdk_coreKotlinx_datetimeInstant, Sdk_coreManipulator, Sdk_coreDashManipulatorCompanion, Sdk_coreHlsManipulatorSharedState, Sdk_coreHlsManipulatorCompanion, Sdk_coreHlsManipulatorCueOutMarker, Sdk_coreHlsManipulatorCueInMarker, Sdk_coreHlsManipulatorCueEvent, Sdk_coreManifestLoaderCompanion, Sdk_coreRepresentation, Sdk_coreMPDCompanion, Sdk_corePeriod, Sdk_corePeriodCompanion, Sdk_coreAdaptationSet, Sdk_coreTimeScaled, Sdk_coreSpliceInfoSection_, Sdk_coreSegmentBase, Sdk_coreSegmentList, Sdk_coreSegmentTemplate, Sdk_coreInitialization, Sdk_coreSegmentURL, Sdk_coreMediaType, Sdk_coreChannels, Sdk_coreAlternativeRendition, Sdk_coreByteRange, Sdk_coreCueOut, Sdk_coreScte35, Sdk_coreCueOutCont, Sdk_coreDateRange, Sdk_coreResolution, Sdk_coreVideoRange, Sdk_coreIFrameVariant, Sdk_coreKeyMethodCompanion, Sdk_coreKeyMethod, Sdk_coreStartTimeOffset, Sdk_corePlaylistVariable, Sdk_corePlaylist, Sdk_coreSessionData, Sdk_coreSegmentKey, Sdk_coreMasterPlaylist, Sdk_corePlaylistType, Sdk_coreMediaSegment, Sdk_coreServerControl, Sdk_corePartialSegmentInformation, Sdk_corePartialSegment, Sdk_coreSkip, Sdk_corePreloadHint, Sdk_coreRenditionReport, Sdk_coreSegmentMap, Sdk_coreMediaTypeCompanion, Sdk_corePreloadHintType, Sdk_coreAbstractPlaylistParserCompanion, Sdk_coreTextBuilder, Sdk_coreAbstractPlaylistParser<T, B>, Sdk_coreParsingMode, Sdk_coreMasterPlaylistParserCompanion, Sdk_coreMediaPlaylistParserCompanion, Sdk_coreMediaPlaylistParserBuilder, Sdk_coreParsingModeCompanion, Sdk_corePartialSegmentAttributeCompanion, Sdk_corePartialSegmentAttribute, Sdk_corePartialSegmentInformationAttributeCompanion, Sdk_corePartialSegmentInformationAttribute, Sdk_coreKotlinx_io_coreIOException, Sdk_corePlaylistVariableAttributeCompanion, Sdk_corePlaylistVariableAttribute, Sdk_corePreloadHintAttributeCompanion, Sdk_corePreloadHintAttribute, Sdk_coreRenditionReportAttributeCompanion, Sdk_coreRenditionReportAttribute, Sdk_coreSegmentKeyAttributeCompanion, Sdk_coreSegmentKeyAttribute, Sdk_coreServerControlAttributeCompanion, Sdk_coreServerControlAttribute, Sdk_coreSkipAttributeCompanion, Sdk_coreSkipAttribute, Sdk_coreKotlinStringBuilder, Sdk_coreManipulationProxyCompanion, Sdk_coreManipulationProxyProxyType, Sdk_coreManipulationProxyProxyTypeCompanion, Sdk_coreManipulationServerCompanion, Sdk_coreKotlinRegex, Sdk_coreMedia, Sdk_coreMediaChunk, Sdk_corePlayItem, Sdk_coreMediaTrackManageServiceCompanion, Sdk_coreMediaTrackManageServiceSubTrack, Sdk_coreMediaTrackManageServiceMediaTrack, Sdk_coreAdProgress, Sdk_coreAdPlayerCallbacksCompanion, Sdk_coreAdProgressCompanion, Sdk_coreConcurrentQueueCompanion, Sdk_corePlatform_Companion, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher, Sdk_coreRedirectCachePluginCompanion, Sdk_coreKtor_utilsAttributeKey<T>, Sdk_coreRedirectCachePlugin, Sdk_coreRedirectCachePluginConfig, Sdk_coreStringUtils, Sdk_coreKtor_client_coreHttpClientEngineConfig, Sdk_coreKtor_client_coreHttpClientConfig<T>, Sdk_coreKtor_eventsEvents, Sdk_coreKtor_client_coreHttpReceivePipeline, Sdk_coreKtor_client_coreHttpRequestPipeline, Sdk_coreKtor_client_coreHttpResponsePipeline, Sdk_coreKtor_client_coreHttpSendPipeline, Sdk_coreKtor_client_coreHttpResponse, Sdk_coreKtor_httpHeadersBuilder, Sdk_coreKtor_client_coreHttpRequestBuilderCompanion, Sdk_coreKtor_client_coreHttpRequestData, Sdk_coreKtor_httpURLBuilder, Sdk_coreKtor_utilsTypeInfo, Sdk_coreKtor_httpHttpMethod, Sdk_coreKtor_httpUrlCompanion, Sdk_coreKtor_httpURLProtocol, Sdk_coreKtor_httpUrl, Sdk_coreKotlinByteIterator, NSData, Sdk_coreKotlinx_coroutines_coreDispatchers, Sdk_coreKotlinx_coroutines_coreMainCoroutineDispatcher, Sdk_corePlatformSet<E>, Sdk_coreManipulationServer, Sdk_coreKotlinNothing, Sdk_coreKotlinCancellationException, Sdk_coreKotlinRuntimeException, Sdk_coreKotlinIllegalStateException, Sdk_coreKtor_httpHttpStatusCodeCompanion, Sdk_coreKotlinx_serialization_coreSerializersModule, Sdk_coreKotlinx_serialization_jsonJsonDefault, Sdk_coreKotlinx_serialization_jsonJsonElement, Sdk_coreKotlinx_serialization_jsonJsonConfiguration, Sdk_coreKotlinx_datetimeInstantCompanion, Sdk_coreKotlinCharArray, Sdk_coreKotlinRegexOption, Sdk_coreKotlinRegexCompanion, Sdk_coreKotlinAbstractCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcherKey, Sdk_coreKtor_client_coreHttpResponseData, Sdk_coreKtor_client_coreProxyConfig, Sdk_coreKtor_eventsEventDefinition<T>, Sdk_coreKtor_utilsPipelinePhase, Sdk_coreKtor_utilsPipeline<TSubject, TContext>, Sdk_coreKtor_client_coreHttpReceivePipelinePhases, Sdk_coreKtor_client_coreHttpRequestPipelinePhases, Sdk_coreKtor_client_coreHttpResponsePipelinePhases, Sdk_coreKtor_client_coreHttpResponseContainer, Sdk_coreKtor_client_coreHttpClientCall, Sdk_coreKtor_client_coreHttpSendPipelinePhases, Sdk_coreKtor_utilsGMTDate, Sdk_coreKtor_httpHttpProtocolVersion, Sdk_coreKtor_utilsStringValuesBuilderImpl, Sdk_coreKtor_httpOutgoingContent, Sdk_coreKtor_httpURLBuilderCompanion, Sdk_coreKtor_httpHttpMethodCompanion, Sdk_coreKtor_httpURLProtocolCompanion, Sdk_coreKotlinx_serialization_coreSerialKind, Sdk_coreKotlinx_serialization_jsonJsonElementCompanion, Sdk_coreKotlinx_serialization_jsonClassDiscriminatorMode, Sdk_coreKotlinCharIterator, Sdk_coreKotlinMatchResultDestructured, Sdk_coreKotlinIntRange, Sdk_coreKotlinx_io_coreBuffer, Sdk_coreKotlinAbstractCoroutineContextKey<B, E>, Sdk_coreKtor_client_coreHttpClientCallCompanion, Sdk_coreKtor_utilsWeekDay, Sdk_coreKtor_utilsMonth, Sdk_coreKtor_utilsGMTDateCompanion, Sdk_coreKtor_httpHttpProtocolVersionCompanion, Sdk_coreKtor_httpContentType, Sdk_coreKotlinKTypeProjection, Sdk_coreKotlinMatchGroup, Sdk_coreKotlinIntProgressionCompanion, Sdk_coreKotlinIntIterator, Sdk_coreKotlinIntProgression, Sdk_coreKotlinIntRangeCompanion, Sdk_coreKtor_utilsWeekDayCompanion, Sdk_coreKtor_utilsMonthCompanion, Sdk_coreKtor_httpHeaderValueParam, Sdk_coreKtor_httpHeaderValueWithParametersCompanion, Sdk_coreKtor_httpHeaderValueWithParameters, Sdk_coreKtor_httpContentTypeCompanion, Sdk_coreKotlinKVariance, Sdk_coreKotlinKTypeProjectionCompanion;
 
-@protocol Sdk_coreLogLevelController, Sdk_coreLogger, Sdk_coreLogFactory, Sdk_coreKotlinComparable, Sdk_coreTagProvider, Sdk_coreSdkLifecycleListener, Sdk_coreSdkContainerBeanFactory, Sdk_coreFlowerAdsManagerListener, Sdk_coreKotlinx_coroutines_coreJob, Sdk_coreAdPlayerView, Sdk_coreFlowerAdUIView, Sdk_coreFlowerAdViewStub, Sdk_coreGoogleAdView, Sdk_coreMediaPlayerAdapter, Sdk_coreKotlinx_coroutines_coreFlow, Sdk_coreMediaPlayerHook, Sdk_coreFlowerAdsManager, Sdk_coreAdPlayerCallback, Sdk_coreAdPlayer, Sdk_coreKotlinx_serialization_coreKSerializer, Sdk_coreUIElement, Sdk_coreUiText, Sdk_corePlatformFile, Sdk_coreKtor_httpHeaders, Sdk_coreDeviceService, Sdk_coreGoogleAdsManager, Sdk_coreXmlUtil, Sdk_coreKeyValueStore, Sdk_coreGoogleAdsLoaderListener, Sdk_coreKotlinIterator, Sdk_coreAttribute, Sdk_coreManipulationServerResponse, Sdk_coreKtor_ioByteReadChannel, Sdk_coreKotlinSuspendFunction0, Sdk_coreKotlinCoroutineContext, Sdk_coreKotlinx_coroutines_coreCoroutineScope, Sdk_coreKtor_ioCloseable, Sdk_coreKtor_client_coreHttpClientEngine, Sdk_coreKtor_client_coreHttpClientEngineCapability, Sdk_coreKtor_utilsAttributes, Sdk_coreKtor_httpHttpMessageBuilder, Sdk_coreKtor_httpParameters, Sdk_coreKotlinKClass, Sdk_coreKotlinx_coroutines_coreChildHandle, Sdk_coreKotlinx_coroutines_coreChildJob, Sdk_coreKotlinx_coroutines_coreDisposableHandle, Sdk_coreKotlinSequence, Sdk_coreKotlinx_coroutines_coreSelectClause0, Sdk_coreKotlinCoroutineContextKey, Sdk_coreKotlinCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreFlowCollector, Sdk_coreKotlinx_serialization_coreEncoder, Sdk_coreKotlinx_serialization_coreSerialDescriptor, Sdk_coreKotlinx_serialization_coreSerializationStrategy, Sdk_coreKotlinx_serialization_coreDecoder, Sdk_coreKotlinx_serialization_coreDeserializationStrategy, Sdk_coreKotlinMapEntry, Sdk_coreKtor_utilsStringValues, Sdk_coreKotlinx_serialization_coreSerialFormat, Sdk_coreKotlinx_serialization_coreStringFormat, Sdk_coreKotlinCharSequence, Sdk_coreKotlinAppendable, Sdk_coreKotlinMatchResult, Sdk_coreKtor_ioReadSession, Sdk_coreKotlinSuspendFunction1, Sdk_coreKotlinFunction, Sdk_coreKotlinContinuation, Sdk_coreKotlinContinuationInterceptor, Sdk_coreKotlinx_coroutines_coreRunnable, Sdk_coreKtor_client_coreHttpClientPlugin, Sdk_coreKotlinSuspendFunction2, Sdk_coreKtor_httpHttpMessage, Sdk_coreKtor_utilsStringValuesBuilder, Sdk_coreKtor_httpParametersBuilder, Sdk_coreKotlinKType, Sdk_coreKotlinKDeclarationContainer, Sdk_coreKotlinKAnnotatedElement, Sdk_coreKotlinKClassifier, Sdk_coreKotlinx_coroutines_coreParentJob, Sdk_coreKotlinx_coroutines_coreSelectInstance, Sdk_coreKotlinx_coroutines_coreSelectClause, Sdk_coreKotlinx_serialization_coreCompositeEncoder, Sdk_coreKotlinAnnotation, Sdk_coreKotlinx_serialization_coreCompositeDecoder, Sdk_coreKotlinx_serialization_coreSerializersModuleCollector, Sdk_coreKotlinx_serialization_jsonJsonNamingStrategy, Sdk_coreKotlinx_datetimeDateTimeFormat, Sdk_coreKotlinMatchGroupCollection, Sdk_coreKtor_ioObjectPool, Sdk_coreKtor_client_coreHttpRequest, Sdk_coreKotlinIterable, Sdk_coreKotlinCollection, Sdk_coreKotlinClosedRange, Sdk_coreKotlinOpenEndRange;
+@protocol Sdk_coreLogLevelController, Sdk_coreLogger, Sdk_coreLogFactory, Sdk_coreKotlinComparable, Sdk_coreTagProvider, Sdk_coreSdkLifecycleListener, Sdk_coreSdkContainerBeanFactory, Sdk_coreFlowerAdsManagerListener, Sdk_coreKotlinx_coroutines_coreJob, Sdk_coreAdPlayerView, Sdk_coreFlowerAdUIView, Sdk_coreFlowerAdViewStub, Sdk_coreGoogleAdView, Sdk_coreMediaPlayerAdapter, Sdk_coreKotlinx_coroutines_coreFlow, Sdk_coreMediaPlayerHook, Sdk_coreFlowerAdsManager, Sdk_coreAdPlayerCallback, Sdk_coreAdPlayer, Sdk_coreKotlinx_serialization_coreKSerializer, Sdk_coreUIElement, Sdk_coreUiText, Sdk_corePlatformFile, Sdk_coreKtor_httpHeaders, Sdk_coreDeviceService, Sdk_coreGoogleAdsManager, Sdk_coreXmlUtil, Sdk_coreKeyValueStore, Sdk_coreGoogleAdsLoaderListener, Sdk_coreKotlinIterator, Sdk_coreAttribute, Sdk_coreManipulationServerResponse, Sdk_coreKtor_ioByteReadChannel, Sdk_coreKotlinSuspendFunction0, Sdk_coreKtor_client_coreHttpClientPlugin, Sdk_coreKotlinCoroutineContext, Sdk_coreKotlinx_coroutines_coreCoroutineScope, Sdk_coreKtor_ioCloseable, Sdk_coreKtor_client_coreHttpClientEngine, Sdk_coreKtor_client_coreHttpClientEngineCapability, Sdk_coreKtor_utilsAttributes, Sdk_coreKtor_httpHttpMessageBuilder, Sdk_coreKtor_httpParameters, Sdk_coreKotlinx_coroutines_coreChildHandle, Sdk_coreKotlinx_coroutines_coreChildJob, Sdk_coreKotlinx_coroutines_coreDisposableHandle, Sdk_coreKotlinSequence, Sdk_coreKotlinx_coroutines_coreSelectClause0, Sdk_coreKotlinCoroutineContextKey, Sdk_coreKotlinCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreFlowCollector, Sdk_coreKotlinx_serialization_coreEncoder, Sdk_coreKotlinx_serialization_coreSerialDescriptor, Sdk_coreKotlinx_serialization_coreSerializationStrategy, Sdk_coreKotlinx_serialization_coreDecoder, Sdk_coreKotlinx_serialization_coreDeserializationStrategy, Sdk_coreKotlinMapEntry, Sdk_coreKtor_utilsStringValues, Sdk_coreKotlinx_serialization_coreSerialFormat, Sdk_coreKotlinx_serialization_coreStringFormat, Sdk_coreKotlinCharSequence, Sdk_coreKotlinAppendable, Sdk_coreKotlinMatchResult, Sdk_coreKotlinx_io_coreSource, Sdk_coreKotlinFunction, Sdk_coreKotlinContinuation, Sdk_coreKotlinContinuationInterceptor, Sdk_coreKotlinx_coroutines_coreRunnable, Sdk_coreKotlinSuspendFunction2, Sdk_coreKtor_httpHttpMessage, Sdk_coreKtor_utilsStringValuesBuilder, Sdk_coreKtor_httpParametersBuilder, Sdk_coreKotlinKClass, Sdk_coreKotlinKType, Sdk_coreKotlinx_coroutines_coreParentJob, Sdk_coreKotlinx_coroutines_coreSelectInstance, Sdk_coreKotlinx_coroutines_coreSelectClause, Sdk_coreKotlinx_serialization_coreCompositeEncoder, Sdk_coreKotlinAnnotation, Sdk_coreKotlinx_serialization_coreCompositeDecoder, Sdk_coreKotlinx_serialization_coreSerializersModuleCollector, Sdk_coreKotlinx_serialization_jsonJsonNamingStrategy, Sdk_coreKotlinx_datetimeDateTimeFormat, Sdk_coreKotlinMatchGroupCollection, Sdk_coreKotlinx_io_coreRawSink, Sdk_coreKotlinAutoCloseable, Sdk_coreKotlinx_io_coreRawSource, Sdk_coreKtor_client_coreHttpRequest, Sdk_coreKotlinKDeclarationContainer, Sdk_coreKotlinKAnnotatedElement, Sdk_coreKotlinKClassifier, Sdk_coreKotlinIterable, Sdk_coreKotlinCollection, Sdk_coreKotlinClosedRange, Sdk_coreKotlinOpenEndRange, Sdk_coreKotlinx_io_coreSink;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -719,7 +719,7 @@ __attribute__((swift_name("AdHandler")))
 /**
  * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
-@property (readonly) id<Sdk_coreMediaPlayerAdapter> mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
+@property (readonly) id<Sdk_coreMediaPlayerAdapter> _Nullable mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
 
 /**
  * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
@@ -2347,24 +2347,6 @@ __attribute__((swift_name("DashManipulator.Companion")))
 @end
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("DashManipulator.PeriodInformation")))
-@interface Sdk_coreDashManipulatorPeriodInformation : Sdk_coreBase
-- (instancetype)initWithId:(NSString *)id startTime:(int64_t)startTime presentationTimeOffset:(Sdk_coreTimeScaled *)presentationTimeOffset __attribute__((swift_name("init(id:startTime:presentationTimeOffset:)"))) __attribute__((objc_designated_initializer));
-@property (readonly) NSString *id __attribute__((swift_name("id")));
-@property (readonly) Sdk_coreTimeScaled *presentationTimeOffset __attribute__((swift_name("presentationTimeOffset")));
-@property (readonly) int64_t startTime __attribute__((swift_name("startTime")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("DashManipulator.ResponseAds")))
-@interface Sdk_coreDashManipulatorResponseAds : Sdk_coreBase
-- (instancetype)initWithAds:(NSMutableArray<Sdk_coreAd *> *)ads isCompleted:(BOOL)isCompleted requestId:(NSString *)requestId __attribute__((swift_name("init(ads:isCompleted:requestId:)"))) __attribute__((objc_designated_initializer));
-@property (readonly) NSMutableArray<Sdk_coreAd *> *ads __attribute__((swift_name("ads")));
-@property BOOL isCompleted __attribute__((swift_name("isCompleted")));
-@property NSString *requestId __attribute__((swift_name("requestId")));
-@end
-
-__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("HlsManipulator")))
 @interface Sdk_coreHlsManipulator : Sdk_coreManipulator
 - (instancetype)initWithMediaId:(NSString *)mediaId adsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager sharedState:(Sdk_coreHlsManipulatorSharedState *)sharedState __attribute__((swift_name("init(mediaId:adsManager:sharedState:)"))) __attribute__((objc_designated_initializer));
@@ -2493,9 +2475,15 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("AdaptationSet")))
 @interface Sdk_coreAdaptationSet : Sdk_coreBase
 - (instancetype)initWithXmlNode:(Sdk_coreXmlNode *)xmlNode __attribute__((swift_name("init(xmlNode:)"))) __attribute__((objc_designated_initializer));
-- (NSString *)getFirstRepresentationId __attribute__((swift_name("getFirstRepresentationId()")));
 @property (readonly) NSArray<Sdk_coreRepresentation *> *representations __attribute__((swift_name("representations")));
-@property (readonly) Sdk_coreSegmentTemplate *segmentTemplate __attribute__((swift_name("segmentTemplate")));
+@property (readonly) Sdk_coreXmlNode *xmlNode __attribute__((swift_name("xmlNode")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Initialization")))
+@interface Sdk_coreInitialization : Sdk_coreBase
+- (instancetype)initWithXmlNode:(Sdk_coreXmlNode *)xmlNode __attribute__((swift_name("init(xmlNode:)"))) __attribute__((objc_designated_initializer));
+@property NSString * _Nullable sourceURL __attribute__((swift_name("sourceURL")));
 @property (readonly) Sdk_coreXmlNode *xmlNode __attribute__((swift_name("xmlNode")));
 @end
 
@@ -2543,6 +2531,7 @@ __attribute__((swift_name("Period")))
 - (Sdk_corePeriod *)withDurationNewDuration:(int64_t)newDuration __attribute__((swift_name("withDuration(newDuration:)")));
 - (Sdk_corePeriod *)withIdId:(NSString *)id __attribute__((swift_name("withId(id:)")));
 - (Sdk_corePeriod *)withStartNewStart:(int64_t)newStart __attribute__((swift_name("withStart(newStart:)")));
+@property (readonly) NSArray<Sdk_coreAdaptationSet *> *adaptationSets __attribute__((swift_name("adaptationSets")));
 @property int64_t duration __attribute__((swift_name("duration")));
 @property (readonly) NSString *id __attribute__((swift_name("id")));
 @property (readonly) int64_t start __attribute__((swift_name("start")));
@@ -2564,18 +2553,48 @@ __attribute__((swift_name("Representation")))
 @interface Sdk_coreRepresentation : Sdk_coreBase
 - (instancetype)initWithXmlNode:(Sdk_coreXmlNode *)xmlNode __attribute__((swift_name("init(xmlNode:)"))) __attribute__((objc_designated_initializer));
 @property (readonly) int64_t bandwidth __attribute__((swift_name("bandwidth")));
-@property (readonly) int64_t height __attribute__((swift_name("height")));
+@property (readonly) Sdk_coreLong * _Nullable height __attribute__((swift_name("height")));
 @property (readonly) NSString *id __attribute__((swift_name("id")));
-@property (readonly) int64_t width __attribute__((swift_name("width")));
+@property (readonly) Sdk_coreSegmentBase * _Nullable segmentBase __attribute__((swift_name("segmentBase")));
+@property (readonly) Sdk_coreSegmentList * _Nullable segmentList __attribute__((swift_name("segmentList")));
+@property (readonly) Sdk_coreSegmentTemplate * _Nullable segmentTemplate __attribute__((swift_name("segmentTemplate")));
+@property (readonly) Sdk_coreXmlNode *xmlNode __attribute__((swift_name("xmlNode")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SegmentBase")))
+@interface Sdk_coreSegmentBase : Sdk_coreBase
+- (instancetype)initWithXmlNode:(Sdk_coreXmlNode *)xmlNode __attribute__((swift_name("init(xmlNode:)"))) __attribute__((objc_designated_initializer));
+@property (readonly) Sdk_coreInitialization * _Nullable initialization __attribute__((swift_name("initialization")));
+@property (readonly) Sdk_coreXmlNode *xmlNode __attribute__((swift_name("xmlNode")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SegmentList")))
+@interface Sdk_coreSegmentList : Sdk_coreBase
+- (instancetype)initWithXmlNode:(Sdk_coreXmlNode *)xmlNode __attribute__((swift_name("init(xmlNode:)"))) __attribute__((objc_designated_initializer));
+@property (readonly) Sdk_coreInitialization * _Nullable initialization __attribute__((swift_name("initialization")));
+@property (readonly) NSArray<Sdk_coreSegmentURL *> *segmentURLs __attribute__((swift_name("segmentURLs")));
+@property (readonly) Sdk_coreXmlNode *xmlNode __attribute__((swift_name("xmlNode")));
 @end
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("SegmentTemplate")))
 @interface Sdk_coreSegmentTemplate : Sdk_coreBase
 - (instancetype)initWithXmlNode:(Sdk_coreXmlNode *)xmlNode __attribute__((swift_name("init(xmlNode:)"))) __attribute__((objc_designated_initializer));
-@property (readonly) Sdk_coreTimeScaled *duration __attribute__((swift_name("duration")));
-@property (readonly) NSString *initialization __attribute__((swift_name("initialization")));
-@property (readonly) NSString *media __attribute__((swift_name("media")));
+@property (readonly) Sdk_coreTimeScaled * _Nullable duration __attribute__((swift_name("duration")));
+@property NSString * _Nullable initialization __attribute__((swift_name("initialization")));
+@property NSString * _Nullable media __attribute__((swift_name("media")));
+@property (readonly) Sdk_coreXmlNode *xmlNode __attribute__((swift_name("xmlNode")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SegmentURL")))
+@interface Sdk_coreSegmentURL : Sdk_coreBase
+- (instancetype)initWithXmlNode:(Sdk_coreXmlNode *)xmlNode __attribute__((swift_name("init(xmlNode:)"))) __attribute__((objc_designated_initializer));
+@property NSString * _Nullable index __attribute__((swift_name("index")));
+@property NSString * _Nullable media __attribute__((swift_name("media")));
+@property (readonly) Sdk_coreXmlNode *xmlNode __attribute__((swift_name("xmlNode")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -3313,20 +3332,23 @@ __attribute__((swift_name("PartialSegmentInformationAttribute.Companion")))
 @property (readonly) NSDictionary<NSString *, Sdk_corePartialSegmentInformationAttribute *> *attributeMap __attribute__((swift_name("attributeMap")));
 @end
 
-__attribute__((swift_name("Ktor_ioIOException")))
-@interface Sdk_coreKtor_ioIOException : Sdk_coreKotlinException
-- (instancetype)initWithMessage:(NSString *)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithMessage:(NSString *)message cause:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-+ (instancetype)new __attribute__((unavailable));
-- (instancetype)initWithCause:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+__attribute__((swift_name("Kotlinx_io_coreIOException")))
+@interface Sdk_coreKotlinx_io_coreIOException : Sdk_coreKotlinException
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithCause:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
 @end
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("PlaylistParserException")))
-@interface Sdk_corePlaylistParserException : Sdk_coreKtor_ioIOException
+@interface Sdk_corePlaylistParserException : Sdk_coreKotlinx_io_coreIOException
 - (instancetype)initWithMessage:(NSString *)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithMessage:(NSString *)message cause:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithCause:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -3964,6 +3986,59 @@ __attribute__((swift_name("PlatformMutex")))
 @end
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("RedirectCachePlugin")))
+@interface Sdk_coreRedirectCachePlugin : Sdk_coreBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+@property (class, readonly, getter=companion) Sdk_coreRedirectCachePluginCompanion *companion __attribute__((swift_name("companion")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)clearCacheWithCompletionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("clearCache(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getCacheSizeWithCompletionHandler:(void (^)(Sdk_coreInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getCacheSize(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getCachedRedirectUrl:(NSString *)url completionHandler:(void (^)(NSString * _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("getCachedRedirect(url:completionHandler:)")));
+@end
+
+__attribute__((swift_name("Ktor_client_coreHttpClientPlugin")))
+@protocol Sdk_coreKtor_client_coreHttpClientPlugin
+@required
+- (void)installPlugin:(id)plugin scope:(Sdk_coreKtor_client_coreHttpClient *)scope __attribute__((swift_name("install(plugin:scope:)")));
+- (id)prepareBlock:(void (^)(id))block __attribute__((swift_name("prepare(block:)")));
+@property (readonly) Sdk_coreKtor_utilsAttributeKey<id> *key __attribute__((swift_name("key")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("RedirectCachePlugin.Companion")))
+@interface Sdk_coreRedirectCachePluginCompanion : Sdk_coreBase <Sdk_coreKtor_client_coreHttpClientPlugin>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) Sdk_coreRedirectCachePluginCompanion *shared __attribute__((swift_name("shared")));
+- (void)installPlugin:(Sdk_coreRedirectCachePlugin *)plugin scope:(Sdk_coreKtor_client_coreHttpClient *)scope __attribute__((swift_name("install(plugin:scope:)")));
+- (Sdk_coreRedirectCachePlugin *)prepareBlock:(void (^)(Sdk_coreRedirectCachePluginConfig *))block __attribute__((swift_name("prepare(block:)")));
+@property (readonly) Sdk_coreKtor_utilsAttributeKey<Sdk_coreRedirectCachePlugin *> *key __attribute__((swift_name("key")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("RedirectCachePlugin.Config")))
+@interface Sdk_coreRedirectCachePluginConfig : Sdk_coreBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+@end
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("StringUtils")))
 @interface Sdk_coreStringUtils : Sdk_coreBase
 + (instancetype)alloc __attribute__((unavailable));
@@ -4094,9 +4169,12 @@ __attribute__((swift_name("Ktor_httpUrl")))
 @property (readonly) NSString *host __attribute__((swift_name("host")));
 @property (readonly) id<Sdk_coreKtor_httpParameters> parameters __attribute__((swift_name("parameters")));
 @property (readonly) NSString * _Nullable password __attribute__((swift_name("password")));
-@property (readonly) NSArray<NSString *> *pathSegments __attribute__((swift_name("pathSegments")));
+@property (readonly) NSArray<NSString *> *pathSegments __attribute__((swift_name("pathSegments"))) __attribute__((deprecated("\n        `pathSegments` is deprecated.\n\n        This property will contain an empty path segment at the beginning for URLs with a hostname,\n        and an empty path segment at the end for the URLs with a trailing slash. If you need to keep this behaviour please\n        use [rawSegments]. If you only need to access the meaningful parts of the path, consider using [segments] instead.\n             \n        Please decide if you need [rawSegments] or [segments] explicitly.\n        ")));
 @property (readonly) int32_t port __attribute__((swift_name("port")));
 @property (readonly) Sdk_coreKtor_httpURLProtocol *protocol __attribute__((swift_name("protocol")));
+@property (readonly) Sdk_coreKtor_httpURLProtocol * _Nullable protocolOrNull __attribute__((swift_name("protocolOrNull")));
+@property (readonly) NSArray<NSString *> *rawSegments __attribute__((swift_name("rawSegments")));
+@property (readonly) NSArray<NSString *> *segments __attribute__((swift_name("segments")));
 @property (readonly) int32_t specifiedPort __attribute__((swift_name("specifiedPort")));
 @property (readonly) BOOL trailingQuery __attribute__((swift_name("trailingQuery")));
 @property (readonly) NSString * _Nullable user __attribute__((swift_name("user")));
@@ -4318,12 +4396,6 @@ __attribute__((swift_name("UrlStringExtKt")))
 @end
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("AsInterface_iosKt")))
-@interface Sdk_coreAsInterface_iosKt : Sdk_coreBase
-+ (id)asInterface:(id)receiver class:(id<Sdk_coreKotlinKClass>)class_ __attribute__((swift_name("asInterface(_:class:)")));
-@end
-
-__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("CallBeacon_iosKt")))
 @interface Sdk_coreCallBeacon_iosKt : Sdk_coreBase
 
@@ -4390,10 +4462,25 @@ __attribute__((swift_name("KotlinCoroutineContextElement")))
 __attribute__((swift_name("Kotlinx_coroutines_coreJob")))
 @protocol Sdk_coreKotlinx_coroutines_coreJob <Sdk_coreKotlinCoroutineContextElement>
 @required
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 - (id<Sdk_coreKotlinx_coroutines_coreChildHandle>)attachChildChild:(id<Sdk_coreKotlinx_coroutines_coreChildJob>)child __attribute__((swift_name("attachChild(child:)")));
 - (void)cancelCause:(Sdk_coreKotlinCancellationException * _Nullable)cause __attribute__((swift_name("cancel(cause:)")));
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 - (Sdk_coreKotlinCancellationException *)getCancellationException __attribute__((swift_name("getCancellationException()")));
 - (id<Sdk_coreKotlinx_coroutines_coreDisposableHandle>)invokeOnCompletionHandler:(void (^)(Sdk_coreKotlinThrowable * _Nullable))handler __attribute__((swift_name("invokeOnCompletion(handler:)")));
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 - (id<Sdk_coreKotlinx_coroutines_coreDisposableHandle>)invokeOnCompletionOnCancelling:(BOOL)onCancelling invokeImmediately:(BOOL)invokeImmediately handler:(void (^)(Sdk_coreKotlinThrowable * _Nullable))handler __attribute__((swift_name("invokeOnCompletion(onCancelling:invokeImmediately:handler:)")));
 
 /**
@@ -4763,147 +4850,11 @@ __attribute__((swift_name("Ktor_ioByteReadChannel")))
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)awaitContentWithCompletionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("awaitContent(completionHandler:)")));
-- (BOOL)cancelCause_:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("cancel(cause_:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)discardMax:(int64_t)max completionHandler:(void (^)(Sdk_coreLong * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("discard(max:completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)peekToDestination:(Sdk_coreKtor_ioMemory *)destination destinationOffset:(int64_t)destinationOffset offset:(int64_t)offset min:(int64_t)min max:(int64_t)max completionHandler:(void (^)(Sdk_coreLong * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("peekTo(destination:destinationOffset:offset:min:max:completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readAvailableDst:(Sdk_coreKtor_ioChunkBuffer *)dst completionHandler:(void (^)(Sdk_coreInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readAvailable(dst:completionHandler:)")));
-- (int32_t)readAvailableMin:(int32_t)min block:(void (^)(Sdk_coreKtor_ioBuffer *))block __attribute__((swift_name("readAvailable(min:block:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readAvailableDst:(Sdk_coreKotlinByteArray *)dst offset:(int32_t)offset length:(int32_t)length completionHandler:(void (^)(Sdk_coreInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readAvailable(dst:offset:length:completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readAvailableDst:(void *)dst offset:(int32_t)offset length:(int32_t)length completionHandler_:(void (^)(Sdk_coreInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readAvailable(dst:offset:length:completionHandler_:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readAvailableDst:(void *)dst offset:(int64_t)offset length:(int64_t)length completionHandler__:(void (^)(Sdk_coreInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readAvailable(dst:offset:length:completionHandler__:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readBooleanWithCompletionHandler:(void (^)(Sdk_coreBoolean * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readBoolean(completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readByteWithCompletionHandler:(void (^)(Sdk_coreByte * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readByte(completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readDoubleWithCompletionHandler:(void (^)(Sdk_coreDouble * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readDouble(completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readFloatWithCompletionHandler:(void (^)(Sdk_coreFloat * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readFloat(completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readFullyDst:(Sdk_coreKtor_ioChunkBuffer *)dst n:(int32_t)n completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("readFully(dst:n:completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readFullyDst:(Sdk_coreKotlinByteArray *)dst offset:(int32_t)offset length:(int32_t)length completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("readFully(dst:offset:length:completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readFullyDst:(void *)dst offset:(int32_t)offset length:(int32_t)length completionHandler_:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("readFully(dst:offset:length:completionHandler_:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readFullyDst:(void *)dst offset:(int64_t)offset length:(int64_t)length completionHandler__:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("readFully(dst:offset:length:completionHandler__:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readIntWithCompletionHandler:(void (^)(Sdk_coreInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readInt(completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readLongWithCompletionHandler:(void (^)(Sdk_coreLong * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readLong(completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readPacketSize:(int32_t)size completionHandler:(void (^)(Sdk_coreKtor_ioByteReadPacket * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readPacket(size:completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readRemainingLimit:(int64_t)limit completionHandler:(void (^)(Sdk_coreKtor_ioByteReadPacket * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readRemaining(limit:completionHandler:)")));
-- (void)readSessionConsumer:(void (^)(id<Sdk_coreKtor_ioReadSession>))consumer __attribute__((swift_name("readSession(consumer:)"))) __attribute__((deprecated("Use read { } instead.")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readShortWithCompletionHandler:(void (^)(Sdk_coreShort * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readShort(completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readSuspendableSessionConsumer:(id<Sdk_coreKotlinSuspendFunction1>)consumer completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("readSuspendableSession(consumer:completionHandler:)"))) __attribute__((deprecated("Use read { } instead.")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readUTF8LineLimit:(int32_t)limit completionHandler:(void (^)(NSString * _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("readUTF8Line(limit:completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)readUTF8LineToOut:(id<Sdk_coreKotlinAppendable>)out limit:(int32_t)limit completionHandler:(void (^)(Sdk_coreBoolean * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readUTF8LineTo(out:limit:completionHandler:)")));
-@property (readonly) int32_t availableForRead __attribute__((swift_name("availableForRead")));
+- (void)awaitContentMin:(int32_t)min completionHandler:(void (^)(Sdk_coreBoolean * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("awaitContent(min:completionHandler:)")));
+- (void)cancelCause_:(Sdk_coreKotlinThrowable * _Nullable)cause __attribute__((swift_name("cancel(cause_:)")));
 @property (readonly) Sdk_coreKotlinThrowable * _Nullable closedCause __attribute__((swift_name("closedCause")));
 @property (readonly) BOOL isClosedForRead __attribute__((swift_name("isClosedForRead")));
-@property (readonly) BOOL isClosedForWrite __attribute__((swift_name("isClosedForWrite")));
-@property (readonly) int64_t totalBytesRead __attribute__((swift_name("totalBytesRead")));
+@property (readonly) id<Sdk_coreKotlinx_io_coreSource> readBuffer __attribute__((swift_name("readBuffer")));
 @end
 
 __attribute__((swift_name("KotlinFunction")))
@@ -4952,18 +4903,34 @@ __attribute__((swift_name("Kotlinx_coroutines_coreCoroutineDispatcher")))
 - (instancetype)initWithKey:(id<Sdk_coreKotlinCoroutineContextKey>)key __attribute__((swift_name("init(key:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) Sdk_coreKotlinx_coroutines_coreCoroutineDispatcherKey *companion __attribute__((swift_name("companion")));
 - (void)dispatchContext:(id<Sdk_coreKotlinCoroutineContext>)context block:(id<Sdk_coreKotlinx_coroutines_coreRunnable>)block __attribute__((swift_name("dispatch(context:block:)")));
-- (void)dispatchYieldContext:(id<Sdk_coreKotlinCoroutineContext>)context block:(id<Sdk_coreKotlinx_coroutines_coreRunnable>)block __attribute__((swift_name("dispatchYield(context:block:)")));
-- (id<Sdk_coreKotlinContinuation>)interceptContinuationContinuation:(id<Sdk_coreKotlinContinuation>)continuation __attribute__((swift_name("interceptContinuation(continuation:)")));
-- (BOOL)isDispatchNeededContext:(id<Sdk_coreKotlinCoroutineContext>)context __attribute__((swift_name("isDispatchNeeded(context:)")));
 
 /**
  * @note annotations
- *   kotlinx.coroutines.ExperimentalCoroutinesApi
+ *   kotlinx.coroutines.InternalCoroutinesApi
 */
-- (Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher *)limitedParallelismParallelism:(int32_t)parallelism __attribute__((swift_name("limitedParallelism(parallelism:)")));
+- (void)dispatchYieldContext:(id<Sdk_coreKotlinCoroutineContext>)context block:(id<Sdk_coreKotlinx_coroutines_coreRunnable>)block __attribute__((swift_name("dispatchYield(context:block:)")));
+- (id<Sdk_coreKotlinContinuation>)interceptContinuationContinuation:(id<Sdk_coreKotlinContinuation>)continuation __attribute__((swift_name("interceptContinuation(continuation:)")));
+- (BOOL)isDispatchNeededContext:(id<Sdk_coreKotlinCoroutineContext>)context __attribute__((swift_name("isDispatchNeeded(context:)")));
+- (Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher *)limitedParallelismParallelism:(int32_t)parallelism name:(NSString * _Nullable)name __attribute__((swift_name("limitedParallelism(parallelism:name:)")));
 - (Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher *)plusOther_:(Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher *)other __attribute__((swift_name("plus(other_:)"))) __attribute__((unavailable("Operator '+' on two CoroutineDispatcher objects is meaningless. CoroutineDispatcher is a coroutine context element and `+` is a set-sum operator for coroutine contexts. The dispatcher to the right of `+` just replaces the dispatcher to the left.")));
 - (void)releaseInterceptedContinuationContinuation:(id<Sdk_coreKotlinContinuation>)continuation __attribute__((swift_name("releaseInterceptedContinuation(continuation:)")));
 - (NSString *)description __attribute__((swift_name("description()")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_utilsAttributeKey")))
+@interface Sdk_coreKtor_utilsAttributeKey<T> : Sdk_coreBase
+
+/**
+ * @note annotations
+ *   kotlin.jvm.JvmOverloads
+*/
+- (instancetype)initWithName:(NSString *)name type:(Sdk_coreKtor_utilsTypeInfo *)type __attribute__((swift_name("init(name:type:)"))) __attribute__((objc_designated_initializer));
+- (Sdk_coreKtor_utilsAttributeKey<T> *)doCopyName:(NSString *)name type:(Sdk_coreKtor_utilsTypeInfo *)type __attribute__((swift_name("doCopy(name:type:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString *name __attribute__((swift_name("name")));
 @end
 
 __attribute__((swift_name("Ktor_client_coreHttpClientEngine")))
@@ -4985,9 +4952,10 @@ __attribute__((swift_name("Ktor_client_coreHttpClientEngineConfig")))
 @interface Sdk_coreKtor_client_coreHttpClientEngineConfig : Sdk_coreBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+@property Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher * _Nullable dispatcher __attribute__((swift_name("dispatcher")));
 @property BOOL pipelining __attribute__((swift_name("pipelining")));
 @property Sdk_coreKtor_client_coreProxyConfig * _Nullable proxy __attribute__((swift_name("proxy")));
-@property int32_t threadsCount __attribute__((swift_name("threadsCount"))) __attribute__((deprecated("The [threadsCount] property is deprecated. The [Dispatchers.IO] is used by default.")));
+@property int32_t threadsCount __attribute__((swift_name("threadsCount"))) __attribute__((unavailable("The [threadsCount] property is deprecated. Consider setting [dispatcher] instead.")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -5001,7 +4969,7 @@ __attribute__((swift_name("Ktor_client_coreHttpClientConfig")))
 - (void)installPlugin:(id<Sdk_coreKtor_client_coreHttpClientPlugin>)plugin configure:(void (^)(id))configure __attribute__((swift_name("install(plugin:configure:)")));
 - (void)installKey:(NSString *)key block:(void (^)(Sdk_coreKtor_client_coreHttpClient *))block __attribute__((swift_name("install(key:block:)")));
 - (void)plusAssignOther:(Sdk_coreKtor_client_coreHttpClientConfig<T> *)other __attribute__((swift_name("plusAssign(other:)")));
-@property BOOL developmentMode __attribute__((swift_name("developmentMode")));
+@property BOOL developmentMode __attribute__((swift_name("developmentMode"))) __attribute__((deprecated("Development mode is no longer required. The property will be removed in the future.")));
 @property BOOL expectSuccess __attribute__((swift_name("expectSuccess")));
 @property BOOL followRedirects __attribute__((swift_name("followRedirects")));
 @property BOOL useDefaultTransformers __attribute__((swift_name("useDefaultTransformers")));
@@ -5055,6 +5023,7 @@ __attribute__((swift_name("Ktor_utilsPipeline")))
 - (void)mergeFrom:(Sdk_coreKtor_utilsPipeline<TSubject, TContext> *)from __attribute__((swift_name("merge(from:)")));
 - (void)mergePhasesFrom:(Sdk_coreKtor_utilsPipeline<TSubject, TContext> *)from __attribute__((swift_name("mergePhases(from:)")));
 - (void)resetFromFrom:(Sdk_coreKtor_utilsPipeline<TSubject, TContext> *)from __attribute__((swift_name("resetFrom(from:)")));
+- (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) id<Sdk_coreKtor_utilsAttributes> attributes __attribute__((swift_name("attributes")));
 @property (readonly) BOOL developmentMode __attribute__((swift_name("developmentMode")));
 @property (readonly, getter=isEmpty_) BOOL isEmpty __attribute__((swift_name("isEmpty")));
@@ -5113,7 +5082,7 @@ __attribute__((swift_name("Ktor_client_coreHttpResponse")))
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) Sdk_coreKtor_client_coreHttpClientCall *call __attribute__((swift_name("call")));
-@property (readonly) id<Sdk_coreKtor_ioByteReadChannel> content __attribute__((swift_name("content")));
+@property (readonly) id<Sdk_coreKtor_ioByteReadChannel> rawContent __attribute__((swift_name("rawContent")));
 @property (readonly) Sdk_coreKtor_utilsGMTDate *requestTime __attribute__((swift_name("requestTime")));
 @property (readonly) Sdk_coreKtor_utilsGMTDate *responseTime __attribute__((swift_name("responseTime")));
 @property (readonly) Sdk_coreKtor_httpHttpStatusCode *status __attribute__((swift_name("status")));
@@ -5227,7 +5196,7 @@ __attribute__((swift_name("Ktor_client_coreHttpRequestData")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Ktor_httpURLBuilder")))
 @interface Sdk_coreKtor_httpURLBuilder : Sdk_coreBase
-- (instancetype)initWithProtocol:(Sdk_coreKtor_httpURLProtocol *)protocol host:(NSString *)host port:(int32_t)port user:(NSString * _Nullable)user password:(NSString * _Nullable)password pathSegments:(NSArray<NSString *> *)pathSegments parameters:(id<Sdk_coreKtor_httpParameters>)parameters fragment:(NSString *)fragment trailingQuery:(BOOL)trailingQuery __attribute__((swift_name("init(protocol:host:port:user:password:pathSegments:parameters:fragment:trailingQuery:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithProtocol:(Sdk_coreKtor_httpURLProtocol * _Nullable)protocol host:(NSString *)host port:(int32_t)port user:(NSString * _Nullable)user password:(NSString * _Nullable)password pathSegments:(NSArray<NSString *> *)pathSegments parameters:(id<Sdk_coreKtor_httpParameters>)parameters fragment:(NSString *)fragment trailingQuery:(BOOL)trailingQuery __attribute__((swift_name("init(protocol:host:port:user:password:pathSegments:parameters:fragment:trailingQuery:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) Sdk_coreKtor_httpURLBuilderCompanion *companion __attribute__((swift_name("companion")));
 - (Sdk_coreKtor_httpUrl *)build __attribute__((swift_name("build()")));
 - (NSString *)buildString __attribute__((swift_name("buildString()")));
@@ -5244,6 +5213,7 @@ __attribute__((swift_name("Ktor_httpURLBuilder")))
 @property NSArray<NSString *> *pathSegments __attribute__((swift_name("pathSegments")));
 @property int32_t port __attribute__((swift_name("port")));
 @property Sdk_coreKtor_httpURLProtocol *protocol __attribute__((swift_name("protocol")));
+@property Sdk_coreKtor_httpURLProtocol * _Nullable protocolOrNull __attribute__((swift_name("protocolOrNull")));
 @property BOOL trailingQuery __attribute__((swift_name("trailingQuery")));
 @property NSString * _Nullable user __attribute__((swift_name("user")));
 @end
@@ -5251,13 +5221,12 @@ __attribute__((swift_name("Ktor_httpURLBuilder")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Ktor_utilsTypeInfo")))
 @interface Sdk_coreKtor_utilsTypeInfo : Sdk_coreBase
-- (instancetype)initWithType:(id<Sdk_coreKotlinKClass>)type reifiedType:(id<Sdk_coreKotlinKType>)reifiedType kotlinType:(id<Sdk_coreKotlinKType> _Nullable)kotlinType __attribute__((swift_name("init(type:reifiedType:kotlinType:)"))) __attribute__((objc_designated_initializer));
-- (Sdk_coreKtor_utilsTypeInfo *)doCopyType:(id<Sdk_coreKotlinKClass>)type reifiedType:(id<Sdk_coreKotlinKType>)reifiedType kotlinType:(id<Sdk_coreKotlinKType> _Nullable)kotlinType __attribute__((swift_name("doCopy(type:reifiedType:kotlinType:)")));
+- (instancetype)initWithType:(id<Sdk_coreKotlinKClass>)type kotlinType:(id<Sdk_coreKotlinKType> _Nullable)kotlinType __attribute__((swift_name("init(type:kotlinType:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithType:(id<Sdk_coreKotlinKClass>)type reifiedType:(id<Sdk_coreKotlinKType>)reifiedType kotlinType:(id<Sdk_coreKotlinKType> _Nullable)kotlinType __attribute__((swift_name("init(type:reifiedType:kotlinType:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("Use constructor without reifiedType parameter.")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) id<Sdk_coreKotlinKType> _Nullable kotlinType __attribute__((swift_name("kotlinType")));
-@property (readonly) id<Sdk_coreKotlinKType> reifiedType __attribute__((swift_name("reifiedType")));
 @property (readonly) id<Sdk_coreKotlinKClass> type __attribute__((swift_name("type")));
 @end
 
@@ -5303,47 +5272,16 @@ __attribute__((swift_name("Kotlinx_coroutines_coreMainCoroutineDispatcher")))
 @interface Sdk_coreKotlinx_coroutines_coreMainCoroutineDispatcher : Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher *)limitedParallelismParallelism:(int32_t)parallelism __attribute__((swift_name("limitedParallelism(parallelism:)")));
+- (Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher *)limitedParallelismParallelism:(int32_t)parallelism name:(NSString * _Nullable)name __attribute__((swift_name("limitedParallelism(parallelism:name:)")));
 - (NSString *)description __attribute__((swift_name("description()")));
 
 /**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
  * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
 - (NSString * _Nullable)toStringInternalImpl __attribute__((swift_name("toStringInternalImpl()")));
 @property (readonly) Sdk_coreKotlinx_coroutines_coreMainCoroutineDispatcher *immediate __attribute__((swift_name("immediate")));
-@end
-
-__attribute__((swift_name("KotlinKDeclarationContainer")))
-@protocol Sdk_coreKotlinKDeclarationContainer
-@required
-@end
-
-__attribute__((swift_name("KotlinKAnnotatedElement")))
-@protocol Sdk_coreKotlinKAnnotatedElement
-@required
-@end
-
-
-/**
- * @note annotations
- *   kotlin.SinceKotlin(version="1.1")
-*/
-__attribute__((swift_name("KotlinKClassifier")))
-@protocol Sdk_coreKotlinKClassifier
-@required
-@end
-
-__attribute__((swift_name("KotlinKClass")))
-@protocol Sdk_coreKotlinKClass <Sdk_coreKotlinKDeclarationContainer, Sdk_coreKotlinKAnnotatedElement, Sdk_coreKotlinKClassifier>
-@required
-
-/**
- * @note annotations
- *   kotlin.SinceKotlin(version="1.1")
-*/
-- (BOOL)isInstanceValue:(id _Nullable)value __attribute__((swift_name("isInstance(value:)")));
-@property (readonly) NSString * _Nullable qualifiedName __attribute__((swift_name("qualifiedName")));
-@property (readonly) NSString * _Nullable simpleName __attribute__((swift_name("simpleName")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -5357,16 +5295,41 @@ __attribute__((swift_name("Kotlinx_coroutines_coreDisposableHandle")))
 - (void)dispose __attribute__((swift_name("dispose()")));
 @end
 
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 __attribute__((swift_name("Kotlinx_coroutines_coreChildHandle")))
 @protocol Sdk_coreKotlinx_coroutines_coreChildHandle <Sdk_coreKotlinx_coroutines_coreDisposableHandle>
 @required
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 - (BOOL)childCancelledCause:(Sdk_coreKotlinThrowable *)cause __attribute__((swift_name("childCancelled(cause:)")));
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 @property (readonly) id<Sdk_coreKotlinx_coroutines_coreJob> _Nullable parent __attribute__((swift_name("parent")));
 @end
 
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 __attribute__((swift_name("Kotlinx_coroutines_coreChildJob")))
 @protocol Sdk_coreKotlinx_coroutines_coreChildJob <Sdk_coreKotlinx_coroutines_coreJob>
 @required
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 - (void)parentCancelledParentJob:(id<Sdk_coreKotlinx_coroutines_coreParentJob>)parentJob __attribute__((swift_name("parentCancelled(parentJob:)")));
 @end
 
@@ -5376,11 +5339,16 @@ __attribute__((swift_name("KotlinSequence")))
 - (id<Sdk_coreKotlinIterator>)iterator __attribute__((swift_name("iterator()")));
 @end
 
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 __attribute__((swift_name("Kotlinx_coroutines_coreSelectClause")))
 @protocol Sdk_coreKotlinx_coroutines_coreSelectClause
 @required
 @property (readonly) id clauseObject __attribute__((swift_name("clauseObject")));
-@property (readonly) Sdk_coreKotlinUnit *(^(^ _Nullable onCancellationConstructor)(id<Sdk_coreKotlinx_coroutines_coreSelectInstance>, id _Nullable, id _Nullable))(Sdk_coreKotlinThrowable *) __attribute__((swift_name("onCancellationConstructor")));
+@property (readonly) Sdk_coreKotlinUnit *(^(^ _Nullable onCancellationConstructor)(id<Sdk_coreKotlinx_coroutines_coreSelectInstance>, id _Nullable, id _Nullable))(Sdk_coreKotlinThrowable *, id _Nullable, id<Sdk_coreKotlinCoroutineContext>) __attribute__((swift_name("onCancellationConstructor")));
 @property (readonly) id _Nullable (^processResFunc)(id, id _Nullable, id _Nullable) __attribute__((swift_name("processResFunc")));
 @property (readonly) void (^regFunc)(id, id<Sdk_coreKotlinx_coroutines_coreSelectInstance>, id _Nullable) __attribute__((swift_name("regFunc")));
 @end
@@ -5787,159 +5755,44 @@ __attribute__((swift_name("KotlinMatchResult")))
 @property (readonly) NSString *value_ __attribute__((swift_name("value_")));
 @end
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_ioMemory")))
-@interface Sdk_coreKtor_ioMemory : Sdk_coreBase
-- (instancetype)initWithPointer:(void *)pointer size:(int64_t)size __attribute__((swift_name("init(pointer:size:)"))) __attribute__((objc_designated_initializer));
-@property (class, readonly, getter=companion) Sdk_coreKtor_ioMemoryCompanion *companion __attribute__((swift_name("companion")));
-- (void)doCopyToDestination:(Sdk_coreKtor_ioMemory *)destination offset:(int32_t)offset length:(int32_t)length destinationOffset:(int32_t)destinationOffset __attribute__((swift_name("doCopyTo(destination:offset:length:destinationOffset:)")));
-- (void)doCopyToDestination:(Sdk_coreKtor_ioMemory *)destination offset:(int64_t)offset length:(int64_t)length destinationOffset_:(int64_t)destinationOffset __attribute__((swift_name("doCopyTo(destination:offset:length:destinationOffset_:)")));
-- (int8_t)loadAtIndex:(int32_t)index __attribute__((swift_name("loadAt(index:)")));
-- (int8_t)loadAtIndex_:(int64_t)index __attribute__((swift_name("loadAt(index_:)")));
-- (Sdk_coreKtor_ioMemory *)sliceOffset:(int32_t)offset length:(int32_t)length __attribute__((swift_name("slice(offset:length:)")));
-- (Sdk_coreKtor_ioMemory *)sliceOffset:(int64_t)offset length_:(int64_t)length __attribute__((swift_name("slice(offset:length_:)")));
-- (void)storeAtIndex:(int32_t)index value:(int8_t)value __attribute__((swift_name("storeAt(index:value:)")));
-- (void)storeAtIndex:(int64_t)index value_:(int8_t)value __attribute__((swift_name("storeAt(index:value_:)")));
-@property (readonly) void *pointer __attribute__((swift_name("pointer")));
-@property (readonly) int64_t size __attribute__((swift_name("size")));
-@property (readonly) int32_t size32 __attribute__((swift_name("size32")));
-@end
-
-__attribute__((swift_name("Ktor_ioBuffer")))
-@interface Sdk_coreKtor_ioBuffer : Sdk_coreBase
-- (instancetype)initWithMemory:(Sdk_coreKtor_ioMemory *)memory __attribute__((swift_name("init(memory:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("\n    We're migrating to the new kotlinx-io library.\n    This declaration is deprecated and will be removed in Ktor 4.0.0\n    If you have any problems with migration, please contact us in \n    https://youtrack.jetbrains.com/issue/KTOR-6030/Migrate-to-new-kotlinx.io-library\n    ")));
-@property (class, readonly, getter=companion) Sdk_coreKtor_ioBufferCompanion *companion __attribute__((swift_name("companion")));
-- (void)commitWrittenCount:(int32_t)count __attribute__((swift_name("commitWritten(count:)")));
-- (void)discardExactCount:(int32_t)count __attribute__((swift_name("discardExact(count:)")));
-- (Sdk_coreKtor_ioBuffer *)duplicate __attribute__((swift_name("duplicate()")));
 
 /**
- * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
+ * @note annotations
+ *   kotlin.SinceKotlin(version="2.0")
 */
-- (void)duplicateToCopy:(Sdk_coreKtor_ioBuffer *)copy __attribute__((swift_name("duplicateTo(copy:)")));
-- (int8_t)readByte __attribute__((swift_name("readByte()")));
-- (void)reserveEndGapEndGap:(int32_t)endGap __attribute__((swift_name("reserveEndGap(endGap:)")));
-- (void)reserveStartGapStartGap:(int32_t)startGap __attribute__((swift_name("reserveStartGap(startGap:)")));
-- (void)reset __attribute__((swift_name("reset()")));
-- (void)resetForRead __attribute__((swift_name("resetForRead()")));
-- (void)resetForWrite __attribute__((swift_name("resetForWrite()")));
-- (void)resetForWriteLimit:(int32_t)limit __attribute__((swift_name("resetForWrite(limit:)")));
-- (void)rewindCount:(int32_t)count __attribute__((swift_name("rewind(count:)")));
-- (NSString *)description __attribute__((swift_name("description()")));
-- (int32_t)tryPeekByte __attribute__((swift_name("tryPeekByte()")));
-- (int32_t)tryReadByte __attribute__((swift_name("tryReadByte()")));
-- (void)writeByteValue:(int8_t)value __attribute__((swift_name("writeByte(value:)")));
-@property (readonly) int32_t capacity __attribute__((swift_name("capacity")));
-@property (readonly) int32_t endGap __attribute__((swift_name("endGap")));
-@property (readonly) int32_t limit __attribute__((swift_name("limit")));
-@property (readonly) Sdk_coreKtor_ioMemory *memory __attribute__((swift_name("memory")));
-@property (readonly) int32_t readPosition __attribute__((swift_name("readPosition")));
-@property (readonly) int32_t readRemaining __attribute__((swift_name("readRemaining")));
-@property (readonly) int32_t startGap __attribute__((swift_name("startGap")));
-@property (readonly) int32_t writePosition __attribute__((swift_name("writePosition")));
-@property (readonly) int32_t writeRemaining __attribute__((swift_name("writeRemaining")));
-@end
-
-__attribute__((swift_name("Ktor_ioChunkBuffer")))
-@interface Sdk_coreKtor_ioChunkBuffer : Sdk_coreKtor_ioBuffer
-- (instancetype)initWithMemory:(Sdk_coreKtor_ioMemory *)memory origin:(Sdk_coreKtor_ioChunkBuffer * _Nullable)origin parentPool:(id<Sdk_coreKtor_ioObjectPool> _Nullable)parentPool __attribute__((swift_name("init(memory:origin:parentPool:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("\n    We're migrating to the new kotlinx-io library.\n    This declaration is deprecated and will be removed in Ktor 4.0.0\n    If you have any problems with migration, please contact us in \n    https://youtrack.jetbrains.com/issue/KTOR-6030/Migrate-to-new-kotlinx.io-library\n    ")));
-- (instancetype)initWithMemory:(Sdk_coreKtor_ioMemory *)memory __attribute__((swift_name("init(memory:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-@property (class, readonly, getter=companion) Sdk_coreKtor_ioChunkBufferCompanion *companion __attribute__((swift_name("companion")));
-- (Sdk_coreKtor_ioChunkBuffer * _Nullable)cleanNext __attribute__((swift_name("cleanNext()")));
-- (Sdk_coreKtor_ioChunkBuffer *)duplicate __attribute__((swift_name("duplicate()")));
-- (void)releasePool:(id<Sdk_coreKtor_ioObjectPool>)pool __attribute__((swift_name("release(pool:)")));
-- (void)reset __attribute__((swift_name("reset()")));
-@property (getter=next_) Sdk_coreKtor_ioChunkBuffer * _Nullable next __attribute__((swift_name("next")));
-@property (readonly) Sdk_coreKtor_ioChunkBuffer * _Nullable origin __attribute__((swift_name("origin")));
-@property (readonly) int32_t referenceCount __attribute__((swift_name("referenceCount")));
-@end
-
-__attribute__((swift_name("Ktor_ioInput")))
-@interface Sdk_coreKtor_ioInput : Sdk_coreBase <Sdk_coreKtor_ioCloseable>
-- (instancetype)initWithHead:(Sdk_coreKtor_ioChunkBuffer *)head remaining:(int64_t)remaining pool:(id<Sdk_coreKtor_ioObjectPool>)pool __attribute__((swift_name("init(head:remaining:pool:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("\n    We're migrating to the new kotlinx-io library.\n    This declaration is deprecated and will be removed in Ktor 4.0.0\n    If you have any problems with migration, please contact us in \n    https://youtrack.jetbrains.com/issue/KTOR-6030/Migrate-to-new-kotlinx.io-library\n    ")));
-@property (class, readonly, getter=companion) Sdk_coreKtor_ioInputCompanion *companion __attribute__((swift_name("companion")));
-- (BOOL)canRead __attribute__((swift_name("canRead()")));
+__attribute__((swift_name("KotlinAutoCloseable")))
+@protocol Sdk_coreKotlinAutoCloseable
+@required
 - (void)close __attribute__((swift_name("close()")));
+@end
 
-/**
- * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
-*/
-- (void)closeSource __attribute__((swift_name("closeSource()")));
-- (int32_t)discardN:(int32_t)n __attribute__((swift_name("discard(n:)")));
-- (int64_t)discardN_:(int64_t)n __attribute__((swift_name("discard(n_:)")));
-- (void)discardExactN:(int32_t)n __attribute__((swift_name("discardExact(n:)")));
+__attribute__((swift_name("Kotlinx_io_coreRawSource")))
+@protocol Sdk_coreKotlinx_io_coreRawSource <Sdk_coreKotlinAutoCloseable>
+@required
+- (int64_t)readAtMostToSink:(Sdk_coreKotlinx_io_coreBuffer *)sink byteCount:(int64_t)byteCount __attribute__((swift_name("readAtMostTo(sink:byteCount:)")));
+@end
 
-/**
- * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
-*/
-- (Sdk_coreKtor_ioChunkBuffer * _Nullable)fill __attribute__((swift_name("fill()")));
-
-/**
- * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
-*/
-- (int32_t)fillDestination:(Sdk_coreKtor_ioMemory *)destination offset:(int32_t)offset length:(int32_t)length __attribute__((swift_name("fill(destination:offset:length:)")));
-- (BOOL)hasBytesN:(int32_t)n __attribute__((swift_name("hasBytes(n:)")));
-
-/**
- * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
-*/
-- (void)markNoMoreChunksAvailable __attribute__((swift_name("markNoMoreChunksAvailable()")));
-- (int32_t)peekToBuffer:(Sdk_coreKtor_ioChunkBuffer *)buffer __attribute__((swift_name("peekTo(buffer:)")));
-- (int64_t)peekToDestination:(Sdk_coreKtor_ioMemory *)destination destinationOffset:(int64_t)destinationOffset offset:(int64_t)offset min:(int64_t)min max:(int64_t)max __attribute__((swift_name("peekTo(destination:destinationOffset:offset:min:max:)")));
+__attribute__((swift_name("Kotlinx_io_coreSource")))
+@protocol Sdk_coreKotlinx_io_coreSource <Sdk_coreKotlinx_io_coreRawSource>
+@required
+- (BOOL)exhausted __attribute__((swift_name("exhausted()")));
+- (id<Sdk_coreKotlinx_io_coreSource>)peek __attribute__((swift_name("peek()")));
+- (int32_t)readAtMostToSink:(Sdk_coreKotlinByteArray *)sink startIndex:(int32_t)startIndex endIndex:(int32_t)endIndex __attribute__((swift_name("readAtMostTo(sink:startIndex:endIndex:)")));
 - (int8_t)readByte __attribute__((swift_name("readByte()")));
-- (NSString *)readTextMin:(int32_t)min max:(int32_t)max __attribute__((swift_name("readText(min:max:)")));
-- (int32_t)readTextOut:(id<Sdk_coreKotlinAppendable>)out min:(int32_t)min max:(int32_t)max __attribute__((swift_name("readText(out:min:max:)")));
-- (NSString *)readTextExactExactCharacters:(int32_t)exactCharacters __attribute__((swift_name("readTextExact(exactCharacters:)")));
-- (void)readTextExactOut:(id<Sdk_coreKotlinAppendable>)out exactCharacters:(int32_t)exactCharacters __attribute__((swift_name("readTextExact(out:exactCharacters:)")));
-- (void)release_ __attribute__((swift_name("release()")));
-- (int32_t)tryPeek __attribute__((swift_name("tryPeek()")));
-@property (readonly) BOOL endOfInput __attribute__((swift_name("endOfInput")));
-@property (readonly) id<Sdk_coreKtor_ioObjectPool> pool __attribute__((swift_name("pool")));
-@property (readonly) int64_t remaining __attribute__((swift_name("remaining")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_ioByteReadPacket")))
-@interface Sdk_coreKtor_ioByteReadPacket : Sdk_coreKtor_ioInput
-- (instancetype)initWithHead:(Sdk_coreKtor_ioChunkBuffer *)head pool:(id<Sdk_coreKtor_ioObjectPool>)pool __attribute__((swift_name("init(head:pool:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithHead:(Sdk_coreKtor_ioChunkBuffer *)head remaining:(int64_t)remaining pool:(id<Sdk_coreKtor_ioObjectPool>)pool __attribute__((swift_name("init(head:remaining:pool:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-@property (class, readonly, getter=companion) Sdk_coreKtor_ioByteReadPacketCompanion *companion __attribute__((swift_name("companion")));
+- (int32_t)readInt __attribute__((swift_name("readInt()")));
+- (int64_t)readLong __attribute__((swift_name("readLong()")));
+- (int16_t)readShort __attribute__((swift_name("readShort()")));
+- (void)readToSink:(id<Sdk_coreKotlinx_io_coreRawSink>)sink byteCount:(int64_t)byteCount __attribute__((swift_name("readTo(sink:byteCount:)")));
+- (BOOL)requestByteCount:(int64_t)byteCount __attribute__((swift_name("request(byteCount:)")));
+- (void)requireByteCount:(int64_t)byteCount __attribute__((swift_name("require(byteCount:)")));
+- (void)skipByteCount:(int64_t)byteCount __attribute__((swift_name("skip(byteCount:)")));
+- (int64_t)transferToSink:(id<Sdk_coreKotlinx_io_coreRawSink>)sink __attribute__((swift_name("transferTo(sink:)")));
 
 /**
- * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
+ * @note annotations
+ *   kotlinx.io.InternalIoApi
 */
-- (void)closeSource __attribute__((swift_name("closeSource()")));
-- (Sdk_coreKtor_ioByteReadPacket *)doCopy __attribute__((swift_name("doCopy()")));
-
-/**
- * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
-*/
-- (Sdk_coreKtor_ioChunkBuffer * _Nullable)fill __attribute__((swift_name("fill()")));
-
-/**
- * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
-*/
-- (int32_t)fillDestination:(Sdk_coreKtor_ioMemory *)destination offset:(int32_t)offset length:(int32_t)length __attribute__((swift_name("fill(destination:offset:length:)")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@end
-
-__attribute__((swift_name("Ktor_ioReadSession")))
-@protocol Sdk_coreKtor_ioReadSession
-@required
-- (int32_t)discardN:(int32_t)n __attribute__((swift_name("discard(n:)")));
-- (Sdk_coreKtor_ioChunkBuffer * _Nullable)requestAtLeast:(int32_t)atLeast __attribute__((swift_name("request(atLeast:)")));
-@property (readonly) int32_t availableForRead __attribute__((swift_name("availableForRead")));
-@end
-
-__attribute__((swift_name("KotlinSuspendFunction1")))
-@protocol Sdk_coreKotlinSuspendFunction1 <Sdk_coreKotlinFunction>
-@required
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)invokeP1:(id _Nullable)p1 completionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("invoke(p1:completionHandler:)")));
+@property (readonly) Sdk_coreKotlinx_io_coreBuffer *buffer __attribute__((swift_name("buffer")));
 @end
 
 
@@ -6006,24 +5859,6 @@ __attribute__((swift_name("Ktor_client_coreProxyConfig")))
 - (instancetype)initWithUrl:(Sdk_coreKtor_httpUrl *)url __attribute__((swift_name("init(url:)"))) __attribute__((objc_designated_initializer));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) Sdk_coreKtor_httpUrl *url __attribute__((swift_name("url")));
-@end
-
-__attribute__((swift_name("Ktor_client_coreHttpClientPlugin")))
-@protocol Sdk_coreKtor_client_coreHttpClientPlugin
-@required
-- (void)installPlugin:(id)plugin scope:(Sdk_coreKtor_client_coreHttpClient *)scope __attribute__((swift_name("install(plugin:scope:)")));
-- (id)prepareBlock:(void (^)(id))block __attribute__((swift_name("prepare(block:)")));
-@property (readonly) Sdk_coreKtor_utilsAttributeKey<id> *key __attribute__((swift_name("key")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_utilsAttributeKey")))
-@interface Sdk_coreKtor_utilsAttributeKey<T> : Sdk_coreBase
-- (instancetype)initWithName:(NSString *)name __attribute__((swift_name("init(name:)"))) __attribute__((objc_designated_initializer));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) NSString *name __attribute__((swift_name("name")));
 @end
 
 __attribute__((swift_name("Ktor_eventsEventDefinition")))
@@ -6154,11 +5989,18 @@ __attribute__((swift_name("Ktor_client_coreHttpSendPipeline.Phases")))
 @property (readonly) Sdk_coreKtor_utilsPipelinePhase *State __attribute__((swift_name("State")));
 @end
 
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Ktor_utilsGMTDate")))
 @interface Sdk_coreKtor_utilsGMTDate : Sdk_coreBase <Sdk_coreKotlinComparable>
+- (instancetype)initWithSeconds:(int32_t)seconds minutes:(int32_t)minutes hours:(int32_t)hours dayOfWeek:(Sdk_coreKtor_utilsWeekDay *)dayOfWeek dayOfMonth:(int32_t)dayOfMonth dayOfYear:(int32_t)dayOfYear month:(Sdk_coreKtor_utilsMonth *)month year:(int32_t)year timestamp:(int64_t)timestamp __attribute__((swift_name("init(seconds:minutes:hours:dayOfWeek:dayOfMonth:dayOfYear:month:year:timestamp:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) Sdk_coreKtor_utilsGMTDateCompanion *companion __attribute__((swift_name("companion")));
 - (int32_t)compareToOther:(Sdk_coreKtor_utilsGMTDate *)other __attribute__((swift_name("compareTo(other:)")));
+- (Sdk_coreKtor_utilsGMTDate *)doCopy __attribute__((swift_name("doCopy()")));
 - (Sdk_coreKtor_utilsGMTDate *)doCopySeconds:(int32_t)seconds minutes:(int32_t)minutes hours:(int32_t)hours dayOfWeek:(Sdk_coreKtor_utilsWeekDay *)dayOfWeek dayOfMonth:(int32_t)dayOfMonth dayOfYear:(int32_t)dayOfYear month:(Sdk_coreKtor_utilsMonth *)month year:(int32_t)year timestamp:(int64_t)timestamp __attribute__((swift_name("doCopy(seconds:minutes:hours:dayOfWeek:dayOfMonth:dayOfYear:month:year:timestamp:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
@@ -6213,6 +6055,39 @@ __attribute__((swift_name("Ktor_httpParametersBuilder")))
 @required
 @end
 
+__attribute__((swift_name("KotlinKDeclarationContainer")))
+@protocol Sdk_coreKotlinKDeclarationContainer
+@required
+@end
+
+__attribute__((swift_name("KotlinKAnnotatedElement")))
+@protocol Sdk_coreKotlinKAnnotatedElement
+@required
+@end
+
+
+/**
+ * @note annotations
+ *   kotlin.SinceKotlin(version="1.1")
+*/
+__attribute__((swift_name("KotlinKClassifier")))
+@protocol Sdk_coreKotlinKClassifier
+@required
+@end
+
+__attribute__((swift_name("KotlinKClass")))
+@protocol Sdk_coreKotlinKClass <Sdk_coreKotlinKDeclarationContainer, Sdk_coreKotlinKAnnotatedElement, Sdk_coreKotlinKClassifier>
+@required
+
+/**
+ * @note annotations
+ *   kotlin.SinceKotlin(version="1.1")
+*/
+- (BOOL)isInstanceValue:(id _Nullable)value __attribute__((swift_name("isInstance(value:)")));
+@property (readonly) NSString * _Nullable qualifiedName __attribute__((swift_name("qualifiedName")));
+@property (readonly) NSString * _Nullable simpleName __attribute__((swift_name("simpleName")));
+@end
+
 __attribute__((swift_name("KotlinKType")))
 @protocol Sdk_coreKotlinKType
 @required
@@ -6265,12 +6140,27 @@ __attribute__((swift_name("Ktor_httpURLProtocol.Companion")))
 @property (readonly) NSDictionary<NSString *, Sdk_coreKtor_httpURLProtocol *> *byName __attribute__((swift_name("byName")));
 @end
 
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 __attribute__((swift_name("Kotlinx_coroutines_coreParentJob")))
 @protocol Sdk_coreKotlinx_coroutines_coreParentJob <Sdk_coreKotlinx_coroutines_coreJob>
 @required
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 - (Sdk_coreKotlinCancellationException *)getChildJobCancellationCause __attribute__((swift_name("getChildJobCancellationCause()")));
 @end
 
+
+/**
+ * @note annotations
+ *   kotlinx.coroutines.InternalCoroutinesApi
+*/
 __attribute__((swift_name("Kotlinx_coroutines_coreSelectInstance")))
 @protocol Sdk_coreKotlinx_coroutines_coreSelectInstance
 @required
@@ -6520,65 +6410,85 @@ __attribute__((swift_name("KotlinIntRange")))
 @property (readonly, getter=start_) Sdk_coreInt *start __attribute__((swift_name("start")));
 @end
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_ioMemory.Companion")))
-@interface Sdk_coreKtor_ioMemoryCompanion : Sdk_coreBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) Sdk_coreKtor_ioMemoryCompanion *shared __attribute__((swift_name("shared")));
-@property (readonly) Sdk_coreKtor_ioMemory *Empty __attribute__((swift_name("Empty")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_ioBuffer.Companion")))
-@interface Sdk_coreKtor_ioBufferCompanion : Sdk_coreBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) Sdk_coreKtor_ioBufferCompanion *shared __attribute__((swift_name("shared")));
-@property (readonly) Sdk_coreKtor_ioBuffer *Empty __attribute__((swift_name("Empty")));
-@property (readonly) int32_t ReservedSize __attribute__((swift_name("ReservedSize")));
-@end
-
-__attribute__((swift_name("Ktor_ioObjectPool")))
-@protocol Sdk_coreKtor_ioObjectPool <Sdk_coreKtor_ioCloseable>
+__attribute__((swift_name("Kotlinx_io_coreRawSink")))
+@protocol Sdk_coreKotlinx_io_coreRawSink <Sdk_coreKotlinAutoCloseable>
 @required
-- (id)borrow __attribute__((swift_name("borrow()")));
-- (void)dispose __attribute__((swift_name("dispose()")));
-- (void)recycleInstance:(id)instance __attribute__((swift_name("recycle(instance:)")));
-@property (readonly) int32_t capacity __attribute__((swift_name("capacity")));
+- (void)flush __attribute__((swift_name("flush()")));
+- (void)writeSource:(Sdk_coreKotlinx_io_coreBuffer *)source byteCount:(int64_t)byteCount __attribute__((swift_name("write(source:byteCount:)")));
+@end
+
+__attribute__((swift_name("Kotlinx_io_coreSink")))
+@protocol Sdk_coreKotlinx_io_coreSink <Sdk_coreKotlinx_io_coreRawSink>
+@required
+- (void)emit __attribute__((swift_name("emit()")));
+
+/**
+ * @note annotations
+ *   kotlinx.io.InternalIoApi
+*/
+- (void)hintEmit __attribute__((swift_name("hintEmit()")));
+- (int64_t)transferFromSource:(id<Sdk_coreKotlinx_io_coreRawSource>)source __attribute__((swift_name("transferFrom(source:)")));
+- (void)writeSource:(id<Sdk_coreKotlinx_io_coreRawSource>)source byteCount_:(int64_t)byteCount __attribute__((swift_name("write(source:byteCount_:)")));
+- (void)writeSource:(Sdk_coreKotlinByteArray *)source startIndex:(int32_t)startIndex endIndex:(int32_t)endIndex __attribute__((swift_name("write(source:startIndex:endIndex:)")));
+- (void)writeByteByte:(int8_t)byte __attribute__((swift_name("writeByte(byte:)")));
+- (void)writeIntInt:(int32_t)int_ __attribute__((swift_name("writeInt(int:)")));
+- (void)writeLongLong:(int64_t)long_ __attribute__((swift_name("writeLong(long:)")));
+- (void)writeShortShort:(int16_t)short_ __attribute__((swift_name("writeShort(short:)")));
+
+/**
+ * @note annotations
+ *   kotlinx.io.InternalIoApi
+*/
+@property (readonly) Sdk_coreKotlinx_io_coreBuffer *buffer __attribute__((swift_name("buffer")));
 @end
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_ioChunkBuffer.Companion")))
-@interface Sdk_coreKtor_ioChunkBufferCompanion : Sdk_coreBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) Sdk_coreKtor_ioChunkBufferCompanion *shared __attribute__((swift_name("shared")));
-@property (readonly) Sdk_coreKtor_ioChunkBuffer *Empty __attribute__((swift_name("Empty")));
-@property (readonly) id<Sdk_coreKtor_ioObjectPool> EmptyPool __attribute__((swift_name("EmptyPool")));
-@property (readonly) id<Sdk_coreKtor_ioObjectPool> Pool __attribute__((swift_name("Pool")));
-@end
+__attribute__((swift_name("Kotlinx_io_coreBuffer")))
+@interface Sdk_coreKotlinx_io_coreBuffer : Sdk_coreBase <Sdk_coreKotlinx_io_coreSource, Sdk_coreKotlinx_io_coreSink>
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)clear __attribute__((swift_name("clear()")));
+- (void)close __attribute__((swift_name("close()")));
+- (Sdk_coreKotlinx_io_coreBuffer *)doCopy __attribute__((swift_name("doCopy()")));
+- (void)doCopyToOut:(Sdk_coreKotlinx_io_coreBuffer *)out startIndex:(int64_t)startIndex endIndex:(int64_t)endIndex __attribute__((swift_name("doCopyTo(out:startIndex:endIndex:)")));
+- (void)emit __attribute__((swift_name("emit()")));
+- (BOOL)exhausted __attribute__((swift_name("exhausted()")));
+- (void)flush __attribute__((swift_name("flush()")));
+- (int8_t)getPosition:(int64_t)position __attribute__((swift_name("get(position:)")));
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_ioInput.Companion")))
-@interface Sdk_coreKtor_ioInputCompanion : Sdk_coreBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) Sdk_coreKtor_ioInputCompanion *shared __attribute__((swift_name("shared")));
-@end
+/**
+ * @note annotations
+ *   kotlinx.io.InternalIoApi
+*/
+- (void)hintEmit __attribute__((swift_name("hintEmit()")));
+- (id<Sdk_coreKotlinx_io_coreSource>)peek __attribute__((swift_name("peek()")));
+- (int64_t)readAtMostToSink:(Sdk_coreKotlinx_io_coreBuffer *)sink byteCount:(int64_t)byteCount __attribute__((swift_name("readAtMostTo(sink:byteCount:)")));
+- (int32_t)readAtMostToSink:(Sdk_coreKotlinByteArray *)sink startIndex:(int32_t)startIndex endIndex:(int32_t)endIndex __attribute__((swift_name("readAtMostTo(sink:startIndex:endIndex:)")));
+- (int8_t)readByte __attribute__((swift_name("readByte()")));
+- (int32_t)readInt __attribute__((swift_name("readInt()")));
+- (int64_t)readLong __attribute__((swift_name("readLong()")));
+- (int16_t)readShort __attribute__((swift_name("readShort()")));
+- (void)readToSink:(id<Sdk_coreKotlinx_io_coreRawSink>)sink byteCount:(int64_t)byteCount __attribute__((swift_name("readTo(sink:byteCount:)")));
+- (BOOL)requestByteCount:(int64_t)byteCount __attribute__((swift_name("request(byteCount:)")));
+- (void)requireByteCount:(int64_t)byteCount __attribute__((swift_name("require(byteCount:)")));
+- (void)skipByteCount:(int64_t)byteCount __attribute__((swift_name("skip(byteCount:)")));
+- (NSString *)description __attribute__((swift_name("description()")));
+- (int64_t)transferFromSource:(id<Sdk_coreKotlinx_io_coreRawSource>)source __attribute__((swift_name("transferFrom(source:)")));
+- (int64_t)transferToSink:(id<Sdk_coreKotlinx_io_coreRawSink>)sink __attribute__((swift_name("transferTo(sink:)")));
+- (void)writeSource:(Sdk_coreKotlinx_io_coreBuffer *)source byteCount:(int64_t)byteCount __attribute__((swift_name("write(source:byteCount:)")));
+- (void)writeSource:(id<Sdk_coreKotlinx_io_coreRawSource>)source byteCount_:(int64_t)byteCount __attribute__((swift_name("write(source:byteCount_:)")));
+- (void)writeSource:(Sdk_coreKotlinByteArray *)source startIndex:(int32_t)startIndex endIndex:(int32_t)endIndex __attribute__((swift_name("write(source:startIndex:endIndex:)")));
+- (void)writeByteByte:(int8_t)byte __attribute__((swift_name("writeByte(byte:)")));
+- (void)writeIntInt:(int32_t)int_ __attribute__((swift_name("writeInt(int:)")));
+- (void)writeLongLong:(int64_t)long_ __attribute__((swift_name("writeLong(long:)")));
+- (void)writeShortShort:(int16_t)short_ __attribute__((swift_name("writeShort(short:)")));
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_ioByteReadPacket.Companion")))
-@interface Sdk_coreKtor_ioByteReadPacketCompanion : Sdk_coreBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) Sdk_coreKtor_ioByteReadPacketCompanion *shared __attribute__((swift_name("shared")));
-@property (readonly) Sdk_coreKtor_ioByteReadPacket *Empty __attribute__((swift_name("Empty")));
+/**
+ * @note annotations
+ *   kotlinx.io.InternalIoApi
+*/
+@property (readonly) Sdk_coreKotlinx_io_coreBuffer *buffer __attribute__((swift_name("buffer")));
+@property (readonly) int64_t size __attribute__((swift_name("size")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -6588,7 +6498,6 @@ __attribute__((swift_name("Ktor_client_coreHttpClientCall.Companion")))
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) Sdk_coreKtor_client_coreHttpClientCallCompanion *shared __attribute__((swift_name("shared")));
-@property (readonly) Sdk_coreKtor_utilsAttributeKey<id> *CustomResponse __attribute__((swift_name("CustomResponse"))) __attribute__((unavailable("This is going to be removed. Please file a ticket with clarification why and what for do you need it.")));
 @end
 
 __attribute__((swift_name("Ktor_client_coreHttpRequest")))
@@ -6599,16 +6508,6 @@ __attribute__((swift_name("Ktor_client_coreHttpRequest")))
 @property (readonly) Sdk_coreKtor_httpOutgoingContent *content __attribute__((swift_name("content")));
 @property (readonly) Sdk_coreKtor_httpHttpMethod *method __attribute__((swift_name("method")));
 @property (readonly) Sdk_coreKtor_httpUrl *url __attribute__((swift_name("url")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_utilsGMTDate.Companion")))
-@interface Sdk_coreKtor_utilsGMTDateCompanion : Sdk_coreBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) Sdk_coreKtor_utilsGMTDateCompanion *shared __attribute__((swift_name("shared")));
-@property (readonly) Sdk_coreKtor_utilsGMTDate *START __attribute__((swift_name("START")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -6626,6 +6525,7 @@ __attribute__((swift_name("Ktor_utilsWeekDay")))
 @property (class, readonly) Sdk_coreKtor_utilsWeekDay *saturday __attribute__((swift_name("saturday")));
 @property (class, readonly) Sdk_coreKtor_utilsWeekDay *sunday __attribute__((swift_name("sunday")));
 + (Sdk_coreKotlinArray<Sdk_coreKtor_utilsWeekDay *> *)values __attribute__((swift_name("values()")));
+@property (class, readonly) NSArray<Sdk_coreKtor_utilsWeekDay *> *entries __attribute__((swift_name("entries")));
 @property (readonly) NSString *value __attribute__((swift_name("value")));
 @end
 
@@ -6649,7 +6549,19 @@ __attribute__((swift_name("Ktor_utilsMonth")))
 @property (class, readonly) Sdk_coreKtor_utilsMonth *november __attribute__((swift_name("november")));
 @property (class, readonly) Sdk_coreKtor_utilsMonth *december __attribute__((swift_name("december")));
 + (Sdk_coreKotlinArray<Sdk_coreKtor_utilsMonth *> *)values __attribute__((swift_name("values()")));
+@property (class, readonly) NSArray<Sdk_coreKtor_utilsMonth *> *entries __attribute__((swift_name("entries")));
 @property (readonly) NSString *value __attribute__((swift_name("value")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_utilsGMTDate.Companion")))
+@interface Sdk_coreKtor_utilsGMTDateCompanion : Sdk_coreBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) Sdk_coreKtor_utilsGMTDateCompanion *shared __attribute__((swift_name("shared")));
+- (id<Sdk_coreKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@property (readonly) Sdk_coreKtor_utilsGMTDate *START __attribute__((swift_name("START")));
 @end
 
 __attribute__((objc_subclassing_restricted))
