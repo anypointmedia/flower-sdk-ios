@@ -2426,6 +2426,7 @@ __attribute__((swift_name("HlsManipulatorSharedState")))
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (readonly) Sdk_coreMutableDictionary<Sdk_coreLong *, id> *cueEventIds __attribute__((swift_name("cueEventIds")));
 @property Sdk_coreMutableDictionary<Sdk_coreInt *, Sdk_coreHlsManipulatorCueEvent *> *cueEvents __attribute__((swift_name("cueEvents")));
+@property (readonly) Sdk_coreMutableDictionary<NSString *, Sdk_coreLong *> *variantSequenceDifferences __attribute__((swift_name("variantSequenceDifferences")));
 @end
 
 __attribute__((objc_subclassing_restricted))
