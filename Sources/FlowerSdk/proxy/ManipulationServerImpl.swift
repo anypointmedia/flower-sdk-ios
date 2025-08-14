@@ -37,7 +37,7 @@ class ManipulationServerImpl: ManipulationServer {
         if freePort == 0 {
             throw Throwable(message: "No free port available.")
         } else {
-            if let player = flowerAdsManager.mediaPlayerHook?.getPlayer() as? AVPlayer {
+            if let player = mediaPlayerHook?.getPlayer() as? AVPlayer {
                 observer = MSPlayerObserver(player: player) { player, keyPath in
                     if keyPath == "rate" {
                         if player.status == .readyToPlay && player.rate > 0.0 {

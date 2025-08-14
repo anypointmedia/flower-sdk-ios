@@ -1,9 +1,9 @@
 import AVFoundation
 import sdk_core
 
-class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
+class AVQueuePlayerAdapter: NSObject, CoreMediaPlayerAdapter {
     private var mediaPlayerHook: MediaPlayerHook
-    private var flowerAdsManager: FlowerAdsManagerImpl
+    private var adsManagerListener: FlowerAdsManagerListener
 
     private var player: AVQueuePlayer {
         get throws {
@@ -21,23 +21,11 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
         }
     }
 
-    init(mediaPlayerHook: MediaPlayerHook, flowerAdsManager: FlowerAdsManagerImpl) {
+    init(mediaPlayerHook: MediaPlayerHook, adsManagerListener: FlowerAdsManagerListener) {
         self.mediaPlayerHook = mediaPlayerHook
-        self.flowerAdsManager = flowerAdsManager
+        self.adsManagerListener = adsManagerListener
     }
 
-
-    func getCurrentPosition() throws -> KotlinWrapped<KotlinInt> {
-        KotlinWrapped(value: KotlinInt(value: Int32(CMTimeGetSeconds(try player.currentTime()) * 1000)))
-    }
-
-    func getCurrentMediaChunk() throws -> MediaChunk {
-        MediaChunk(
-            currentPosition: Int32(CMTimeGetSeconds(try player.currentTime()) * 1000),
-            url: nil,
-            periodId: nil
-        )
-    }
 
     func getCurrentMedia() throws -> Media {
         if let asset = try player.currentItem?.asset as? AVURLAsset {

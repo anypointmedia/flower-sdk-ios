@@ -5,7 +5,7 @@ import MobileVLCKit
 
 class VLCMediaListPlayerAdapter: MediaPlayerAdapter {
     private var mediaPlayerHook: MediaPlayerHook
-    private var flowerAdsManager: FlowerAdsManagerImpl
+    private var adsManagerListener: FlowerAdsManagerListener
 
     private var vlcMedias: [VLCMedia] = []
 
@@ -26,26 +26,10 @@ class VLCMediaListPlayerAdapter: MediaPlayerAdapter {
         }
     }
 
-    init(mediaPlayerHook: MediaPlayerHook, flowerAdsManager: FlowerAdsManagerImpl) {
+    init(mediaPlayerHook: MediaPlayerHook, adsManagerListener: FlowerAdsManagerListener) {
         self.mediaPlayerHook = mediaPlayerHook
-        self.flowerAdsManager = flowerAdsManager
+        self.adsManagerListener = adsManagerListener
     }
-
-    func getCurrentPosition() throws -> KotlinWrapped<KotlinInt> {
-        KotlinWrapped(value: KotlinInt(value: try mediaPlayer.time.intValue))
-    }
-
-    func getCurrentMediaChunk() throws -> any MediaChunkStub {
-        guard let media = try mediaPlayer.media else {
-            throw PlatformException(message: "No media available")
-        }
-
-        return MediaChunk(
-            currentPosition: try getCurrentPosition().value!.int32Value,
-            url: nil,
-            periodId: nil
-        )
-    }   
 
     func getCurrentMedia() throws -> Media {
         guard let media = try mediaPlayer.media else {

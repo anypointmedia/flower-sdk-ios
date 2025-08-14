@@ -180,7 +180,7 @@ class AdPlayerImpl: AdPlayer {
     }
 
 
-    func getProgress() -> AdProgress {
+    func getProgress_() -> AdProgress {
         guard let player = self.player else {
             return AdProgress.companion.NOT_READY
         }

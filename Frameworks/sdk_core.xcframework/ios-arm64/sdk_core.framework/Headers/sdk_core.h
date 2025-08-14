@@ -6,9 +6,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class Sdk_coreScte35DecoderCompanion, Sdk_coreSpliceInfoSection, Sdk_coreKotlinByteArray, Sdk_coreKotlinThrowable, Sdk_coreKotlinArray<T>, Sdk_coreKotlinException, Sdk_coreSpliceInsert, Sdk_coreSpliceTime, Sdk_coreBreakDuration, Sdk_coreKmLogging, Sdk_coreKotlinPair<__covariant A, __covariant B>, Sdk_coreLogLevel, Sdk_coreKmLog, Sdk_coreKotlinEnumCompanion, Sdk_coreKotlinEnum<E>, Sdk_corePlatform, Sdk_coreTimingLogCompanion, Sdk_coreTimingLogTiming, Sdk_coreHex, Sdk_coreLifecycleManager, Sdk_coreSdkContainerClassName, Sdk_corePlatformMap<K, V>, Sdk_coreFlowerAdsManagerImpl, Sdk_coreAdTracker, Sdk_coreAdHandlerCompanion, Sdk_coreAdsLoader, Sdk_coreManipulationProxy, Sdk_coreSdkContainer, Sdk_coreAdList, Sdk_coreWrapperAdsLoader, Sdk_coreLogger, Sdk_coreFLogging, Sdk_coreAdTrackerCompanion, Sdk_coreAd, Sdk_coreGoogleAdReportLogEvent, Sdk_coreAdUrlMacroCompanion, Sdk_coreAdUrlMacroValue, Sdk_coreAdUrlMacroType, Sdk_coreAdsFillingServiceCompanion, Sdk_coreAdHandler, Sdk_coreAdsLoaderCompanion, Sdk_coreCacheConfig, Sdk_coreCreativeConvertServiceCompanion, Sdk_coreKotlinUnit, Sdk_coreFillerAdsManagerCompanion, Sdk_coreFlowerAdsManagerImplCompanion, Sdk_coreFlowerAdsManagerListeners, Sdk_coreMediaTrackManageService, Sdk_coreFlowerError, Sdk_coreFlowerAdsManagerListenersCompanion, Sdk_corePlatformList<E>, Sdk_coreLinearTVAdHandlerCompanion, Sdk_coreLinearTVAdHandlerLinearTvAdRequest, Sdk_coreCreativeType, Sdk_coreNormalAdHandlerCompanion, Sdk_coreVastParserCompanion, Sdk_coreVmapParserCompanion, Sdk_coreAdBreak, Sdk_coreNormalAdHandler, Sdk_coreVodAdHandlerCompanion, Sdk_coreWrapperAdsLoaderCompanion, Sdk_coreCreative, Sdk_coreAdTrackingEvent, Sdk_coreAdClick, Sdk_coreAdCompanion, Sdk_coreConvertCreativeRequestCompanion, Sdk_coreCreativeMedia, Sdk_coreCreativeMediaCompanion, Sdk_coreManifestLoader, Sdk_coreCreativeMediaM3u8Companion, Sdk_coreVariant, Sdk_coreMediaPlaylist, Sdk_coreMPD, Sdk_coreCreativeResponseAsset, Sdk_coreCreativeResponseCompanion, Sdk_coreCreativeResponseAssetCompanion, Sdk_coreCreativeTypeCompanion, Sdk_coreUiTextEn, Sdk_coreUiTextKo, Sdk_coreAdInfo, Sdk_coreFlowerEventInfo, Sdk_coreFlowerEventInfoAdBreakStarted, Sdk_coreFlowerEventInfoAdCompleted, Sdk_coreFlowerEventInfoAdPlay, Sdk_coreCacheConfigStrategy, Sdk_coreCacheConfigCompanion, Sdk_coreCacheServiceCompanion, Sdk_coreKotlinWrapped<T>, Sdk_coreConcurrentQueue, Sdk_coreFlowerConfigService, Sdk_coreKtor_client_coreHttpClient, Sdk_coreCachedHttpClientCompanion, Sdk_coreKtor_client_coreHttpRequestBuilder, Sdk_coreCachedHttpClientResponse, Sdk_coreKtor_httpHttpStatusCode, Sdk_coreErrorCodeCompanion, Sdk_coreErrorCode, Sdk_coreErrorLogCompanion, Sdk_coreErrorLogSenderCompanion, Sdk_coreErrorLog, Sdk_coreFlowerConfigServiceCompanion, Sdk_coreXmlNode, Sdk_coreFlowerConfigServiceStartupConfig, Sdk_coreFlowerConfigServiceStartupConfigKey, Sdk_corePlatformAnalytics, Sdk_coreSdkContainerCompanion, Sdk_coreSdkContainerLogLevel, Sdk_coreAdUrlMacro, Sdk_coreCacheService, Sdk_coreCachedHttpClient, Sdk_coreErrorLogSender, Sdk_coreFillerAdsManager, Sdk_coreKotlinx_serialization_jsonJson, Sdk_coreDeviceServiceCompanion, Sdk_coreManipulatorCompanion, Sdk_coreLinearTVAdHandler, Sdk_coreKotlinx_datetimeInstant, Sdk_coreManipulator, Sdk_coreDashManipulatorCompanion, Sdk_coreHlsManipulatorSharedState, Sdk_coreHlsManipulatorCompanion, Sdk_coreHlsManipulatorCueOutMarker, Sdk_coreHlsManipulatorCueInMarker, Sdk_coreHlsManipulatorCueEvent, Sdk_coreManifestLoaderCompanion, Sdk_coreRepresentation, Sdk_coreMPDCompanion, Sdk_corePeriod, Sdk_corePeriodCompanion, Sdk_coreAdaptationSet, Sdk_coreTimeScaled, Sdk_coreSpliceInfoSection_, Sdk_coreSegmentBase, Sdk_coreSegmentList, Sdk_coreSegmentTemplate, Sdk_coreInitialization, Sdk_coreSegmentURL, Sdk_coreMediaType, Sdk_coreChannels, Sdk_coreAlternativeRendition, Sdk_coreByteRange, Sdk_coreCueOut, Sdk_coreScte35, Sdk_coreCueOutCont, Sdk_coreDateRange, Sdk_coreResolution, Sdk_coreVideoRange, Sdk_coreIFrameVariant, Sdk_coreKeyMethodCompanion, Sdk_coreKeyMethod, Sdk_coreStartTimeOffset, Sdk_corePlaylistVariable, Sdk_corePlaylist, Sdk_coreSessionData, Sdk_coreSegmentKey, Sdk_coreMasterPlaylist, Sdk_corePlaylistType, Sdk_coreMediaSegment, Sdk_coreServerControl, Sdk_corePartialSegmentInformation, Sdk_corePartialSegment, Sdk_coreSkip, Sdk_corePreloadHint, Sdk_coreRenditionReport, Sdk_coreSegmentMap, Sdk_coreMediaTypeCompanion, Sdk_corePreloadHintType, Sdk_coreAbstractPlaylistParserCompanion, Sdk_coreTextBuilder, Sdk_coreAbstractPlaylistParser<T, B>, Sdk_coreParsingMode, Sdk_coreMasterPlaylistParserCompanion, Sdk_coreMediaPlaylistParserCompanion, Sdk_coreMediaPlaylistParserBuilder, Sdk_coreParsingModeCompanion, Sdk_corePartialSegmentAttributeCompanion, Sdk_corePartialSegmentAttribute, Sdk_corePartialSegmentInformationAttributeCompanion, Sdk_corePartialSegmentInformationAttribute, Sdk_coreKotlinx_io_coreIOException, Sdk_corePlaylistVariableAttributeCompanion, Sdk_corePlaylistVariableAttribute, Sdk_corePreloadHintAttributeCompanion, Sdk_corePreloadHintAttribute, Sdk_coreRenditionReportAttributeCompanion, Sdk_coreRenditionReportAttribute, Sdk_coreSegmentKeyAttributeCompanion, Sdk_coreSegmentKeyAttribute, Sdk_coreServerControlAttributeCompanion, Sdk_coreServerControlAttribute, Sdk_coreSkipAttributeCompanion, Sdk_coreSkipAttribute, Sdk_coreKotlinStringBuilder, Sdk_coreManipulationProxyCompanion, Sdk_coreManipulationProxyProxyType, Sdk_coreManipulationProxyProxyTypeCompanion, Sdk_coreManipulationServerCompanion, Sdk_coreKotlinRegex, Sdk_coreMedia, Sdk_coreMediaChunk, Sdk_corePlayItem, Sdk_coreMediaTrackManageServiceCompanion, Sdk_coreMediaTrackManageServiceSubTrack, Sdk_coreMediaTrackManageServiceMediaTrack, Sdk_coreAdProgress, Sdk_coreAdPlayerCallbacksCompanion, Sdk_coreAdProgressCompanion, Sdk_coreConcurrentQueueCompanion, Sdk_corePlatform_Companion, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher, Sdk_coreRedirectCachePluginCompanion, Sdk_coreKtor_utilsAttributeKey<T>, Sdk_coreRedirectCachePlugin, Sdk_coreRedirectCachePluginConfig, Sdk_coreStringUtils, Sdk_coreKtor_client_coreHttpClientEngineConfig, Sdk_coreKtor_client_coreHttpClientConfig<T>, Sdk_coreKtor_eventsEvents, Sdk_coreKtor_client_coreHttpReceivePipeline, Sdk_coreKtor_client_coreHttpRequestPipeline, Sdk_coreKtor_client_coreHttpResponsePipeline, Sdk_coreKtor_client_coreHttpSendPipeline, Sdk_coreKtor_client_coreHttpResponse, Sdk_coreKtor_httpHeadersBuilder, Sdk_coreKtor_client_coreHttpRequestBuilderCompanion, Sdk_coreKtor_client_coreHttpRequestData, Sdk_coreKtor_httpURLBuilder, Sdk_coreKtor_utilsTypeInfo, Sdk_coreKtor_httpHttpMethod, Sdk_coreKtor_httpUrlCompanion, Sdk_coreKtor_httpURLProtocol, Sdk_coreKtor_httpUrl, Sdk_coreKotlinByteIterator, NSData, Sdk_coreKotlinx_coroutines_coreDispatchers, Sdk_coreKotlinx_coroutines_coreMainCoroutineDispatcher, Sdk_corePlatformSet<E>, Sdk_coreManipulationServer, Sdk_coreKotlinNothing, Sdk_coreKotlinCancellationException, Sdk_coreKotlinRuntimeException, Sdk_coreKotlinIllegalStateException, Sdk_coreKtor_httpHttpStatusCodeCompanion, Sdk_coreKotlinx_serialization_coreSerializersModule, Sdk_coreKotlinx_serialization_jsonJsonDefault, Sdk_coreKotlinx_serialization_jsonJsonElement, Sdk_coreKotlinx_serialization_jsonJsonConfiguration, Sdk_coreKotlinx_datetimeInstantCompanion, Sdk_coreKotlinCharArray, Sdk_coreKotlinRegexOption, Sdk_coreKotlinRegexCompanion, Sdk_coreKotlinAbstractCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcherKey, Sdk_coreKtor_client_coreHttpResponseData, Sdk_coreKtor_client_coreProxyConfig, Sdk_coreKtor_eventsEventDefinition<T>, Sdk_coreKtor_utilsPipelinePhase, Sdk_coreKtor_utilsPipeline<TSubject, TContext>, Sdk_coreKtor_client_coreHttpReceivePipelinePhases, Sdk_coreKtor_client_coreHttpRequestPipelinePhases, Sdk_coreKtor_client_coreHttpResponsePipelinePhases, Sdk_coreKtor_client_coreHttpResponseContainer, Sdk_coreKtor_client_coreHttpClientCall, Sdk_coreKtor_client_coreHttpSendPipelinePhases, Sdk_coreKtor_utilsGMTDate, Sdk_coreKtor_httpHttpProtocolVersion, Sdk_coreKtor_utilsStringValuesBuilderImpl, Sdk_coreKtor_httpOutgoingContent, Sdk_coreKtor_httpURLBuilderCompanion, Sdk_coreKtor_httpHttpMethodCompanion, Sdk_coreKtor_httpURLProtocolCompanion, Sdk_coreKotlinx_serialization_coreSerialKind, Sdk_coreKotlinx_serialization_jsonJsonElementCompanion, Sdk_coreKotlinx_serialization_jsonClassDiscriminatorMode, Sdk_coreKotlinCharIterator, Sdk_coreKotlinMatchResultDestructured, Sdk_coreKotlinIntRange, Sdk_coreKotlinx_io_coreBuffer, Sdk_coreKotlinAbstractCoroutineContextKey<B, E>, Sdk_coreKtor_client_coreHttpClientCallCompanion, Sdk_coreKtor_utilsWeekDay, Sdk_coreKtor_utilsMonth, Sdk_coreKtor_utilsGMTDateCompanion, Sdk_coreKtor_httpHttpProtocolVersionCompanion, Sdk_coreKtor_httpContentType, Sdk_coreKotlinKTypeProjection, Sdk_coreKotlinMatchGroup, Sdk_coreKotlinIntProgressionCompanion, Sdk_coreKotlinIntIterator, Sdk_coreKotlinIntProgression, Sdk_coreKotlinIntRangeCompanion, Sdk_coreKtor_utilsWeekDayCompanion, Sdk_coreKtor_utilsMonthCompanion, Sdk_coreKtor_httpHeaderValueParam, Sdk_coreKtor_httpHeaderValueWithParametersCompanion, Sdk_coreKtor_httpHeaderValueWithParameters, Sdk_coreKtor_httpContentTypeCompanion, Sdk_coreKotlinKVariance, Sdk_coreKotlinKTypeProjectionCompanion;
+@class Sdk_coreScte35DecoderCompanion, Sdk_coreSpliceInfoSection, Sdk_coreKotlinByteArray, Sdk_coreKotlinThrowable, Sdk_coreKotlinArray<T>, Sdk_coreKotlinException, Sdk_coreSpliceInsert, Sdk_coreSpliceTime, Sdk_coreBreakDuration, Sdk_coreKmLogging, Sdk_coreKotlinPair<__covariant A, __covariant B>, Sdk_coreLogLevel, Sdk_coreKmLog, Sdk_coreKotlinEnumCompanion, Sdk_coreKotlinEnum<E>, Sdk_corePlatform, Sdk_coreTimingLogCompanion, Sdk_coreTimingLogTiming, Sdk_coreHex, Sdk_coreLifecycleManager, Sdk_coreSdkContainerClassName, Sdk_corePlatformMap<K, V>, Sdk_coreFlowerAdsManagerImpl, Sdk_coreAdTracker, Sdk_coreAdHandlerCompanion, Sdk_coreAdsLoader, Sdk_coreManipulationProxy, Sdk_coreSdkContainer, Sdk_coreAdList, Sdk_coreWrapperAdsLoader, Sdk_coreLogger, Sdk_coreFLogging, Sdk_coreAdTrackerCompanion, Sdk_coreAd, Sdk_coreGoogleAdReportLogEvent, Sdk_coreAdUrlMacroCompanion, Sdk_coreAdUrlMacroValue, Sdk_coreAdUrlMacroType, Sdk_coreAdsFillingServiceCompanion, Sdk_coreAdHandler, Sdk_coreAdsLoaderCompanion, Sdk_coreCacheConfig, Sdk_coreCreativeConvertServiceCompanion, Sdk_coreFillerAdsManagerCompanion, Sdk_coreFlowerAdsManagerImplCompanion, Sdk_coreFlowerAdsManagerListeners, Sdk_coreMediaTrackManageService, Sdk_coreFlowerError, Sdk_coreFlowerAdsManagerListenersCompanion, Sdk_corePlatformList<E>, Sdk_coreLinearTVAdHandlerCompanion, Sdk_coreLinearTVAdHandlerLinearTvAdRequest, Sdk_coreNormalAdHandlerCompanion, Sdk_coreVastParserCompanion, Sdk_coreVmapParserCompanion, Sdk_coreAdBreak, Sdk_coreNormalAdHandler, Sdk_coreVodAdHandlerCompanion, Sdk_coreWrapperAdsLoaderCompanion, Sdk_coreCreative, Sdk_coreAdTrackingEvent, Sdk_coreAdClick, Sdk_coreAdCompanion, Sdk_coreConvertCreativeRequestCompanion, Sdk_coreCreativeType, Sdk_coreCreativeMedia, Sdk_coreCreativeMediaCompanion, Sdk_coreManifestLoader, Sdk_coreCreativeMediaM3u8Companion, Sdk_coreVariant, Sdk_coreMediaPlaylist, Sdk_coreMPD, Sdk_coreCreativeResponseAsset, Sdk_coreCreativeResponseCompanion, Sdk_coreCreativeResponseAssetCompanion, Sdk_coreCreativeTypeCompanion, Sdk_coreUiTextEn, Sdk_coreUiTextKo, Sdk_coreAdInfo, Sdk_corePlayItem, Sdk_coreMedia, Sdk_coreKotlinWrapped<T>, Sdk_coreFlowerEventInfo, Sdk_coreFlowerEventInfoAdBreakStarted, Sdk_coreFlowerEventInfoAdCompleted, Sdk_coreFlowerEventInfoAdPlay, Sdk_coreCacheConfigStrategy, Sdk_coreCacheConfigCompanion, Sdk_coreCacheServiceCompanion, Sdk_coreConcurrentQueue, Sdk_coreFlowerConfigService, Sdk_coreKtor_client_coreHttpClient, Sdk_coreCachedHttpClientCompanion, Sdk_coreKtor_client_coreHttpRequestBuilder, Sdk_coreCachedHttpClientResponse, Sdk_coreKtor_httpHttpStatusCode, Sdk_coreErrorCodeCompanion, Sdk_coreErrorCode, Sdk_coreErrorLogCompanion, Sdk_coreErrorLogSenderCompanion, Sdk_coreErrorLog, Sdk_coreFlowerConfigServiceCompanion, Sdk_coreXmlNode, Sdk_coreFlowerConfigServiceStartupConfig, Sdk_coreFlowerConfigServiceStartupConfigKey, Sdk_corePlatformAnalytics, Sdk_coreSdkContainerCompanion, Sdk_coreSdkContainerLogLevel, Sdk_coreAdUrlMacro, Sdk_coreCacheService, Sdk_coreCachedHttpClient, Sdk_coreErrorLogSender, Sdk_coreFillerAdsManager, Sdk_coreKotlinx_serialization_jsonJson, Sdk_coreDeviceServiceCompanion, Sdk_coreManipulatorCompanion, Sdk_coreLinearTVAdHandler, Sdk_coreKotlinx_datetimeInstant, Sdk_coreManipulator, Sdk_coreDashManipulatorCompanion, Sdk_coreHlsManipulatorSharedState, Sdk_coreHlsManipulatorCompanion, Sdk_coreHlsManipulatorCueOutMarker, Sdk_coreHlsManipulatorCueInMarker, Sdk_coreHlsManipulatorCueEvent, Sdk_coreManifestLoaderCompanion, Sdk_coreRepresentation, Sdk_coreMPDCompanion, Sdk_corePeriod, Sdk_corePeriodCompanion, Sdk_coreAdaptationSet, Sdk_coreTimeScaled, Sdk_coreSpliceInfoSection_, Sdk_coreSegmentBase, Sdk_coreSegmentList, Sdk_coreSegmentTemplate, Sdk_coreInitialization, Sdk_coreSegmentURL, Sdk_coreMediaType, Sdk_coreChannels, Sdk_coreAlternativeRendition, Sdk_coreByteRange, Sdk_coreCueOut, Sdk_coreScte35, Sdk_coreCueOutCont, Sdk_coreDateRange, Sdk_coreResolution, Sdk_coreVideoRange, Sdk_coreIFrameVariant, Sdk_coreKeyMethodCompanion, Sdk_coreKeyMethod, Sdk_coreStartTimeOffset, Sdk_corePlaylistVariable, Sdk_corePlaylist, Sdk_coreSessionData, Sdk_coreSegmentKey, Sdk_coreMasterPlaylist, Sdk_corePlaylistType, Sdk_coreMediaSegment, Sdk_coreServerControl, Sdk_corePartialSegmentInformation, Sdk_corePartialSegment, Sdk_coreSkip, Sdk_corePreloadHint, Sdk_coreRenditionReport, Sdk_coreSegmentMap, Sdk_coreMediaTypeCompanion, Sdk_corePreloadHintType, Sdk_coreAbstractPlaylistParserCompanion, Sdk_coreTextBuilder, Sdk_coreAbstractPlaylistParser<T, B>, Sdk_coreParsingMode, Sdk_coreMasterPlaylistParserCompanion, Sdk_coreMediaPlaylistParserCompanion, Sdk_coreMediaPlaylistParserBuilder, Sdk_coreParsingModeCompanion, Sdk_corePartialSegmentAttributeCompanion, Sdk_corePartialSegmentAttribute, Sdk_corePartialSegmentInformationAttributeCompanion, Sdk_corePartialSegmentInformationAttribute, Sdk_coreKotlinx_io_coreIOException, Sdk_corePlaylistVariableAttributeCompanion, Sdk_corePlaylistVariableAttribute, Sdk_corePreloadHintAttributeCompanion, Sdk_corePreloadHintAttribute, Sdk_coreRenditionReportAttributeCompanion, Sdk_coreRenditionReportAttribute, Sdk_coreSegmentKeyAttributeCompanion, Sdk_coreSegmentKeyAttribute, Sdk_coreServerControlAttributeCompanion, Sdk_coreServerControlAttribute, Sdk_coreSkipAttributeCompanion, Sdk_coreSkipAttribute, Sdk_coreKotlinStringBuilder, Sdk_coreManipulationProxyCompanion, Sdk_coreManipulationProxyProxyType, Sdk_coreManipulationProxyProxyTypeCompanion, Sdk_coreManipulationServerCompanion, Sdk_coreKotlinRegex, Sdk_coreMediaTrackManageServiceCompanion, Sdk_coreMediaTrackManageServiceSubTrack, Sdk_coreMediaTrackManageServiceMediaTrack, Sdk_coreAdProgress, Sdk_coreAdPlayerCallbacksCompanion, Sdk_coreAdProgressCompanion, Sdk_coreConcurrentQueueCompanion, Sdk_corePlatform_Companion, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher, Sdk_coreRedirectCachePluginCompanion, Sdk_coreKtor_utilsAttributeKey<T>, Sdk_coreRedirectCachePlugin, Sdk_coreRedirectCachePluginConfig, Sdk_coreStringUtils, Sdk_coreKtor_client_coreHttpClientEngineConfig, Sdk_coreKtor_client_coreHttpClientConfig<T>, Sdk_coreKtor_eventsEvents, Sdk_coreKtor_client_coreHttpReceivePipeline, Sdk_coreKtor_client_coreHttpRequestPipeline, Sdk_coreKtor_client_coreHttpResponsePipeline, Sdk_coreKtor_client_coreHttpSendPipeline, Sdk_coreKtor_client_coreHttpResponse, Sdk_coreKtor_httpHeadersBuilder, Sdk_coreKtor_client_coreHttpRequestBuilderCompanion, Sdk_coreKtor_client_coreHttpRequestData, Sdk_coreKtor_httpURLBuilder, Sdk_coreKtor_utilsTypeInfo, Sdk_coreKtor_httpHttpMethod, Sdk_coreKtor_httpUrlCompanion, Sdk_coreKtor_httpURLProtocol, Sdk_coreKtor_httpUrl, Sdk_coreKotlinByteIterator, NSData, Sdk_coreKotlinx_coroutines_coreDispatchers, Sdk_coreKotlinx_coroutines_coreMainCoroutineDispatcher, Sdk_corePlatformSet<E>, Sdk_coreManipulationServer, Sdk_coreKotlinNothing, Sdk_coreKotlinCancellationException, Sdk_coreKotlinRuntimeException, Sdk_coreKotlinIllegalStateException, Sdk_coreKtor_httpHttpStatusCodeCompanion, Sdk_coreKotlinx_serialization_coreSerializersModule, Sdk_coreKotlinx_serialization_jsonJsonDefault, Sdk_coreKotlinx_serialization_jsonJsonElement, Sdk_coreKotlinx_serialization_jsonJsonConfiguration, Sdk_coreKotlinx_datetimeInstantCompanion, Sdk_coreKotlinCharArray, Sdk_coreKotlinRegexOption, Sdk_coreKotlinRegexCompanion, Sdk_coreKotlinAbstractCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcherKey, Sdk_coreKtor_client_coreHttpResponseData, Sdk_coreKtor_client_coreProxyConfig, Sdk_coreKtor_eventsEventDefinition<T>, Sdk_coreKtor_utilsPipelinePhase, Sdk_coreKtor_utilsPipeline<TSubject, TContext>, Sdk_coreKtor_client_coreHttpReceivePipelinePhases, Sdk_coreKotlinUnit, Sdk_coreKtor_client_coreHttpRequestPipelinePhases, Sdk_coreKtor_client_coreHttpResponsePipelinePhases, Sdk_coreKtor_client_coreHttpResponseContainer, Sdk_coreKtor_client_coreHttpClientCall, Sdk_coreKtor_client_coreHttpSendPipelinePhases, Sdk_coreKtor_utilsGMTDate, Sdk_coreKtor_httpHttpProtocolVersion, Sdk_coreKtor_utilsStringValuesBuilderImpl, Sdk_coreKtor_httpOutgoingContent, Sdk_coreKtor_httpURLBuilderCompanion, Sdk_coreKtor_httpHttpMethodCompanion, Sdk_coreKtor_httpURLProtocolCompanion, Sdk_coreKotlinx_serialization_coreSerialKind, Sdk_coreKotlinx_serialization_jsonJsonElementCompanion, Sdk_coreKotlinx_serialization_jsonClassDiscriminatorMode, Sdk_coreKotlinCharIterator, Sdk_coreKotlinMatchResultDestructured, Sdk_coreKotlinIntRange, Sdk_coreKotlinx_io_coreBuffer, Sdk_coreKotlinAbstractCoroutineContextKey<B, E>, Sdk_coreKtor_client_coreHttpClientCallCompanion, Sdk_coreKtor_utilsWeekDay, Sdk_coreKtor_utilsMonth, Sdk_coreKtor_utilsGMTDateCompanion, Sdk_coreKtor_httpHttpProtocolVersionCompanion, Sdk_coreKtor_httpContentType, Sdk_coreKotlinKTypeProjection, Sdk_coreKotlinMatchGroup, Sdk_coreKotlinIntProgressionCompanion, Sdk_coreKotlinIntIterator, Sdk_coreKotlinIntProgression, Sdk_coreKotlinIntRangeCompanion, Sdk_coreKtor_utilsWeekDayCompanion, Sdk_coreKtor_utilsMonthCompanion, Sdk_coreKtor_httpHeaderValueParam, Sdk_coreKtor_httpHeaderValueWithParametersCompanion, Sdk_coreKtor_httpHeaderValueWithParameters, Sdk_coreKtor_httpContentTypeCompanion, Sdk_coreKotlinKVariance, Sdk_coreKotlinKTypeProjectionCompanion;
 
-@protocol Sdk_coreLogLevelController, Sdk_coreLogger, Sdk_coreLogFactory, Sdk_coreKotlinComparable, Sdk_coreTagProvider, Sdk_coreSdkLifecycleListener, Sdk_coreSdkContainerBeanFactory, Sdk_coreFlowerAdsManagerListener, Sdk_coreKotlinx_coroutines_coreJob, Sdk_coreAdPlayerView, Sdk_coreFlowerAdUIView, Sdk_coreFlowerAdViewStub, Sdk_coreGoogleAdView, Sdk_coreMediaPlayerAdapter, Sdk_coreKotlinx_coroutines_coreFlow, Sdk_coreMediaPlayerHook, Sdk_coreFlowerAdsManager, Sdk_coreAdPlayerCallback, Sdk_coreAdPlayer, Sdk_coreKotlinx_serialization_coreKSerializer, Sdk_coreUIElement, Sdk_coreUiText, Sdk_corePlatformFile, Sdk_coreKtor_httpHeaders, Sdk_coreDeviceService, Sdk_coreGoogleAdsManager, Sdk_coreXmlUtil, Sdk_coreKeyValueStore, Sdk_coreGoogleAdsLoaderListener, Sdk_coreKotlinIterator, Sdk_coreAttribute, Sdk_coreManipulationServerResponse, Sdk_coreKtor_ioByteReadChannel, Sdk_coreKotlinSuspendFunction0, Sdk_coreKtor_client_coreHttpClientPlugin, Sdk_coreKotlinCoroutineContext, Sdk_coreKotlinx_coroutines_coreCoroutineScope, Sdk_coreKtor_ioCloseable, Sdk_coreKtor_client_coreHttpClientEngine, Sdk_coreKtor_client_coreHttpClientEngineCapability, Sdk_coreKtor_utilsAttributes, Sdk_coreKtor_httpHttpMessageBuilder, Sdk_coreKtor_httpParameters, Sdk_coreKotlinx_coroutines_coreChildHandle, Sdk_coreKotlinx_coroutines_coreChildJob, Sdk_coreKotlinx_coroutines_coreDisposableHandle, Sdk_coreKotlinSequence, Sdk_coreKotlinx_coroutines_coreSelectClause0, Sdk_coreKotlinCoroutineContextKey, Sdk_coreKotlinCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreFlowCollector, Sdk_coreKotlinx_serialization_coreEncoder, Sdk_coreKotlinx_serialization_coreSerialDescriptor, Sdk_coreKotlinx_serialization_coreSerializationStrategy, Sdk_coreKotlinx_serialization_coreDecoder, Sdk_coreKotlinx_serialization_coreDeserializationStrategy, Sdk_coreKotlinMapEntry, Sdk_coreKtor_utilsStringValues, Sdk_coreKotlinx_serialization_coreSerialFormat, Sdk_coreKotlinx_serialization_coreStringFormat, Sdk_coreKotlinCharSequence, Sdk_coreKotlinAppendable, Sdk_coreKotlinMatchResult, Sdk_coreKotlinx_io_coreSource, Sdk_coreKotlinFunction, Sdk_coreKotlinContinuation, Sdk_coreKotlinContinuationInterceptor, Sdk_coreKotlinx_coroutines_coreRunnable, Sdk_coreKotlinSuspendFunction2, Sdk_coreKtor_httpHttpMessage, Sdk_coreKtor_utilsStringValuesBuilder, Sdk_coreKtor_httpParametersBuilder, Sdk_coreKotlinKClass, Sdk_coreKotlinKType, Sdk_coreKotlinx_coroutines_coreParentJob, Sdk_coreKotlinx_coroutines_coreSelectInstance, Sdk_coreKotlinx_coroutines_coreSelectClause, Sdk_coreKotlinx_serialization_coreCompositeEncoder, Sdk_coreKotlinAnnotation, Sdk_coreKotlinx_serialization_coreCompositeDecoder, Sdk_coreKotlinx_serialization_coreSerializersModuleCollector, Sdk_coreKotlinx_serialization_jsonJsonNamingStrategy, Sdk_coreKotlinx_datetimeDateTimeFormat, Sdk_coreKotlinMatchGroupCollection, Sdk_coreKotlinx_io_coreRawSink, Sdk_coreKotlinAutoCloseable, Sdk_coreKotlinx_io_coreRawSource, Sdk_coreKtor_client_coreHttpRequest, Sdk_coreKotlinKDeclarationContainer, Sdk_coreKotlinKAnnotatedElement, Sdk_coreKotlinKClassifier, Sdk_coreKotlinIterable, Sdk_coreKotlinCollection, Sdk_coreKotlinClosedRange, Sdk_coreKotlinOpenEndRange, Sdk_coreKotlinx_io_coreSink;
+@protocol Sdk_coreLogLevelController, Sdk_coreLogger, Sdk_coreLogFactory, Sdk_coreKotlinComparable, Sdk_coreTagProvider, Sdk_coreSdkLifecycleListener, Sdk_coreSdkContainerBeanFactory, Sdk_coreFlowerAdsManagerListener, Sdk_coreKotlinx_coroutines_coreJob, Sdk_coreAdPlayerView, Sdk_coreFlowerAdUIView, Sdk_coreFlowerAdViewStub, Sdk_coreGoogleAdView, Sdk_coreCoreMediaPlayerAdapter, Sdk_coreKotlinx_coroutines_coreFlow, Sdk_coreKotlinSuspendFunction2, Sdk_coreFlowerAdTracker, Sdk_coreFlowerCreative, Sdk_coreMediaPlayerHook, Sdk_coreFlowerAd, Sdk_coreFlowerAdsManager, Sdk_coreAdPlayerCallback, Sdk_coreAdPlayer, Sdk_coreKotlinx_serialization_coreKSerializer, Sdk_coreUIElement, Sdk_coreUiText, Sdk_corePlatformFile, Sdk_coreKtor_httpHeaders, Sdk_coreDeviceService, Sdk_coreGoogleAdsManager, Sdk_coreXmlUtil, Sdk_coreKeyValueStore, Sdk_coreGoogleAdsLoaderListener, Sdk_coreKotlinIterator, Sdk_coreAttribute, Sdk_coreManipulationServerResponse, Sdk_coreKtor_ioByteReadChannel, Sdk_coreKotlinSuspendFunction0, Sdk_coreKtor_client_coreHttpClientPlugin, Sdk_coreKotlinCoroutineContext, Sdk_coreKotlinx_coroutines_coreCoroutineScope, Sdk_coreKtor_ioCloseable, Sdk_coreKtor_client_coreHttpClientEngine, Sdk_coreKtor_client_coreHttpClientEngineCapability, Sdk_coreKtor_utilsAttributes, Sdk_coreKtor_httpHttpMessageBuilder, Sdk_coreKtor_httpParameters, Sdk_coreKotlinx_coroutines_coreChildHandle, Sdk_coreKotlinx_coroutines_coreChildJob, Sdk_coreKotlinx_coroutines_coreDisposableHandle, Sdk_coreKotlinSequence, Sdk_coreKotlinx_coroutines_coreSelectClause0, Sdk_coreKotlinCoroutineContextKey, Sdk_coreKotlinCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreFlowCollector, Sdk_coreKotlinFunction, Sdk_coreKotlinx_serialization_coreEncoder, Sdk_coreKotlinx_serialization_coreSerialDescriptor, Sdk_coreKotlinx_serialization_coreSerializationStrategy, Sdk_coreKotlinx_serialization_coreDecoder, Sdk_coreKotlinx_serialization_coreDeserializationStrategy, Sdk_coreKotlinMapEntry, Sdk_coreKtor_utilsStringValues, Sdk_coreKotlinx_serialization_coreSerialFormat, Sdk_coreKotlinx_serialization_coreStringFormat, Sdk_coreKotlinCharSequence, Sdk_coreKotlinAppendable, Sdk_coreKotlinMatchResult, Sdk_coreKotlinx_io_coreSource, Sdk_coreKotlinContinuation, Sdk_coreKotlinContinuationInterceptor, Sdk_coreKotlinx_coroutines_coreRunnable, Sdk_coreKtor_httpHttpMessage, Sdk_coreKtor_utilsStringValuesBuilder, Sdk_coreKtor_httpParametersBuilder, Sdk_coreKotlinKClass, Sdk_coreKotlinKType, Sdk_coreKotlinx_coroutines_coreParentJob, Sdk_coreKotlinx_coroutines_coreSelectInstance, Sdk_coreKotlinx_coroutines_coreSelectClause, Sdk_coreKotlinx_serialization_coreCompositeEncoder, Sdk_coreKotlinAnnotation, Sdk_coreKotlinx_serialization_coreCompositeDecoder, Sdk_coreKotlinx_serialization_coreSerializersModuleCollector, Sdk_coreKotlinx_serialization_jsonJsonNamingStrategy, Sdk_coreKotlinx_datetimeDateTimeFormat, Sdk_coreKotlinMatchGroupCollection, Sdk_coreKotlinx_io_coreRawSink, Sdk_coreKotlinAutoCloseable, Sdk_coreKotlinx_io_coreRawSource, Sdk_coreKtor_client_coreHttpRequest, Sdk_coreKotlinKDeclarationContainer, Sdk_coreKotlinKAnnotatedElement, Sdk_coreKotlinKClassifier, Sdk_coreKotlinIterable, Sdk_coreKotlinCollection, Sdk_coreKotlinClosedRange, Sdk_coreKotlinOpenEndRange, Sdk_coreKotlinx_io_coreSink;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -719,7 +719,7 @@ __attribute__((swift_name("AdHandler")))
 /**
  * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
-@property (readonly) id<Sdk_coreMediaPlayerAdapter> _Nullable mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
+@property (readonly) id<Sdk_coreCoreMediaPlayerAdapter> _Nullable mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
 
 /**
  * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
@@ -902,7 +902,12 @@ __attribute__((swift_name("CreativeConvertService")))
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (class, readonly, getter=companion) Sdk_coreCreativeConvertServiceCompanion *companion __attribute__((swift_name("companion")));
-- (void)convertMediaFileMediaUrl:(NSString *)mediaUrl wrapperAd:(Sdk_coreAd *)wrapperAd timeoutMillis:(int64_t)timeoutMillis retryCallback:(void (^)(Sdk_coreAd *, Sdk_coreKotlinUnit *(^)(NSArray<Sdk_coreAd *> * _Nullable)))retryCallback callback:(void (^)(NSArray<Sdk_coreAd *> * _Nullable))callback __attribute__((swift_name("convertMediaFile(mediaUrl:wrapperAd:timeoutMillis:retryCallback:callback:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)convertMediaFileMediaUrl:(NSString *)mediaUrl wrapperAd:(Sdk_coreAd *)wrapperAd timeoutMillis:(int64_t)timeoutMillis retryFallback:(id<Sdk_coreKotlinSuspendFunction2>)retryFallback callback:(void (^)(NSArray<Sdk_coreAd *> * _Nullable))callback completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("convertMediaFile(mediaUrl:wrapperAd:timeoutMillis:retryFallback:callback:completionHandler:)")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -937,6 +942,21 @@ __attribute__((swift_name("FillerAdsManager.Companion")))
 @property (class, readonly, getter=shared) Sdk_coreFillerAdsManagerCompanion *shared __attribute__((swift_name("shared")));
 @end
 
+__attribute__((swift_name("FlowerAd")))
+@protocol Sdk_coreFlowerAd
+@required
+- (void)startAdTracker:(id<Sdk_coreFlowerAdTracker>)adTracker __attribute__((swift_name("start(adTracker:)")));
+@property (readonly) NSArray<id<Sdk_coreFlowerCreative>> *creatives __attribute__((swift_name("creatives")));
+@property (readonly) int64_t duration __attribute__((swift_name("duration")));
+@property NSString *id __attribute__((swift_name("id")));
+@end
+
+__attribute__((swift_name("FlowerAdTracker")))
+@protocol Sdk_coreFlowerAdTracker
+@required
+- (int32_t)getProgress __attribute__((swift_name("getProgress()")));
+@end
+
 __attribute__((swift_name("FlowerAdsManager")))
 @protocol Sdk_coreFlowerAdsManager
 @required
@@ -945,13 +965,16 @@ __attribute__((swift_name("FlowerAdsManager")))
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:)")));
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:adTagHeaders:)")));
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders channelStreamHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)channelStreamHeaders __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:adTagHeaders:channelStreamHeaders:)")));
+- (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerAdapter:(id)mediaPlayerAdapter adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders channelStreamHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)channelStreamHeaders prerollAdTagUrl:(NSString * _Nullable)prerollAdTagUrl __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerAdapter:adTagHeaders:channelStreamHeaders:prerollAdTagUrl:)")));
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders channelStreamHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)channelStreamHeaders prerollAdTagUrl:(NSString * _Nullable)prerollAdTagUrl __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:adTagHeaders:channelStreamHeaders:prerollAdTagUrl:)")));
+- (void)enterChannelAdTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> *)extraParams platformMediaPlayerAdapter:(id)platformMediaPlayerAdapter adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders __attribute__((swift_name("enterChannel(adTagUrl:channelId:extraParams:platformMediaPlayerAdapter:adTagHeaders:)")));
 - (void)notifyContentEnded __attribute__((swift_name("notifyContentEnded()")));
 - (void)pause __attribute__((swift_name("pause()")));
 - (void)play __attribute__((swift_name("play()")));
 - (void)removeListenerAdsManagerListener:(id<Sdk_coreFlowerAdsManagerListener>)adsManagerListener __attribute__((swift_name("removeListener(adsManagerListener:)")));
 - (void)requestAdAdTagUrl:(NSString *)adTagUrl extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams __attribute__((swift_name("requestAd(adTagUrl:extraParams:)")));
 - (void)requestAdAdTagUrl:(NSString *)adTagUrl extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders __attribute__((swift_name("requestAd(adTagUrl:extraParams:adTagHeaders:)")));
+- (void)requestChannelAdCueDuration:(int64_t)cueDuration uniqueProgramId:(int32_t)uniqueProgramId timeout:(int64_t)timeout onPrepare:(void (^)(NSArray<id<Sdk_coreFlowerAd>> *))onPrepare __attribute__((swift_name("requestChannelAd(cueDuration:uniqueProgramId:timeout:onPrepare:)")));
 - (void)requestVodAdAdTagUrl:(NSString *)adTagUrl contentId:(NSString *)contentId durationMs:(int64_t)durationMs extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook __attribute__((swift_name("requestVodAd(adTagUrl:contentId:durationMs:extraParams:mediaPlayerHook:)")));
 - (void)requestVodAdAdTagUrl:(NSString *)adTagUrl contentId:(NSString *)contentId durationMs:(int64_t)durationMs extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders __attribute__((swift_name("requestVodAd(adTagUrl:contentId:durationMs:extraParams:mediaPlayerHook:adTagHeaders:)")));
 - (void)resume __attribute__((swift_name("resume()")));
@@ -969,8 +992,11 @@ __attribute__((swift_name("FlowerAdsManagerImpl")))
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:)")));
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:adTagHeaders:)")));
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders channelStreamHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)channelStreamHeaders __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:adTagHeaders:channelStreamHeaders:)")));
+- (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerAdapter:(id)mediaPlayerAdapter adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders channelStreamHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)channelStreamHeaders prerollAdTagUrl:(NSString * _Nullable)prerollAdTagUrl __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerAdapter:adTagHeaders:channelStreamHeaders:prerollAdTagUrl:)")));
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders channelStreamHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)channelStreamHeaders prerollAdTagUrl:(NSString * _Nullable)prerollAdTagUrl __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:adTagHeaders:channelStreamHeaders:prerollAdTagUrl:)")));
-- (NSString *)changeChannelUrlImplVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> *)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders channelStreamHeaders:(NSDictionary<NSString *, NSString *> *)channelStreamHeaders prerollAdTagUrl:(NSString * _Nullable)prerollAdTagUrl __attribute__((swift_name("changeChannelUrlImpl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:adTagHeaders:channelStreamHeaders:prerollAdTagUrl:)")));
+- (NSString *)changeChannelUrlImplVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> *)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook> _Nullable)mediaPlayerHook platformMediaPlayerAdapter:(id _Nullable)platformMediaPlayerAdapter adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders channelStreamHeaders:(NSDictionary<NSString *, NSString *> *)channelStreamHeaders prerollAdTagUrl:(NSString * _Nullable)prerollAdTagUrl __attribute__((swift_name("changeChannelUrlImpl(videoUrl:adTagUrl:channelId:extraParams:mediaPlayerHook:platformMediaPlayerAdapter:adTagHeaders:channelStreamHeaders:prerollAdTagUrl:)")));
+- (void)enterChannelAdTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> *)extraParams platformMediaPlayerAdapter:(id)platformMediaPlayerAdapter adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders __attribute__((swift_name("enterChannel(adTagUrl:channelId:extraParams:platformMediaPlayerAdapter:adTagHeaders:)")));
+- (void)enterChannelImplAdTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> *)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook> _Nullable)mediaPlayerHook platformMediaPlayerAdapter:(id _Nullable)platformMediaPlayerAdapter adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders __attribute__((swift_name("enterChannelImpl(adTagUrl:channelId:extraParams:mediaPlayerHook:platformMediaPlayerAdapter:adTagHeaders:)")));
 - (void)notifyContentEnded __attribute__((swift_name("notifyContentEnded()")));
 - (void)pause __attribute__((swift_name("pause()")));
 - (void)play __attribute__((swift_name("play()")));
@@ -978,10 +1004,11 @@ __attribute__((swift_name("FlowerAdsManagerImpl")))
 - (void)requestAdAdTagUrl:(NSString *)adTagUrl extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams __attribute__((swift_name("requestAd(adTagUrl:extraParams:)")));
 - (void)requestAdAdTagUrl:(NSString *)adTagUrl extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders __attribute__((swift_name("requestAd(adTagUrl:extraParams:adTagHeaders:)")));
 - (void)requestAdImplAdTagUrl:(NSString *)adTagUrl extraParams:(NSDictionary<NSString *, NSString *> *)extraParams adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders __attribute__((swift_name("requestAdImpl(adTagUrl:extraParams:adTagHeaders:)")));
-- (void)requestLinearTvPrerollAdTagUrl:(NSString *)adTagUrl extraParams:(NSDictionary<NSString *, NSString *> *)extraParams adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders __attribute__((swift_name("requestLinearTvPreroll(adTagUrl:extraParams:adTagHeaders:)")));
+- (void)requestChannelAdCueDuration:(int64_t)cueDuration uniqueProgramId:(int32_t)uniqueProgramId timeout:(int64_t)timeout onPrepare:(void (^)(NSArray<id<Sdk_coreFlowerAd>> *))onPrepare __attribute__((swift_name("requestChannelAd(cueDuration:uniqueProgramId:timeout:onPrepare:)")));
+- (void)requestLinearTvPrerollAdTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> *)extraParams adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders __attribute__((swift_name("requestLinearTvPreroll(adTagUrl:channelId:extraParams:adTagHeaders:)")));
 - (void)requestVodAdAdTagUrl:(NSString *)adTagUrl contentId:(NSString *)contentId durationMs:(int64_t)durationMs extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook __attribute__((swift_name("requestVodAd(adTagUrl:contentId:durationMs:extraParams:mediaPlayerHook:)")));
 - (void)requestVodAdAdTagUrl:(NSString *)adTagUrl contentId:(NSString *)contentId durationMs:(int64_t)durationMs extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders __attribute__((swift_name("requestVodAd(adTagUrl:contentId:durationMs:extraParams:mediaPlayerHook:adTagHeaders:)")));
-- (void)requestVodAdImplAdTagUrl:(NSString *)adTagUrl contentId:(NSString *)contentId durationMs:(int64_t)durationMs extraParams:(NSDictionary<NSString *, NSString *> *)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders __attribute__((swift_name("requestVodAdImpl(adTagUrl:contentId:durationMs:extraParams:mediaPlayerHook:adTagHeaders:)")));
+- (void)requestVodAdImplAdTagUrl:(NSString *)adTagUrl contentId:(NSString *)contentId durationMs:(int64_t)durationMs extraParams:(NSDictionary<NSString *, NSString *> *)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook> _Nullable)mediaPlayerHook platformMediaPlayerAdapter:(id _Nullable)platformMediaPlayerAdapter adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders __attribute__((swift_name("requestVodAdImpl(adTagUrl:contentId:durationMs:extraParams:mediaPlayerHook:platformMediaPlayerAdapter:adTagHeaders:)")));
 - (void)resume __attribute__((swift_name("resume()")));
 - (void)stop __attribute__((swift_name("stop()")));
 @property (readonly) id<Sdk_coreAdPlayerView> adPlayerView __attribute__((swift_name("adPlayerView")));
@@ -992,9 +1019,8 @@ __attribute__((swift_name("FlowerAdsManagerImpl")))
 @property Sdk_coreAdHandler * _Nullable globalAdHandler __attribute__((swift_name("globalAdHandler")));
 @property (readonly) id<Sdk_coreGoogleAdView> googleAdView __attribute__((swift_name("googleAdView")));
 @property Sdk_coreManipulationProxy * _Nullable manipulationProxy __attribute__((swift_name("manipulationProxy")));
-@property id<Sdk_coreMediaPlayerAdapter> _Nullable mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
-@property id<Sdk_coreMediaPlayerHook> _Nullable mediaPlayerHook __attribute__((swift_name("mediaPlayerHook")));
-@property Sdk_coreMediaTrackManageService *mediaTrackManageService __attribute__((swift_name("mediaTrackManageService")));
+@property id<Sdk_coreCoreMediaPlayerAdapter> _Nullable mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
+@property Sdk_coreMediaTrackManageService * _Nullable mediaTrackManageService __attribute__((swift_name("mediaTrackManageService")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -1044,19 +1070,31 @@ __attribute__((swift_name("FlowerAdsManagerListeners.Companion")))
 @property (class, readonly, getter=shared) Sdk_coreFlowerAdsManagerListenersCompanion *shared __attribute__((swift_name("shared")));
 @end
 
+__attribute__((swift_name("FlowerCreative")))
+@protocol Sdk_coreFlowerCreative
+@required
+@property int32_t height __attribute__((swift_name("height")));
+@property NSString *type __attribute__((swift_name("type")));
+@property (readonly) NSString *url __attribute__((swift_name("url")));
+@property int32_t width __attribute__((swift_name("width")));
+@end
+
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("LinearTVAdHandler")))
 @interface Sdk_coreLinearTVAdHandler : Sdk_coreAdHandler
-- (instancetype)initWithAdsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager adsManagerListener:(id<Sdk_coreFlowerAdsManagerListener>)adsManagerListener adTracker:(Sdk_coreAdTracker *)adTracker __attribute__((swift_name("init(adsManager:adsManagerListener:adTracker:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithAdsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager adsManagerListener:(id<Sdk_coreFlowerAdsManagerListener>)adsManagerListener adTracker:(Sdk_coreAdTracker *)adTracker mediaTrackManageService:(Sdk_coreMediaTrackManageService * _Nullable)mediaTrackManageService __attribute__((swift_name("init(adsManager:adsManagerListener:adTracker:mediaTrackManageService:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithAdsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager adsManagerListener:(id<Sdk_coreFlowerAdsManagerListener>)adsManagerListener adTracker:(Sdk_coreAdTracker *)adTracker __attribute__((swift_name("init(adsManager:adsManagerListener:adTracker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) Sdk_coreLinearTVAdHandlerCompanion *companion __attribute__((swift_name("companion")));
 - (void)changeChannelExtraParamsExtraParams:(NSDictionary<NSString *, id> *)extraParams __attribute__((swift_name("changeChannelExtraParams(extraParams:)")));
 - (NSString *)changeChannelUrlVideoUrl:(NSString *)videoUrl adTagUrl:(NSString *)adTagUrl adUrlMacroValue:(Sdk_coreAdUrlMacroValue *)adUrlMacroValue extraParams:(NSDictionary<NSString *, id> *)extraParams adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders channelStreamHeaders:(NSDictionary<NSString *, NSString *> *)channelStreamHeaders __attribute__((swift_name("changeChannelUrl(videoUrl:adTagUrl:adUrlMacroValue:extraParams:adTagHeaders:channelStreamHeaders:)")));
 - (void)destroy __attribute__((swift_name("destroy()")));
+- (void)enterChannelAdTagUrl:(NSString *)adTagUrl adUrlMacroValue:(Sdk_coreAdUrlMacroValue *)adUrlMacroValue extraParams:(NSDictionary<NSString *, id> *)extraParams adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders __attribute__((swift_name("enterChannel(adTagUrl:adUrlMacroValue:extraParams:adTagHeaders:)")));
 - (void)fillSpareAdEventId:(int32_t)eventId __attribute__((swift_name("fillSpareAd(eventId:)")));
 - (Sdk_coreLinearTVAdHandlerLinearTvAdRequest * _Nullable)getAdRequestEventId:(int32_t)eventId __attribute__((swift_name("getAdRequest(eventId:)")));
 - (BOOL)isEmpty __attribute__((swift_name("isEmpty()")));
 - (void)removeSpareAdEventId:(int32_t)eventId ad:(Sdk_coreAd *)ad __attribute__((swift_name("removeSpareAd(eventId:ad:)")));
-- (Sdk_coreLinearTVAdHandlerLinearTvAdRequest *)requestAdsEventId:(int32_t)eventId adDuration:(int64_t)adDuration uniqueProgramId:(int32_t)uniqueProgramId adWaitingTime:(int64_t)adWaitingTime adPrefix:(NSString * _Nullable)adPrefix cacheConfig:(Sdk_coreCacheConfig *)cacheConfig creativeType:(Sdk_coreCreativeType *)creativeType __attribute__((swift_name("requestAds(eventId:adDuration:uniqueProgramId:adWaitingTime:adPrefix:cacheConfig:creativeType:)")));
+- (Sdk_coreLinearTVAdHandlerLinearTvAdRequest *)requestAdsEventId:(int32_t)eventId adDuration:(int64_t)adDuration uniqueProgramId:(int32_t)uniqueProgramId adWaitingTime:(int64_t)adWaitingTime adPrefix:(NSString * _Nullable)adPrefix cacheConfig:(Sdk_coreCacheConfig *)cacheConfig skipAdProgressCheck:(BOOL)skipAdProgressCheck __attribute__((swift_name("requestAds(eventId:adDuration:uniqueProgramId:adWaitingTime:adPrefix:cacheConfig:skipAdProgressCheck:)")));
+- (void)requestChannelAdAdDuration:(int64_t)adDuration uniqueProgramId:(int32_t)uniqueProgramId timeout:(int64_t)timeout onPrepare:(void (^)(NSArray<id<Sdk_coreFlowerAd>> *))onPrepare __attribute__((swift_name("requestChannelAd(adDuration:uniqueProgramId:timeout:onPrepare:)")));
 - (void)requestSkippedAdsEventId:(int32_t)eventId skippedDuration:(int64_t)skippedDuration uniqueProgramId:(int32_t)uniqueProgramId adWaitingTime:(int64_t)adWaitingTime adPrefix:(NSString * _Nullable)adPrefix cacheConfig:(Sdk_coreCacheConfig *)cacheConfig originalAdHandler:(Sdk_coreAdHandler *)originalAdHandler onNewAd:(void (^)(Sdk_coreAd *))onNewAd __attribute__((swift_name("requestSkippedAds(eventId:skippedDuration:uniqueProgramId:adWaitingTime:adPrefix:cacheConfig:originalAdHandler:onNewAd:)")));
 - (void)skipAdRequestEventId:(int32_t)eventId __attribute__((swift_name("skipAdRequest(eventId:)")));
 - (void)stopRequestTransactionEventId:(int32_t)eventId __attribute__((swift_name("stopRequestTransaction(eventId:)")));
@@ -1211,7 +1249,12 @@ __attribute__((swift_name("WrapperAdsLoader")))
 @interface Sdk_coreWrapperAdsLoader : Sdk_coreBase
 - (instancetype)initWithAdsLoader:(Sdk_coreAdsLoader *)adsLoader googleAdView:(id<Sdk_coreGoogleAdView>)googleAdView adTracker:(Sdk_coreAdTracker *)adTracker __attribute__((swift_name("init(adsLoader:googleAdView:adTracker:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) Sdk_coreWrapperAdsLoaderCompanion *companion __attribute__((swift_name("companion")));
-- (void)executeWrapperAdWrapperAd:(Sdk_coreAd *)wrapperAd remainingAdDuration:(int64_t)remainingAdDuration callback:(void (^)(NSArray<Sdk_coreAd *> * _Nullable))callback __attribute__((swift_name("executeWrapperAd(wrapperAd:remainingAdDuration:callback:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)executeWrapperAdWrapperAd:(Sdk_coreAd *)wrapperAd remainingAdDuration:(int64_t)remainingAdDuration callback:(void (^)(NSArray<Sdk_coreAd *> * _Nullable))callback completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("executeWrapperAd(wrapperAd:remainingAdDuration:callback:completionHandler:)")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -1621,6 +1664,56 @@ __attribute__((swift_name("AdInfo")))
 @property (readonly) BOOL isSkippable __attribute__((swift_name("isSkippable")));
 @end
 
+__attribute__((swift_name("CoreMediaPlayerAdapter")))
+@protocol Sdk_coreCoreMediaPlayerAdapter
+@required
+
+/**
+ * @note This method converts all Kotlin exceptions to errors.
+*/
+- (BOOL)enqueuePlayItemPlayItem:(Sdk_corePlayItem *)playItem error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("enqueuePlayItem(playItem:)")));
+
+/**
+ * @note This method converts all Kotlin exceptions to errors.
+*/
+- (Sdk_coreMedia * _Nullable)getCurrentMediaAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("getCurrentMedia()")));
+
+/**
+ * @note This method converts all Kotlin exceptions to errors.
+*/
+- (Sdk_coreKotlinWrapped<Sdk_coreInt *> * _Nullable)getHeightAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("getHeight_()")));
+
+/**
+ * @note This method converts all Kotlin exceptions to errors.
+*/
+- (Sdk_coreKotlinWrapped<Sdk_coreFloat *> * _Nullable)getVolumeAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("getVolume()")));
+
+/**
+ * @note This method converts all Kotlin exceptions to errors.
+*/
+- (Sdk_coreKotlinWrapped<Sdk_coreBoolean *> * _Nullable)isPlayingAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("isPlaying()")));
+
+/**
+ * @note This method converts all Kotlin exceptions to errors.
+*/
+- (BOOL)pauseAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("pause_()")));
+
+/**
+ * @note This method converts all Kotlin exceptions to errors.
+*/
+- (BOOL)playNextItemAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("playNextItem()")));
+
+/**
+ * @note This method converts all Kotlin exceptions to errors.
+*/
+- (BOOL)removePlayItemPlayItem:(Sdk_corePlayItem *)playItem error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("removePlayItem(playItem:)")));
+
+/**
+ * @note This method converts all Kotlin exceptions to errors.
+*/
+- (BOOL)resumeAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("resume_()")));
+@end
+
 __attribute__((swift_name("FlowerAdViewStub")))
 @protocol Sdk_coreFlowerAdViewStub <Sdk_coreUIElement>
 @required
@@ -1682,10 +1775,38 @@ __attribute__((swift_name("FlowerEventInfo.AdPlay")))
 @property (readonly) Sdk_coreAdInfo *ad __attribute__((swift_name("ad")));
 @end
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinWrapped")))
+@interface Sdk_coreKotlinWrapped<T> : Sdk_coreBase
+- (instancetype)initWithValue:(T _Nullable)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+@property (readonly) T _Nullable value __attribute__((swift_name("value")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Media")))
+@interface Sdk_coreMedia : Sdk_coreBase
+- (instancetype)initWithUrl:(NSString *)url duration:(int32_t)duration position:(int32_t)position __attribute__((swift_name("init(url:duration:position:)"))) __attribute__((objc_designated_initializer));
+- (Sdk_coreMedia *)doCopyUrl:(NSString *)url duration:(int32_t)duration position:(int32_t)position __attribute__((swift_name("doCopy(url:duration:position:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property int32_t duration __attribute__((swift_name("duration")));
+@property (readonly) int32_t position __attribute__((swift_name("position")));
+@property (readonly) NSString *url __attribute__((swift_name("url")));
+@end
+
 __attribute__((swift_name("MediaPlayerHook")))
 @protocol Sdk_coreMediaPlayerHook
 @required
 - (id _Nullable)getPlayer __attribute__((swift_name("getPlayer()")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PlayItem")))
+@interface Sdk_corePlayItem : Sdk_coreBase
+- (instancetype)initWithUrl:(NSString *)url isAd:(BOOL)isAd __attribute__((swift_name("init(url:isAd:)"))) __attribute__((objc_designated_initializer));
+@property (readonly) BOOL isAd __attribute__((swift_name("isAd")));
+@property (readonly) NSString *url __attribute__((swift_name("url")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -2092,7 +2213,8 @@ __attribute__((swift_name("SdkContainer.ClassName")))
 @property (class, readonly) Sdk_coreSdkContainerClassName *json __attribute__((swift_name("json")));
 @property (class, readonly) Sdk_coreSdkContainerClassName *fillerAdsManager __attribute__((swift_name("fillerAdsManager")));
 @property (class, readonly) Sdk_coreSdkContainerClassName *httpClient __attribute__((swift_name("httpClient")));
-@property (class, readonly) Sdk_coreSdkContainerClassName *mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
+@property (class, readonly) Sdk_coreSdkContainerClassName *mediaPlayerAdapterWrapper __attribute__((swift_name("mediaPlayerAdapterWrapper")));
+@property (class, readonly) Sdk_coreSdkContainerClassName *platformMediaPlayerAdapter __attribute__((swift_name("platformMediaPlayerAdapter")));
 @property (class, readonly) Sdk_coreSdkContainerClassName *xmlUtil __attribute__((swift_name("xmlUtil")));
 @property (class, readonly) Sdk_coreSdkContainerClassName *adPlayer __attribute__((swift_name("adPlayer")));
 @property (class, readonly) Sdk_coreSdkContainerClassName *manipulationProxy __attribute__((swift_name("manipulationProxy")));
@@ -2227,7 +2349,7 @@ __attribute__((swift_name("GoogleAdsManager")))
 
 __attribute__((swift_name("Manipulator")))
 @interface Sdk_coreManipulator : Sdk_coreBase
-- (instancetype)initWithMediaId:(NSString *)mediaId adsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager __attribute__((swift_name("init(mediaId:adsManager:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithMediaId:(NSString *)mediaId adsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager mediaTrackManageService:(Sdk_coreMediaTrackManageService *)mediaTrackManageService __attribute__((swift_name("init(mediaId:adsManager:mediaTrackManageService:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) Sdk_coreManipulatorCompanion *companion __attribute__((swift_name("companion")));
 - (void)enqueueOriginalPlaylistPlaylistUrl:(NSString *)playlistUrl __attribute__((swift_name("enqueueOriginalPlaylist(playlistUrl:)")));
 - (NSString *)manipulateText:(NSString *)text requestUri:(NSString *)requestUri __attribute__((swift_name("manipulate(text:requestUri:)")));
@@ -2289,7 +2411,7 @@ __attribute__((swift_name("Manipulator")))
 /**
  * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
-@property (readonly) id<Sdk_coreMediaPlayerAdapter> mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
+@property (readonly) id<Sdk_coreCoreMediaPlayerAdapter> mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
 
 /**
  * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
@@ -2320,7 +2442,7 @@ __attribute__((swift_name("Manipulator")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("DashManipulator")))
 @interface Sdk_coreDashManipulator : Sdk_coreManipulator
-- (instancetype)initWithMediaId:(NSString *)mediaId adsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager __attribute__((swift_name("init(mediaId:adsManager:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithMediaId:(NSString *)mediaId adsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager mediaTrackManageService:(Sdk_coreMediaTrackManageService *)mediaTrackManageService __attribute__((swift_name("init(mediaId:adsManager:mediaTrackManageService:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) Sdk_coreDashManipulatorCompanion *companion __attribute__((swift_name("companion")));
 
 /**
@@ -2349,8 +2471,8 @@ __attribute__((swift_name("DashManipulator.Companion")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("HlsManipulator")))
 @interface Sdk_coreHlsManipulator : Sdk_coreManipulator
-- (instancetype)initWithMediaId:(NSString *)mediaId adsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager sharedState:(Sdk_coreHlsManipulatorSharedState *)sharedState __attribute__((swift_name("init(mediaId:adsManager:sharedState:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithMediaId:(NSString *)mediaId adsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager __attribute__((swift_name("init(mediaId:adsManager:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (instancetype)initWithMediaId:(NSString *)mediaId adsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager mediaTrackManageService:(Sdk_coreMediaTrackManageService *)mediaTrackManageService sharedState:(Sdk_coreHlsManipulatorSharedState *)sharedState __attribute__((swift_name("init(mediaId:adsManager:mediaTrackManageService:sharedState:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithMediaId:(NSString *)mediaId adsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager mediaTrackManageService:(Sdk_coreMediaTrackManageService *)mediaTrackManageService __attribute__((swift_name("init(mediaId:adsManager:mediaTrackManageService:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) Sdk_coreHlsManipulatorCompanion *companion __attribute__((swift_name("companion")));
 
 /**
@@ -2426,7 +2548,6 @@ __attribute__((swift_name("HlsManipulatorSharedState")))
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (readonly) Sdk_coreMutableDictionary<Sdk_coreLong *, id> *cueEventIds __attribute__((swift_name("cueEventIds")));
 @property Sdk_coreMutableDictionary<Sdk_coreInt *, Sdk_coreHlsManipulatorCueEvent *> *cueEvents __attribute__((swift_name("cueEvents")));
-@property (readonly) Sdk_coreMutableDictionary<NSString *, Sdk_coreLong *> *variantSequenceDifferences __attribute__((swift_name("variantSequenceDifferences")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -3571,7 +3692,7 @@ __attribute__((swift_name("ManipulationProxy")))
  * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
 - (Sdk_coreManipulator *)getManipulatorUrl:(NSString *)url __attribute__((swift_name("getManipulator(url:)")));
-- (void)doInitFlowerAdsManager:(Sdk_coreFlowerAdsManagerImpl *)flowerAdsManager __attribute__((swift_name("doInit(flowerAdsManager:)")));
+- (void)doInitFlowerAdsManager:(Sdk_coreFlowerAdsManagerImpl *)flowerAdsManager mediaPlayerHook:(id<Sdk_coreMediaPlayerHook> _Nullable)mediaPlayerHook __attribute__((swift_name("doInit(flowerAdsManager:mediaPlayerHook:)")));
 - (void)setChannelStreamHeadersMap:(NSDictionary<NSString *, NSString *> *)map __attribute__((swift_name("setChannelStreamHeaders(map:)")));
 
 /**
@@ -3586,6 +3707,11 @@ __attribute__((swift_name("ManipulationProxy")))
 @property Sdk_coreFlowerAdsManagerImpl *flowerAdsManager __attribute__((swift_name("flowerAdsManager")));
 @property (readonly) Sdk_coreHlsManipulatorSharedState *hlsManipulatorSharedState __attribute__((swift_name("hlsManipulatorSharedState")));
 @property (readonly) Sdk_coreMutableDictionary<NSString *, Sdk_coreManipulator *> *manipulators __attribute__((swift_name("manipulators")));
+
+/**
+ * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
+*/
+@property id<Sdk_coreMediaPlayerHook> _Nullable mediaPlayerHook __attribute__((swift_name("mediaPlayerHook")));
 
 /**
  * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
@@ -3651,7 +3777,7 @@ __attribute__((swift_name("ManipulationServer")))
  * Other uncaught Kotlin exceptions are fatal.
 */
 - (void)handleRequestRequestUri:(NSString *)requestUri requestHeaders:(NSDictionary<NSString *, NSString *> *)requestHeaders completionHandler:(void (^)(id<Sdk_coreManipulationServerResponse> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("handleRequest(requestUri:requestHeaders:completionHandler:)")));
-- (void)doInitFlowerAdsManager:(Sdk_coreFlowerAdsManagerImpl *)flowerAdsManager __attribute__((swift_name("doInit(flowerAdsManager:)")));
+- (void)doInitFlowerAdsManager:(Sdk_coreFlowerAdsManagerImpl *)flowerAdsManager mediaPlayerHook:(id<Sdk_coreMediaPlayerHook> _Nullable)mediaPlayerHook __attribute__((swift_name("doInit(flowerAdsManager:mediaPlayerHook:)")));
 
 /**
  * @note This method converts all Kotlin exceptions to errors.
@@ -3694,95 +3820,9 @@ __attribute__((swift_name("ManipulationServerResponse")))
 @end
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Media")))
-@interface Sdk_coreMedia : Sdk_coreBase
-- (instancetype)initWithUrl:(NSString *)url duration:(int32_t)duration position:(int32_t)position __attribute__((swift_name("init(url:duration:position:)"))) __attribute__((objc_designated_initializer));
-- (Sdk_coreMedia *)doCopyUrl:(NSString *)url duration:(int32_t)duration position:(int32_t)position __attribute__((swift_name("doCopy(url:duration:position:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property int32_t duration __attribute__((swift_name("duration")));
-@property (readonly) int32_t position __attribute__((swift_name("position")));
-@property (readonly) NSString *url __attribute__((swift_name("url")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("MediaChunk")))
-@interface Sdk_coreMediaChunk : Sdk_coreBase
-- (instancetype)initWithCurrentPosition:(int32_t)currentPosition url:(NSString * _Nullable)url periodId:(NSString * _Nullable)periodId __attribute__((swift_name("init(currentPosition:url:periodId:)"))) __attribute__((objc_designated_initializer));
-- (Sdk_coreMediaChunk *)doCopyCurrentPosition:(int32_t)currentPosition url:(NSString * _Nullable)url periodId:(NSString * _Nullable)periodId __attribute__((swift_name("doCopy(currentPosition:url:periodId:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property int32_t currentPosition __attribute__((swift_name("currentPosition")));
-@property NSString * _Nullable periodId __attribute__((swift_name("periodId")));
-@property NSString * _Nullable url __attribute__((swift_name("url")));
-@end
-
-__attribute__((swift_name("MediaPlayerAdapter")))
-@protocol Sdk_coreMediaPlayerAdapter
-@required
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (BOOL)enqueuePlayItemPlayItem:(Sdk_corePlayItem *)playItem error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("enqueuePlayItem(playItem:)")));
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (Sdk_coreMedia * _Nullable)getCurrentMediaAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("getCurrentMedia()")));
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (Sdk_coreMediaChunk * _Nullable)getCurrentMediaChunkAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("getCurrentMediaChunk()")));
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (Sdk_coreKotlinWrapped<Sdk_coreInt *> * _Nullable)getCurrentPositionAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("getCurrentPosition()")));
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (Sdk_coreKotlinWrapped<Sdk_coreInt *> * _Nullable)getHeightAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("getHeight_()")));
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (Sdk_coreKotlinWrapped<Sdk_coreFloat *> * _Nullable)getVolumeAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("getVolume()")));
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (Sdk_coreKotlinWrapped<Sdk_coreBoolean *> * _Nullable)isPlayingAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("isPlaying()")));
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (BOOL)pauseAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("pause_()")));
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (BOOL)playNextItemAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("playNextItem()")));
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (BOOL)removePlayItemPlayItem:(Sdk_corePlayItem *)playItem error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("removePlayItem(playItem:)")));
-
-/**
- * @note This method converts all Kotlin exceptions to errors.
-*/
-- (BOOL)resumeAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("resume_()")));
-@end
-
-__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("MediaTrackManageService")))
 @interface Sdk_coreMediaTrackManageService : Sdk_coreBase
-- (instancetype)initWithAdsManager:(Sdk_coreFlowerAdsManagerImpl *)adsManager __attribute__((swift_name("init(adsManager:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithManipulationProxy:(Sdk_coreManipulationProxy *)manipulationProxy mediaPlayerAdapter:(id<Sdk_coreCoreMediaPlayerAdapter>)mediaPlayerAdapter adsManagerListener:(id<Sdk_coreFlowerAdsManagerListener>)adsManagerListener __attribute__((swift_name("init(manipulationProxy:mediaPlayerAdapter:adsManagerListener:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) Sdk_coreMediaTrackManageServiceCompanion *companion __attribute__((swift_name("companion")));
 - (void)appendMediaTrackUrl:(NSString *)url __attribute__((swift_name("appendMediaTrack(url:)")));
 - (void)appendOrExtendSubTrackMediaTrackUrl:(NSString *)mediaTrackUrl subTrack:(Sdk_coreMediaTrackManageServiceSubTrack *)subTrack __attribute__((swift_name("appendOrExtendSubTrack(mediaTrackUrl:subTrack:)")));
@@ -3823,19 +3863,11 @@ __attribute__((swift_name("MediaTrackManageService.SubTrack")))
 @property (readonly) NSString *url __attribute__((swift_name("url")));
 @end
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("PlayItem")))
-@interface Sdk_corePlayItem : Sdk_coreBase
-- (instancetype)initWithUrl:(NSString *)url isAd:(BOOL)isAd __attribute__((swift_name("init(url:isAd:)"))) __attribute__((objc_designated_initializer));
-@property (readonly) BOOL isAd __attribute__((swift_name("isAd")));
-@property (readonly) NSString *url __attribute__((swift_name("url")));
-@end
-
 __attribute__((swift_name("AdPlayer")))
 @protocol Sdk_coreAdPlayer
 @required
 - (void)addCallbackAdPlayerCallback:(id<Sdk_coreAdPlayerCallback>)adPlayerCallback __attribute__((swift_name("addCallback(adPlayerCallback:)")));
-- (Sdk_coreAdProgress *)getProgress __attribute__((swift_name("getProgress()")));
+- (Sdk_coreAdProgress *)getProgress_ __attribute__((swift_name("getProgress_()")));
 - (BOOL)isPause __attribute__((swift_name("isPause()")));
 - (void)loadMediaUrls:(Sdk_corePlatformList<NSString *> *)mediaUrls totalDuration:(int32_t)totalDuration adPlayerView:(id<Sdk_coreAdPlayerView>)adPlayerView __attribute__((swift_name("load(mediaUrls:totalDuration:adPlayerView:)")));
 - (void)pause __attribute__((swift_name("pause()")));
@@ -3934,13 +3966,6 @@ __attribute__((swift_name("DeferredStub")))
  * @note This method converts all Kotlin exceptions to errors.
 */
 - (void)awaitWithCompletionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("await(completionHandler:)")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("KotlinWrapped")))
-@interface Sdk_coreKotlinWrapped<T> : Sdk_coreBase
-- (instancetype)initWithValue:(T _Nullable)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
-@property (readonly) T _Nullable value __attribute__((swift_name("value")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -4355,12 +4380,6 @@ __attribute__((swift_name("ManipulationProxyKt")))
 @end
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("MediaPlayerAdapterKt")))
-@interface Sdk_coreMediaPlayerAdapterKt : Sdk_coreBase
-@property (class, readonly) int32_t ERROR_CURRENT_POSITION __attribute__((swift_name("ERROR_CURRENT_POSITION")));
-@end
-
-__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("MediaPlayerHookExceptionKt")))
 @interface Sdk_coreMediaPlayerHookExceptionKt : Sdk_coreBase
 + (NSString *)formatMediaPlayerHookExceptionStringExpected:(NSString *)expected received:(NSString *)received __attribute__((swift_name("formatMediaPlayerHookExceptionString(expected:received:)")));
@@ -4547,14 +4566,20 @@ __attribute__((swift_name("Kotlinx_coroutines_coreFlow")))
 - (void)collectCollector:(id<Sdk_coreKotlinx_coroutines_coreFlowCollector>)collector completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("collect(collector:completionHandler:)")));
 @end
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("KotlinUnit")))
-@interface Sdk_coreKotlinUnit : Sdk_coreBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)unit __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) Sdk_coreKotlinUnit *shared __attribute__((swift_name("shared")));
-- (NSString *)description __attribute__((swift_name("description()")));
+__attribute__((swift_name("KotlinFunction")))
+@protocol Sdk_coreKotlinFunction
+@required
+@end
+
+__attribute__((swift_name("KotlinSuspendFunction2")))
+@protocol Sdk_coreKotlinSuspendFunction2 <Sdk_coreKotlinFunction>
+@required
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)invokeP1:(id _Nullable)p1 p2:(id _Nullable)p2 completionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("invoke(p1:p2:completionHandler:)")));
 @end
 
 __attribute__((swift_name("Kotlinx_serialization_coreSerializationStrategy")))
@@ -4856,11 +4881,6 @@ __attribute__((swift_name("Ktor_ioByteReadChannel")))
 @property (readonly) Sdk_coreKotlinThrowable * _Nullable closedCause __attribute__((swift_name("closedCause")));
 @property (readonly) BOOL isClosedForRead __attribute__((swift_name("isClosedForRead")));
 @property (readonly) id<Sdk_coreKotlinx_io_coreSource> readBuffer __attribute__((swift_name("readBuffer")));
-@end
-
-__attribute__((swift_name("KotlinFunction")))
-@protocol Sdk_coreKotlinFunction
-@required
 @end
 
 __attribute__((swift_name("KotlinSuspendFunction0")))
@@ -5876,17 +5896,6 @@ __attribute__((swift_name("Ktor_utilsPipelinePhase")))
 @property (readonly) NSString *name __attribute__((swift_name("name")));
 @end
 
-__attribute__((swift_name("KotlinSuspendFunction2")))
-@protocol Sdk_coreKotlinSuspendFunction2 <Sdk_coreKotlinFunction>
-@required
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)invokeP1:(id _Nullable)p1 p2:(id _Nullable)p2 completionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("invoke(p1:p2:completionHandler:)")));
-@end
-
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Ktor_client_coreHttpReceivePipeline.Phases")))
 @interface Sdk_coreKtor_client_coreHttpReceivePipelinePhases : Sdk_coreBase
@@ -5897,6 +5906,16 @@ __attribute__((swift_name("Ktor_client_coreHttpReceivePipeline.Phases")))
 @property (readonly) Sdk_coreKtor_utilsPipelinePhase *After __attribute__((swift_name("After")));
 @property (readonly) Sdk_coreKtor_utilsPipelinePhase *Before __attribute__((swift_name("Before")));
 @property (readonly) Sdk_coreKtor_utilsPipelinePhase *State __attribute__((swift_name("State")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinUnit")))
+@interface Sdk_coreKotlinUnit : Sdk_coreBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)unit __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) Sdk_coreKotlinUnit *shared __attribute__((swift_name("shared")));
+- (NSString *)description __attribute__((swift_name("description()")));
 @end
 
 __attribute__((objc_subclassing_restricted))

@@ -7,16 +7,16 @@ import MobileVLCKit
 class MediaPlayerAdapterFactory: sdk_core.SdkContainerBeanFactory {
     func create(args: KotlinArray<AnyObject>) throws -> KotlinWrapped<AnyObject> {
         let mediaPlayerHook = args.get(index: 0) as! MediaPlayerHook
-        let flowerAdsManager = args.get(index: 1) as! FlowerAdsManagerImpl
+        let adsManagerListener = args.get(index: 1) as! FlowerAdsManagerListener
         let player = mediaPlayerHook.getPlayer()
 
         if let avplayer = player as? AVQueuePlayer {
-            return KotlinWrapped(value: AVQueuePlayerAdapter(mediaPlayerHook: mediaPlayerHook, flowerAdsManager: flowerAdsManager))
+            return KotlinWrapped(value: AVQueuePlayerAdapter(mediaPlayerHook: mediaPlayerHook, adsManagerListener: adsManagerListener))
         }
 
         #if canImport(MobileVLCKit)
         if let vlcMediaListPlayer = player as? VLCMediaListPlayer {
-            return KotlinWrapped(value: VLCMediaListPlayerAdapter(mediaPlayerHook: mediaPlayerHook, flowerAdsManager: flowerAdsManager))
+            return KotlinWrapped(value: VLCMediaListPlayerAdapter(mediaPlayerHook: mediaPlayerHook, adsManagerListener: adsManagerListener))
         }
         #endif
 
