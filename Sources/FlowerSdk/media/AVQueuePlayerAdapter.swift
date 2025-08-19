@@ -1,7 +1,7 @@
 import AVFoundation
 import sdk_core
 
-class AVQueuePlayerAdapter: NSObject, CoreMediaPlayerAdapter {
+class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
     private var mediaPlayerHook: MediaPlayerHook
     private var adsManagerListener: FlowerAdsManagerListener
 
@@ -48,23 +48,23 @@ class AVQueuePlayerAdapter: NSObject, CoreMediaPlayerAdapter {
         throw Throwable(message: "No media available")
 }
 
-    func isPlaying() throws -> KotlinWrapped<KotlinBoolean> {
-        KotlinWrapped(value: KotlinBoolean(value: try player.rate != 0.0))
+    func isPlaying() throws -> Bool {
+        try player.rate != 0.0
     }
 
-    func getVolume() throws -> KotlinWrapped<KotlinFloat> {
-        KotlinWrapped(value: KotlinFloat(value: try player.volume))
+    func getVolume() throws -> Float {
+        try player.volume
     }
 
-    func getHeight_() throws -> KotlinWrapped<KotlinInt> {
-        KotlinWrapped(value: KotlinInt(value: Int32(try player.currentItem?.presentationSize.height ?? 0)))
+    func getHeight() throws -> Int32 {
+        Int32(try player.currentItem?.presentationSize.height ?? 0)
     }
 
-    func pause_() throws {
+    func pause() throws {
         try player.pause()
     }
 
-    func resume_() throws {
+    func resume() throws {
         try player.play()
     }
 

@@ -43,23 +43,23 @@ class VLCMediaListPlayerAdapter: MediaPlayerAdapter {
         )
     }
 
-    func getVolume() throws -> KotlinWrapped<KotlinFloat> {
-        KotlinWrapped(value: KotlinFloat(value: AVAudioSession.sharedInstance().outputVolume))
+    func getVolume() throws -> Float {
+        AVAudioSession.sharedInstance().outputVolume
     }
 
-    func isPlaying() throws -> KotlinWrapped<KotlinBoolean> {
-        KotlinWrapped(value: KotlinBoolean(value: try mediaPlayer.isPlaying))
+    func isPlaying() throws -> Bool {
+        try mediaPlayer.isPlaying
     }
 
-    func getHeight_() throws -> KotlinWrapped<KotlinInt> {
-        KotlinWrapped(value: KotlinInt(value: Int32(try mediaPlayer.videoSize.height)))
+    func getHeight() throws -> Int32 {
+        Int32(try mediaPlayer.videoSize.height)
     }
 
-    func pause_() throws {
+    func pause() throws {
         fatalError("Not implemented")
     }
 
-    func resume_() throws {
+    func resume() throws {
         fatalError("Not implemented")
     }
 

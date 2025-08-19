@@ -37,6 +37,7 @@ public class FlowerSdk {
                     sdk_core.SdkContainer.ClassName.cacheService: CacheServiceImpl(),
                 ]),
                 factories: PlatformMap(storage: [
+                    sdk_core.SdkContainer.ClassName.mediaPlayerAdapterWrapper: MediaPlayerAdapterWrapperFactory(),
                     sdk_core.SdkContainer.ClassName.platformMediaPlayerAdapter: MediaPlayerAdapterFactory(),
                     sdk_core.SdkContainer.ClassName.platformFile: PlatformFileImplFactory(),
                     sdk_core.SdkContainer.ClassName.manipulationProxy: ManipulationProxyFactory(),
