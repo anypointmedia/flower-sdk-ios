@@ -78,22 +78,32 @@ private class AVPlayerViewControllerListener: FlowerAdsManagerListener {
     }
 
     public func onPrepare(adDurationMs: Int32) {
-        controller.showsPlaybackControls = false
+        DispatchQueue.main.async {
+            self.controller.showsPlaybackControls = false
+        }
     }
 
     public func onPlay() {
-        controller.showsPlaybackControls = false
+        DispatchQueue.main.async {
+            self.controller.showsPlaybackControls = false
+        }
     }
 
     public func onCompleted() {
-        controller.showsPlaybackControls = true
+        DispatchQueue.main.async {
+            self.controller.showsPlaybackControls = true
+        }
     }
 
     public func onError(error: FlowerError?) {
-        controller.showsPlaybackControls = true
+        DispatchQueue.main.async {
+            self.controller.showsPlaybackControls = true
+        }
     }
 
     public func onAdSkipped(reason: Int32) {
-        controller.showsPlaybackControls = true
+        DispatchQueue.main.async {
+            self.controller.showsPlaybackControls = true
+        }
     }
 }

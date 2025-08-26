@@ -31,6 +31,11 @@ open class FlowerAVPlayer: AVQueuePlayer {
     }
 
     open override func play() {
+        if (changedChannelUrl != nil) {
+            super.play()
+            return
+        }
+
         guard let item = currentItem else {
             logger.warn { "FlowerAVPlayer will play without FlowerAds since currentItem is nil" }
             super.play()
@@ -45,11 +50,6 @@ open class FlowerAVPlayer: AVQueuePlayer {
 
         guard let adConfig = adConfig as? FlowerLinearTvAdConfig else {
             logger.warn { "FlowerAVPlayer will play without FlowerAds since adConfig was not properly set." }
-            super.play()
-            return
-        }
-
-        if (changedChannelUrl != nil) {
             super.play()
             return
         }
