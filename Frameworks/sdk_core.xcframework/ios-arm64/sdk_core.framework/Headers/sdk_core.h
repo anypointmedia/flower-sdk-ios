@@ -6,7 +6,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class Sdk_coreScte35DecoderCompanion, Sdk_coreSpliceInfoSection, Sdk_coreKotlinByteArray, Sdk_coreKotlinThrowable, Sdk_coreKotlinArray<T>, Sdk_coreKotlinException, Sdk_coreSpliceInsert, Sdk_coreSpliceTime, Sdk_coreBreakDuration, Sdk_coreKmLogging, Sdk_coreKotlinPair<__covariant A, __covariant B>, Sdk_coreLogLevel, Sdk_coreKmLog, Sdk_coreKotlinEnumCompanion, Sdk_coreKotlinEnum<E>, Sdk_corePlatform, Sdk_coreTimingLogCompanion, Sdk_coreTimingLogTiming, Sdk_coreHex, Sdk_coreLifecycleManager, Sdk_coreSdkContainerClassName, Sdk_corePlatformMap<K, V>, Sdk_coreFlowerAdsManagerImpl, Sdk_coreAdTracker, Sdk_coreAdHandlerCompanion, Sdk_coreAdsLoader, Sdk_coreManipulationProxy, Sdk_coreSdkContainer, Sdk_coreAdList, Sdk_coreWrapperAdsLoader, Sdk_coreLogger, Sdk_coreFLogging, Sdk_coreAdTrackerCompanion, Sdk_coreAd, Sdk_coreGoogleAdReportLogEvent, Sdk_coreAdUrlMacroCompanion, Sdk_coreAdUrlMacroValue, Sdk_coreAdUrlMacroType, Sdk_coreAdsFillingServiceCompanion, Sdk_coreAdHandler, Sdk_coreAdsLoaderCompanion, Sdk_coreCacheConfig, Sdk_coreCreativeConvertServiceCompanion, Sdk_coreFillerAdsManagerCompanion, Sdk_coreFlowerAdsManagerImplCompanion, Sdk_coreFlowerAdsManagerListeners, Sdk_coreMediaTrackManageService, Sdk_coreFlowerError, Sdk_coreFlowerAdsManagerListenersCompanion, Sdk_corePlatformList<E>, Sdk_coreLinearTVAdHandlerCompanion, Sdk_coreLinearTVAdHandlerLinearTvAdRequest, Sdk_coreNormalAdHandlerCompanion, Sdk_coreVastParserCompanion, Sdk_coreVmapParserCompanion, Sdk_coreAdBreak, Sdk_coreNormalAdHandler, Sdk_coreVodAdHandlerCompanion, Sdk_coreWrapperAdsLoaderCompanion, Sdk_coreCreative, Sdk_coreAdTrackingEvent, Sdk_coreAdClick, Sdk_coreAdCompanion, Sdk_coreConvertCreativeRequestCompanion, Sdk_coreCreativeType, Sdk_coreCreativeMedia, Sdk_coreCreativeMediaCompanion, Sdk_coreManifestLoader, Sdk_coreCreativeMediaM3u8Companion, Sdk_coreVariant, Sdk_coreMediaPlaylist, Sdk_coreMPD, Sdk_coreCreativeResponseAsset, Sdk_coreCreativeResponseCompanion, Sdk_coreCreativeResponseAssetCompanion, Sdk_coreCreativeTypeCompanion, Sdk_coreUiTextEn, Sdk_coreUiTextKo, Sdk_coreAdInfo, Sdk_corePlayItem, Sdk_coreMedia, Sdk_coreKotlinWrapped<T>, Sdk_coreFlowerEventInfo, Sdk_coreFlowerEventInfoAdBreakStarted, Sdk_coreFlowerEventInfoAdCompleted, Sdk_coreFlowerEventInfoAdPlay, Sdk_coreCacheConfigStrategy, Sdk_coreCacheConfigCompanion, Sdk_coreCacheServiceCompanion, Sdk_coreConcurrentQueue, Sdk_coreFlowerConfigService, Sdk_coreKtor_client_coreHttpClient, Sdk_coreCachedHttpClientCompanion, Sdk_coreKtor_client_coreHttpRequestBuilder, Sdk_coreCachedHttpClientResponse, Sdk_coreKtor_httpHttpStatusCode, Sdk_coreErrorCodeCompanion, Sdk_coreErrorCode, Sdk_coreErrorLogCompanion, Sdk_coreErrorLogSenderCompanion, Sdk_coreErrorLog, Sdk_coreFlowerConfigServiceCompanion, Sdk_coreXmlNode, Sdk_coreFlowerConfigServiceStartupConfig, Sdk_coreFlowerConfigServiceStartupConfigKey, Sdk_corePlatformAnalytics, Sdk_coreSdkContainerCompanion, Sdk_coreSdkContainerLogLevel, Sdk_coreAdUrlMacro, Sdk_coreCacheService, Sdk_coreCachedHttpClient, Sdk_coreErrorLogSender, Sdk_coreFillerAdsManager, Sdk_coreKotlinx_serialization_jsonJson, Sdk_coreDeviceServiceCompanion, Sdk_coreManipulatorCompanion, Sdk_coreLinearTVAdHandler, Sdk_coreKotlinx_datetimeInstant, Sdk_coreManipulator, Sdk_coreDashManipulatorCompanion, Sdk_coreHlsManipulatorSharedState, Sdk_coreHlsManipulatorCompanion, Sdk_coreHlsManipulatorCueOutMarker, Sdk_coreHlsManipulatorCueInMarker, Sdk_coreHlsManipulatorCueEvent, Sdk_coreManifestLoaderCompanion, Sdk_coreRepresentation, Sdk_coreMPDCompanion, Sdk_corePeriod, Sdk_corePeriodCompanion, Sdk_coreAdaptationSet, Sdk_coreTimeScaled, Sdk_coreSpliceInfoSection_, Sdk_coreSegmentBase, Sdk_coreSegmentList, Sdk_coreSegmentTemplate, Sdk_coreInitialization, Sdk_coreSegmentURL, Sdk_coreMediaType, Sdk_coreChannels, Sdk_coreAlternativeRendition, Sdk_coreByteRange, Sdk_coreCueOut, Sdk_coreScte35, Sdk_coreCueOutCont, Sdk_coreDateRange, Sdk_coreResolution, Sdk_coreVideoRange, Sdk_coreIFrameVariant, Sdk_coreKeyMethodCompanion, Sdk_coreKeyMethod, Sdk_coreStartTimeOffset, Sdk_corePlaylistVariable, Sdk_corePlaylist, Sdk_coreSessionData, Sdk_coreSegmentKey, Sdk_coreMasterPlaylist, Sdk_corePlaylistType, Sdk_coreMediaSegment, Sdk_coreServerControl, Sdk_corePartialSegmentInformation, Sdk_corePartialSegment, Sdk_coreSkip, Sdk_corePreloadHint, Sdk_coreRenditionReport, Sdk_coreSegmentMap, Sdk_coreMediaTypeCompanion, Sdk_corePreloadHintType, Sdk_coreAbstractPlaylistParserCompanion, Sdk_coreTextBuilder, Sdk_coreAbstractPlaylistParser<T, B>, Sdk_coreParsingMode, Sdk_coreMasterPlaylistParserCompanion, Sdk_coreMediaPlaylistParserCompanion, Sdk_coreMediaPlaylistParserBuilder, Sdk_coreParsingModeCompanion, Sdk_corePartialSegmentAttributeCompanion, Sdk_corePartialSegmentAttribute, Sdk_corePartialSegmentInformationAttributeCompanion, Sdk_corePartialSegmentInformationAttribute, Sdk_coreKotlinx_io_coreIOException, Sdk_corePlaylistVariableAttributeCompanion, Sdk_corePlaylistVariableAttribute, Sdk_corePreloadHintAttributeCompanion, Sdk_corePreloadHintAttribute, Sdk_coreRenditionReportAttributeCompanion, Sdk_coreRenditionReportAttribute, Sdk_coreSegmentKeyAttributeCompanion, Sdk_coreSegmentKeyAttribute, Sdk_coreServerControlAttributeCompanion, Sdk_coreServerControlAttribute, Sdk_coreSkipAttributeCompanion, Sdk_coreSkipAttribute, Sdk_coreKotlinStringBuilder, Sdk_coreManipulationProxyCompanion, Sdk_coreManipulationProxyProxyType, Sdk_coreManipulationProxyProxyTypeCompanion, Sdk_coreManipulationServerCompanion, Sdk_coreKotlinRegex, Sdk_coreMediaTrackManageServiceCompanion, Sdk_coreMediaTrackManageServiceSubTrack, Sdk_coreMediaTrackManageServiceMediaTrack, Sdk_coreAdProgress, Sdk_coreAdPlayerCallbacksCompanion, Sdk_coreAdProgressCompanion, Sdk_coreConcurrentQueueCompanion, Sdk_corePlatform_Companion, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher, Sdk_coreRedirectCachePluginCompanion, Sdk_coreKtor_utilsAttributeKey<T>, Sdk_coreRedirectCachePlugin, Sdk_coreRedirectCachePluginConfig, Sdk_coreStringUtils, Sdk_coreKtor_client_coreHttpClientEngineConfig, Sdk_coreKtor_client_coreHttpClientConfig<T>, Sdk_coreKtor_eventsEvents, Sdk_coreKtor_client_coreHttpReceivePipeline, Sdk_coreKtor_client_coreHttpRequestPipeline, Sdk_coreKtor_client_coreHttpResponsePipeline, Sdk_coreKtor_client_coreHttpSendPipeline, Sdk_coreKtor_client_coreHttpResponse, Sdk_coreKtor_httpHeadersBuilder, Sdk_coreKtor_client_coreHttpRequestBuilderCompanion, Sdk_coreKtor_client_coreHttpRequestData, Sdk_coreKtor_httpURLBuilder, Sdk_coreKtor_utilsTypeInfo, Sdk_coreKtor_httpHttpMethod, Sdk_coreKtor_httpUrlCompanion, Sdk_coreKtor_httpURLProtocol, Sdk_coreKtor_httpUrl, Sdk_coreKotlinByteIterator, NSData, Sdk_coreKotlinx_coroutines_coreDispatchers, Sdk_coreKotlinx_coroutines_coreMainCoroutineDispatcher, Sdk_corePlatformSet<E>, Sdk_coreManipulationServer, Sdk_coreKotlinNothing, Sdk_coreKotlinCancellationException, Sdk_coreKotlinRuntimeException, Sdk_coreKotlinIllegalStateException, Sdk_coreKtor_httpHttpStatusCodeCompanion, Sdk_coreKotlinx_serialization_coreSerializersModule, Sdk_coreKotlinx_serialization_jsonJsonDefault, Sdk_coreKotlinx_serialization_jsonJsonElement, Sdk_coreKotlinx_serialization_jsonJsonConfiguration, Sdk_coreKotlinx_datetimeInstantCompanion, Sdk_coreKotlinCharArray, Sdk_coreKotlinRegexOption, Sdk_coreKotlinRegexCompanion, Sdk_coreKotlinAbstractCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcherKey, Sdk_coreKtor_client_coreHttpResponseData, Sdk_coreKtor_client_coreProxyConfig, Sdk_coreKtor_eventsEventDefinition<T>, Sdk_coreKtor_utilsPipelinePhase, Sdk_coreKtor_utilsPipeline<TSubject, TContext>, Sdk_coreKtor_client_coreHttpReceivePipelinePhases, Sdk_coreKotlinUnit, Sdk_coreKtor_client_coreHttpRequestPipelinePhases, Sdk_coreKtor_client_coreHttpResponsePipelinePhases, Sdk_coreKtor_client_coreHttpResponseContainer, Sdk_coreKtor_client_coreHttpClientCall, Sdk_coreKtor_client_coreHttpSendPipelinePhases, Sdk_coreKtor_utilsGMTDate, Sdk_coreKtor_httpHttpProtocolVersion, Sdk_coreKtor_utilsStringValuesBuilderImpl, Sdk_coreKtor_httpOutgoingContent, Sdk_coreKtor_httpURLBuilderCompanion, Sdk_coreKtor_httpHttpMethodCompanion, Sdk_coreKtor_httpURLProtocolCompanion, Sdk_coreKotlinx_serialization_coreSerialKind, Sdk_coreKotlinx_serialization_jsonJsonElementCompanion, Sdk_coreKotlinx_serialization_jsonClassDiscriminatorMode, Sdk_coreKotlinCharIterator, Sdk_coreKotlinMatchResultDestructured, Sdk_coreKotlinIntRange, Sdk_coreKotlinx_io_coreBuffer, Sdk_coreKotlinAbstractCoroutineContextKey<B, E>, Sdk_coreKtor_client_coreHttpClientCallCompanion, Sdk_coreKtor_utilsWeekDay, Sdk_coreKtor_utilsMonth, Sdk_coreKtor_utilsGMTDateCompanion, Sdk_coreKtor_httpHttpProtocolVersionCompanion, Sdk_coreKtor_httpContentType, Sdk_coreKotlinKTypeProjection, Sdk_coreKotlinMatchGroup, Sdk_coreKotlinIntProgressionCompanion, Sdk_coreKotlinIntIterator, Sdk_coreKotlinIntProgression, Sdk_coreKotlinIntRangeCompanion, Sdk_coreKtor_utilsWeekDayCompanion, Sdk_coreKtor_utilsMonthCompanion, Sdk_coreKtor_httpHeaderValueParam, Sdk_coreKtor_httpHeaderValueWithParametersCompanion, Sdk_coreKtor_httpHeaderValueWithParameters, Sdk_coreKtor_httpContentTypeCompanion, Sdk_coreKotlinKVariance, Sdk_coreKotlinKTypeProjectionCompanion;
+@class Sdk_coreScte35DecoderCompanion, Sdk_coreSpliceInfoSection, Sdk_coreKotlinByteArray, Sdk_coreKotlinThrowable, Sdk_coreKotlinArray<T>, Sdk_coreKotlinException, Sdk_coreSpliceInsert, Sdk_coreSpliceTime, Sdk_coreBreakDuration, Sdk_coreKmLogging, Sdk_coreKotlinPair<__covariant A, __covariant B>, Sdk_coreLogLevel, Sdk_coreKmLog, Sdk_coreKotlinEnumCompanion, Sdk_coreKotlinEnum<E>, Sdk_corePlatform, Sdk_coreTimingLogCompanion, Sdk_coreTimingLogTiming, Sdk_coreHex, Sdk_coreLifecycleManager, Sdk_coreSdkContainerClassName, Sdk_corePlatformMap<K, V>, Sdk_coreFlowerAdsManagerImpl, Sdk_coreAdTracker, Sdk_coreAdHandlerCompanion, Sdk_coreAdsLoader, Sdk_coreManipulationProxy, Sdk_coreSdkContainer, Sdk_coreAdList, Sdk_coreWrapperAdsLoader, Sdk_coreLogger, Sdk_coreFLogging, Sdk_coreAdTrackerCompanion, Sdk_coreAd, Sdk_coreGoogleAdReportLogEvent, Sdk_coreAdUrlMacroCompanion, Sdk_coreAdUrlMacroValue, Sdk_coreAdUrlMacroType, Sdk_coreAdsFillingServiceCompanion, Sdk_coreAdHandler, Sdk_coreAdsLoaderCompanion, Sdk_coreCacheConfig, Sdk_coreCreativeConvertServiceCompanion, Sdk_coreFillerAdsManagerCompanion, Sdk_coreFlowerAdsManagerImplCompanion, Sdk_coreFlowerAdsManagerListeners, Sdk_coreMediaTrackManageService, Sdk_coreFlowerError, Sdk_coreFlowerAdsManagerListenersCompanion, Sdk_corePlatformList<E>, Sdk_coreLinearTVAdHandlerCompanion, Sdk_coreLinearTVAdHandlerLinearTvAdRequest, Sdk_coreNormalAdHandlerCompanion, Sdk_coreVastParserCompanion, Sdk_coreVmapParserCompanion, Sdk_coreAdBreak, Sdk_coreNormalAdHandler, Sdk_coreVodAdHandlerCompanion, Sdk_coreWrapperAdsLoaderCompanion, Sdk_coreCreative, Sdk_coreAdTrackingEvent, Sdk_coreAdClick, Sdk_coreAdCompanion, Sdk_coreConvertCreativeRequestCompanion, Sdk_coreCreativeType, Sdk_coreCreativeMedia, Sdk_coreCreativeMediaCompanion, Sdk_coreManifestLoader, Sdk_coreCreativeMediaM3u8Companion, Sdk_coreVariant, Sdk_coreMediaPlaylist, Sdk_coreMPD, Sdk_coreCreativeResponseAsset, Sdk_coreCreativeResponseCompanion, Sdk_coreCreativeResponseAssetCompanion, Sdk_coreCreativeTypeCompanion, Sdk_coreUiTextEn, Sdk_coreUiTextKo, Sdk_coreAdInfo, Sdk_corePlayItem, Sdk_coreMedia, Sdk_coreKotlinWrapped<T>, Sdk_coreFlowerEventInfo, Sdk_coreFlowerEventInfoAdBreakStarted, Sdk_coreFlowerEventInfoAdCompleted, Sdk_coreFlowerEventInfoAdPlay, Sdk_coreCacheConfigStrategy, Sdk_coreCacheConfigCompanion, Sdk_coreCacheServiceCompanion, Sdk_coreConcurrentQueue, Sdk_coreFlowerConfigService, Sdk_coreKtor_client_coreHttpClient, Sdk_coreCachedHttpClientCompanion, Sdk_coreKtor_client_coreHttpRequestBuilder, Sdk_coreCachedHttpClientResponse, Sdk_coreKtor_httpHttpStatusCode, Sdk_coreFlowerConfigServiceCompanion, Sdk_coreXmlNode, Sdk_coreFlowerConfigServiceStartupConfig, Sdk_coreFlowerConfigServiceStartupConfigKey, Sdk_coreSdkContainerCompanion, Sdk_coreSdkContainerLogLevel, Sdk_coreAdUrlMacro, Sdk_coreCacheService, Sdk_coreCachedHttpClient, Sdk_coreFillerAdsManager, Sdk_coreKotlinx_serialization_jsonJson, Sdk_coreDeviceServiceCompanion, Sdk_coreManipulatorCompanion, Sdk_coreLinearTVAdHandler, Sdk_coreKotlinx_datetimeInstant, Sdk_coreManipulator, Sdk_coreDashManipulatorCompanion, Sdk_coreHlsManipulatorSharedState, Sdk_coreHlsManipulatorCompanion, Sdk_coreHlsManipulatorCueOutMarker, Sdk_coreHlsManipulatorCueInMarker, Sdk_coreHlsManipulatorCueEvent, Sdk_coreManifestLoaderCompanion, Sdk_coreRepresentation, Sdk_coreMPDCompanion, Sdk_corePeriod, Sdk_corePeriodCompanion, Sdk_coreAdaptationSet, Sdk_coreTimeScaled, Sdk_coreSpliceInfoSection_, Sdk_coreSegmentBase, Sdk_coreSegmentList, Sdk_coreSegmentTemplate, Sdk_coreInitialization, Sdk_coreSegmentURL, Sdk_coreMediaType, Sdk_coreChannels, Sdk_coreAlternativeRendition, Sdk_coreByteRange, Sdk_coreCueOut, Sdk_coreScte35, Sdk_coreCueOutCont, Sdk_coreDateRange, Sdk_coreResolution, Sdk_coreVideoRange, Sdk_coreIFrameVariant, Sdk_coreKeyMethodCompanion, Sdk_coreKeyMethod, Sdk_coreStartTimeOffset, Sdk_corePlaylistVariable, Sdk_corePlaylist, Sdk_coreSessionData, Sdk_coreSegmentKey, Sdk_coreMasterPlaylist, Sdk_corePlaylistType, Sdk_coreMediaSegment, Sdk_coreServerControl, Sdk_corePartialSegmentInformation, Sdk_corePartialSegment, Sdk_coreSkip, Sdk_corePreloadHint, Sdk_coreRenditionReport, Sdk_coreSegmentMap, Sdk_coreMediaTypeCompanion, Sdk_corePreloadHintType, Sdk_coreAbstractPlaylistParserCompanion, Sdk_coreTextBuilder, Sdk_coreAbstractPlaylistParser<T, B>, Sdk_coreParsingMode, Sdk_coreMasterPlaylistParserCompanion, Sdk_coreMediaPlaylistParserCompanion, Sdk_coreMediaPlaylistParserBuilder, Sdk_coreParsingModeCompanion, Sdk_corePartialSegmentAttributeCompanion, Sdk_corePartialSegmentAttribute, Sdk_corePartialSegmentInformationAttributeCompanion, Sdk_corePartialSegmentInformationAttribute, Sdk_coreKotlinx_io_coreIOException, Sdk_corePlaylistVariableAttributeCompanion, Sdk_corePlaylistVariableAttribute, Sdk_corePreloadHintAttributeCompanion, Sdk_corePreloadHintAttribute, Sdk_coreRenditionReportAttributeCompanion, Sdk_coreRenditionReportAttribute, Sdk_coreSegmentKeyAttributeCompanion, Sdk_coreSegmentKeyAttribute, Sdk_coreServerControlAttributeCompanion, Sdk_coreServerControlAttribute, Sdk_coreSkipAttributeCompanion, Sdk_coreSkipAttribute, Sdk_coreKotlinStringBuilder, Sdk_coreManipulationProxyCompanion, Sdk_coreManipulationProxyProxyType, Sdk_coreManipulationProxyProxyTypeCompanion, Sdk_coreManipulationServerCompanion, Sdk_coreKotlinRegex, Sdk_coreMediaTrackManageServiceCompanion, Sdk_coreMediaTrackManageServiceSubTrack, Sdk_coreMediaTrackManageServiceMediaTrack, Sdk_coreAdProgress, Sdk_coreAdPlayerCallbacksCompanion, Sdk_coreAdProgressCompanion, Sdk_coreConcurrentQueueCompanion, Sdk_corePlatform_Companion, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcher, Sdk_coreRedirectCachePluginCompanion, Sdk_coreKtor_utilsAttributeKey<T>, Sdk_coreRedirectCachePlugin, Sdk_coreRedirectCachePluginConfig, Sdk_coreStringUtils, Sdk_coreKtor_client_coreHttpClientEngineConfig, Sdk_coreKtor_client_coreHttpClientConfig<T>, Sdk_coreKtor_eventsEvents, Sdk_coreKtor_client_coreHttpReceivePipeline, Sdk_coreKtor_client_coreHttpRequestPipeline, Sdk_coreKtor_client_coreHttpResponsePipeline, Sdk_coreKtor_client_coreHttpSendPipeline, Sdk_coreKtor_client_coreHttpResponse, Sdk_coreKtor_httpHeadersBuilder, Sdk_coreKtor_client_coreHttpRequestBuilderCompanion, Sdk_coreKtor_client_coreHttpRequestData, Sdk_coreKtor_httpURLBuilder, Sdk_coreKtor_utilsTypeInfo, Sdk_coreKtor_httpHttpMethod, Sdk_coreKtor_httpUrlCompanion, Sdk_coreKtor_httpURLProtocol, Sdk_coreKtor_httpUrl, Sdk_coreKotlinByteIterator, NSData, Sdk_coreKotlinx_coroutines_coreDispatchers, Sdk_coreKotlinx_coroutines_coreMainCoroutineDispatcher, Sdk_corePlatformSet<E>, Sdk_coreManipulationServer, Sdk_coreKotlinNothing, Sdk_coreKotlinCancellationException, Sdk_coreKotlinRuntimeException, Sdk_coreKotlinIllegalStateException, Sdk_coreKtor_httpHttpStatusCodeCompanion, Sdk_coreKotlinx_serialization_coreSerializersModule, Sdk_coreKotlinx_serialization_jsonJsonDefault, Sdk_coreKotlinx_serialization_jsonJsonElement, Sdk_coreKotlinx_serialization_jsonJsonConfiguration, Sdk_coreKotlinx_datetimeInstantCompanion, Sdk_coreKotlinCharArray, Sdk_coreKotlinRegexOption, Sdk_coreKotlinRegexCompanion, Sdk_coreKotlinAbstractCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreCoroutineDispatcherKey, Sdk_coreKtor_client_coreHttpResponseData, Sdk_coreKtor_client_coreProxyConfig, Sdk_coreKtor_eventsEventDefinition<T>, Sdk_coreKtor_utilsPipelinePhase, Sdk_coreKtor_utilsPipeline<TSubject, TContext>, Sdk_coreKtor_client_coreHttpReceivePipelinePhases, Sdk_coreKotlinUnit, Sdk_coreKtor_client_coreHttpRequestPipelinePhases, Sdk_coreKtor_client_coreHttpResponsePipelinePhases, Sdk_coreKtor_client_coreHttpResponseContainer, Sdk_coreKtor_client_coreHttpClientCall, Sdk_coreKtor_client_coreHttpSendPipelinePhases, Sdk_coreKtor_utilsGMTDate, Sdk_coreKtor_httpHttpProtocolVersion, Sdk_coreKtor_utilsStringValuesBuilderImpl, Sdk_coreKtor_httpOutgoingContent, Sdk_coreKtor_httpURLBuilderCompanion, Sdk_coreKtor_httpHttpMethodCompanion, Sdk_coreKtor_httpURLProtocolCompanion, Sdk_coreKotlinx_serialization_coreSerialKind, Sdk_coreKotlinx_serialization_jsonJsonElementCompanion, Sdk_coreKotlinx_serialization_jsonClassDiscriminatorMode, Sdk_coreKotlinCharIterator, Sdk_coreKotlinMatchResultDestructured, Sdk_coreKotlinIntRange, Sdk_coreKotlinx_io_coreBuffer, Sdk_coreKotlinAbstractCoroutineContextKey<B, E>, Sdk_coreKtor_client_coreHttpClientCallCompanion, Sdk_coreKtor_utilsWeekDay, Sdk_coreKtor_utilsMonth, Sdk_coreKtor_utilsGMTDateCompanion, Sdk_coreKtor_httpHttpProtocolVersionCompanion, Sdk_coreKtor_httpContentType, Sdk_coreKotlinKTypeProjection, Sdk_coreKotlinMatchGroup, Sdk_coreKotlinIntProgressionCompanion, Sdk_coreKotlinIntIterator, Sdk_coreKotlinIntProgression, Sdk_coreKotlinIntRangeCompanion, Sdk_coreKtor_utilsWeekDayCompanion, Sdk_coreKtor_utilsMonthCompanion, Sdk_coreKtor_httpHeaderValueParam, Sdk_coreKtor_httpHeaderValueWithParametersCompanion, Sdk_coreKtor_httpHeaderValueWithParameters, Sdk_coreKtor_httpContentTypeCompanion, Sdk_coreKotlinKVariance, Sdk_coreKotlinKTypeProjectionCompanion;
 
 @protocol Sdk_coreLogLevelController, Sdk_coreLogger, Sdk_coreLogFactory, Sdk_coreKotlinComparable, Sdk_coreTagProvider, Sdk_coreSdkLifecycleListener, Sdk_coreSdkContainerBeanFactory, Sdk_coreFlowerAdsManagerListener, Sdk_coreKotlinx_coroutines_coreJob, Sdk_coreAdPlayerView, Sdk_coreFlowerAdUIView, Sdk_coreFlowerAdViewStub, Sdk_coreGoogleAdView, Sdk_coreCoreMediaPlayerAdapter, Sdk_coreKotlinx_coroutines_coreFlow, Sdk_coreKotlinSuspendFunction2, Sdk_coreFlowerAdTracker, Sdk_coreFlowerCreative, Sdk_coreMediaPlayerHook, Sdk_coreFlowerAd, Sdk_coreFlowerAdsManager, Sdk_coreAdPlayerCallback, Sdk_coreAdPlayer, Sdk_coreKotlinx_serialization_coreKSerializer, Sdk_coreUIElement, Sdk_coreUiText, Sdk_corePlatformFile, Sdk_coreKtor_httpHeaders, Sdk_coreDeviceService, Sdk_coreGoogleAdsManager, Sdk_coreXmlUtil, Sdk_coreKeyValueStore, Sdk_coreGoogleAdsLoaderListener, Sdk_coreKotlinIterator, Sdk_coreAttribute, Sdk_coreManipulationServerResponse, Sdk_coreKtor_ioByteReadChannel, Sdk_coreKotlinSuspendFunction0, Sdk_coreKtor_client_coreHttpClientPlugin, Sdk_coreKotlinCoroutineContext, Sdk_coreKotlinx_coroutines_coreCoroutineScope, Sdk_coreKtor_ioCloseable, Sdk_coreKtor_client_coreHttpClientEngine, Sdk_coreKtor_client_coreHttpClientEngineCapability, Sdk_coreKtor_utilsAttributes, Sdk_coreKtor_httpHttpMessageBuilder, Sdk_coreKtor_httpParameters, Sdk_coreKotlinx_coroutines_coreChildHandle, Sdk_coreKotlinx_coroutines_coreChildJob, Sdk_coreKotlinx_coroutines_coreDisposableHandle, Sdk_coreKotlinSequence, Sdk_coreKotlinx_coroutines_coreSelectClause0, Sdk_coreKotlinCoroutineContextKey, Sdk_coreKotlinCoroutineContextElement, Sdk_coreKotlinx_coroutines_coreFlowCollector, Sdk_coreKotlinFunction, Sdk_coreKotlinx_serialization_coreEncoder, Sdk_coreKotlinx_serialization_coreSerialDescriptor, Sdk_coreKotlinx_serialization_coreSerializationStrategy, Sdk_coreKotlinx_serialization_coreDecoder, Sdk_coreKotlinx_serialization_coreDeserializationStrategy, Sdk_coreKotlinMapEntry, Sdk_coreKtor_utilsStringValues, Sdk_coreKotlinx_serialization_coreSerialFormat, Sdk_coreKotlinx_serialization_coreStringFormat, Sdk_coreKotlinCharSequence, Sdk_coreKotlinAppendable, Sdk_coreKotlinMatchResult, Sdk_coreKotlinx_io_coreSource, Sdk_coreKotlinContinuation, Sdk_coreKotlinContinuationInterceptor, Sdk_coreKotlinx_coroutines_coreRunnable, Sdk_coreKtor_httpHttpMessage, Sdk_coreKtor_utilsStringValuesBuilder, Sdk_coreKtor_httpParametersBuilder, Sdk_coreKotlinKClass, Sdk_coreKotlinKType, Sdk_coreKotlinx_coroutines_coreParentJob, Sdk_coreKotlinx_coroutines_coreSelectInstance, Sdk_coreKotlinx_coroutines_coreSelectClause, Sdk_coreKotlinx_serialization_coreCompositeEncoder, Sdk_coreKotlinAnnotation, Sdk_coreKotlinx_serialization_coreCompositeDecoder, Sdk_coreKotlinx_serialization_coreSerializersModuleCollector, Sdk_coreKotlinx_serialization_jsonJsonNamingStrategy, Sdk_coreKotlinx_datetimeDateTimeFormat, Sdk_coreKotlinMatchGroupCollection, Sdk_coreKotlinx_io_coreRawSink, Sdk_coreKotlinAutoCloseable, Sdk_coreKotlinx_io_coreRawSource, Sdk_coreKtor_client_coreHttpRequest, Sdk_coreKotlinKDeclarationContainer, Sdk_coreKotlinKAnnotatedElement, Sdk_coreKotlinKClassifier, Sdk_coreKotlinIterable, Sdk_coreKotlinCollection, Sdk_coreKotlinClosedRange, Sdk_coreKotlinOpenEndRange, Sdk_coreKotlinx_io_coreSink;
 
@@ -1999,106 +1999,6 @@ __attribute__((swift_name("PlatformFile")))
 @property (readonly) NSString *name __attribute__((swift_name("name")));
 @end
 
-
-/**
- * @note annotations
- *   kotlinx.serialization.Serializable(with=NormalClass(value=tv/anypoint/flower/sdk/core/common/ErrorCodeSerializer))
-*/
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("ErrorCode")))
-@interface Sdk_coreErrorCode : Sdk_coreKotlinEnum<Sdk_coreErrorCode *>
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-@property (class, readonly, getter=companion) Sdk_coreErrorCodeCompanion *companion __attribute__((swift_name("companion")));
-@property (class, readonly) Sdk_coreErrorCode *unknownError __attribute__((swift_name("unknownError")));
-@property (class, readonly) Sdk_coreErrorCode *segmentSkipped __attribute__((swift_name("segmentSkipped")));
-@property (class, readonly) Sdk_coreErrorCode *playerErrorEvent __attribute__((swift_name("playerErrorEvent")));
-@property (class, readonly) Sdk_coreErrorCode *playlistSkipped __attribute__((swift_name("playlistSkipped")));
-@property (class, readonly) Sdk_coreErrorCode *playlistRewinded __attribute__((swift_name("playlistRewinded")));
-@property (class, readonly) Sdk_coreErrorCode *playerStopped __attribute__((swift_name("playerStopped")));
-@property (class, readonly) Sdk_coreErrorCode *playerDestroyed __attribute__((swift_name("playerDestroyed")));
-@property (class, readonly) Sdk_coreErrorCode *adRequestUnknownError __attribute__((swift_name("adRequestUnknownError")));
-@property (class, readonly) Sdk_coreErrorCode *adResponseIsShorterThanRequested __attribute__((swift_name("adResponseIsShorterThanRequested")));
-@property (class, readonly) Sdk_coreErrorCode *adNoAcceptableCreative __attribute__((swift_name("adNoAcceptableCreative")));
-@property (class, readonly) Sdk_coreErrorCode *adRequestTimeout __attribute__((swift_name("adRequestTimeout")));
-@property (class, readonly) Sdk_coreErrorCode *adCannotFindSmallerVariant __attribute__((swift_name("adCannotFindSmallerVariant")));
-@property (class, readonly) Sdk_coreErrorCode *adCannotFindExactVariant __attribute__((swift_name("adCannotFindExactVariant")));
-@property (class, readonly) Sdk_coreErrorCode *xmlParseError __attribute__((swift_name("xmlParseError")));
-@property (class, readonly) Sdk_coreErrorCode *m3u8ParseError __attribute__((swift_name("m3u8ParseError")));
-+ (Sdk_coreKotlinArray<Sdk_coreErrorCode *> *)values __attribute__((swift_name("values()")));
-@property (class, readonly) NSArray<Sdk_coreErrorCode *> *entries __attribute__((swift_name("entries")));
-@property (readonly) int32_t value __attribute__((swift_name("value")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("ErrorCode.Companion")))
-@interface Sdk_coreErrorCodeCompanion : Sdk_coreBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) Sdk_coreErrorCodeCompanion *shared __attribute__((swift_name("shared")));
-- (id<Sdk_coreKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
-- (id<Sdk_coreKotlinx_serialization_coreKSerializer>)serializerTypeParamsSerializers:(Sdk_coreKotlinArray<id<Sdk_coreKotlinx_serialization_coreKSerializer>> *)typeParamsSerializers __attribute__((swift_name("serializer(typeParamsSerializers:)")));
-@end
-
-
-/**
- * @note annotations
- *   kotlinx.serialization.Serializable
-*/
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("ErrorLog")))
-@interface Sdk_coreErrorLog : Sdk_coreBase
-- (instancetype)initWithErrorCode:(Sdk_coreErrorCode * _Nullable)errorCode streamVariant:(NSString * _Nullable)streamVariant tagUrl:(NSString * _Nullable)tagUrl spliceEventId:(Sdk_coreLong * _Nullable)spliceEventId cueDuration:(Sdk_coreLong * _Nullable)cueDuration adIds:(NSArray<NSString *> * _Nullable)adIds timeout:(Sdk_coreLong * _Nullable)timeout __attribute__((swift_name("init(errorCode:streamVariant:tagUrl:spliceEventId:cueDuration:adIds:timeout:)"))) __attribute__((objc_designated_initializer));
-@property (class, readonly, getter=companion) Sdk_coreErrorLogCompanion *companion __attribute__((swift_name("companion")));
-@property (readonly) NSArray<NSString *> * _Nullable adIds __attribute__((swift_name("adIds")));
-@property (readonly) Sdk_coreLong * _Nullable cueDuration __attribute__((swift_name("cueDuration")));
-@property NSString * _Nullable deviceId __attribute__((swift_name("deviceId")));
-@property NSString * _Nullable deviceModel __attribute__((swift_name("deviceModel")));
-@property (readonly) Sdk_coreErrorCode * _Nullable errorCode __attribute__((swift_name("errorCode")));
-@property NSString * _Nullable firmwareVersion __attribute__((swift_name("firmwareVersion")));
-@property NSString * _Nullable sdkType __attribute__((swift_name("sdkType")));
-@property NSString * _Nullable sdkVersion __attribute__((swift_name("sdkVersion")));
-@property (readonly) Sdk_coreLong * _Nullable spliceEventId __attribute__((swift_name("spliceEventId")));
-@property (readonly) NSString * _Nullable streamVariant __attribute__((swift_name("streamVariant")));
-@property (readonly) NSString * _Nullable tagUrl __attribute__((swift_name("tagUrl")));
-@property (readonly) Sdk_coreLong * _Nullable timeout __attribute__((swift_name("timeout")));
-@property (readonly) double timestamp __attribute__((swift_name("timestamp")));
-@property NSString * _Nullable userAgent __attribute__((swift_name("userAgent")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("ErrorLog.Companion")))
-@interface Sdk_coreErrorLogCompanion : Sdk_coreBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) Sdk_coreErrorLogCompanion *shared __attribute__((swift_name("shared")));
-- (id<Sdk_coreKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("ErrorLogSender")))
-@interface Sdk_coreErrorLogSender : Sdk_coreBase
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
-+ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-@property (class, readonly, getter=companion) Sdk_coreErrorLogSenderCompanion *companion __attribute__((swift_name("companion")));
-- (void)logErrorLog:(Sdk_coreErrorLog *)errorLog __attribute__((swift_name("log(errorLog:)")));
-- (Sdk_coreErrorLog *)resolveLogErrorLog:(Sdk_coreErrorLog *)errorLog __attribute__((swift_name("resolveLog(errorLog:)")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("ErrorLogSender.Companion")))
-@interface Sdk_coreErrorLogSenderCompanion : Sdk_coreFLogging
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-- (instancetype)initWithTag:(NSString * _Nullable)tag __attribute__((swift_name("init(tag:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) Sdk_coreErrorLogSenderCompanion *shared __attribute__((swift_name("shared")));
-@property (readonly) NSString *S3_BUCKET_HOST __attribute__((swift_name("S3_BUCKET_HOST")));
-@end
-
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("FlowerConfigService")))
 @interface Sdk_coreFlowerConfigService : Sdk_coreBase
@@ -2148,19 +2048,6 @@ __attribute__((swift_name("FlowerConfigService.StartupConfigKey")))
 @end
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("PlatformAnalytics")))
-@interface Sdk_corePlatformAnalytics : Sdk_coreBase
-- (instancetype)initWithSdkVersion:(NSString *)sdkVersion __attribute__((swift_name("init(sdkVersion:)"))) __attribute__((objc_designated_initializer));
-@property (readonly) NSString *sdkVersion __attribute__((swift_name("sdkVersion")));
-@end
-
-__attribute__((swift_name("PlatformAnalyticsResolver")))
-@protocol Sdk_corePlatformAnalyticsResolver
-@required
-- (Sdk_corePlatformAnalytics *)resolve __attribute__((swift_name("resolve()")));
-@end
-
-__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("SdkContainer")))
 @interface Sdk_coreSdkContainer : Sdk_coreBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
@@ -2177,7 +2064,6 @@ __attribute__((swift_name("SdkContainer")))
 @property (readonly) Sdk_coreCachedHttpClient *cachedHttpClient __attribute__((swift_name("cachedHttpClient")));
 @property (readonly) id<Sdk_coreDeviceService> deviceService __attribute__((swift_name("deviceService")));
 @property NSString *env __attribute__((swift_name("env")));
-@property (readonly) Sdk_coreErrorLogSender *errorLogSender __attribute__((swift_name("errorLogSender")));
 @property Sdk_coreMutableDictionary<Sdk_coreSdkContainerClassName *, id<Sdk_coreSdkContainerBeanFactory>> *factories __attribute__((swift_name("factories")));
 @property (readonly) Sdk_coreFillerAdsManager *fillerAdsManager __attribute__((swift_name("fillerAdsManager")));
 @property (readonly) Sdk_coreFlowerConfigService *flowerConfigService __attribute__((swift_name("flowerConfigService")));
@@ -2208,7 +2094,6 @@ __attribute__((swift_name("SdkContainer.ClassName")))
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly) Sdk_coreSdkContainerClassName *adUrlMacro __attribute__((swift_name("adUrlMacro")));
 @property (class, readonly) Sdk_coreSdkContainerClassName *deviceService __attribute__((swift_name("deviceService")));
-@property (class, readonly) Sdk_coreSdkContainerClassName *platformAnalyticsResolver __attribute__((swift_name("platformAnalyticsResolver")));
 @property (class, readonly) Sdk_coreSdkContainerClassName *googleAdsManager __attribute__((swift_name("googleAdsManager")));
 @property (class, readonly) Sdk_coreSdkContainerClassName *json __attribute__((swift_name("json")));
 @property (class, readonly) Sdk_coreSdkContainerClassName *fillerAdsManager __attribute__((swift_name("fillerAdsManager")));
@@ -2371,11 +2256,6 @@ __attribute__((swift_name("Manipulator")))
  * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
 @property Sdk_coreFlowerAdsManagerImpl *adsManager __attribute__((swift_name("adsManager")));
-
-/**
- * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
-*/
-@property (readonly) Sdk_coreErrorLogSender *errorLogSender __attribute__((swift_name("errorLogSender")));
 
 /**
  * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
@@ -5604,7 +5484,7 @@ __attribute__((swift_name("KotlinMapEntry")))
 @protocol Sdk_coreKotlinMapEntry
 @required
 @property (readonly) id _Nullable key __attribute__((swift_name("key")));
-@property (readonly) id _Nullable value_ __attribute__((swift_name("value_")));
+@property (readonly) id _Nullable value __attribute__((swift_name("value")));
 @end
 
 __attribute__((swift_name("Kotlinx_serialization_coreSerializersModule")))
@@ -5773,7 +5653,7 @@ __attribute__((swift_name("KotlinMatchResult")))
 @property (readonly) NSArray<NSString *> *groupValues __attribute__((swift_name("groupValues")));
 @property (readonly) id<Sdk_coreKotlinMatchGroupCollection> groups __attribute__((swift_name("groups")));
 @property (readonly) Sdk_coreKotlinIntRange *range __attribute__((swift_name("range")));
-@property (readonly) NSString *value_ __attribute__((swift_name("value_")));
+@property (readonly) NSString *value __attribute__((swift_name("value")));
 @end
 
 

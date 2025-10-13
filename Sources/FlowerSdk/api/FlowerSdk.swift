@@ -33,7 +33,6 @@ public class FlowerSdk {
                     // Thus, do not add instance sdk_core.SdkContainer.ClassName.httpClient: ,
                     sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(fingerPrintResolverViewModel: fingerPrintResolverViewModel),
                     sdk_core.SdkContainer.ClassName.xmlUtil: XmlUtilImpl(),
-                    sdk_core.SdkContainer.ClassName.platformAnalyticsResolver: PlatformAnalyticsResolverImpl(),
                     sdk_core.SdkContainer.ClassName.cacheService: CacheServiceImpl(),
                 ]),
                 factories: PlatformMap(storage: [
