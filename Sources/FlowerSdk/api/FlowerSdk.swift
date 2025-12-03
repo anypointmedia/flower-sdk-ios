@@ -17,6 +17,7 @@ class DefaultSdkLifecycleListener: SdkLifecycleListener {
 }
 
 public class FlowerSdk {
+    private static var logger = FLogging(tag: "FlowerSdk").logger
     private static var fingerPrintResolverViewModel = FingerPrintResolverViewModel()
 
     public static var root: some View {
@@ -24,6 +25,14 @@ public class FlowerSdk {
     }
 
     public static func doInit() {
+        let versionObj = FlowerSdkVersion()
+        logger.info {
+            "FlowerSdk.doInit()\n" +
+            "version: \(versionObj.version)\n" +
+            "head: \(versionObj.head)\n" +
+            "dirty: \(versionObj.dirty)"
+        }
+
         var DEFAULT_TIMEOUT: TimeInterval = 3_000
 
         let lm: Void = sdk_core.LifecycleManager().doInit(
@@ -52,6 +61,12 @@ public class FlowerSdk {
 
 
     public static func setEnv(env: String) {
+        logger.info {
+            "FlowerSdk.setEnv(\n" +
+            "- env: \(env)\n" +
+            ")"
+        }
+
         switch env {
         case "local",
              "dev",
@@ -65,6 +80,12 @@ public class FlowerSdk {
     }
 
     public static func setLogLevel(level: String) {
+        logger.info {
+            "FlowerSdk.setLogLevel(\n" +
+            "- level: \(level)\n" +
+            ")"
+        }
+
         let logLevels = SdkContainer.LogLevel.entries
 
         guard let logLevel = logLevels.first(where: { $0.name == level }) else {
@@ -72,5 +93,13 @@ public class FlowerSdk {
         }
 
         SdkContainer.companion.getInstance().setLogLevel(level: logLevel)
+    }
+
+    public static func ignoreSkip() {
+        SdkContainer.companion.getInstance().ignoreSkip = true
+    }
+
+    public static func notifyPictureInPictureModeChanged(_ isInPictureInPictureMode: Bool) {
+        SdkContainer.companion.getInstance().isInPictureInPictureMode = isInPictureInPictureMode
     }
 }

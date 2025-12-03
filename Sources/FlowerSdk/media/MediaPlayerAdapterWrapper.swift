@@ -19,7 +19,7 @@ class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter {
         KotlinWrapped(value: KotlinBoolean(value: try platformMediaPlayerAdapter.isPlaying()))
     }
 
-    func getHeight_() throws -> KotlinWrapped<KotlinInt> {
+    func getHeight() throws -> KotlinWrapped<KotlinInt> {
         KotlinWrapped(value: KotlinInt(value: try platformMediaPlayerAdapter.getHeight()))
     }
 

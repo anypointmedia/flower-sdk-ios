@@ -3,7 +3,7 @@ import SwiftUI
 import sdk_core
 
 class GoogleAdViewImpl: GoogleAdView {
-    let logger = FLogging(tag: nil).logger
+    let logger = FLogging(tag: "GoogleAdView").logger
 
     var flowerAdView: FlowerAdView
     lazy var googleAdViewImplBody = GoogleAdViewImplBody(flowerAdView: flowerAdView)
@@ -25,17 +25,21 @@ class GoogleAdViewImpl: GoogleAdView {
     }
 
     func show() {
-        logger.debug { "Showing GoogleAdView" }
-        flowerAdView.isGoogleAdViewVisible = true
+        DispatchQueue.main.async {
+            self.logger.debug { "Showing GoogleAdView" }
+            self.flowerAdView.isGoogleAdViewVisible = true
+        }
     }
 
     func hide() {
-        logger.debug { "Hiding GoogleAdView" }
-        flowerAdView.isGoogleAdViewVisible = false
+        DispatchQueue.main.async {
+            self.logger.debug { "Hiding GoogleAdView" }
+            self.flowerAdView.isGoogleAdViewVisible = false
+        }
     }
 
-    func isShow() -> Bool {
-        return flowerAdView.isGoogleAdViewVisible
+    func isShow() async throws -> KotlinBoolean {
+        return KotlinBoolean(value: flowerAdView.isGoogleAdViewVisible)
     }
 
     func addView(view: any GoogleAdView) {

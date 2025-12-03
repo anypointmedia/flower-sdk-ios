@@ -126,6 +126,7 @@ class ManipulationServerImpl: ManipulationServer {
         var response = try? httpClient.ios_requestSync(builder: requestBuilder)
 
         if (response == nil) {
+            logger.info { "Proxy server healthcheck failed. Restarting server." }
             startServer(address: "127.0.0.1", port: lastServerPort)
         }
     }
@@ -178,6 +179,7 @@ class ManipulationServerImpl: ManipulationServer {
     override func stop_() throws {
         try super.stop_()
         observer?.destroy()
+        observer = nil
         server.stop()
     }
 }

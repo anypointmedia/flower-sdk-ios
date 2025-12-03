@@ -123,4 +123,8 @@ class DeviceServiceImpl: DeviceService {
 
         return adId
     }
+
+    func isTv() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .tv
+    }
 }

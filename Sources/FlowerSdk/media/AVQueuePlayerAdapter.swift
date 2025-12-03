@@ -2,6 +2,8 @@ import AVFoundation
 import sdk_core
 
 class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
+    private let logger = FLogging(tag: "AVQueuePlayerAdapter").logger
+
     private var mediaPlayerHook: MediaPlayerHook
     private var adsManagerListener: FlowerAdsManagerListener
 

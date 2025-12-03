@@ -39,7 +39,7 @@ public class FlowerAVPlayerViewController: AVPlayerViewController {
 
         self.flowerPlayer = flowerPlayer
 
-        let hostingController = FlowerAdView.HostingController(adView: flowerPlayer.getAdView())
+        let hostingController = FlowerAdView.HostingController(adView: flowerPlayer.flowerAdView)
         self.adHostingController = hostingController
 
         flowerPlayer.addAdListener(listener: adsManagerListener)

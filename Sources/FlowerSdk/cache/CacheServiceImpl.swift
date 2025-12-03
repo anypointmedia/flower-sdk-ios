@@ -28,12 +28,12 @@ class CacheServiceImpl: CacheService {
         }
     }
 
-    override func getFreeStorageSizeKb() throws -> KotlinWrapped<KotlinInt> {
+    override func getFreeStorageSize() throws -> KotlinWrapped<KotlinLong> {
         guard let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: (cacheDir as! PlatformFileImpl).path),
               let freeSize = systemAttributes[.systemFreeSize] as? NSNumber else {
-            return KotlinWrapped(value: KotlinInt(0))
+            return KotlinWrapped(value: KotlinLong(0))
         }
 
-        return KotlinWrapped(value: KotlinInt(value: Int32(freeSize.int64Value / 1024)))
+        return KotlinWrapped(value: KotlinLong(value: Int64(freeSize.int64Value)))
     }
 }

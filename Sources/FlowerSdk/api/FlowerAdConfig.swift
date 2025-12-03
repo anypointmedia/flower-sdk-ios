@@ -1,4 +1,4 @@
-protocol FlowerAdConfig {}
+public protocol FlowerAdConfig {}
 
 public final class FlowerLinearTvAdConfig: FlowerAdConfig {
     public let adTagUrl: String
@@ -29,5 +29,36 @@ public final class FlowerLinearTvAdConfig: FlowerAdConfig {
         self.extraParams = extraParams
         self.adTagHeaders = adTagHeaders
         self.channelStreamHeaders = channelStreamHeaders
+    }
+}
+
+public final class FlowerVodAdConfig: FlowerAdConfig {
+    public let adTagUrl: String
+    public let contentId: String
+    public let contentDuration: Int64
+    public let extraParams: [String: String]?
+    public let adTagHeaders: [String: String]?
+    public let requestTimeout: Int64?
+    public let minPrepareDuration: Int64?
+    public let rewindDuration: Int64?
+
+    public init(
+        adTagUrl: String,
+        contentId: String,
+        contentDuration: Int64,
+        extraParams: [String: String]? = nil,
+        adTagHeaders: [String: String]? = nil,
+        requestTimeout: Int64? = nil,
+        minPrepareDuration: Int64? = nil,
+        rewindDuration: Int64? = nil
+    ) {
+        self.adTagUrl = adTagUrl
+        self.contentId = contentId
+        self.contentDuration = contentDuration
+        self.extraParams = extraParams
+        self.adTagHeaders = adTagHeaders
+        self.requestTimeout = requestTimeout
+        self.minPrepareDuration = minPrepareDuration
+        self.rewindDuration = rewindDuration
     }
 }

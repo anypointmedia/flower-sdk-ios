@@ -5,7 +5,7 @@ import SwiftUI
 import sdk_core
 
 class AdPlayerImpl: AdPlayer {
-    private var logger = FLogging(tag: nil).logger
+    private var logger = FLogging(tag: "AdPlayerImpl").logger
     private let sdkContainer = sdk_core.SdkContainer.companion.getInstance()
     private var isAdPlaying = false
     private var totalDuration: Int32 = -1
@@ -51,7 +51,6 @@ class AdPlayerImpl: AdPlayer {
                 for item in player!.items() {
                     NotificationCenter.default.addObserver(self, selector: #selector(adPlayerDidFinishPlaying(_:)), name: .AVPlayerItemDidPlayToEndTime, object: item)
                 }
-                logger.info { "ad player load" }
                 adPlayerCallbacks.onLoaded(mediaUrl: mediaUrls[0], duration: totalDuration)
             } catch let error {
                 logger.error { "failed to load play set \(error)" }
@@ -180,7 +179,7 @@ class AdPlayerImpl: AdPlayer {
     }
 
 
-    func getProgress_() -> AdProgress {
+    func getCurrentAdProgress() async throws -> AdProgress {
         guard let player = self.player else {
             return AdProgress.companion.NOT_READY
         }
@@ -265,11 +264,12 @@ class AdPlayerImpl: AdPlayer {
         player?.play()
     }
 
-    func isPause() -> Bool {
-        return player?.rate == 0.0
+    func isPause() async throws -> KotlinBoolean {
+        return KotlinBoolean(value: player?.rate == 0.0)
     }
 
-    func playNextItem_() {
+    func playNextItem() async throws -> KotlinBoolean {
         next()
+        return true
     }
 }

@@ -3,7 +3,7 @@ import sdk_core
 import SwiftUI
 
 class FlowerAdUIViewImpl: FlowerAdUIView {
-    let logger = FLogging(tag: nil).logger
+    let logger = FLogging(tag: "FlowerAdUIView").logger
 
     var flowerAdView: FlowerAdView
     lazy var flowerAdUIViewImplBody = FlowerAdUIViewImplBody(flowerAdView: flowerAdView)
@@ -32,12 +32,16 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
         flowerAdUIViewImplBody.hide()
     }
 
-    func isShow() -> Bool {
-        return flowerAdUIViewImplBody.isShow()
+    func isShow() async throws -> KotlinBoolean {
+        return KotlinBoolean(value: flowerAdUIViewImplBody.isShow())
     }
 
     func showClickUi(ad: Ad, postClick: @escaping () -> Void) {
         flowerAdUIViewImplBody.showClickUi(ad: ad, postClick: postClick)
+    }
+
+    func hideClickUi() {
+        flowerAdUIViewImplBody.hideClickUi()
     }
 
     func showSkipUi(ad: Ad, postSkip: @escaping () -> Void) {
@@ -120,8 +124,10 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
                 return
             }
 
-            logger.debug { "Showing FlowerAdUIView" }
-            flowerAdView.isFlowerAdUIViewVisible = true
+            DispatchQueue.main.async {
+                self.logger.debug { "Showing FlowerAdUIView" }
+                self.flowerAdView.isFlowerAdUIViewVisible = true
+            }
         }
 
         func hide() {
@@ -129,10 +135,12 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
                 return
             }
 
-            logger.debug { "Hiding FlowerAdUIView" }
-            flowerAdView.isFlowerAdUIViewVisible = false
-            observer.clickThroughButtonAd = nil
-            observer.skipButtonAd = nil
+            DispatchQueue.main.async {
+                self.logger.debug { "Hiding FlowerAdUIView" }
+                self.flowerAdView.isFlowerAdUIViewVisible = false
+                self.observer.clickThroughButtonAd = nil
+                self.observer.skipButtonAd = nil
+            }
         }
 
         func isShow() -> Bool {
@@ -144,11 +152,12 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
                 return
             }
 
-            logger.debug { "Showing FlowerAdUIView click ui" }
+            DispatchQueue.main.async {
+                self.logger.debug { "Showing FlowerAdUIView click ui" }
 
-            observer.clickThroughButtonAd = ad
-            show()
-            observer.postClick = postClick
+                self.observer.clickThroughButtonAd = ad
+                self.observer.postClick = postClick
+            }
         }
 
         func showSkipUi(ad: Ad, postSkip: @escaping () -> Void) {
@@ -156,11 +165,23 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
                 return
             }
 
-            logger.debug { "Showing FlowerAdUIView skip ui" }
+            DispatchQueue.main.async {
+                self.logger.debug { "Showing FlowerAdUIView skip ui" }
 
-            observer.skipButtonAd = ad
-            show()
-            observer.postSkip = postSkip
+                self.observer.skipButtonAd = ad
+                self.observer.postSkip = postSkip
+            }
+        }
+
+        func hideClickUi() {
+            if observer.clickThroughButtonAd == nil {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.logger.debug { "Hiding FlowerAdUIView click ui" }
+                self.observer.clickThroughButtonAd = nil
+            }
         }
 
         func hideSkipUi() {
@@ -168,8 +189,10 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
                 return
             }
 
-            logger.debug { "Hiding FlowerAdUIView skip ui" }
-            observer.skipButtonAd = nil
+            DispatchQueue.main.async {
+                self.logger.debug { "Hiding FlowerAdUIView skip ui" }
+                self.observer.skipButtonAd = nil
+            }
         }
     }
 }

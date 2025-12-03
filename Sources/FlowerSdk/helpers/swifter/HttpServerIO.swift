@@ -130,7 +130,11 @@ open class HttpServerIO {
                     keepConnection = try self.respond(socket, response: response, keepAlive: keepConnection)
                 }
             } catch {
-                os_log(.error, log: .default, "Failed to send response: \(error)")
+                var components = URLComponents()
+                components.queryItems = request.queryParams.map { key, value in
+                    URLQueryItem(name: key, value: value)
+                }
+                os_log(.error, log: .default, "Failed to send response: \(request.path)\(components.percentEncodedQuery != nil ? "?\(components.percentEncodedQuery!)" : "") error: \(error.localizedDescription)")
             }
             if let session = response.socketSession() {
                 delegate?.socketConnectionReceived(socket)

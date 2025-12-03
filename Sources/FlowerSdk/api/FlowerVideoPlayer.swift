@@ -11,7 +11,7 @@ public struct FlowerVideoPlayer: View {
     public var body: some View {
         ZStack {
             VideoPlayer(player: player)
-            player.adView.body
+            player.flowerAdView.body
         }
     }
 }

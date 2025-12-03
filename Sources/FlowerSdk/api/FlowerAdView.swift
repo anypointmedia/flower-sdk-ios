@@ -4,7 +4,7 @@ import SwiftUI
 import sdk_core
 
 public class FlowerAdView: FlowerAdViewStub, ObservableObject {
-    let logger = FLogging(tag: nil).logger
+    let logger = FLogging(tag: "FlowerAdView").logger
 
     @Published var isFlowerAdViewVisible = false
     @Published var isAdPlayerViewVisible = false
@@ -39,23 +39,21 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
     }
 
     public func show() {
-        logger.debug { "Showing FlowerAdView" }
-        self.isFlowerAdViewVisible = true
-        self.flowerAdUIView.show()
-        self.adPlayerView.show()
-        self.googleAdView.show()
+        DispatchQueue.main.async {
+            self.logger.debug { "Showing FlowerAdView" }
+            self.isFlowerAdViewVisible = true
+        }
     }
 
     public func hide() {
-        logger.debug { "Hiding FlowerAdView" }
-        self.isFlowerAdViewVisible = false
-        self.flowerAdUIView.hide()
-        self.adPlayerView.hide()
-        self.googleAdView.hide()
+        DispatchQueue.main.async {
+            self.logger.debug { "Hiding FlowerAdView" }
+            self.isFlowerAdViewVisible = false
+        }
     }
 
-    public func isShow() -> Bool {
-        return isFlowerAdViewVisible
+    public func isShow() async throws -> KotlinBoolean {
+        return KotlinBoolean(value: isFlowerAdViewVisible)
     }
 
     public struct FlowerAdViewBody: View {

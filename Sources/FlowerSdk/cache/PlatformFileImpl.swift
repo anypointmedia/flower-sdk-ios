@@ -24,9 +24,9 @@ class PlatformFileImpl: PlatformFile {
         self.fileURL = fileURL
     }
 
-    func sizeKb() -> Int32 {
+    func size() -> Int64 {
         let attrs = try? FileManager.default.attributesOfItem(atPath: fileURL.path)
-        return Int32((attrs?[.size] as? NSNumber)?.int64Value ?? 0) / 1024
+        return (attrs?[.size] as? NSNumber)?.int64Value ?? 0
     }
 
     func lastModified() -> KotlinLong? {
