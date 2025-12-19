@@ -38,8 +38,8 @@ class GoogleAdViewImpl: GoogleAdView {
         }
     }
 
-    func isShow() async throws -> KotlinBoolean {
-        return KotlinBoolean(value: flowerAdView.isGoogleAdViewVisible)
+    func isShow() -> any DeferredStub {
+        return DeferredStubImpl(task: Task { KotlinBoolean(value: flowerAdView.isGoogleAdViewVisible) })
     }
 
     func addView(view: any GoogleAdView) {

@@ -178,20 +178,19 @@ class AdPlayerImpl: AdPlayer {
         adPlayerCallbacks.removeCallback(callback: adPlayerCallback)
     }
 
-
-    func getCurrentAdProgress() async throws -> AdProgress {
+    func getCurrentAdProgress() -> any DeferredStub {
         guard let player = self.player else {
-            return AdProgress.companion.NOT_READY
+            return DeferredStubImpl(task: Task { AdProgress.companion.NOT_READY })
         }
         
         let playTime: Double = player.currentTime().seconds * 1000
         let playingItemCount = player.items().count
         
         if playingItemCount == 0 {
-            return AdProgress.companion.NOT_READY
+            return DeferredStubImpl(task: Task { AdProgress.companion.NOT_READY })
         }
                 
-        return AdProgress(currentTime: Int32(exactly: playTime.rounded() ) ?? 0, duration: Int32(durations[durations.count - playingItemCount]))
+        return DeferredStubImpl(task: Task { AdProgress(currentTime: Int32(exactly: playTime.rounded() ) ?? 0, duration: Int32(durations[durations.count - playingItemCount])) })
     }
 
     func getCurrentPeriodIndex() -> Int {
@@ -264,12 +263,12 @@ class AdPlayerImpl: AdPlayer {
         player?.play()
     }
 
-    func isPause() async throws -> KotlinBoolean {
-        return KotlinBoolean(value: player?.rate == 0.0)
+    func isPause() -> any DeferredStub {
+        return DeferredStubImpl(task: Task { KotlinBoolean(value: await player?.rate == 0.0) })
     }
 
-    func playNextItem() async throws -> KotlinBoolean {
+    func playNextItem_() -> any DeferredStub {
         next()
-        return true
+        return DeferredStubImpl(task: Task { true })
     }
 }

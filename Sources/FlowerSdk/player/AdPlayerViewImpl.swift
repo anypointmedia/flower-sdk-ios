@@ -39,8 +39,8 @@ class AdPlayerViewImpl: AdPlayerView {
         }
     }
 
-    func isShow() async throws -> KotlinBoolean {
-        return KotlinBoolean(value: flowerAdView.isAdPlayerViewVisible)
+    func isShow() -> any DeferredStub {
+        return DeferredStubImpl(task: Task { KotlinBoolean(value: flowerAdView.isAdPlayerViewVisible) })
     }
 
     func addPlayerLayer(playerLayer: AVPlayerLayer) {

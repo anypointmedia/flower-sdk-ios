@@ -44,4 +44,6 @@ public protocol MediaPlayerAdapter {
      * Seeks to the next media item in the queue.
      */
     func playNextItem() throws
+
+    func bitmovinPlayerCurrentTime() -> Double?
 }

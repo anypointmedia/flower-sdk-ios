@@ -52,8 +52,8 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
         }
     }
 
-    public func isShow() async throws -> KotlinBoolean {
-        return KotlinBoolean(value: isFlowerAdViewVisible)
+    public func isShow() -> any DeferredStub {
+        return DeferredStubImpl(task: Task { KotlinBoolean(value: isFlowerAdViewVisible) })
     }
 
     public struct FlowerAdViewBody: View {

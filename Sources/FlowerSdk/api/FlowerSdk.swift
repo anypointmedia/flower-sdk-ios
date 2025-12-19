@@ -18,10 +18,9 @@ class DefaultSdkLifecycleListener: SdkLifecycleListener {
 
 public class FlowerSdk {
     private static var logger = FLogging(tag: "FlowerSdk").logger
-    private static var fingerPrintResolverViewModel = FingerPrintResolverViewModel()
 
     public static var root: some View {
-        FingerPrintResolver(viewModel: fingerPrintResolverViewModel)
+        VStack {}
     }
 
     public static func doInit() {
@@ -40,7 +39,7 @@ public class FlowerSdk {
                 instances: PlatformMap(storage: [
                     // Note: Let kmp core handle creating HttpClient[io.ktor.client.engine.darwin.DarwinClientEngine
                     // Thus, do not add instance sdk_core.SdkContainer.ClassName.httpClient: ,
-                    sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(fingerPrintResolverViewModel: fingerPrintResolverViewModel),
+                    sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(),
                     sdk_core.SdkContainer.ClassName.xmlUtil: XmlUtilImpl(),
                     sdk_core.SdkContainer.ClassName.cacheService: CacheServiceImpl(),
                 ]),

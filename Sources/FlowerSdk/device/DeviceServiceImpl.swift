@@ -3,38 +3,74 @@ import sdk_core
 import UIKit
 import AdSupport
 import Combine
+import CryptoKit
 
 class DeviceServiceImpl: DeviceService {
     let keyValueStore: KeyValueStore = KeyValueStoreImpl(prefix: "FlowerSDK_")
 
     private let logger = FLogging(tag: nil).logger
 
-    private var deviceUuid: String? = nil
+    private var appleAdId: String? = nil
     private var fingerPrintId: String? = nil
+    private var deviceUuid: String? = nil
 
-    init(fingerPrintResolverViewModel: FingerPrintResolverViewModel) {
-        var fingerPrintSub: AnyCancellable?
-        fingerPrintSub = fingerPrintResolverViewModel.fingerPrintId
-        .receive(on: RunLoop.main)
-        .sink(receiveValue: { value in
-            if value != nil {
-                self.logger.info { "Load fingerprint id:: \(value!)" }
-                self.fingerPrintId = value
+    init() {
+        Task {
+            loadAppleAdId()
+            await loadFingerprintId()
+            loadDeviceUuid()
+        }
+    }
+
+    private func loadAppleAdId() {
+        let adId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+
+        if adId == "" || adId == "00000000-0000-0000-0000-000000000000" {
+            logger.warn { "Apple Ads ID is disabled." }
+            return
+        }
+
+        appleAdId = adId
+        logger.info { "Load Apple Ads ID: \(adId)" }
+    }
+
+    private func loadFingerprintId() async {
+        // stabilityLevel: stable vs optimal vs unique
+        // optimal 및 unique는 하나의 기기에서도 앱마다 다른 값이 로드됨
+        // https://github.com/fingerprintjs/fingerprintjs-ios?tab=readme-ov-file#fingerprint-stability-levels
+        let configuration = Configuration(version: .v6, stabilityLevel: .stable, algorithm: .sha256)
+        let fingerprinter = FingerprinterFactory.getInstance(configuration)
+        if let fingerprint = await fingerprinter.getFingerprint() {
+            if fingerprint != "" {
+                fingerPrintId = uuidFromSeed(seed: fingerprint)
+                logger.info { "Load fingerprint ID: \(self.fingerPrintId ?? "none")(\(fingerprint))" }
+                return
             }
+        }
 
-            self.loadDeviceUuid()
-            fingerPrintSub?.cancel()
-        })
+        logger.warn { "Failed to load Fingerprint ID." }
     }
 
     private func loadDeviceUuid() {
         let savedDeviceId = keyValueStore.getString(key: DeviceServiceCompanion().DEVICE_ID_KEY)
-        if savedDeviceId == nil {
-            setDeviceId(deviceId: UUID().uuidString)
+        if savedDeviceId == nil || savedDeviceId == "" {
+            setDeviceId(deviceId: generateUuid())
         } else {
-            logger.info { "exist deviceId: \(savedDeviceId!)" }
+            logger.info { "Load existing deviceId: \(savedDeviceId!)" }
             deviceUuid = savedDeviceId
         }
+    }
+
+    private func generateUuid() -> String {
+        if let appleAdId = appleAdId {
+            return appleAdId
+        }
+
+        if let fingerPrintId = fingerPrintId {
+            return fingerPrintId
+        }
+
+        return UUID().uuidString
     }
 
     func getDeviceId() -> String? {
@@ -115,16 +151,35 @@ class DeviceServiceImpl: DeviceService {
     }
 
     func getPlatformAdId() -> String? {
-        let adId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-
-        if adId == "00000000-0000-0000-0000-000000000000" {
-            return nil
-        }
-
-        return adId
+        return appleAdId
     }
 
     func isTv() -> Bool {
         return UIDevice.current.userInterfaceIdiom == .tv
+    }
+
+    func isSamsungTv() -> Bool {
+        return false
+    }
+
+    private func uuidFromSeed(seed: String) -> String {
+        let data = Data(seed.utf8)
+        let md5 = Insecure.MD5.hash(data: data)
+
+        var bytes = Array(md5)
+
+        // RFC 4122 version 3
+        bytes[6] = (bytes[6] & 0x0F) | 0x30
+        bytes[8] = (bytes[8] & 0x3F) | 0x80
+
+        let uuid = UUID(uuid: (
+            bytes[0], bytes[1], bytes[2], bytes[3],
+            bytes[4], bytes[5],
+            bytes[6], bytes[7],
+            bytes[8], bytes[9],
+            bytes[10], bytes[11], bytes[12], bytes[13], bytes[14], bytes[15]
+        ))
+
+        return uuid.uuidString.lowercased()
     }
 }

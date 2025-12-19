@@ -32,8 +32,8 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
         flowerAdUIViewImplBody.hide()
     }
 
-    func isShow() async throws -> KotlinBoolean {
-        return KotlinBoolean(value: flowerAdUIViewImplBody.isShow())
+    func isShow() -> any DeferredStub {
+        return DeferredStubImpl(task: Task { KotlinBoolean(value: flowerAdUIViewImplBody.isShow()) })
     }
 
     func showClickUi(ad: Ad, postClick: @escaping () -> Void) {
