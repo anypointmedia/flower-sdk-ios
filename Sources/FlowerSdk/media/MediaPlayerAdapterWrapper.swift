@@ -50,4 +50,12 @@ class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter {
             return nil
         }
     }
+
+    func getCurrentAbsoluteTime() throws -> KotlinWrapped<KotlinLong> {
+        if let time = try platformMediaPlayerAdapter.getCurrentAbsoluteTime() {
+            return KotlinWrapped(value: KotlinLong(value: time))
+        } else {
+            return KotlinWrapped(value: nil)
+        }
+    }
 }

@@ -77,11 +77,26 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
         }
 
         playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new], context: nil)
-        try player.insert(playerItem, after: nil)
+
+        let player = try self.player
+        if let flowerPlayer = player as? FlowerAVPlayer {
+            flowerPlayer.insertInternal(playerItem, after: nil)
+        } else {
+            player.insert(playerItem, after: nil)
+        }
     }
 
     func removePlayItem(playItem: PlayItem) throws {
-        guard let playerItem = try player.items().first(where: { item in
+        let player = try self.player
+
+        let items: [AVPlayerItem]
+        if let flowerPlayer = player as? FlowerAVPlayer {
+            items = flowerPlayer.itemsInternal()
+        } else {
+            items = player.items()
+        }
+
+        guard let playerItem = items.first(where: { item in
             if let urlAsset = item.asset as? AVURLAsset {
                 return urlAsset.url.absoluteString == playItem.url
             }
@@ -121,6 +136,10 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
     }
 
     func bitmovinPlayerCurrentTime() -> Double? {
+        nil
+    }
+
+    func getCurrentAbsoluteTime() -> Int64? {
         nil
     }
 }

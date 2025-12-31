@@ -360,6 +360,10 @@ open class FlowerAVPlayer: AVQueuePlayer {
         return []
     }
 
+    internal nonisolated func itemsInternal() -> [AVPlayerItem] {
+        return super.items()
+    }
+
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")
     open override nonisolated func advanceToNextItem() {
     }
@@ -371,6 +375,10 @@ open class FlowerAVPlayer: AVQueuePlayer {
 
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")
     open override nonisolated func insert(_ item: AVPlayerItem, after afterItem: AVPlayerItem?) {
+    }
+
+    internal nonisolated func insertInternal(_ item: AVPlayerItem, after afterItem: AVPlayerItem?) {
+        super.insert(item, after: afterItem)
     }
 
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")

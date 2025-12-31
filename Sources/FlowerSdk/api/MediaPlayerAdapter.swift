@@ -46,4 +46,6 @@ public protocol MediaPlayerAdapter {
     func playNextItem() throws
 
     func bitmovinPlayerCurrentTime() -> Double?
+
+    func getCurrentAbsoluteTime() throws -> Int64?
 }
