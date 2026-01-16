@@ -5,6 +5,7 @@ import sdk_core
 public typealias FlowerAdsManagerListener = sdk_core.FlowerAdsManagerListener
 public typealias MediaPlayerHook = sdk_core.MediaPlayerHook
 public typealias FlowerError = sdk_core.FlowerError
+public typealias AdInfo = sdk_core.AdInfo
 
 class DefaultSdkLifecycleListener: SdkLifecycleListener {
     func onDestroyed() {
@@ -91,6 +92,14 @@ public class FlowerSdk {
         }
 
         SdkContainer.companion.getInstance().setLogLevel(level: logLevel)
+    }
+    
+    public static func getDeviceId() -> String {
+        return SdkContainer.companion.getInstance().deviceService.getDeviceId() ?? ""
+    }
+
+    public static func setDeviceId(deviceId: String) {
+        SdkContainer.companion.getInstance().deviceService.setDeviceId(deviceId: deviceId)
     }
 
     public static func ignoreSkip() {

@@ -85,9 +85,9 @@ class PlatformFileImpl: PlatformFile {
         }
     }
 
-    func listFiles(filter: ((String) -> KotlinBoolean)? = nil) -> PlatformList<PlatformFile> {
+    func listFiles(filter: ((String) -> KotlinBoolean)? = nil) -> NSMutableArray {
         guard let urls = try? FileManager.default.contentsOfDirectory(at: fileURL, includingPropertiesForKeys: nil, options: []) else {
-            return PlatformList(array: [])
+            return NSMutableArray(array: [])
         }
         let files = urls.compactMap { url in
             let file = PlatformFileImpl(fileURL: url)
@@ -96,7 +96,7 @@ class PlatformFileImpl: PlatformFile {
             }
             return file
         }
-        return PlatformList(array: files)
+        return NSMutableArray(array: files)
     }
 
     func mkdirs() -> Bool {

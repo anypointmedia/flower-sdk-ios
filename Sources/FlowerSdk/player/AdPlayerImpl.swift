@@ -20,8 +20,8 @@ class AdPlayerImpl: AdPlayer {
 
     private var durations: [Double] = []
 
-    func load(mediaUrls: PlatformList<NSString>, totalDuration: Int32, adPlayerView: AdPlayerView) {
-        let mediaUrls = mediaUrls.array as! [String]
+    func load(mediaUrls: NSMutableArray, totalDuration: Int32, adPlayerView: AdPlayerView) {
+        let mediaUrls = mediaUrls as! [String]
         if mediaUrls.count == 0 {
             logger.warn { "empty mediaUrls" }
             fatalError("empty mediaUrls")

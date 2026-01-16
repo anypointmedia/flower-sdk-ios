@@ -83,6 +83,10 @@ private class AVPlayerViewControllerListener: FlowerAdsManagerListener {
         }
     }
 
+    public func onAdBreakPrepare(adInfos: NSMutableArray) {
+        controller.showsPlaybackControls = false
+    }
+    
     public func onPlay() {
         DispatchQueue.main.async {
             self.controller.showsPlaybackControls = false

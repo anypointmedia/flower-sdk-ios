@@ -135,11 +135,7 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
         try player.advanceToNextItem()
     }
 
-    func bitmovinPlayerCurrentTime() -> Double? {
-        nil
-    }
-
-    func getCurrentAbsoluteTime() -> Int64? {
+    func getCurrentAbsoluteTime() -> Double? {
         nil
     }
 }

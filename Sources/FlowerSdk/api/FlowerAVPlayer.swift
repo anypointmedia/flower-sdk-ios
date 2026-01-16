@@ -136,6 +136,9 @@ open class FlowerAVPlayer: AVQueuePlayer {
 
             func onAdSkipped(reason: Int32) {
             }
+
+            func onAdBreakPrepare(adInfos: NSMutableArray) {
+            }
         }
 
         let prerollEventListener = PrerollEventListener(
@@ -283,6 +286,9 @@ open class FlowerAVPlayer: AVQueuePlayer {
                     }
 
                     func onAdSkipped(reason: Int32) {
+                    }
+
+                    func onAdBreakPrepare(adInfos: NSMutableArray) {
                     }
                 }
 

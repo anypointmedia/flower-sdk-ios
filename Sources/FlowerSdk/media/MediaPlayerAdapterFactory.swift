@@ -26,10 +26,10 @@ class MediaPlayerAdapterFactory: sdk_core.SdkContainerBeanFactory {
 
         throw Throwable(
             message: UnsupportedMediaPlayerExceptionKt.formatUnsupportedMediaPlayerExceptionString(
-                players: PlatformList(array: [
+                players: [
                     "AVPlayer",
                     "VLCMediaListPlayer",
-                ]),
+                ],
                 received: player == nil ? "nil" : String(describing: type(of: player!))
             )
         )

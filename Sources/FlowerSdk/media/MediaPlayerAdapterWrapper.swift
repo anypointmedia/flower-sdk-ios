@@ -43,17 +43,9 @@ class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter {
         try platformMediaPlayerAdapter.playNextItem()
     }
 
-    func bitmovinPlayerCurrentTime() -> KotlinDouble? {
-        if let time = platformMediaPlayerAdapter.bitmovinPlayerCurrentTime() {
-            return KotlinDouble(value: time)
-        } else {
-            return nil
-        }
-    }
-
-    func getCurrentAbsoluteTime() throws -> KotlinWrapped<KotlinLong> {
+    func getCurrentAbsoluteTime() throws -> KotlinWrapped<KotlinDouble> {
         if let time = try platformMediaPlayerAdapter.getCurrentAbsoluteTime() {
-            return KotlinWrapped(value: KotlinLong(value: time))
+            return KotlinWrapped(value: KotlinDouble(value: time))
         } else {
             return KotlinWrapped(value: nil)
         }

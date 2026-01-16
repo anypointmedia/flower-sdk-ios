@@ -162,6 +162,14 @@ class DeviceServiceImpl: DeviceService {
         return false
     }
 
+    func getTimeZoneOffset() -> String {
+        let timeZone = TimeZone.current
+        let offsetSeconds = timeZone.secondsFromGMT()
+        let offsetHours = Double(offsetSeconds) / 3600.0
+        let formatted = String(format: "%.1f", offsetHours)
+        return formatted.hasSuffix(".0") ? String(formatted.dropLast(2)) : formatted
+    }
+
     private func uuidFromSeed(seed: String) -> String {
         let data = Data(seed.utf8)
         let md5 = Insecure.MD5.hash(data: data)
