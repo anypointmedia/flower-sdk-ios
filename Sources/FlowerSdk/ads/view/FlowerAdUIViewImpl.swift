@@ -44,7 +44,7 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
         flowerAdUIViewImplBody.hideClickUi()
     }
 
-    func showSkipUi(ad: Ad, postSkip: @escaping () -> Void) {
+    func showSkipUi(ad: Ad, nextAd: Ad?, postSkip: @escaping () -> Void) {
         flowerAdUIViewImplBody.showSkipUi(ad: ad, postSkip: postSkip)
     }
 
@@ -60,15 +60,24 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
     }
 
     struct FlowerAdUIViewImplBody: View {
-        let logger = FLogging(tag: nil).logger
+        let logger = FLogging(tag: "FlowerAdUIViewImpl").logger
 
         @ObservedObject var flowerAdView: FlowerAdView
         @ObservedObject var observer = FlowerAdUIViewImplBodyObserver()
         @State var width: Int32 = 0
         @State var height: Int32 = 0
 
+        /// 화면 너비에 비례한 오른쪽 여백 (작은 화면에서 버튼이 오른쪽에 가깝게 위치)
+        /// minOffset 60 = 버튼 minWidth 120의 절반 (position은 중심 기준)
+        private func trailingOffset(for width: CGFloat) -> CGFloat {
+            let ratio: CGFloat = 0.08
+            let minOffset: CGFloat = 60
+            return max(minOffset, width * ratio)
+        }
+
         var body: some View {
             GeometryReader { geometry in
+                let trailing = trailingOffset(for: geometry.size.width)
                 ZStack {
                     if observer.clickThroughButtonAd != nil {
                         Button(action: {
@@ -89,12 +98,14 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
                             }
                         }) {
                             Text(SdkContainer.Companion().getInstance().uiText.clickThrough)
-                            .foregroundColor(.white)
-                            .opacity(0.8)
-                            .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.white)
+                                .opacity(0.8)
+                                .font(.system(size: 16, weight: .semibold))
+                                .frame(minWidth: 120, minHeight: 44)
+                                .background(Color.black.opacity(0.3))
                         }
-                        .buttonStyle(.bordered)
-                        .position(x: geometry.size.width - 80, y: geometry.size.height - 40)
+                        .buttonStyle(.plain)
+                        .position(x: geometry.size.width - trailing, y: geometry.size.height - 40)
                     }
                     if observer.skipButtonAd != nil {
                         Button(action: {
@@ -103,12 +114,14 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
                             }
                         }) {
                             Text(SdkContainer.Companion().getInstance().uiText.skip)
-                            .foregroundColor(.white)
-                            .opacity(0.8)
-                            .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.white)
+                                .opacity(0.8)
+                                .font(.system(size: 16, weight: .semibold))
+                                .frame(minWidth: 120, minHeight: 44)
+                                .background(Color.black.opacity(0.3))
                         }
-                        .buttonStyle(.bordered)
-                        .position(x: geometry.size.width - 80, y: geometry.size.height - 80)
+                        .buttonStyle(.plain)
+                        .position(x: geometry.size.width - trailing, y: geometry.size.height - 100)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

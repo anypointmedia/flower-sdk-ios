@@ -38,8 +38,8 @@ class VLCMediaListPlayerAdapter: MediaPlayerAdapter {
 
         return Media(
             url: media.url!.absoluteString,
-            duration: media.length.intValue,
-            position: try mediaPlayer.time.intValue
+            duration: KotlinLong(value: Int64(media.length.intValue)),
+            position: KotlinLong(value: Int64(try mediaPlayer.time.intValue))
         )
     }
 
@@ -74,11 +74,7 @@ class VLCMediaListPlayerAdapter: MediaPlayerAdapter {
             "network-timeout": 10000,
         ]
 
-        if (playItem.isAd) {
-            commonMediaOptions["adaptive-logic"] = "rate"
-        } else {
-            commonMediaOptions["adaptive-logic"] = "highest"
-        }
+        commonMediaOptions["adaptive-logic"] = "highest"
 
         media.addOptions(commonMediaOptions)
 

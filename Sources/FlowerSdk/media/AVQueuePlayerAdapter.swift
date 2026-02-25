@@ -26,19 +26,36 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
     init(mediaPlayerHook: MediaPlayerHook, adsManagerListener: FlowerAdsManagerListener) {
         self.mediaPlayerHook = mediaPlayerHook
         self.adsManagerListener = adsManagerListener
+        super.init()
+        setupRateObserver()
     }
 
+    private func setupRateObserver() {
+        do {
+            let player = try self.player
+            player.addObserver(self, forKeyPath: #keyPath(AVPlayer.rate), options: [.new, .old], context: nil)
+        } catch {
+            logger.error {
+                "Failed to setup rate observer: \(error.localizedDescription)"
+            }
+        }
+    }
 
     func getCurrentMedia() throws -> Media {
-        if let asset = try player.currentItem?.asset as? AVURLAsset {
+        let currentPlayer = try self.player
+
+        if let asset = currentPlayer.currentItem?.asset as? AVURLAsset {
             if case .loaded(let _duration) = asset.status(of: .duration) {
                 let duration = CMTimeGetSeconds(_duration) * 1000
-                let position = CMTimeGetSeconds(try player.currentTime()) * 1000
+                let position = CMTimeGetSeconds(currentPlayer.currentTime()) * 1000
+
+                let finalPosition: Int64 = (position.isInfinite || position.isNaN) ? Int64(-1) : Int64(position)
+                let finalDuration: Int64 = (duration.isInfinite || duration.isNaN) ? Int64(-1) : Int64(duration)
 
                 return Media(
-                    url:  asset.url.absoluteString,
-                    duration: (duration.isInfinite || duration.isNaN) ? -1 : Int32(duration),
-                    position: (position.isInfinite || position.isNaN) ? -1 : Int32(position)
+                    urlOrId: asset.url.absoluteString,
+                    duration: finalDuration,
+                    position: finalPosition
                 )
             }
 
@@ -47,27 +64,31 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
             }
         }
 
-        throw Throwable(message: "No media available")
-}
+        return Media(
+            urlOrId: "",
+            duration: Int64(-1),
+            position: Int64(-1),
+            )
+    }
 
     func isPlaying() throws -> Bool {
-        try player.rate != 0.0
+        try self.player.rate != 0.0
     }
 
     func getVolume() throws -> Float {
-        try player.volume
+        try self.player.volume
     }
 
     func getHeight() throws -> Int32 {
-        Int32(try player.currentItem?.presentationSize.height ?? 0)
+        Int32(try self.player.currentItem?.presentationSize.height ?? 0)
     }
 
     func pause() throws {
-        try player.pause()
+        try self.player.pause()
     }
 
     func resume() throws {
-        try player.play()
+        try self.player.play()
     }
 
     func enqueuePlayItem(playItem: PlayItem) throws {
@@ -102,10 +123,14 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
             }
             return false
         }) else {
-            throw Throwable(message: "No media available")
+            logger.warn {
+                "not matched playitem"
+            }
+            return
         }
 
-        try player.remove(playerItem)
+        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
+        player.remove(playerItem)
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -122,20 +147,56 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
             }
 
             switch status {
-            case .readyToPlay: break
-            @unknown default:
+            case .readyToPlay:
+                break
+            default:
                 if let playerItem = object as? AVPlayerItem {
+                    playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
                     player.remove(playerItem)
+                }
+            }
+        } else if keyPath == #keyPath(AVPlayer.rate) {
+            // rate 변화 감지: 0 -> non-zero (재생 시작)
+            if let newRate = change?[.newKey] as? NSNumber,
+               let oldRate = change?[.oldKey] as? NSNumber {
+                let newRateValue = newRate.doubleValue
+                let oldRateValue = oldRate.doubleValue
+
+                // 재생 시작 시 또는 재개 시 새 item의 status observer 추가
+                if oldRateValue == 0 && newRateValue > 0 {
+                    if let player = try? self.player {
+                        player.currentItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new], context: nil)
+                    }
+                } else if newRateValue > 0 {
+                    if let player = try? self.player {
+                        player.currentItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new], context: nil)
+                    }
                 }
             }
         }
     }
 
     func playNextItem() throws {
-        try player.advanceToNextItem()
+        try self.player.advanceToNextItem()
     }
 
-    func getCurrentAbsoluteTime() -> Double? {
-        nil
+    func seekToPosition(absoluteStartTimeMs: Double?, relativeStartTimeMs: Double?, offsetMs: Double?, windowDurationMs: Double?) throws {
+        // AVPlayer: relativeStartTimeMs 사용
+        // fallback: offsetMs -> absoluteStartTimeMs
+        guard let targetMs = relativeStartTimeMs ?? offsetMs ?? absoluteStartTimeMs else {
+            return
+        }
+        let time = CMTime(seconds: targetMs / 1000, preferredTimescale: 600)
+        try self.player.seek(to: time)
+    }
+
+    func getCurrentAbsoluteTime(isPrintDetails: Bool) throws -> Double {
+        // currentDate() returns the date of the current playback position from EXT-X-PROGRAM-DATE-TIME
+        guard let currentPlayer = try? self.player,
+              let date = currentPlayer.currentItem?.currentDate()
+        else {
+            return -1
+        }
+        return date.timeIntervalSince1970 * 1000
     }
 }

@@ -6,6 +6,11 @@
 //
 
 import Foundation
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
+import Glibc
+#endif
 
 public enum SocketError: Error {
     case socketCreationFailed(String)
@@ -111,12 +116,24 @@ open class Socket: Hashable, Equatable {
         var sent = 0
         while sent < length {
             #if os(Linux)
-            let result = send(self.socketFileDescriptor, pointer + sent, Int(length - sent), Int32(MSG_NOSIGNAL))
+            let result = send(self.socketFileDescriptor, pointer.advanced(by: sent), Int(length - sent), Int32(MSG_NOSIGNAL))
             #else
-            let result = write(self.socketFileDescriptor, pointer + sent, Int(length - sent))
+            let result = write(self.socketFileDescriptor, pointer.advanced(by: sent), Int(length - sent))
             #endif
-            if result <= 0 {
+            if result < 0 {
+                #if os(Linux)
+                if errno == EINTR {
+                    continue
+                }
+                #else
+                if errno == EINTR {
+                    continue
+                }
+                #endif
                 throw SocketError.writeFailed(Errno.description())
+            }
+            if result == 0 {
+                break
             }
             sent += result
         }

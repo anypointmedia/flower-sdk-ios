@@ -45,5 +45,14 @@ public protocol MediaPlayerAdapter {
      */
     func playNextItem() throws
 
-    func getCurrentAbsoluteTime() throws -> Double?
+    /**
+     * Seeks to the specified position using available time values.
+     * @param absoluteStartTimeMs Absolute time in milliseconds
+     * @param relativeStartTimeMs relative time from the first window in milliseconds
+     * @param offsetMs Offset within the current window in milliseconds
+     * @param windowDurationMs Total length of the current window in milliseconds
+     */
+    func seekToPosition(absoluteStartTimeMs: Double?, relativeStartTimeMs: Double?, offsetMs: Double?, windowDurationMs: Double?) throws
+
+    func getCurrentAbsoluteTime(isPrintDetails: Bool) throws -> Double
 }

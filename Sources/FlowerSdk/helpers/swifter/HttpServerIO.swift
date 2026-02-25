@@ -134,7 +134,8 @@ open class HttpServerIO {
                 components.queryItems = request.queryParams.map { key, value in
                     URLQueryItem(name: key, value: value)
                 }
-                os_log(.error, log: .default, "Failed to send response: \(request.path)\(components.percentEncodedQuery != nil ? "?\(components.percentEncodedQuery!)" : "") error: \(error.localizedDescription)")
+                let pathAndQuery = "\(request.path)\(components.percentEncodedQuery != nil ? "?\(components.percentEncodedQuery!)" : "")"
+                os_log(.error, log: .default, "Failed to send response: %{public}@ error: %{public}@", pathAndQuery, String(describing: error))
             }
             if let session = response.socketSession() {
                 delegate?.socketConnectionReceived(socket)

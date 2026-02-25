@@ -2,6 +2,11 @@ import Foundation
 import SwiftUI
 import sdk_core
 
+// Import from util group/folder
+// Note: In Swift, files in the same target are visible to each other without import,
+// but we moved them physically. Just ensure the project structure reflects this.
+// No explicit import needed if they are in the same module.
+
 public typealias FlowerAdsManagerListener = sdk_core.FlowerAdsManagerListener
 public typealias MediaPlayerHook = sdk_core.MediaPlayerHook
 public typealias FlowerError = sdk_core.FlowerError
@@ -66,15 +71,44 @@ public class FlowerSdk {
             ")"
         }
 
-        switch env {
+        // Parse env string for remote logging support
+        // Format: "local-log-192.168.0.1:9898" -> env: "local", logServer: "192.168.0.1:9898"
+        var actualEnv = env
+        var logServerURL: String? = nil
+
+        if env.contains("-log-") {
+            let components = env.components(separatedBy: "-log-")
+            if components.count == 2 {
+                actualEnv = components[0]
+                logServerURL = components[1]
+            }
+        }
+
+        switch actualEnv {
         case "local",
              "dev",
              "prod":
-            sdk_core.SdkContainer.companion.getInstance().env = env
+            sdk_core.SdkContainer.companion.getInstance().env = actualEnv
             break;
         default:
             // Throw an error if env is not one of "local", "dev", or "prod"
             fatalError("env must be one of local, dev, prod")
+        }
+
+        // Configure remote logger if log server URL is provided
+        if let logServer = logServerURL {
+            // Configure RemoteLogger
+            RemoteLogger.shared.configure(serverURL: logServer)
+
+            // Bridge Kotlin logs to RemoteLogger via the SDK's global listener API
+            GlobalLogListener.shared.setListener(listener: LogListenerImpl())
+
+            logger.info {
+                "Remote logging enabled - sending logs to: http://\(logServer)"
+            }
+        } else {
+            // Disable remote logging by clearing the listener
+            GlobalLogListener.shared.setListener(listener: nil)
         }
     }
 
@@ -110,3 +144,4 @@ public class FlowerSdk {
         SdkContainer.companion.getInstance().isInPictureInPictureMode = isInPictureInPictureMode
     }
 }
+

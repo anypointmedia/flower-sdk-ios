@@ -271,4 +271,18 @@ class AdPlayerImpl: AdPlayer {
         next()
         return DeferredStubImpl(task: Task { true })
     }
+
+    func seekTo(offsetMs: Double) {
+        guard let player = self.player else {
+            return
+        }
+        let seconds = offsetMs / 1000.0
+        let time = CMTime(seconds: seconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        if let currentItem = player.currentItem {
+            currentItem.seek(to: time)
+        } else if let firstItem = player.items().first {
+            firstItem.seek(to: time)
+        }
+    }
 }
+

@@ -26,7 +26,7 @@ class MSPlayerObserver: NSObject {
 class ManipulationServerImpl: ManipulationServer {
     private let server = HttpServer()
     private var observer: MSPlayerObserver?
-    var logger = FLogging(tag: nil).logger
+    var logger = FLogging(tag: "ManipulationServerImpl").logger
 
     private var lastServerPort: in_port_t = 0
 

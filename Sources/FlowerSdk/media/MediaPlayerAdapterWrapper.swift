@@ -43,11 +43,35 @@ class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter {
         try platformMediaPlayerAdapter.playNextItem()
     }
 
-    func getCurrentAbsoluteTime() throws -> KotlinWrapped<KotlinDouble> {
-        if let time = try platformMediaPlayerAdapter.getCurrentAbsoluteTime() {
-            return KotlinWrapped(value: KotlinDouble(value: time))
-        } else {
-            return KotlinWrapped(value: nil)
+    func seekToPosition(absoluteStartTimeMs: KotlinWrapped<KotlinDouble>?, relativeStartTimeMs: KotlinWrapped<KotlinDouble>?, offsetMs: KotlinWrapped<KotlinDouble>?, windowDurationMs: KotlinWrapped<KotlinDouble>?) throws {
+        var absTime: Double? = nil
+        var relTime: Double? = nil
+        var offset: Double? = nil
+        var windowDur: Double? = nil
+
+        if let wrapped = absoluteStartTimeMs, let kotlinDouble = wrapped.value {
+            absTime = Double(kotlinDouble)
         }
+        if let wrapped = relativeStartTimeMs, let kotlinDouble = wrapped.value {
+            relTime = Double(kotlinDouble)
+        }
+        if let wrapped = offsetMs, let kotlinDouble = wrapped.value {
+            offset = Double(kotlinDouble)
+        }
+        if let wrapped = windowDurationMs, let kotlinDouble = wrapped.value {
+            windowDur = Double(kotlinDouble)
+        }
+        
+        try platformMediaPlayerAdapter.seekToPosition(
+            absoluteStartTimeMs: absTime,
+            relativeStartTimeMs: relTime,
+            offsetMs: offset,
+            windowDurationMs: windowDur
+        )
+    }
+
+    func getCurrentAbsoluteTime(isPrintDetails: Bool) throws -> KotlinWrapped<KotlinDouble> {
+        return KotlinWrapped(value: KotlinDouble(value: try platformMediaPlayerAdapter.getCurrentAbsoluteTime(isPrintDetails: isPrintDetails)))
     }
 }
+

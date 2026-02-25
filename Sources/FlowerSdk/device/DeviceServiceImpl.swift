@@ -8,7 +8,7 @@ import CryptoKit
 class DeviceServiceImpl: DeviceService {
     let keyValueStore: KeyValueStore = KeyValueStoreImpl(prefix: "FlowerSDK_")
 
-    private let logger = FLogging(tag: nil).logger
+    private let logger = FLogging(tag: "DeviceServiceImpl").logger
 
     private var appleAdId: String? = nil
     private var fingerPrintId: String? = nil

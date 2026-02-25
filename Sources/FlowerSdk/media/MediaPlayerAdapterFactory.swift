@@ -5,16 +5,23 @@ import MobileVLCKit
 #endif
 
 class MediaPlayerAdapterFactory: sdk_core.SdkContainerBeanFactory {
-    private let logger = FLogging(tag: nil).logger
+    private let logger = FLogging(tag: "MediaPlayerAdapterFactory").logger
 
     func create(args: KotlinArray<AnyObject>) throws -> KotlinWrapped<AnyObject> {
         let mediaPlayerHook = args.get(index: 1) as! MediaPlayerHook
         let adsManagerListener = args.get(index: 2) as! FlowerAdsManagerListener
         let player = mediaPlayerHook.getPlayer()
 
-        if let avplayer = player as? AVQueuePlayer {
+        if let avQueuePlayer = player as? AVQueuePlayer {
             logger.info { "Using AVQueuePlayerAdapter" }
             return KotlinWrapped(value: AVQueuePlayerAdapter(mediaPlayerHook: mediaPlayerHook, adsManagerListener: adsManagerListener))
+        }
+
+        if player is AVPlayer {
+            logger.info {
+                "Using AVPlayerAdapter"
+            }
+            return KotlinWrapped(value: AVPlayerAdapter(mediaPlayerHook: mediaPlayerHook, adsManagerListener: adsManagerListener))
         }
 
         #if canImport(MobileVLCKit)
@@ -27,6 +34,7 @@ class MediaPlayerAdapterFactory: sdk_core.SdkContainerBeanFactory {
         throw Throwable(
             message: UnsupportedMediaPlayerExceptionKt.formatUnsupportedMediaPlayerExceptionString(
                 players: [
+                    "AVQueuePlayer",
                     "AVPlayer",
                     "VLCMediaListPlayer",
                 ],

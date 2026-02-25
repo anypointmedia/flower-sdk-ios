@@ -3,6 +3,10 @@ import SwiftUI
 import sdk_core
 
 class GoogleAdViewImpl: GoogleAdView {
+
+    func setFocusable(focusable: Bool) {
+    }
+    
     let logger = FLogging(tag: "GoogleAdView").logger
 
     var flowerAdView: FlowerAdView
