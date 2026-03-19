@@ -22,7 +22,7 @@ let package = Package(
         .target(
             name: "FlowerSdk",
             dependencies: [
-                "sdk_core"
+                "sdk_core",
             ]
         ),
     ]

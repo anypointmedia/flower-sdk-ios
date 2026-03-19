@@ -92,6 +92,15 @@ class AVPlayerAdapter: NSObject, MediaPlayerAdapter {
         try player.pause()
     }
 
+    func stop() throws {
+        let player = try self.player
+        player.pause()
+        player.replaceCurrentItem(with: nil)
+        queueLock.lock()
+        queue.removeAll()
+        queueLock.unlock()
+    }
+
     func resume() throws {
         try player.play()
     }
@@ -222,9 +231,7 @@ class AVPlayerAdapter: NSObject, MediaPlayerAdapter {
 //        try? resume()
 //    }
 
-    func seekToPosition(absoluteStartTimeMs: Double?, relativeStartTimeMs: Double?, offsetMs: Double?, windowDurationMs: Double?) throws {
-        // AVPlayer: relativeStartTimeMs 사용
-        // fallback: offsetMs -> absoluteStartTimeMs
+    func seekToPosition(absoluteStartTimeMs: Double?, relativeStartTimeMs: Double?, offsetMs: Double?, windowDurationMs: Double?, periodIndex: Int32?) throws {
         guard let targetMs = relativeStartTimeMs ?? offsetMs ?? absoluteStartTimeMs else {
             return
         }
@@ -241,4 +248,13 @@ class AVPlayerAdapter: NSObject, MediaPlayerAdapter {
         }
         return date.timeIntervalSince1970 * 1000
     }
+
+    func getPlayerType() -> String? {
+        "AVPlayer"
+    }
+
+    func getPlayerVersion() -> String? {
+        nil
+    }
 }
+

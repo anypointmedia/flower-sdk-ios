@@ -40,14 +40,21 @@ public class FlowerSdk {
 
         var DEFAULT_TIMEOUT: TimeInterval = 3_000
 
+        var instances: [SdkContainer.ClassName: Any] = [
+            sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(),
+            sdk_core.SdkContainer.ClassName.cacheService: CacheServiceImpl(),
+        ]
+
+        #if canImport(ProgrammaticAccessLibrary)
+        instances[sdk_core.SdkContainer.ClassName.googlePalManager] = GooglePalManagerImpl()
+        logger.info {
+            "Google PAL SDK initialized"
+        }
+        #endif
+
         let lm: Void = sdk_core.LifecycleManager().doInit(
-                listener: DefaultSdkLifecycleListener(),
-                instances: PlatformMap(storage: [
-                    // Note: Let kmp core handle creating HttpClient[io.ktor.client.engine.darwin.DarwinClientEngine
-                    // Thus, do not add instance sdk_core.SdkContainer.ClassName.httpClient: ,
-                    sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(),
-                    sdk_core.SdkContainer.ClassName.cacheService: CacheServiceImpl(),
-                ]),
+            listener: DefaultSdkLifecycleListener(),
+            instances: PlatformMap(storage: instances),
                 factories: PlatformMap(storage: [
                     sdk_core.SdkContainer.ClassName.mediaPlayerAdapterWrapper: MediaPlayerAdapterWrapperFactory(),
                     sdk_core.SdkContainer.ClassName.platformMediaPlayerAdapter: MediaPlayerAdapterFactory(),

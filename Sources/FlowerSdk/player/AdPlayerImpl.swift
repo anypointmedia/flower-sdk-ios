@@ -9,7 +9,7 @@ class AdPlayerImpl: AdPlayer {
     private let sdkContainer = sdk_core.SdkContainer.companion.getInstance()
     private var isAdPlaying = false
     private var totalDuration: Int32 = -1
-//    private let rendererFactory: RenderersFactory
+    private let externalPlayer: AVQueuePlayer?
     private var player: AVQueuePlayer?
     private var adPlayerCallbacks = AdPlayerCallbacks()
     private var mediaUrls: [String] = []
@@ -19,6 +19,14 @@ class AdPlayerImpl: AdPlayer {
     private var adPlayerView: AdPlayerViewImpl!
 
     private var durations: [Double] = []
+    private var originalMediaUrls: [String] = []
+    private var originalPosition: Double = 0
+    private var adCount: Int = 0
+    private var originalItemObservation: NSKeyValueObservation?
+
+    init(player: AVQueuePlayer? = nil) {
+        self.externalPlayer = player
+    }
 
     func load(mediaUrls: NSMutableArray, totalDuration: Int32, adPlayerView: AdPlayerView) {
         let mediaUrls = mediaUrls as! [String]
@@ -32,9 +40,21 @@ class AdPlayerImpl: AdPlayer {
             guard let self = self else {return}
 
             do {
+                // Save original sources only once, but always update position
+                if let existingPlayer = self.player {
+                    if self.originalMediaUrls.isEmpty {
+                        self.originalMediaUrls = existingPlayer.items().compactMap { item in
+                            (item.asset as? AVURLAsset)?.url.absoluteString
+                        }
+                    }
+                    self.originalPosition = CMTimeGetSeconds(existingPlayer.currentTime()) * 1000
+                    self.logger.info { "saved original from player: urls=\(self.originalMediaUrls.count), position=\(self.originalPosition)" }
+                }
+
                 self.release()
 
-                self.mediaUrls = mediaUrls
+                self.adCount = mediaUrls.count
+                self.mediaUrls = mediaUrls + self.originalMediaUrls
                 self.totalDuration = totalDuration
                 self.durations = []
 
@@ -44,13 +64,24 @@ class AdPlayerImpl: AdPlayer {
                     durations.append(CMTimeGetSeconds(source.asset.duration)*1000)
                 }
 
-                // Note: Initialize in this order
-                // AVQueuePlayer > AVPlayerLayer > adPlayerView.layer.addSublayer(playerLayer)
-                player = AVQueuePlayer(items: mediaSources)
-
-                for item in player!.items() {
-                    NotificationCenter.default.addObserver(self, selector: #selector(adPlayerDidFinishPlaying(_:)), name: .AVPlayerItemDidPlayToEndTime, object: item)
+                if let externalPlayer = self.externalPlayer {
+                    // Reuse external player: clear existing items, insert new ones
+                    self.logger.info { "Reusing external player (externalPlayer provided)" }
+                    externalPlayer.removeAllItems()
+                    for source in mediaSources {
+                        externalPlayer.insert(source, after: nil)
+                    }
+                    player = externalPlayer
+                } else {
+                    // Note: Initialize in this order
+                    // AVQueuePlayer > AVPlayerLayer > adPlayerView.layer.addSublayer(playerLayer)
+                    self.logger.info { "Creating new AVQueuePlayer (no externalPlayer)" }
+                    player = AVQueuePlayer(items: mediaSources)
                 }
+
+                // Pre-seek original items while ads are still playing
+                self.preSeekOriginalItems()
+
                 adPlayerCallbacks.onLoaded(mediaUrl: mediaUrls[0], duration: totalDuration)
             } catch let error {
                 logger.error { "failed to load play set \(error)" }
@@ -63,19 +94,6 @@ class AdPlayerImpl: AdPlayer {
     // Note: Due to OS differences, returning [AVPlayerItem] instead of MediaSource
     func convertMediaSource() -> [AVPlayerItem] {
         return mediaUrls.map { AVPlayerItem(url: URL(string: $0)!) }
-    }
-
-    func next() {
-        guard let player = self.player else {
-            stop()
-            return
-        }
-
-        if player.items().index(of: player.currentItem!)! < player.items().count - 1 {
-            player.advanceToNextItem()
-        } else {
-            stop()
-        }
     }
 
     func play() {
@@ -109,17 +127,18 @@ class AdPlayerImpl: AdPlayer {
             return
         }
         cancelPlayerJobs()
-        stopJob = DispatchWorkItem { [weak self] in
-            guard let self = self else {return}
-            do {
-                self.adPlayerView.hide()
-                player.pause()
-                logger.info { "ad player stop" }
-                self.release()
-                adPlayerCallbacks.onStopped()
-            }
+        let work = {
+            self.adPlayerView.hide()
+            player.pause()
+            self.logger.info { "ad player stop" }
+            self.release()
+            self.adPlayerCallbacks.onStopped()
         }
-        DispatchQueue.main.async(execute: stopJob!)
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.sync { work() }
+        }
     }
 
     func cancelPlayerJobs() {
@@ -154,7 +173,10 @@ class AdPlayerImpl: AdPlayer {
         }
         do {
             isAdPlaying = false
-            player = nil
+            // Don't nil out external player - it's owned by the caller
+            if externalPlayer == nil {
+                player = nil
+            }
             logger.info { "exit releasePlayer" }
         }
     }
@@ -213,7 +235,7 @@ class AdPlayerImpl: AdPlayer {
 
     func onPlayerError(error: Any) { // Expect error: Kotlin.PlaybackException
         let nsMutableArray = NSMutableArray(array: [])
-        adPlayerCallbacks.onStopped()
+        adPlayerCallbacks.onError(mediaUrl: mediaUrls[0], t: error as! KotlinThrowable)
     }
 
     func onPlayWhenReadyChange(playWhenReady: Bool, reason: Int) {
@@ -247,14 +269,6 @@ class AdPlayerImpl: AdPlayer {
 //
 //    }
 
-    @objc func adPlayerDidFinishPlaying(_ notification: Notification) {
-        // if player has completed the last ad
-        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: player!.currentItem)
-        if player!.items().count == 1 {
-            stop()
-        }
-    }
-
     func pause() {
         player?.pause()
     }
@@ -268,8 +282,64 @@ class AdPlayerImpl: AdPlayer {
     }
 
     func playNextItem_() -> any DeferredStub {
-        next()
-        return DeferredStubImpl(task: Task { true })
+        guard let player = self.player else {
+            logger.warn { "playNextItem_: player is nil" }
+            return DeferredStubImpl(task: Task { KotlinBoolean(value: false) })
+        }
+
+        let itemCount = player.items().count
+        logger.info { "playNextItem_: itemCount=\(itemCount)" }
+
+        if itemCount > 1 {
+            // Original items are already pre-seeked, just advance
+            player.advanceToNextItem()
+            return DeferredStubImpl(task: Task { KotlinBoolean(value: true) })
+        } else {
+            logger.info { "playNextItem_: No more media items to play" }
+            return DeferredStubImpl(task: Task { KotlinBoolean(value: false) })
+        }
+    }
+
+    private var statusObservation: NSKeyValueObservation?
+
+    /// Pre-seek original items in the queue so they start at the correct position
+    /// when AVQueuePlayer auto-advances to them (avoids first-frame flash)
+    private func preSeekOriginalItems() {
+        guard let player = self.player,
+              !originalMediaUrls.isEmpty,
+              originalPosition > 0 else { return }
+
+        let items = player.items()
+        let seekTime = CMTime(seconds: originalPosition / 1000.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+
+        // Original items start at index adCount
+        for i in adCount..<items.count {
+            let item = items[i]
+            if item.status == .readyToPlay {
+                logger.info { "preSeekOriginalItems: item[\(i)] already ready, seeking to \(self.originalPosition)ms" }
+                item.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] finished in
+                    self?.logger.info { "preSeekOriginalItems: item[\(i)] seek finished=\(finished)" }
+                }
+            } else {
+                logger.info { "preSeekOriginalItems: item[\(i)] not ready, observing status" }
+                originalItemObservation?.invalidate()
+                originalItemObservation = item.observe(\.status, options: [.new]) { [weak self] observedItem, _ in
+                    guard let self = self else { return }
+                    if observedItem.status == .readyToPlay {
+                        self.logger.info { "preSeekOriginalItems: item[\(i)] became ready, seeking to \(self.originalPosition)ms" }
+                        observedItem.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero) { finished in
+                            self.logger.info { "preSeekOriginalItems: item[\(i)] seek finished=\(finished)" }
+                        }
+                        self.originalItemObservation?.invalidate()
+                        self.originalItemObservation = nil
+                    } else if observedItem.status == .failed {
+                        self.logger.error { "preSeekOriginalItems: item[\(i)] failed - \(observedItem.error?.localizedDescription ?? "unknown")" }
+                        self.originalItemObservation?.invalidate()
+                        self.originalItemObservation = nil
+                    }
+                }
+            }
+        }
     }
 
     func seekTo(offsetMs: Double) {
@@ -282,6 +352,41 @@ class AdPlayerImpl: AdPlayer {
             currentItem.seek(to: time)
         } else if let firstItem = player.items().first {
             firstItem.seek(to: time)
+        }
+    }
+
+    func enqueueNextItem(mediaUrl: String) {
+        guard let player = self.player else {
+            logger.warn {
+                "ad player is not initialized"
+            }
+            return
+        }
+
+        let url = URL(string: mediaUrl)!
+        let playerItem = AVPlayerItem(url: url)
+        player.insert(playerItem, after: nil)
+        mediaUrls.append(mediaUrl)
+        durations.append(0) // Duration will be updated when loaded
+    }
+
+    func removeNextItem(mediaUrl: String) {
+        guard let player = self.player else {
+            logger.warn {
+                "ad player is not initialized"
+            }
+            return
+        }
+
+        if let index = mediaUrls.firstIndex(of: mediaUrl) {
+            if index < player.items().count {
+                let item = player.items()[index]
+                player.remove(item)
+            }
+            mediaUrls.remove(at: index)
+            if index < durations.count {
+                durations.remove(at: index)
+            }
         }
     }
 }

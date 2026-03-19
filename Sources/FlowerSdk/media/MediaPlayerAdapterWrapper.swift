@@ -27,6 +27,10 @@ class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter {
         try platformMediaPlayerAdapter.pause()
     }
 
+    func stop_() throws {
+        try platformMediaPlayerAdapter.stop()
+    }
+
     func resume_() throws {
         try platformMediaPlayerAdapter.resume()
     }
@@ -43,7 +47,7 @@ class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter {
         try platformMediaPlayerAdapter.playNextItem()
     }
 
-    func seekToPosition(absoluteStartTimeMs: KotlinWrapped<KotlinDouble>?, relativeStartTimeMs: KotlinWrapped<KotlinDouble>?, offsetMs: KotlinWrapped<KotlinDouble>?, windowDurationMs: KotlinWrapped<KotlinDouble>?) throws {
+    func seekToPosition(absoluteStartTimeMs: KotlinWrapped<KotlinDouble>?, relativeStartTimeMs: KotlinWrapped<KotlinDouble>?, offsetMs: KotlinWrapped<KotlinDouble>?, windowDurationMs: KotlinWrapped<KotlinDouble>?, periodIndex: KotlinInt?) throws {
         var absTime: Double? = nil
         var relTime: Double? = nil
         var offset: Double? = nil
@@ -61,17 +65,26 @@ class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter {
         if let wrapped = windowDurationMs, let kotlinDouble = wrapped.value {
             windowDur = Double(kotlinDouble)
         }
-        
+
         try platformMediaPlayerAdapter.seekToPosition(
             absoluteStartTimeMs: absTime,
             relativeStartTimeMs: relTime,
             offsetMs: offset,
-            windowDurationMs: windowDur
+            windowDurationMs: windowDur,
+            periodIndex: periodIndex != nil ? Int32(truncating: periodIndex!) : nil
         )
     }
 
     func getCurrentAbsoluteTime(isPrintDetails: Bool) throws -> KotlinWrapped<KotlinDouble> {
         return KotlinWrapped(value: KotlinDouble(value: try platformMediaPlayerAdapter.getCurrentAbsoluteTime(isPrintDetails: isPrintDetails)))
+    }
+
+    func getPlayerType() -> String? {
+        return platformMediaPlayerAdapter.getPlayerType()
+    }
+
+    func getPlayerVersion() -> String? {
+        return platformMediaPlayerAdapter.getPlayerVersion()
     }
 }
 

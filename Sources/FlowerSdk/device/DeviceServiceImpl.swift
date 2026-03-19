@@ -162,6 +162,14 @@ class DeviceServiceImpl: DeviceService {
         return false
     }
 
+    func isSupportHls() -> Bool {
+        return true
+    }
+
+    func isSupportDash() -> Bool {
+        return false
+    }
+
     func getTimeZoneOffset() -> String {
         let timeZone = TimeZone.current
         let offsetSeconds = timeZone.secondsFromGMT()

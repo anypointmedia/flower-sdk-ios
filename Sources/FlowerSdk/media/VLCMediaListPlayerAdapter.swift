@@ -59,6 +59,10 @@ class VLCMediaListPlayerAdapter: MediaPlayerAdapter {
         fatalError("Not implemented")
     }
 
+    func stop() throws {
+        fatalError("Not implemented")
+    }
+
     func resume() throws {
         fatalError("Not implemented")
     }
@@ -90,6 +94,14 @@ class VLCMediaListPlayerAdapter: MediaPlayerAdapter {
                 mediaPlayer.media = media
             }
         }
+    }
+
+    func getPlayerType() -> String? {
+        "VLCMediaListPlayer"
+    }
+
+    func getPlayerVersion() -> String? {
+        nil
     }
 }
 #endif

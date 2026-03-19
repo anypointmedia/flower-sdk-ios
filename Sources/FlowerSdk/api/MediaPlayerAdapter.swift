@@ -29,6 +29,11 @@ public protocol MediaPlayerAdapter {
     func pause() throws
 
     /**
+     * Stops the playback and releases resources.
+     */
+    func stop() throws
+
+    /**
      * Resumes the playback.
      */
     func resume() throws
@@ -51,8 +56,23 @@ public protocol MediaPlayerAdapter {
      * @param relativeStartTimeMs relative time from the first window in milliseconds
      * @param offsetMs Offset within the current window in milliseconds
      * @param windowDurationMs Total length of the current window in milliseconds
+     * @param periodIndex Period index for DASH MPD live streams
      */
-    func seekToPosition(absoluteStartTimeMs: Double?, relativeStartTimeMs: Double?, offsetMs: Double?, windowDurationMs: Double?) throws
+    func seekToPosition(absoluteStartTimeMs: Double?, relativeStartTimeMs: Double?, offsetMs: Double?, windowDurationMs: Double?, periodIndex: Int32?) throws
 
     func getCurrentAbsoluteTime(isPrintDetails: Bool) throws -> Double
+
+    func getPlayerType() -> String?
+
+    func getPlayerVersion() -> String?
+}
+
+extension MediaPlayerAdapter {
+    func getPlayerType() -> String? {
+        nil
+    }
+
+    func getPlayerVersion() -> String? {
+        nil
+    }
 }
