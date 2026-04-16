@@ -37,9 +37,9 @@ class VLCMediaListPlayerAdapter: MediaPlayerAdapter {
         }
 
         return Media(
-            url: media.url!.absoluteString,
-            duration: KotlinLong(value: Int64(media.length.intValue)),
-            position: KotlinLong(value: Int64(try mediaPlayer.time.intValue))
+            urlOrId: media.url!.absoluteString,
+            duration: Double(media.length.intValue),
+            position: Double(try mediaPlayer.time.intValue)
         )
     }
 

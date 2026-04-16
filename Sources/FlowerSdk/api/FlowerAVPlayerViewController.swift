@@ -71,6 +71,9 @@ public class FlowerAVPlayerViewController: AVPlayerViewController {
 }
 
 private class AVPlayerViewControllerListener: FlowerAdsManagerListener {
+    func onAdUserAction(action: String, adInfo: AdInfo) {
+    }
+    
     let controller: FlowerAVPlayerViewController
 
     init(controller: FlowerAVPlayerViewController) {
@@ -105,7 +108,7 @@ private class AVPlayerViewControllerListener: FlowerAdsManagerListener {
         }
     }
 
-    public func onAdSkipped(reason: Int32) {
+    public func onAdBreakSkipped(reason: Int32) {
         DispatchQueue.main.async {
             self.controller.showsPlaybackControls = true
         }

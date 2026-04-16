@@ -13,6 +13,7 @@ class DeviceServiceImpl: DeviceService {
     private var appleAdId: String? = nil
     private var fingerPrintId: String? = nil
     private var deviceUuid: String? = nil
+    private var appName: String? = nil
 
     init() {
         Task {
@@ -168,6 +169,14 @@ class DeviceServiceImpl: DeviceService {
 
     func isSupportDash() -> Bool {
         return false
+    }
+
+    func getAppName() -> String? {
+        return appName
+    }
+
+    func setAppName(appName: String) {
+        self.appName = appName
     }
 
     func getTimeZoneOffset() -> String {

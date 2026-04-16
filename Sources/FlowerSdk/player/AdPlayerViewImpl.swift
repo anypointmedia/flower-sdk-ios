@@ -43,6 +43,18 @@ class AdPlayerViewImpl: AdPlayerView {
         return DeferredStubImpl(task: Task { KotlinBoolean(value: flowerAdView.isAdPlayerViewVisible) })
     }
 
+    func setCoverImage(url: String) {
+        // no-op on iOS
+    }
+
+    func showCoverImage() {
+        // no-op on iOS
+    }
+
+    func hideCoverImage() {
+        // no-op on iOS
+    }
+
     func addPlayerLayer(playerLayer: AVPlayerLayer) {
         adPlayerViewImplBody.observer.playerLayerRepresentable = AVPlayerLayerRepresentable(playerLayer: playerLayer)
     }

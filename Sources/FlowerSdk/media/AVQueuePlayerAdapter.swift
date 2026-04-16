@@ -49,8 +49,8 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
                 let duration = CMTimeGetSeconds(_duration) * 1000
                 let position = CMTimeGetSeconds(currentPlayer.currentTime()) * 1000
 
-                let finalPosition: Int64 = (position.isInfinite || position.isNaN) ? Int64(-1) : Int64(position)
-                let finalDuration: Int64 = (duration.isInfinite || duration.isNaN) ? Int64(-1) : Int64(duration)
+                let finalPosition: Double = (position.isInfinite || position.isNaN) ? -1.0 : position
+                let finalDuration: Double = (duration.isInfinite || duration.isNaN) ? -1.0 : duration
 
                 return Media(
                     urlOrId: asset.url.absoluteString,
@@ -66,8 +66,8 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
 
         return Media(
             urlOrId: "",
-            duration: Int64(-1),
-            position: Int64(-1),
+            duration: -1.0,
+            position: -1.0,
             )
     }
 
@@ -122,7 +122,7 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
             items = player.items()
         }
 
-        guard let playerItem = items.first(where: { item in
+        guard let playerItem = items.last(where: { item in
             if let urlAsset = item.asset as? AVURLAsset {
                 return urlAsset.url.absoluteString == playItem.url
             }

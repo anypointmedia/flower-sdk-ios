@@ -79,6 +79,9 @@ open class FlowerAVPlayer: AVQueuePlayer {
         var onPrerollCompleted: () -> Void = {}
 
         final class PrerollEventListener: FlowerAdsManagerListener {
+            func onAdUserAction(action: String, adInfo: AdInfo) {
+            }
+            
             private let logger: Logger_
             private let flowerAdView: FlowerAdView
             private let playFlagProvider: () -> Bool
@@ -134,7 +137,7 @@ open class FlowerAVPlayer: AVQueuePlayer {
             func onError(error: FlowerError?) {
             }
 
-            func onAdSkipped(reason: Int32) {
+            func onAdBreakSkipped(reason: Int32) {
             }
 
             func onAdBreakPrepare(adInfos: NSMutableArray) {
@@ -210,6 +213,9 @@ open class FlowerAVPlayer: AVQueuePlayer {
                 var midrollPrepared = false
 
                 final class MidrollEventListener: FlowerAdsManagerListener {
+                    func onAdUserAction(action: String, adInfo: AdInfo) {
+                    }
+                    
                     private let logger: Logger_
                     private let flowerAdView: FlowerAdView
                     private let minPrepareDuration: Int64
@@ -285,7 +291,7 @@ open class FlowerAVPlayer: AVQueuePlayer {
                     func onError(error: FlowerError?) {
                     }
 
-                    func onAdSkipped(reason: Int32) {
+                    func onAdBreakSkipped(reason: Int32) {
                     }
 
                     func onAdBreakPrepare(adInfos: NSMutableArray) {
