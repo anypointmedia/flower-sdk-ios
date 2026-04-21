@@ -12,17 +12,19 @@ class AdPlayerImplFactory: sdk_core.SdkContainerBeanFactory {
             return KotlinWrapped(value: AdPlayerImpl())
         }
 
-        let mediaPlayerHook = args.get(index: 1) as? MediaPlayerHook
-        let player = mediaPlayerHook?.getPlayer()
+        if SdkContainer.Companion().getInstance().ignoreAdBreakInPIPMode == false {
+            let mediaPlayerHook = args.get(index: 1) as? MediaPlayerHook
+            let player = mediaPlayerHook?.getPlayer()
 
-        if let queuePlayer = player as? AVQueuePlayer {
-            logger.info { "Using AdPlayerImpl (AVQueuePlayer)" }
-            return KotlinWrapped(value: AdPlayerImpl(player: queuePlayer))
-        }
+            if let queuePlayer = player as? AVQueuePlayer {
+                logger.info { "Using AdPlayerImpl (AVQueuePlayer)" }
+                return KotlinWrapped(value: AdPlayerImpl(player: queuePlayer))
+            }
 
-        if let avPlayer = player as? AVPlayer {
-            logger.info { "Using AdAvPlayerImpl (AVPlayer)" }
-            return KotlinWrapped(value: AdAvPlayerImpl(player: avPlayer))
+            if let avPlayer = player as? AVPlayer {
+                logger.info { "Using AdAvPlayerImpl (AVPlayer)" }
+                return KotlinWrapped(value: AdAvPlayerImpl(player: avPlayer))
+            }
         }
 
         // Default: create internal AVQueuePlayer

@@ -737,6 +737,7 @@ __attribute__((swift_name("AdHandler.Companion")))
 - (instancetype)initWithTag:(NSString * _Nullable)tag __attribute__((swift_name("init(tag:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) Sdk_coreAdHandlerCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) int64_t AD_BREAK_END_BUFFER __attribute__((swift_name("AD_BREAK_END_BUFFER")));
 @property (readonly) int32_t MIN_BUFFER_TIME __attribute__((swift_name("MIN_BUFFER_TIME")));
 @property (readonly) int64_t MIN_REMNANT_DURATION __attribute__((swift_name("MIN_REMNANT_DURATION")));
 @property (readonly) int64_t REMAINED_AD_DURATION_THRESHOLD __attribute__((swift_name("REMAINED_AD_DURATION_THRESHOLD")));
@@ -766,7 +767,6 @@ __attribute__((swift_name("AdTracker.Companion")))
 @property (readonly) int64_t AD_CTA_SHOW_DELAY __attribute__((swift_name("AD_CTA_SHOW_DELAY")));
 @property (readonly) int64_t AD_PLAY_TIME_CHECK_INTERVAL __attribute__((swift_name("AD_PLAY_TIME_CHECK_INTERVAL")));
 @property (readonly) int64_t AD_PLAY_TIME_CHECK_INTERVAL_FOR_TV __attribute__((swift_name("AD_PLAY_TIME_CHECK_INTERVAL_FOR_TV")));
-@property (readonly) int64_t AD_PLAY_TIME_CHECK_INTERVAL_PLAYER_PAUSE __attribute__((swift_name("AD_PLAY_TIME_CHECK_INTERVAL_PLAYER_PAUSE")));
 @property (readonly) int64_t DEFAULT_AD_SKIP_EXPIRATION_DURATION __attribute__((swift_name("DEFAULT_AD_SKIP_EXPIRATION_DURATION")));
 @property (readonly) int32_t PLAYBACK_ERROR_CODE __attribute__((swift_name("PLAYBACK_ERROR_CODE")));
 @end
@@ -1188,7 +1188,7 @@ __attribute__((swift_name("NormalAdHandler")))
  * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
 - (void)requestDisplayAdAdTagUri:(NSString *)adTagUri timeoutMillis:(int64_t)timeoutMillis __attribute__((swift_name("requestDisplayAd(adTagUri:timeoutMillis:)")));
-- (id<Sdk_coreKotlinx_coroutines_coreJob>)requestVideoAdAdTagUrl:(NSString *)adTagUrl extraParams:(NSDictionary<NSString *, id> *)extraParams timeout:(int64_t)timeout macro:(Sdk_coreAdUrlMacroValue *)macro adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders cacheConfig:(Sdk_coreCacheConfig *)cacheConfig stopOnPipMode:(BOOL)stopOnPipMode __attribute__((swift_name("requestVideoAd(adTagUrl:extraParams:timeout:macro:adTagHeaders:cacheConfig:stopOnPipMode:)")));
+- (id<Sdk_coreKotlinx_coroutines_coreJob>)requestVideoAdAdTagUrl:(NSString *)adTagUrl extraParams:(NSDictionary<NSString *, id> *)extraParams timeout:(int64_t)timeout macro:(Sdk_coreAdUrlMacroValue *)macro adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders cacheConfig:(Sdk_coreCacheConfig *)cacheConfig __attribute__((swift_name("requestVideoAd(adTagUrl:extraParams:timeout:macro:adTagHeaders:cacheConfig:)")));
 - (void)resume __attribute__((swift_name("resume()")));
 - (void)stop __attribute__((swift_name("stop()")));
 
@@ -1713,6 +1713,7 @@ __attribute__((swift_name("UiText")))
 @protocol Sdk_coreUiText
 @required
 @property (readonly) NSString *clickThrough __attribute__((swift_name("clickThrough")));
+@property (readonly) NSString *samsungTvSkip __attribute__((swift_name("samsungTvSkip")));
 @property (readonly) NSString *skip __attribute__((swift_name("skip")));
 @end
 
@@ -1724,6 +1725,7 @@ __attribute__((swift_name("UiTextEn")))
 + (instancetype)uiTextEn __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) Sdk_coreUiTextEn *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *clickThrough __attribute__((swift_name("clickThrough")));
+@property (readonly) NSString *samsungTvSkip __attribute__((swift_name("samsungTvSkip")));
 @property (readonly) NSString *skip __attribute__((swift_name("skip")));
 @end
 
@@ -1735,6 +1737,7 @@ __attribute__((swift_name("UiTextKo")))
 + (instancetype)uiTextKo __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) Sdk_coreUiTextKo *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *clickThrough __attribute__((swift_name("clickThrough")));
+@property (readonly) NSString *samsungTvSkip __attribute__((swift_name("samsungTvSkip")));
 @property (readonly) NSString *skip __attribute__((swift_name("skip")));
 @end
 
@@ -2193,6 +2196,7 @@ __attribute__((swift_name("SdkContainer")))
 @property (readonly) id<Sdk_coreGoogleAdsManager> _Nullable googleAdsManager __attribute__((swift_name("googleAdsManager")));
 @property (readonly) id<Sdk_coreGooglePalManager> _Nullable googlePalManager __attribute__((swift_name("googlePalManager")));
 @property (readonly) Sdk_coreKtor_client_coreHttpClient *httpClient __attribute__((swift_name("httpClient")));
+@property BOOL ignoreAdBreakInPIPMode __attribute__((swift_name("ignoreAdBreakInPIPMode")));
 @property BOOL ignoreSkip __attribute__((swift_name("ignoreSkip")));
 @property Sdk_coreMutableDictionary<Sdk_coreSdkContainerClassName *, id> *instances __attribute__((swift_name("instances")));
 @property BOOL isInPictureInPictureMode __attribute__((swift_name("isInPictureInPictureMode")));

@@ -150,5 +150,9 @@ public class FlowerSdk {
     public static func notifyPictureInPictureModeChanged(_ isInPictureInPictureMode: Bool) {
         SdkContainer.companion.getInstance().isInPictureInPictureMode = isInPictureInPictureMode
     }
+
+    public static func setIgnoreAdBreakInPIPMode(_ ignore: Bool) {
+        SdkContainer.companion.getInstance().ignoreAdBreakInPIPMode = ignore
+    }
 }
 
