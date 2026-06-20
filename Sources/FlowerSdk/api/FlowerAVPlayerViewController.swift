@@ -71,6 +71,10 @@ public class FlowerAVPlayerViewController: AVPlayerViewController {
 }
 
 private class AVPlayerViewControllerListener: FlowerAdsManagerListener {
+    func onAdPlay(adInfo: AdInfo) {
+        
+    }
+    
     func onAdUserAction(action: String, adInfo: AdInfo) {
     }
     

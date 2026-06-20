@@ -2,6 +2,7 @@ import Foundation
 import sdk_core
 import UIKit
 import AdSupport
+import AppTrackingTransparency
 import Combine
 import CryptoKit
 
@@ -112,22 +113,47 @@ class DeviceServiceImpl: DeviceService {
             if (getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len), &hostname, socklen_t(hostname.count), nil, 0, NI_NUMERICHOST) == 0) {
                 let addressStr = String(cString: hostname)
                 if useIPv4 && addr.sa_family == UInt8(AF_INET) {
-                    address = addressStr
-                    break
-                } else if !useIPv4 && addr.sa_family == UInt8(AF_INET6) {
-                    if addressStr.contains("%") {
-                        address = addressStr.components(separatedBy: "%").first?.uppercased()
-                    } else {
-                        address = addressStr.uppercased()
+                    if isIPv4PrivateAddress(addressStr) {
+                        address = addressStr
+                        break
                     }
-
-                    break
+                } else if !useIPv4 && addr.sa_family == UInt8(AF_INET6) {
+                    let stripped: String
+                    if addressStr.contains("%") {
+                        stripped = addressStr.components(separatedBy: "%").first.map { String($0) } ?? addressStr
+                    } else {
+                        stripped = addressStr
+                    }
+                    if isIPv6UniqueLocalAddress(stripped) {
+                        address = stripped.uppercased()
+                        break
+                    }
                 }
             }
         }
         freeifaddrs(ifaddr)
 
         return address
+    }
+
+    private func isIPv4PrivateAddress(_ addr: String) -> Bool {
+        // RFC 1918: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16.
+        if addr.hasPrefix("10.") || addr.hasPrefix("192.168.") {
+            return true
+        }
+        if addr.hasPrefix("172.") {
+            let parts = addr.split(separator: ".")
+            if parts.count >= 2, let second = Int(parts[1]), (16...31).contains(second) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private func isIPv6UniqueLocalAddress(_ addr: String) -> Bool {
+        // RFC 4193 ULA occupies fc00::/7 (first hextet starts with fc or fd).
+        let lower = addr.lowercased()
+        return lower.hasPrefix("fc") || lower.hasPrefix("fd")
     }
 
     func getLocale() -> String? {
@@ -169,6 +195,20 @@ class DeviceServiceImpl: DeviceService {
 
     func isSupportDash() -> Bool {
         return false
+    }
+
+    func isAdTrackingEnabled() -> Bool {
+        if #available(iOS 14, tvOS 14, *) {
+            switch ATTrackingManager.trackingAuthorizationStatus {
+            case .denied, .restricted:
+                return false
+            case .authorized, .notDetermined:
+                return true
+            @unknown default:
+                return true
+            }
+        }
+        return true
     }
 
     func getAppName() -> String? {

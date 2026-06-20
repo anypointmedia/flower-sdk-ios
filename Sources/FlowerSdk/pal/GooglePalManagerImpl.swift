@@ -1,5 +1,6 @@
 #if canImport(ProgrammaticAccessLibrary)
 import Foundation
+import CryptoKit
 import sdk_core
 import ProgrammaticAccessLibrary
 
@@ -18,7 +19,7 @@ class GooglePalManagerImpl: GooglePalManager {
         self.settings = settings
     }
 
-    func loadNonce(transactionId: String, descriptionUrl: String?, playerType: String?, playerVersion: String?, callback: @escaping (String?) -> Void) {
+    func loadNonce(transactionId: String, descriptionUrl: String?, playerType: String?, playerVersion: String?, windowHeight: KotlinInt?, windowWidth: KotlinInt?, callback: @escaping (String?) -> Void) {
         let nonceLoader = PALNonceLoader(settings: settings)
         nonceLoaders[transactionId] = nonceLoader
 
@@ -32,11 +33,22 @@ class GooglePalManagerImpl: GooglePalManager {
         if let playerVersion = playerVersion {
             request.playerVersion = playerVersion
         }
-        request.ppid = deviceService.getDeviceId() ?? ""
+        if let height = windowHeight?.int32Value, height > 0 {
+            logger.debug { "windowHeight: \(height)" }
+            request.videoPlayerHeight = height
+        }
+        if let width = windowWidth?.int32Value, width > 0 {
+            logger.debug { "windowWidth: \(width)" }
+            request.videoPlayerWidth = width
+        }
+        if let deviceId = deviceService.getDeviceId(), !deviceId.isEmpty {
+            request.ppid = Self.sha256(deviceId)
+        }
         request.sessionID = transactionId
         request.willAdAutoPlay = true
         request.willAdPlayMuted = false
         request.continuousPlayback = true
+        request.skippablesSupported = true
 
         Task {
             do {
@@ -77,6 +89,11 @@ class GooglePalManagerImpl: GooglePalManager {
         nonceLoaders.removeValue(forKey: transactionId)
         nonceManagers.removeValue(forKey: transactionId)
         logger.debug { "release[\(transactionId)]" }
+    }
+
+    private static func sha256(_ input: String) -> String {
+        let digest = SHA256.hash(data: Data(input.utf8))
+        return digest.map { String(format: "%02x", $0) }.joined()
     }
 }
 #endif

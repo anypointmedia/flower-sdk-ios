@@ -43,12 +43,18 @@ public class FlowerSdk {
         var instances: [SdkContainer.ClassName: Any] = [
             sdk_core.SdkContainer.ClassName.deviceService: DeviceServiceImpl(),
             sdk_core.SdkContainer.ClassName.cacheService: CacheServiceImpl(),
+            sdk_core.SdkContainer.ClassName.messageCommunicator: MessageCommunicatorImpl(),
         ]
 
         #if canImport(ProgrammaticAccessLibrary)
         instances[sdk_core.SdkContainer.ClassName.googlePalManager] = GooglePalManagerImpl()
         logger.info {
             "Google PAL SDK initialized"
+        }
+        #else
+        instances[sdk_core.SdkContainer.ClassName.googlePalManager] = GooglePalManagerDummyImpl()
+        logger.info {
+            "Google PAL SDK not available - using dummy implementation"
         }
         #endif
 
@@ -64,6 +70,10 @@ public class FlowerSdk {
                 ])
         )
 
+    }
+
+    public static func getVersion() -> String {
+        return FlowerSdkVersion().version
     }
 
     static func getEnv() -> String {

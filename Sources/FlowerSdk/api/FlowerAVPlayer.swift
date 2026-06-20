@@ -25,7 +25,17 @@ open class FlowerAVPlayer: AVQueuePlayer {
         replaceCurrentItem(with: item, adConfig: adConfig)
     }
 
-    @available(*, deprecated, message: "Use replaceCurrentItem() instead")
+    /// Rebuilds the current item during stall recovery, bypassing `handleMediaItemWithAds`
+    /// so the (already running) ad pipeline is not torn down/re-initialized — this is a
+    /// transport-only recovery. After this raw replace, `prerollPrepared` stays nil, so a
+    /// subsequent `play()` resolves straight to `super.play()`.
+    ///
+    /// Called by ``PlayerDiagnostics`` (attached via the media player hook) on a fatal
+    /// live stall; integrators do not call this directly.
+    internal func replaceCurrentItemForRecovery(_ item: AVPlayerItem) {
+        super.replaceCurrentItem(with: item)
+    }
+
     public func setAdConfig(adConfig: FlowerLinearTvAdConfig) {
         self.adConfig = adConfig
     }
@@ -79,6 +89,10 @@ open class FlowerAVPlayer: AVQueuePlayer {
         var onPrerollCompleted: () -> Void = {}
 
         final class PrerollEventListener: FlowerAdsManagerListener {
+            func onAdPlay(adInfo: AdInfo) {
+                
+            }
+            
             func onAdUserAction(action: String, adInfo: AdInfo) {
             }
             
@@ -213,6 +227,10 @@ open class FlowerAVPlayer: AVQueuePlayer {
                 var midrollPrepared = false
 
                 final class MidrollEventListener: FlowerAdsManagerListener {
+                    func onAdPlay(adInfo: AdInfo) {
+                    
+                    }
+                    
                     func onAdUserAction(action: String, adInfo: AdInfo) {
                     }
                     

@@ -28,8 +28,11 @@ class AdAvPlayerImpl: AdPlayer {
         self.externalPlayer = player
     }
 
-    func load(mediaUrls: NSMutableArray, totalDuration: Int32, adPlayerView: AdPlayerView) {
-        let mediaUrls = mediaUrls as! [String]
+    func load(playItems: NSMutableArray, totalDuration: Int32, adPlayerView: AdPlayerView) {
+        let playItemList = playItems as! [PlayItem]
+        let mediaUrls = playItemList.map {
+            $0.url
+        }
         if mediaUrls.count == 0 {
             logger.warn { "empty mediaUrls" }
             fatalError("empty mediaUrls")
@@ -318,13 +321,13 @@ class AdAvPlayerImpl: AdPlayer {
         player.seek(to: time)
     }
 
-    func enqueueNextItem(mediaUrl: String) {
-        mediaUrls.append(mediaUrl)
+    func enqueueNextItem(playItem: PlayItem) {
+        mediaUrls.append(playItem.url)
         durations.append(0)
     }
 
-    func removeNextItem(mediaUrl: String) {
-        if let index = mediaUrls.firstIndex(of: mediaUrl) {
+    func removeNextItem(playItem: PlayItem) {
+        if let index = mediaUrls.firstIndex(of: playItem.url) {
             // Don't remove the currently playing item
             if index != currentIndex {
                 mediaUrls.remove(at: index)

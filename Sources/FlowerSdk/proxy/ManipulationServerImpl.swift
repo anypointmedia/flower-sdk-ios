@@ -32,7 +32,7 @@ class ManipulationServerImpl: ManipulationServer {
 
     override func serve() throws -> String {
         let freePort = findFreePort()
-        startServer(address: "127.0.0.1", port: freePort)
+        startServer(address: "0.0.0.0", port: freePort)
 
         if freePort == 0 {
             throw Throwable(message: "No free port available.")
@@ -127,7 +127,7 @@ class ManipulationServerImpl: ManipulationServer {
 
         if (response == nil) {
             logger.info { "Proxy server healthcheck failed. Restarting server." }
-            startServer(address: "127.0.0.1", port: lastServerPort)
+            startServer(address: "0.0.0.0", port: lastServerPort)
         }
     }
 

@@ -28,8 +28,11 @@ class AdPlayerImpl: AdPlayer {
         self.externalPlayer = player
     }
 
-    func load(mediaUrls: NSMutableArray, totalDuration: Int32, adPlayerView: AdPlayerView) {
-        let mediaUrls = mediaUrls as! [String]
+    func load(playItems: NSMutableArray, totalDuration: Int32, adPlayerView: AdPlayerView) {
+        let playItemList = playItems as! [PlayItem]
+        let mediaUrls = playItemList.map {
+            $0.url
+        }
         if mediaUrls.count == 0 {
             logger.warn { "empty mediaUrls" }
             fatalError("empty mediaUrls")
@@ -355,7 +358,7 @@ class AdPlayerImpl: AdPlayer {
         }
     }
 
-    func enqueueNextItem(mediaUrl: String) {
+    func enqueueNextItem(playItem: PlayItem) {
         guard let player = self.player else {
             logger.warn {
                 "ad player is not initialized"
@@ -363,14 +366,14 @@ class AdPlayerImpl: AdPlayer {
             return
         }
 
-        let url = URL(string: mediaUrl)!
+        let url = URL(string: playItem.url)!
         let playerItem = AVPlayerItem(url: url)
         player.insert(playerItem, after: nil)
-        mediaUrls.append(mediaUrl)
+        mediaUrls.append(playItem.url)
         durations.append(0) // Duration will be updated when loaded
     }
 
-    func removeNextItem(mediaUrl: String) {
+    func removeNextItem(playItem: PlayItem) {
         guard let player = self.player else {
             logger.warn {
                 "ad player is not initialized"
@@ -378,7 +381,7 @@ class AdPlayerImpl: AdPlayer {
             return
         }
 
-        if let index = mediaUrls.firstIndex(of: mediaUrl) {
+        if let index = mediaUrls.firstIndex(of: playItem.url) {
             if index < player.items().count {
                 let item = player.items()[index]
                 player.remove(item)

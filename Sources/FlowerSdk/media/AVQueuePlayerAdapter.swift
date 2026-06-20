@@ -7,6 +7,10 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
     private var mediaPlayerHook: MediaPlayerHook
     private var adsManagerListener: FlowerAdsManagerListener
 
+    /// Health monitoring + auto-recovery for the player received via the media player hook.
+    /// Verbose logging is off by default (production-safe); fatal-stall recovery is always on.
+    private var diagnostics: PlayerDiagnostics?
+
     private var player: AVQueuePlayer {
         get throws {
             let player = mediaPlayerHook.getPlayer()
@@ -28,6 +32,7 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
         self.adsManagerListener = adsManagerListener
         super.init()
         setupRateObserver()
+        setupDiagnostics()
     }
 
     private func setupRateObserver() {
@@ -39,6 +44,11 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
                 "Failed to setup rate observer: \(error.localizedDescription)"
             }
         }
+    }
+
+    private func setupDiagnostics() {
+        guard let player = try? self.player else { return }
+        diagnostics = PlayerDiagnostics(player: player)
     }
 
     func getCurrentMedia() throws -> Media {
