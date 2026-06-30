@@ -60,6 +60,26 @@ public final class PlayerDiagnostics {
     /// is treated as a fresh incident and the attempt counter resets.
     private let recoveryAttemptResetInterval: TimeInterval = 60
 
+    // MARK: Stall watchdog (non-fatal prolonged stall)
+
+    /// Wall-clock timer (NOT `addPeriodicTimeObserver`, which is gated on the timebase and stops
+    /// ticking exactly when playback stalls) used to detect a wedged-but-not-failed player.
+    private var stallWatchdogTimer: Timer?
+    private let stallSampleIntervalSec: TimeInterval = 2.0
+    /// How long the player may sit "wants-to-play but frozen + buffer empty" before we rebuild the
+    /// item. AVPlayer's own "no response" timer fires ~5.7s in; we give it headroom to self-recover,
+    /// then act.
+    private let stallRecoveryThresholdSec: TimeInterval = 10.0
+    /// currentTime change below this (seconds) counts as "not advancing".
+    private let stallPositionEpsilonSec: Double = 0.05
+    /// When the current frozen stall started; nil when not stalled.
+    private var stallStartedAt: Date?
+    /// Playhead at the previous sample, to detect (lack of) forward progress.
+    private var lastSampledPositionSec: Double?
+    /// Arm the watchdog only after playback has actually started, so slow initial buffering is not
+    /// mistaken for a wedged stall. Reset whenever the current item changes.
+    private var hasStartedPlaying = false
+
     public init(
         player: AVPlayer,
         verboseLogging: Bool = PlayerDiagnostics.verboseLoggingEnabled,
@@ -70,6 +90,9 @@ public final class PlayerDiagnostics {
         self.autoRecover = autoRecover
         observePlayer(player)
         attachItem(player.currentItem)
+        if autoRecover {
+            startStallWatchdog()
+        }
         if verboseLogging {
             startHeartbeat(player)
             logger.info { "PlayerDiagnostics started (verbose, autoRecover: \(autoRecover))" }
@@ -88,6 +111,8 @@ public final class PlayerDiagnostics {
             player?.removeTimeObserver(periodicObserver)
             self.periodicObserver = nil
         }
+        stallWatchdogTimer?.invalidate()
+        stallWatchdogTimer = nil
     }
 
     // MARK: - Player-level observation
@@ -136,6 +161,11 @@ public final class PlayerDiagnostics {
     private func attachItem(_ item: AVPlayerItem?) {
         guard let item = item else { return }
         observedItem = item
+
+        // New item: re-arm the stall watchdog from scratch.
+        hasStartedPlaying = false
+        stallStartedAt = nil
+        lastSampledPositionSec = nil
 
         // Always observed (cheap, rare): fatal failure that requires recovery.
         itemObservations.append(
@@ -236,17 +266,21 @@ public final class PlayerDiagnostics {
 
     // MARK: - Recovery
 
-    /// Recovers from a fatal live-playback stall by rebuilding the current item from the
-    /// same (proxy) URL and seeking to the live edge. The proxy keeps serving a last-good
-    /// playlist meanwhile, so the rebuilt item can resume once the origin edge advances.
-    private func recoverFromPlaybackFailure(_ error: Error?) {
+    /// Recovers from a wedged player by rebuilding the current item from the same (proxy) URL and
+    /// resuming. For live (indefinite duration) it seeks to the live edge — the proxy keeps serving
+    /// a last-good playlist meanwhile, so the rebuilt item can resume once the origin edge advances.
+    /// For VOD it seeks back to the position where playback stalled (seeking a VOD asset to the live
+    /// edge would jump it to its end). Invoked both by the fatal-failure path (item `.failed` /
+    /// `FailedToPlayToEndTime`) and by the non-fatal stall watchdog.
+    private func recoverFromPlaybackFailure(_ error: Error?, trigger: String = "fatal-failure") {
         guard autoRecover else { return }
         guard !isRecovering else {
             logger.debug { "PlayerDiagnostics: already recovering, ignoring" }
             return
         }
         guard let player = player,
-              let url = (player.currentItem?.asset as? AVURLAsset)?.url else {
+              let item = player.currentItem,
+              let url = (item.asset as? AVURLAsset)?.url else {
             logger.warn { "PlayerDiagnostics: no current item URL, cannot recover" }
             return
         }
@@ -260,12 +294,17 @@ public final class PlayerDiagnostics {
             return
         }
 
+        // Capture BEFORE rebuilding the item: live resumes at the live edge, VOD resumes at the
+        // stalled position. duration.isIndefinite is the standard live-vs-VOD discriminator.
+        let isLive = item.duration.isIndefinite
+        let resumePosition = player.currentTime()
+
         isRecovering = true
         recoveryAttempts += 1
         lastRecoveryTime = now
         logger.warn {
-            "PlayerDiagnostics: recovering from fatal stall (attempt \(self.recoveryAttempts)/\(self.maxRecoveryAttempts)) "
-            + "for \(url.absoluteString), error: \(error.map { String(describing: $0) } ?? "nil")"
+            "PlayerDiagnostics: recovering (\(trigger), attempt \(self.recoveryAttempts)/\(self.maxRecoveryAttempts), "
+            + "live: \(isLive)) for \(url.absoluteString), error: \(error.map { String(describing: $0) } ?? "nil")"
         }
 
         // Rebuild from the same URL. Use the player-type-appropriate item swap; for
@@ -280,11 +319,72 @@ public final class PlayerDiagnostics {
         default:
             player.replaceCurrentItem(with: newItem)
         }
-        player.seek(to: CMTime.positiveInfinity) { [weak self] _ in
+        let seekTarget = isLive ? CMTime.positiveInfinity : resumePosition
+        player.seek(to: seekTarget) { [weak self] _ in
             guard let self = self else { return }
             self.player?.play()
             self.isRecovering = false
-            self.logger.info { "PlayerDiagnostics: recovery resumed at live edge" }
+            self.logger.info { "PlayerDiagnostics: recovery resumed (\(isLive ? "live edge" : "saved position"))" }
+        }
+    }
+
+    // MARK: - Stall watchdog
+
+    private func startStallWatchdog() {
+        let timer = Timer(timeInterval: stallSampleIntervalSec, repeats: true) { [weak self] _ in
+            self?.checkStall()
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        stallWatchdogTimer = timer
+    }
+
+    /// Detects a non-fatal but prolonged stall (e.g. a segment-delivery hang surfacing as CoreMedia
+    /// -12889 "No response for media file") that never raises `item.status == .failed` or
+    /// `FailedToPlayToEndTime`, so the fatal-failure path never fires. In this state the player sits
+    /// in `.waitingToPlayAtSpecifiedRate` with reason `.toMinimizeStalls`, an empty buffer, and a
+    /// frozen playhead. Once that persists for `stallRecoveryThresholdSec`, run the same recovery.
+    ///
+    /// Excluded by construction: user pause / backgrounding (`.paused`, not waiting), normal short
+    /// rebuffering (playhead resumes before the threshold), seeking (playhead moves), and slow
+    /// initial buffering (gated behind `hasStartedPlaying`).
+    private func checkStall() {
+        guard autoRecover, !isRecovering,
+              let player = player, let item = player.currentItem else { return }
+
+        if player.timeControlStatus == .playing {
+            hasStartedPlaying = true
+        }
+
+        let positionSec = CMTimeGetSeconds(player.currentTime())
+        let advanced: Bool = {
+            guard let last = lastSampledPositionSec, positionSec.isFinite else { return true }
+            return abs(positionSec - last) > stallPositionEpsilonSec
+        }()
+        if positionSec.isFinite {
+            lastSampledPositionSec = positionSec
+        }
+
+        let stalled = hasStartedPlaying
+            && player.timeControlStatus == .waitingToPlayAtSpecifiedRate
+            && player.reasonForWaitingToPlay == .toMinimizeStalls
+            && item.isPlaybackBufferEmpty
+
+        guard stalled, !advanced else {
+            stallStartedAt = nil
+            return
+        }
+
+        guard let startedAt = stallStartedAt else {
+            stallStartedAt = Date()
+            return
+        }
+        if Date().timeIntervalSince(startedAt) >= stallRecoveryThresholdSec {
+            stallStartedAt = nil
+            logger.warn {
+                "PlayerDiagnostics: non-fatal stall >= \(Int(self.stallRecoveryThresholdSec))s "
+                + "(waitingToMinimizeStalls, buffer empty, playhead frozen) - recovering"
+            }
+            recoverFromPlaybackFailure(nil, trigger: "stall-watchdog")
         }
     }
 
