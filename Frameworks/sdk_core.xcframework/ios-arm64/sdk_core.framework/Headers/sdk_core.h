@@ -3793,7 +3793,7 @@ __attribute__((swift_name("ManipulationServer")))
  * Other uncaught Kotlin exceptions are fatal.
  * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
-- (void)handlePlaylistRequestTransactionId:(NSString *)transactionId startTime:(double)startTime requestBuilder:(Sdk_coreKtor_client_coreHttpRequestBuilder *)requestBuilder originalUrl:(NSString *)originalUrl completionHandler:(void (^)(id<Sdk_coreManipulationServerResponse> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("handlePlaylistRequest(transactionId:startTime:requestBuilder:originalUrl:completionHandler:)")));
+- (void)handlePlaylistRequestTransactionId:(NSString *)transactionId startTime:(double)startTime requestBuilder:(Sdk_coreKtor_client_coreHttpRequestBuilder *)requestBuilder originalUrl:(NSString *)originalUrl requestHost:(NSString * _Nullable)requestHost completionHandler:(void (^)(id<Sdk_coreManipulationServerResponse> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("handlePlaylistRequest(transactionId:startTime:requestBuilder:originalUrl:requestHost:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.

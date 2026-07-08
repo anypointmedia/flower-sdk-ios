@@ -6,7 +6,9 @@ open class FlowerAVPlayer: AVQueuePlayer {
     let logger = FLogging(tag: "FlowerAVPlayer").logger
 
     private var adConfig: FlowerAdConfig?
-    internal let flowerAdView = FlowerAdView()
+    // Public so integrators can reach `flowerAdView.adsManager` (e.g. getScreenCastingUrl()
+    // for Chromecast). Exposes only the already-public FlowerAdsManager; no cast dependency.
+    public let flowerAdView = FlowerAdView()
     private var changedChannelUrl: String? = nil
     private var prerollPrepared: Bool? = nil
     private var playFlag = false

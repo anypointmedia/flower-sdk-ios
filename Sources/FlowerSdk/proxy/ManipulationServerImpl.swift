@@ -30,8 +30,16 @@ class ManipulationServerImpl: ManipulationServer {
 
     private var lastServerPort: in_port_t = 0
 
+    // The local player must connect to loopback, not the bind address. `0.0.0.0`
+    // (INADDR_ANY) is bindable but not a valid connect target — AVPlayer/CFNetwork
+    // rejects `http://0.0.0.0:port` as NSURLErrorBadURL(-1000) under default ATS.
+    // Loopback is exempt from ATS and needs no Local Network permission.
+    private let loopbackAddress = "127.0.0.1"
+
     override func serve() throws -> String {
         let freePort = findFreePort()
+        // Bind on all interfaces so external devices (e.g. Chromecast/AirPlay via LAN
+        // IP) can still reach the proxy; only the advertised endpoint uses loopback.
         startServer(address: "0.0.0.0", port: freePort)
 
         if freePort == 0 {
@@ -47,7 +55,7 @@ class ManipulationServerImpl: ManipulationServer {
                 }
             }
 
-            return "http://\(server.listenAddressIPv4!):\(freePort)"
+            return "http://\(loopbackAddress):\(freePort)"
         }
     }
 

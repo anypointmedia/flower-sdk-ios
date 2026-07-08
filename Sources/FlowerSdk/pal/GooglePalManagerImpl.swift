@@ -6,24 +6,24 @@ import ProgrammaticAccessLibrary
 
 class GooglePalManagerImpl: GooglePalManager {
     private let logger = FLogging(tag: "GooglePalManagerImpl").logger
-    private let settings: PALSettings
-    private var nonceLoaders: [String: PALNonceLoader] = [:]
-    private var nonceManagers: [String: PALNonceManager] = [:]
+    private let settings: Settings
+    private var nonceLoaders: [String: NonceLoader] = [:]
+    private var nonceManagers: [String: NonceManager] = [:]
+    // NonceLoader.delegate is weak, so the delegate must be retained here until it fires.
+    private var nonceDelegates: [String: NonceLoaderCallbackDelegate] = [:]
     private var deviceService: DeviceService {
         SdkContainer.companion.getInstance().deviceService
     }
 
     init() {
-        let settings = PALSettings()
-        settings.allowStorage = true
-        self.settings = settings
+        self.settings = Settings()
     }
 
     func loadNonce(transactionId: String, descriptionUrl: String?, playerType: String?, playerVersion: String?, windowHeight: KotlinInt?, windowWidth: KotlinInt?, callback: @escaping (String?) -> Void) {
-        let nonceLoader = PALNonceLoader(settings: settings)
+        let nonceLoader = NonceLoader(settings: settings)
         nonceLoaders[transactionId] = nonceLoader
 
-        let request = PALNonceRequest()
+        let request = NonceRequest()
         if let descriptionUrl = descriptionUrl {
             request.descriptionURL = URL(string: descriptionUrl)
         }
@@ -35,34 +35,46 @@ class GooglePalManagerImpl: GooglePalManager {
         }
         if let height = windowHeight?.int32Value, height > 0 {
             logger.debug { "windowHeight: \(height)" }
-            request.videoPlayerHeight = height
+            request.videoPlayerHeight = UInt(height)
         }
         if let width = windowWidth?.int32Value, width > 0 {
             logger.debug { "windowWidth: \(width)" }
-            request.videoPlayerWidth = width
+            request.videoPlayerWidth = UInt(width)
         }
         if let deviceId = deviceService.getDeviceId(), !deviceId.isEmpty {
             request.ppid = Self.sha256(deviceId)
         }
         request.sessionID = transactionId
-        request.willAdAutoPlay = true
-        request.willAdPlayMuted = false
-        request.continuousPlayback = true
+        request.willAdAutoPlay = .on
+        request.willAdPlayMuted = .off
+        request.continuousPlayback = .on
         request.skippablesSupported = true
 
-        Task {
-            do {
-                let nonceManager = try await nonceLoader.loadNonceManager(with: request)
-                nonceManagers[transactionId] = nonceManager
-                let nonce = nonceManager.nonce
-                logger.debug { "loadNonce[\(transactionId)] success" }
-                callback(nonce)
-            } catch {
-                logger.error { "loadNonce[\(transactionId)] failed: \(error)" }
-                nonceLoaders.removeValue(forKey: transactionId)
+        let delegate = NonceLoaderCallbackDelegate(
+            onLoaded: { [weak self] nonceManager in
+                guard let self = self else {
+                    callback(nil)
+                    return
+                }
+                self.nonceManagers[transactionId] = nonceManager
+                self.nonceDelegates.removeValue(forKey: transactionId)
+                self.logger.debug { "loadNonce[\(transactionId)] success" }
+                callback(nonceManager.nonce)
+            },
+            onFailed: { [weak self] error in
+                guard let self = self else {
+                    callback(nil)
+                    return
+                }
+                self.nonceLoaders.removeValue(forKey: transactionId)
+                self.nonceDelegates.removeValue(forKey: transactionId)
+                self.logger.error { "loadNonce[\(transactionId)] failed: \(error)" }
                 callback(nil)
             }
-        }
+        )
+        nonceDelegates[transactionId] = delegate
+        nonceLoader.delegate = delegate
+        nonceLoader.loadNonceManager(with: request)
     }
 
     func sendPlaybackStart(transactionId: String) {
@@ -88,12 +100,32 @@ class GooglePalManagerImpl: GooglePalManager {
     func release(transactionId: String) {
         nonceLoaders.removeValue(forKey: transactionId)
         nonceManagers.removeValue(forKey: transactionId)
+        nonceDelegates.removeValue(forKey: transactionId)
         logger.debug { "release[\(transactionId)]" }
     }
 
     private static func sha256(_ input: String) -> String {
         let digest = SHA256.hash(data: Data(input.utf8))
         return digest.map { String(format: "%02x", $0) }.joined()
+    }
+}
+
+/// Bridges PAL's delegate-based `NonceLoader` API to a closure-based callback.
+private final class NonceLoaderCallbackDelegate: NSObject, NonceLoaderDelegate {
+    private let onLoaded: (NonceManager) -> Void
+    private let onFailed: (Error) -> Void
+
+    init(onLoaded: @escaping (NonceManager) -> Void, onFailed: @escaping (Error) -> Void) {
+        self.onLoaded = onLoaded
+        self.onFailed = onFailed
+    }
+
+    func nonceLoader(_ nonceLoader: NonceLoader, with request: NonceRequest, didLoad nonceManager: NonceManager) {
+        onLoaded(nonceManager)
+    }
+
+    func nonceLoader(_ nonceLoader: NonceLoader, with request: NonceRequest, didFailWith error: any Error) {
+        onFailed(error)
     }
 }
 #endif
