@@ -1,0 +1,27 @@
+Flower SDK for iOS — Proprietary License
+
+Copyright (c) 2026 Anypoint Media. All rights reserved.
+
+This software and its accompanying materials (the "SDK") are the confidential
+and proprietary property of Anypoint Media. The SDK is licensed, not sold, and
+is provided solely for use in integrating with Anypoint Media services under a
+separate written agreement with Anypoint Media.
+
+Subject to the terms of that agreement, Anypoint Media grants you a limited,
+non-exclusive, non-transferable, revocable license to use the SDK. Except as
+expressly permitted therein, you may not:
+
+  1. copy, modify, or create derivative works of the SDK;
+  2. reverse engineer, decompile, or disassemble the SDK, except to the extent
+     such restriction is prohibited by applicable law;
+  3. redistribute, sublicense, sell, rent, lease, or otherwise make the SDK
+     available to any third party; or
+  4. remove or alter any proprietary notices contained in the SDK.
+
+THE SDK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL ANYPOINT MEDIA BE
+LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM, OUT OF, OR IN
+CONNECTION WITH THE SDK OR THE USE OR OTHER DEALINGS IN THE SDK.
+
+For licensing inquiries, contact dev@anypointmedia.com.
