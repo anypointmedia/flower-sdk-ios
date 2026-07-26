@@ -1015,7 +1015,6 @@ __attribute__((swift_name("FlowerAdsManager")))
 - (void)enterChannelAdTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams platformMediaPlayerAdapter:(id)platformMediaPlayerAdapter adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders __attribute__((swift_name("enterChannel(adTagUrl:channelId:extraParams:platformMediaPlayerAdapter:adTagHeaders:)")));
 - (void)enterChannelAdTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> * _Nullable)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook>)mediaPlayerHook adTagHeaders:(NSDictionary<NSString *, NSString *> * _Nullable)adTagHeaders __attribute__((swift_name("enterChannel(adTagUrl:channelId:extraParams:mediaPlayerHook:adTagHeaders:)")));
 - (void)excludeAdsAdIds:(NSArray<NSString *> *)adIds __attribute__((swift_name("excludeAds(adIds:)")));
-- (NSString *)getScreenCastingUrl __attribute__((swift_name("getScreenCastingUrl()")));
 - (void)notifyContentEnded __attribute__((swift_name("notifyContentEnded()")));
 - (void)pause __attribute__((swift_name("pause()")));
 - (void)play __attribute__((swift_name("play()")));
@@ -1049,7 +1048,6 @@ __attribute__((swift_name("FlowerAdsManagerImpl")))
 - (void)enterChannelImplAdTagUrl:(NSString *)adTagUrl channelId:(NSString *)channelId extraParams:(NSDictionary<NSString *, NSString *> *)extraParams mediaPlayerHook:(id<Sdk_coreMediaPlayerHook> _Nullable)mediaPlayerHook platformMediaPlayerAdapter:(id _Nullable)platformMediaPlayerAdapter adTagHeaders:(NSDictionary<NSString *, NSString *> *)adTagHeaders __attribute__((swift_name("enterChannelImpl(adTagUrl:channelId:extraParams:mediaPlayerHook:platformMediaPlayerAdapter:adTagHeaders:)")));
 - (void)excludeAdsAdIds:(NSArray<NSString *> *)adIds __attribute__((swift_name("excludeAds(adIds:)")));
 - (void)excludeAdsImplAdIds:(NSArray<NSString *> *)adIds __attribute__((swift_name("excludeAdsImpl(adIds:)")));
-- (NSString *)getScreenCastingUrl __attribute__((swift_name("getScreenCastingUrl()")));
 - (void)notifyContentEnded __attribute__((swift_name("notifyContentEnded()")));
 - (void)pause __attribute__((swift_name("pause()")));
 - (void)play __attribute__((swift_name("play()")));
@@ -3793,7 +3791,7 @@ __attribute__((swift_name("ManipulationServer")))
  * Other uncaught Kotlin exceptions are fatal.
  * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
-- (void)handlePlaylistRequestTransactionId:(NSString *)transactionId startTime:(double)startTime requestBuilder:(Sdk_coreKtor_client_coreHttpRequestBuilder *)requestBuilder originalUrl:(NSString *)originalUrl requestHost:(NSString * _Nullable)requestHost completionHandler:(void (^)(id<Sdk_coreManipulationServerResponse> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("handlePlaylistRequest(transactionId:startTime:requestBuilder:originalUrl:requestHost:completionHandler:)")));
+- (void)handlePlaylistRequestTransactionId:(NSString *)transactionId startTime:(double)startTime requestBuilder:(Sdk_coreKtor_client_coreHttpRequestBuilder *)requestBuilder originalUrl:(NSString *)originalUrl requestHost:(NSString * _Nullable)requestHost cacheOnly:(BOOL)cacheOnly completionHandler:(void (^)(id<Sdk_coreManipulationServerResponse> _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("handlePlaylistRequest(transactionId:startTime:requestBuilder:originalUrl:requestHost:cacheOnly:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.

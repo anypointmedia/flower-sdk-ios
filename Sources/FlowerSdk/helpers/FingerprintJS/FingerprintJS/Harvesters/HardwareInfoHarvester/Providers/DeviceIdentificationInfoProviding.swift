@@ -1,5 +1,6 @@
 import UIKit
 
+@MainActor
 protocol DeviceIdentificationInfoProviding {
     var model: String { get }
     var userAssignedName: String { get }

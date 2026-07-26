@@ -1,7 +1,7 @@
 import Foundation
 
 /// Entity representing the entire tree/set of device information along with its computed fingerprints
-public struct FingerprintTree {
+public struct FingerprintTree: Sendable {
     /// Item representing the information about the current node (either category details or info item)
     public let info: DeviceInfoItem
     /// Optional list of child nodes, each representing either a fingerprinted category or fingerprinted info item

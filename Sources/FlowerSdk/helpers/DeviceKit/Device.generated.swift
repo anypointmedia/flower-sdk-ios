@@ -530,7 +530,7 @@ public enum RefOtt_Device {
   }
 
   /// Gets the identifier from the system, such as "iPhone7,1".
-  public static var identifier: String = {
+  public static let identifier: String = {
     var systemInfo = utsname()
     uname(&systemInfo)
     let mirror = Mirror(reflecting: systemInfo.machine)
@@ -2047,7 +2047,7 @@ extension RefOtt_Device {
     - firstGenerationUsbC: 1st Generation Apple Pencil (USB-C)
     - pro: Apple Pencil Pro
    */
-  public struct ApplePencilSupport: OptionSet {
+  public struct ApplePencilSupport: OptionSet, Sendable {
 
     public var rawValue: UInt
 

@@ -6,7 +6,12 @@ import AppTrackingTransparency
 import Combine
 import CryptoKit
 
-class DeviceServiceImpl: DeviceService {
+// This Kotlin-facing service's mutable state is only ever populated once during
+// initialization (see `init()` below) and thereafter only re-set via explicit setters
+// (`setDeviceId`/`setAppName`), matching the existing pattern used by other Kotlin-bridging
+// wrapper types in this SDK, so it's safe to declare it `Sendable` and let it cross into
+// `Task` closures without the compiler's conservative "sending self" diagnostics.
+class DeviceServiceImpl: DeviceService, @unchecked Sendable {
     let keyValueStore: KeyValueStore = KeyValueStoreImpl(prefix: "FlowerSDK_")
 
     private let logger = FLogging(tag: "DeviceServiceImpl").logger
@@ -41,7 +46,7 @@ class DeviceServiceImpl: DeviceService {
         // optimal 및 unique는 하나의 기기에서도 앱마다 다른 값이 로드됨
         // https://github.com/fingerprintjs/fingerprintjs-ios?tab=readme-ov-file#fingerprint-stability-levels
         let configuration = Configuration(version: .v6, stabilityLevel: .stable, algorithm: .sha256)
-        let fingerprinter = FingerprinterFactory.getInstance(configuration)
+        let fingerprinter = await FingerprinterFactory.getInstance(configuration)
         if let fingerprint = await fingerprinter.getFingerprint() {
             if fingerprint != "" {
                 fingerPrintId = uuidFromSeed(seed: fingerprint)
@@ -172,6 +177,8 @@ class DeviceServiceImpl: DeviceService {
 
         if UIDevice.current.userInterfaceIdiom == .tv {
             return "\(appPackage)/\(appVersion) Smart-TV (iOS \(iosVersion)) CTV(Connected TV)"
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            return "\(appPackage)/\(appVersion) Tablet (iOS \(iosVersion);\(deviceModel))"
         } else {
             return "\(appPackage)/\(appVersion) (iOS \(iosVersion);\(deviceModel))"
         }

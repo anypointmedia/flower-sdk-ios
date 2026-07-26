@@ -1,3 +1,4 @@
+@MainActor
 struct CompoundTreeBuilder {
     private let providers: [DeviceInfoTreeProvider]
 

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct DeviceInfo: Equatable, Encodable {
+public struct DeviceInfo: Equatable, Encodable, Sendable {
     #if os(iOS)
     private let _mobileCountryCodes: [String]
     private let _mobileNetworkCodes: [String]

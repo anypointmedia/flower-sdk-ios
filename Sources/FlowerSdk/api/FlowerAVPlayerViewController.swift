@@ -2,7 +2,11 @@ import UIKit
 import AVKit
 
 public class FlowerAVPlayerViewController: AVPlayerViewController {
-    private var adHostingController: FlowerAdView.HostingController?
+    // `deinit` on this non-final, publicly-subclassable @MainActor-isolated view controller is
+    // nonisolated by default (Swift can't guarantee isolated deinit across unknown subclasses),
+    // yet it needs to tear down this view on teardown. Deinit is guaranteed to run with sole,
+    // non-concurrent ownership of `self`, so `nonisolated(unsafe)` is safe here.
+    private nonisolated(unsafe) var adHostingController: FlowerAdView.HostingController?
     private var flowerPlayer: FlowerAVPlayer?
     private lazy var adsManagerListener = AVPlayerViewControllerListener(controller: self)
 
@@ -70,7 +74,11 @@ public class FlowerAVPlayerViewController: AVPlayerViewController {
     }
 }
 
-private class AVPlayerViewControllerListener: FlowerAdsManagerListener {
+// `controller` is the only stored state and is an immutable reference set once at init;
+// all mutations of its MainActor-isolated properties are always dispatched onto the main
+// thread below, so it is safe to hand this type to `DispatchQueue.main.async`'s `@Sendable`
+// closures without triggering Swift 6's conservative "sending" data-race diagnostics.
+private class AVPlayerViewControllerListener: FlowerAdsManagerListener, @unchecked Sendable {
     func onAdPlay(adInfo: AdInfo) {
         
     }

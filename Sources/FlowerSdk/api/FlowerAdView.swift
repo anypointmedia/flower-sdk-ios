@@ -3,7 +3,11 @@ import Combine
 import SwiftUI
 import sdk_core
 
-public class FlowerAdView: FlowerAdViewStub, ObservableObject {
+// All mutable state on this Kotlin-facing, `ObservableObject`-conforming wrapper is only ever
+// mutated on the main thread (via `DispatchQueue.main.async` below, or SwiftUI's own main-thread
+// contract for `@Published` state), so it's safe to declare it `Sendable` and let it cross into
+// `Task`/closures without the compiler's conservative "sending self" diagnostics.
+public class FlowerAdView: FlowerAdViewStub, ObservableObject, @unchecked Sendable {
     let logger = FLogging(tag: "FlowerAdView").logger
 
     @Published var isFlowerAdViewVisible = false
@@ -53,7 +57,7 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject {
     }
 
     public func isShow() -> any DeferredStub {
-        return DeferredStubImpl(task: Task { KotlinBoolean(value: isFlowerAdViewVisible) })
+        return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: isFlowerAdViewVisible)) })
     }
 
     public struct FlowerAdViewBody: View {

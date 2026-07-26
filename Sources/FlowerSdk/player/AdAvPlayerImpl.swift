@@ -4,7 +4,11 @@ import AVFoundation
 import SwiftUI
 import sdk_core
 
-class AdAvPlayerImpl: AdPlayer {
+// All mutable state on this Kotlin-facing player wrapper is only ever mutated on the main
+// thread (every mutation below is already dispatched via `DispatchQueue.main.async`/`.sync`),
+// so it's safe to declare it `Sendable` and let it cross into `Task`/closures without the
+// compiler's conservative "sending self" diagnostics.
+class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
     private var logger = FLogging(tag: "AdAvPlayerImpl").logger
     private let sdkContainer = sdk_core.SdkContainer.companion.getInstance()
     private var isAdPlaying = false
@@ -202,16 +206,16 @@ class AdAvPlayerImpl: AdPlayer {
 
     func getCurrentAdProgress() -> any DeferredStub {
         guard let player = self.player else {
-            return DeferredStubImpl(task: Task { AdProgress.companion.NOT_READY })
+            return DeferredStubImpl(task: Task { SendableBox(value: AdProgress.companion.NOT_READY) })
         }
 
         let playTime: Double = player.currentTime().seconds * 1000
 
         if currentIndex >= mediaUrls.count {
-            return DeferredStubImpl(task: Task { AdProgress.companion.NOT_READY })
+            return DeferredStubImpl(task: Task { SendableBox(value: AdProgress.companion.NOT_READY) })
         }
 
-        return DeferredStubImpl(task: Task { AdProgress(currentTime: Int32(exactly: playTime.rounded()) ?? 0, duration: Int32(self.durations[self.currentIndex])) })
+        return DeferredStubImpl(task: Task { SendableBox(value: AdProgress(currentTime: Int32(exactly: playTime.rounded()) ?? 0, duration: Int32(self.durations[self.currentIndex]))) })
     }
 
     func getCurrentPeriodIndex() -> Int {
@@ -296,21 +300,21 @@ class AdAvPlayerImpl: AdPlayer {
     }
 
     func isPause() -> any DeferredStub {
-        return DeferredStubImpl(task: Task { KotlinBoolean(value: await self.player?.rate == 0.0) })
+        return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: await self.player?.rate == 0.0)) })
     }
 
     func playNextItem_() -> any DeferredStub {
         guard let player = self.player else {
-            return DeferredStubImpl(task: Task { KotlinBoolean(value: false) })
+            return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: false)) })
         }
 
         if currentIndex < mediaUrls.count - 1 {
             let nextIndex = currentIndex + 1
             playItem(at: nextIndex)
-            return DeferredStubImpl(task: Task { KotlinBoolean(value: true) })
+            return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: true)) })
         } else {
             logger.info { "No more media items to play" }
-            return DeferredStubImpl(task: Task { KotlinBoolean(value: false) })
+            return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: false)) })
         }
     }
 

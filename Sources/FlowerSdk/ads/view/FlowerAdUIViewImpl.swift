@@ -2,11 +2,33 @@ import Foundation
 import sdk_core
 import SwiftUI
 
-class FlowerAdUIViewImpl: FlowerAdUIView {
+// Kotlin `Ad` values and escaping closures passed into the main-actor `onMain` closure below
+// aren't provably `Sendable`. `onMain` runs synchronously, so these values are only touched on the
+// main thread while the caller blocks — safe to box for the one-shot handoff.
+private struct UnsafeSendableBox<Value>: @unchecked Sendable {
+    let value: Value
+}
+
+// `flowerAdView` is only ever assigned once at init and every other stored property is either
+// immutable or (as documented below) only ever touched from the main thread, so it's safe to
+// declare this Kotlin-facing wrapper `Sendable` and let it cross into `Task`/`MainActor`
+// closures without the compiler's conservative "sending self" diagnostics.
+class FlowerAdUIViewImpl: FlowerAdUIView, @unchecked Sendable {
     let logger = FLogging(tag: "FlowerAdUIView").logger
 
     var flowerAdView: FlowerAdView
-    lazy var flowerAdUIViewImplBody = FlowerAdUIViewImplBody(flowerAdView: flowerAdView)
+    // `FlowerAdUIViewImplBody` is a SwiftUI `View`-conforming type, which Swift 6 isolates to
+    // `@MainActor` in its entirety (including its synthesized initializer). `FlowerAdUIView`/
+    // `UIElement` are Kotlin-exported (@objc) protocols whose requirements must stay nonisolated,
+    // so this storage can't be `@MainActor` without every access below needing to hop actors.
+    // These entry points are always invoked from the main thread by the Kotlin Multiplatform
+    // bridge, so `nonisolated(unsafe)` (with the one-time construction bridged via
+    // `MainActor.assumeIsolated`) is a safe, minimal way to expose it to the nonisolated API.
+    // (`nonisolated` alone is rejected here since the SwiftUI `FlowerAdUIViewImplBody` value
+    // type isn't `Sendable`, even though the enclosing class is.)
+    nonisolated(unsafe) lazy var flowerAdUIViewImplBody = MainActor.assumeIsolated {
+        FlowerAdUIViewImplBody(flowerAdView: flowerAdView)
+    }
 
     public var body: some View {
         flowerAdUIViewImplBody
@@ -17,39 +39,65 @@ class FlowerAdUIViewImpl: FlowerAdUIView {
     }
 
     func getWidth() -> Int32 {
-        return flowerAdUIViewImplBody.width
+        onMain { self.flowerAdUIViewImplBody.width }
     }
 
     func getHeight() -> Int32 {
-        return flowerAdUIViewImplBody.height
+        onMain { self.flowerAdUIViewImplBody.height }
     }
 
     func show() {
-        flowerAdUIViewImplBody.show()
+        onMainAsync { self.flowerAdUIViewImplBody.show() }
     }
 
     func hide() {
-        flowerAdUIViewImplBody.hide()
+        onMainAsync { self.flowerAdUIViewImplBody.hide() }
     }
 
     func isShow() -> any DeferredStub {
-        return DeferredStubImpl(task: Task { KotlinBoolean(value: flowerAdUIViewImplBody.isShow()) })
+        // Read the backing visibility flag directly (it lives on the non-isolated `flowerAdView`),
+        // so this answers synchronously from the Kotlin bridge without hopping to the main thread.
+        let isShow = flowerAdView.isFlowerAdUIViewVisible
+        return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: isShow)) })
     }
 
     func showClickUi(ad: Ad, postClick: @escaping () -> Void) {
-        flowerAdUIViewImplBody.showClickUi(ad: ad, postClick: postClick)
+        let box = UnsafeSendableBox(value: (ad, postClick))
+        onMainAsync { self.flowerAdUIViewImplBody.showClickUi(ad: box.value.0, postClick: box.value.1) }
     }
 
     func hideClickUi() {
-        flowerAdUIViewImplBody.hideClickUi()
+        onMainAsync { self.flowerAdUIViewImplBody.hideClickUi() }
     }
 
     func showSkipUi(ad: Ad, nextAd: Ad?, postSkip: @escaping () -> Void) {
-        flowerAdUIViewImplBody.showSkipUi(ad: ad, postSkip: postSkip)
+        let box = UnsafeSendableBox(value: (ad, postSkip))
+        onMainAsync { self.flowerAdUIViewImplBody.showSkipUi(ad: box.value.0, postSkip: box.value.1) }
     }
 
     func hideSkipUi() {
-        flowerAdUIViewImplBody.hideSkipUi()
+        onMainAsync { self.flowerAdUIViewImplBody.hideSkipUi() }
+    }
+
+    // The Kotlin bridge invokes these entry points from coroutine background threads (e.g.
+    // LinearTVAdHandler on kotlinx DarwinGlobalQueueDispatcher). We must NOT block the caller with
+    // `DispatchQueue.main.sync`: the Kotlin bridge can be holding the main thread waiting on the
+    // same coroutine, which deadlocks and freezes the screen. So UI mutations hop to the main
+    // thread asynchronously. Only synchronous value getters that are never called while the main
+    // thread is blocked use `onMain` below.
+    private func onMainAsync(_ work: @escaping @MainActor () -> Void) {
+        if Thread.isMainThread {
+            MainActor.assumeIsolated(work)
+        } else {
+            DispatchQueue.main.async { MainActor.assumeIsolated(work) }
+        }
+    }
+
+    private func onMain<T: Sendable>(_ work: @MainActor () -> T) -> T {
+        if Thread.isMainThread {
+            return MainActor.assumeIsolated(work)
+        }
+        return DispatchQueue.main.sync { MainActor.assumeIsolated(work) }
     }
 
     class FlowerAdUIViewImplBodyObserver: ObservableObject {

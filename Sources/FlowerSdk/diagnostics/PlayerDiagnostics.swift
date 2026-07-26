@@ -25,7 +25,7 @@ public final class PlayerDiagnostics {
     /// Global opt-in for verbose health logging. Leave `false` in production; a QA
     /// build can flip it at launch to get the full diagnostic stream. Instances
     /// created without an explicit `verboseLogging` argument inherit this value.
-    public static var verboseLoggingEnabled = false
+    public nonisolated(unsafe) static var verboseLoggingEnabled = false
 
     private let logger = FLogging(tag: "PlayerDiagnostics").logger
 

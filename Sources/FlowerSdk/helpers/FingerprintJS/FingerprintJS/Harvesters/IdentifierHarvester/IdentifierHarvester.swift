@@ -1,5 +1,6 @@
 import UIKit
 
+@MainActor
 protocol IdentifierHarvesting {
     var vendorIdentifier: UUID? { get }
 }
@@ -34,6 +35,7 @@ extension IdentifierHarvester: IdentifierHarvesting {
 }
 
 extension IdentifierHarvester {
+    @MainActor
     init() {
         self.init(
             identifierStorage: KeychainIdentifierStorage(),
@@ -45,6 +47,7 @@ extension IdentifierHarvester {
         identifierStorage.loadIdentifier(for: vendorIdentifierLegacyKey)
     }
 
+    @MainActor
     private var systemVendorIdentifier: UUID? {
         vendorIdentifierProvider.identifierForVendor
     }

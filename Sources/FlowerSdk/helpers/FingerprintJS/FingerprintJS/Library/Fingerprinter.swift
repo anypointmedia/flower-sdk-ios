@@ -1,4 +1,5 @@
 /// Main `FingerprintJS` class that provides an interface to all library functions (device identifier and fingerprint retrieval)
+@MainActor
 public class Fingerprinter {
     private let configuration: Configuration
     private let identifiers: IdentifierHarvesting

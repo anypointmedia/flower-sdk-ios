@@ -186,7 +186,7 @@ class AVPlayerAdapter: NSObject, MediaPlayerAdapter {
         let player = try self.player
         let playerItem = AVPlayerItem(url: URL(string: playItem.url)!)
 
-        Task {
+        Task { @MainActor in
             try? await playerItem.asset.load(.duration)
         }
 
@@ -249,14 +249,23 @@ class AVPlayerAdapter: NSObject, MediaPlayerAdapter {
         try player.seek(to: time)
     }
 
+    // Caches the last valid PROGRAM-DATE-TIME (ms). currentDate() can momentarily return nil
+    // while the player seeks/reloads right after an ad skip; returning -1 in that window makes
+    // the SDK fall back to wall-clock time and flip its absolute-time clock space, tearing down
+    // ad tracking for the next ad. Serving the last valid PDT keeps the value in PDT space.
+    // Stays -1 only until the first valid reading (bootstrap).
+    private var lastValidAbsoluteTimeMs: Double = -1
+
     func getCurrentAbsoluteTime(isPrintDetails: Bool) -> Double {
         // currentDate() returns the date of the current playback position from EXT-X-PROGRAM-DATE-TIME
         guard let currentPlayer = try? self.player,
               let date = currentPlayer.currentItem?.currentDate()
         else {
-            return -1
+            return lastValidAbsoluteTimeMs
         }
-        return date.timeIntervalSince1970 * 1000
+        let absoluteTimeMs = date.timeIntervalSince1970 * 1000
+        lastValidAbsoluteTimeMs = absoluteTimeMs
+        return absoluteTimeMs
     }
 
     func getPlayerType() -> String? {

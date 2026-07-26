@@ -1,6 +1,6 @@
 import Foundation
 
-class RemoteLogger {
+final class RemoteLogger: @unchecked Sendable {
     static let shared = RemoteLogger()
 
     private var logServerURL: String?

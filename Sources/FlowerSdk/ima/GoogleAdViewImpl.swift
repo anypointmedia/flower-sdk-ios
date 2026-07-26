@@ -2,7 +2,11 @@ import Foundation
 import SwiftUI
 import sdk_core
 
-class GoogleAdViewImpl: GoogleAdView {
+// `flowerAdView` is only ever assigned once at init and every other stored property is either
+// immutable or only ever touched from the main thread, so it's safe to declare this
+// Kotlin-facing wrapper `Sendable` and let it cross into `Task`/closures without the compiler's
+// conservative "sending self" diagnostics.
+class GoogleAdViewImpl: GoogleAdView, @unchecked Sendable {
 
     func setFocusable(focusable: Bool) {
     }
@@ -43,7 +47,7 @@ class GoogleAdViewImpl: GoogleAdView {
     }
 
     func isShow() -> any DeferredStub {
-        return DeferredStubImpl(task: Task { KotlinBoolean(value: flowerAdView.isGoogleAdViewVisible) })
+        return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: flowerAdView.isGoogleAdViewVisible)) })
     }
 
     func addView(view: any GoogleAdView) {

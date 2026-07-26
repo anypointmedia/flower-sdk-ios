@@ -4,7 +4,7 @@ import LocalAuthentication
 
 /// Constants that indicate the type of biometric authentication supported by the device.
 @available(tvOS, unavailable)
-public enum BiometryType: String, Encodable {
+public enum BiometryType: String, Encodable, Sendable {
     /// The device supports Face ID.
     case faceID
     /// The device supports Touch ID.

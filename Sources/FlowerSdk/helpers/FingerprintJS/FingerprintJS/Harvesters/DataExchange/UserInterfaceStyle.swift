@@ -1,7 +1,7 @@
 import UIKit
 
 /// Constants that indicate the style associated with the app's user interface.
-public enum UserInterfaceStyle: String, Encodable {
+public enum UserInterfaceStyle: String, Encodable, Sendable {
     /// The dark interface style.
     case dark
     /// The light interface style.

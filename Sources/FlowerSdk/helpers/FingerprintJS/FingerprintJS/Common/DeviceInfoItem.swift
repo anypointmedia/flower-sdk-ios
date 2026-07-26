@@ -1,5 +1,5 @@
 /// Types of `DeviceInfoItem` values
-public enum DeviceInfoValueType {
+public enum DeviceInfoValueType: Sendable {
     /// `DeviceInfoItem` that contains category information and child items
     case category
 
@@ -8,7 +8,7 @@ public enum DeviceInfoValueType {
 }
 
 /// Single piece (or a category) of device information encapsulated in a structure
-public struct DeviceInfoItem {
+public struct DeviceInfoItem: Sendable {
     /// The name of the underlying value
     public let label: String
 

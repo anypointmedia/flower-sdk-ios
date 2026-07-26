@@ -65,7 +65,7 @@ extension String {
         }
     }
 
-    public static var pathSeparator = "/"
+    public nonisolated(unsafe) static var pathSeparator = "/"
 
     public func openNewForWriting() throws -> File {
         return try openFileForMode(self, "wb")

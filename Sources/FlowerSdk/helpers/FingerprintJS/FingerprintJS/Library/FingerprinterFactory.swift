@@ -1,3 +1,4 @@
+@MainActor
 public protocol FingerprinterInstanceProviding {
     /// Creates an instance of `Fingerprinter` with the given `Configuration`.
     /// - Parameter configuration: `Configuration` object that instructs the `Fingerprinter` to use
@@ -8,6 +9,7 @@ public protocol FingerprinterInstanceProviding {
 }
 
 /// *FingerprintJS* entry point that is supposed to be used to create an instance of the library's `Fingerprinter` class.
+@MainActor
 public class FingerprinterFactory: FingerprinterInstanceProviding {
     public static func getInstance(_ configuration: Configuration = Configuration()) -> Fingerprinter {
         return Fingerprinter(configuration)

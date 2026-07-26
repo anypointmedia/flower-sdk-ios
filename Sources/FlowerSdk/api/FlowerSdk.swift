@@ -23,7 +23,7 @@ class DefaultSdkLifecycleListener: SdkLifecycleListener {
 }
 
 public class FlowerSdk {
-    private static var logger = FLogging(tag: "FlowerSdk").logger
+    private nonisolated(unsafe) static let logger = FLogging(tag: "FlowerSdk").logger
 
     public static var root: some View {
         VStack {}

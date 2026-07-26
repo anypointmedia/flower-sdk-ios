@@ -3,11 +3,32 @@ import AVKit
 import SwiftUI
 import sdk_core
 
-class AdPlayerViewImpl: AdPlayerView {
+// The `sending` AVPlayerLayer crossing into the main-actor `onMainAsync` closure below isn't
+// provably `Sendable`; it's handed off exactly once to the main thread, so box it for the transfer.
+private struct UnsafeSendableBox<Value>: @unchecked Sendable {
+    let value: Value
+}
+
+// `flowerAdView` is only ever assigned once at init and every other stored property is either
+// immutable or (as documented below) only ever touched from the main thread, so it's safe to
+// declare this Kotlin-facing wrapper `Sendable` and let it cross into `Task`/`MainActor`
+// closures without the compiler's conservative "sending self" diagnostics.
+class AdPlayerViewImpl: AdPlayerView, @unchecked Sendable {
     let logger = FLogging(tag: "AdPlayerView").logger
 
     var flowerAdView: FlowerAdView
-    lazy var adPlayerViewImplBody = AdPlayerViewImplBody(flowerAdView: flowerAdView)
+    // `AdPlayerViewImplBody` is a SwiftUI `View`-conforming type, which Swift 6 isolates to
+    // `@MainActor` in its entirety (including its synthesized initializer). `AdPlayerView`/
+    // `UIElement` are Kotlin-exported (@objc) protocols whose requirements must stay nonisolated,
+    // so this storage can't be `@MainActor` without every access below needing to hop actors.
+    // These entry points are always invoked from the main thread by the Kotlin Multiplatform
+    // bridge, so `nonisolated(unsafe)` (with the one-time construction bridged via
+    // `MainActor.assumeIsolated`) is a safe, minimal way to expose it to the nonisolated API.
+    // (`nonisolated` alone is rejected here since the SwiftUI `AdPlayerViewImplBody` value type
+    // isn't `Sendable`, even though the enclosing class is.)
+    nonisolated(unsafe) lazy var adPlayerViewImplBody = MainActor.assumeIsolated {
+        AdPlayerViewImplBody(flowerAdView: flowerAdView)
+    }
 
     public var body: some View {
         adPlayerViewImplBody
@@ -18,11 +39,11 @@ class AdPlayerViewImpl: AdPlayerView {
     }
 
     func getWidth() -> Int32 {
-        return adPlayerViewImplBody.width
+        onMain { self.adPlayerViewImplBody.width }
     }
 
     func getHeight() -> Int32 {
-        return adPlayerViewImplBody.height
+        onMain { self.adPlayerViewImplBody.height }
     }
 
     func show() {
@@ -40,7 +61,7 @@ class AdPlayerViewImpl: AdPlayerView {
     }
 
     func isShow() -> any DeferredStub {
-        return DeferredStubImpl(task: Task { KotlinBoolean(value: flowerAdView.isAdPlayerViewVisible) })
+        return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: flowerAdView.isAdPlayerViewVisible)) })
     }
 
     func setCoverImage(url: String) {
@@ -55,12 +76,34 @@ class AdPlayerViewImpl: AdPlayerView {
         // no-op on iOS
     }
 
-    func addPlayerLayer(playerLayer: AVPlayerLayer) {
-        adPlayerViewImplBody.observer.playerLayerRepresentable = AVPlayerLayerRepresentable(playerLayer: playerLayer)
+    func addPlayerLayer(playerLayer: sending AVPlayerLayer) {
+        let box = UnsafeSendableBox(value: playerLayer)
+        onMainAsync { self.adPlayerViewImplBody.observer.playerLayerRepresentable = AVPlayerLayerRepresentable(playerLayer: box.value) }
     }
 
     func removePlayerLayer() {
-        adPlayerViewImplBody.observer.playerLayerRepresentable = nil
+        onMainAsync { self.adPlayerViewImplBody.observer.playerLayerRepresentable = nil }
+    }
+
+    // The Kotlin bridge invokes these entry points from coroutine background threads (e.g.
+    // LinearTVAdHandler on kotlinx DarwinGlobalQueueDispatcher). We must NOT block the caller with
+    // `DispatchQueue.main.sync`: the Kotlin bridge can be holding the main thread waiting on the
+    // same coroutine, which deadlocks and freezes the screen. So UI mutations hop to the main
+    // thread asynchronously. Only synchronous value getters that are never called while the main
+    // thread is blocked use `onMain` below.
+    private func onMainAsync(_ work: @escaping @MainActor () -> Void) {
+        if Thread.isMainThread {
+            MainActor.assumeIsolated(work)
+        } else {
+            DispatchQueue.main.async { MainActor.assumeIsolated(work) }
+        }
+    }
+
+    private func onMain<T: Sendable>(_ work: @MainActor () -> T) -> T {
+        if Thread.isMainThread {
+            return MainActor.assumeIsolated(work)
+        }
+        return DispatchQueue.main.sync { MainActor.assumeIsolated(work) }
     }
 
     struct AVPlayerLayerRepresentable: UIViewRepresentable {

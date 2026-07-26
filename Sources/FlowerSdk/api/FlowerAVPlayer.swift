@@ -6,8 +6,8 @@ open class FlowerAVPlayer: AVQueuePlayer {
     let logger = FLogging(tag: "FlowerAVPlayer").logger
 
     private var adConfig: FlowerAdConfig?
-    // Public so integrators can reach `flowerAdView.adsManager` (e.g. getScreenCastingUrl()
-    // for Chromecast). Exposes only the already-public FlowerAdsManager; no cast dependency.
+    // Public so integrators can reach `flowerAdView.adsManager`.
+    // Exposes only the already-public FlowerAdsManager.
     public let flowerAdView = FlowerAdView()
     private var changedChannelUrl: String? = nil
     private var prerollPrepared: Bool? = nil
@@ -90,7 +90,10 @@ open class FlowerAVPlayer: AVQueuePlayer {
 
         var onPrerollCompleted: () -> Void = {}
 
-        final class PrerollEventListener: FlowerAdsManagerListener {
+        // All captured closures/state are only ever invoked on the main thread (the
+        // `DispatchQueue.main.async` hop below is the only mutation point), so this local
+        // listener is safe to declare `Sendable` for closure-capture purposes.
+        final class PrerollEventListener: FlowerAdsManagerListener, @unchecked Sendable {
             func onAdPlay(adInfo: AdInfo) {
                 
             }
@@ -228,7 +231,11 @@ open class FlowerAVPlayer: AVQueuePlayer {
                 var currentPosition: Int64 = 0
                 var midrollPrepared = false
 
-                final class MidrollEventListener: FlowerAdsManagerListener {
+                // All captured closures/state are only ever invoked on the main thread (the
+                // `DispatchQueue.main.async`/`.global().async` hops below are the only mutation
+                // points), so this local listener is safe to declare `Sendable` for closure-capture
+                // purposes.
+                final class MidrollEventListener: FlowerAdsManagerListener, @unchecked Sendable {
                     func onAdPlay(adInfo: AdInfo) {
                     
                     }

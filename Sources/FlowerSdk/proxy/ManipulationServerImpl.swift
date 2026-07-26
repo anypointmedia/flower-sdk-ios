@@ -161,7 +161,7 @@ class ManipulationServerImpl: ManipulationServer {
                 result + (result.isEmpty ? "" : "&") + param.0 + "=" + param.1
             })
 
-            logger.verbose { "requestUri: \(server.listenAddressIPv4!):\(lastServerPort)\(requestUri)" }
+            logger.verbose { "requestUri: \(self.server.listenAddressIPv4!):\(self.lastServerPort)\(requestUri)" }
 
             var response: ManipulationServerResponse
 

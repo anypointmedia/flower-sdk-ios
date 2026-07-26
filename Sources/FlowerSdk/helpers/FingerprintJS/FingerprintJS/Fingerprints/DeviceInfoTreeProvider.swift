@@ -1,3 +1,4 @@
+@MainActor
 protocol DeviceInfoTreeProvider {
     func buildTree(_ configuration: Configuration) -> DeviceInfoItem
 

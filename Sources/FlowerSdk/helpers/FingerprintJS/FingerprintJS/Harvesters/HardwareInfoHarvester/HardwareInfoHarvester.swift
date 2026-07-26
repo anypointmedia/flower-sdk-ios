@@ -4,6 +4,7 @@ import UIKit
 //import SystemControl
 //#endif
 
+@MainActor
 protocol HardwareInfoHarvesting {
     /// The user-assigned device name.
     var deviceName: String { get }
@@ -48,6 +49,7 @@ struct HardwareInfoHarvester {
         self.processInfo = processInfo
     }
 
+    @MainActor
     init() {
         self.init(
             device: UIDevice.current,

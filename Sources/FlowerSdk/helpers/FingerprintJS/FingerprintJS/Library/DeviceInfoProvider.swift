@@ -1,3 +1,4 @@
+@MainActor
 public protocol DeviceInfoProviding {
     /// Gathers and returns all information about the device
     /// - Returns: `DeviceInfo` object that contains typed representation of device information values
@@ -9,6 +10,7 @@ public protocol DeviceInfoProviding {
     func getDeviceInfo(_ completion: @escaping (DeviceInfo) -> Void)
 }
 
+@MainActor
 public class DeviceInfoProvider {
     private let identifierHarvester: IdentifierHarvesting
     private let appInfoHarvester: AppInfoHarvesting
