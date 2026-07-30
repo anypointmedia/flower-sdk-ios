@@ -1,6 +1,7 @@
 import sdk_core
 
 public typealias Media = sdk_core.Media
+public typealias PlayItem = sdk_core.PlayItem
 
 public protocol MediaPlayerAdapter {
     /**
@@ -65,14 +66,40 @@ public protocol MediaPlayerAdapter {
     func getPlayerType() -> String?
 
     func getPlayerVersion() -> String?
+
+    /**
+     * How many times the player has left a spliced-in timeline and rejoined the main one, counted from
+     * the start of playback and never decreasing - in other words, the number of ad breaks played to
+     * their end.
+     *
+     * Only needed by a player that cannot read EXT-X-PROGRAM-DATE-TIME, where the SDK derives the
+     * absolute clock from the position this adapter reports. That clock assumes a second of playback is
+     * a second of stream timeline, which an ad break breaks: the break takes a different amount of wall
+     * time than the origin span it stands in for, and the difference accumulates over a session.
+     * Counting the breaks lets the SDK pin the clock back to an instant it knows exactly.
+     *
+     * Leave it alone for any player that reports PROGRAM-DATE-TIME - the default 0 keeps the SDK from
+     * ever re-pinning, which is what those players want.
+     */
+    func getMainTimelineRejoinCount() -> Int32
 }
 
+/// Defaults for the members a host app should not have to think about.
+///
+/// Every one is `public` on purpose. A default in an internal extension is invisible outside this
+/// module, which does not make the member optional for a host app's adapter - it makes it *required*,
+/// because the app can see the protocol requirement but not the implementation that satisfies it. That
+/// is the opposite of what a default is for.
 extension MediaPlayerAdapter {
-    func getPlayerType() -> String? {
+    public func getPlayerType() -> String? {
         nil
     }
 
-    func getPlayerVersion() -> String? {
+    public func getPlayerVersion() -> String? {
         nil
+    }
+
+    public func getMainTimelineRejoinCount() -> Int32 {
+        0
     }
 }

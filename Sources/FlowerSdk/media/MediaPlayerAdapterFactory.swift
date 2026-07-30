@@ -1,9 +1,11 @@
 import sdk_core
 import AVFoundation
-#if canImport(MobileVLCKit)
-import MobileVLCKit
-#endif
 
+/// Builds an adapter for the players the SDK ships support for.
+///
+/// Any other player is the host app's responsibility: implement `MediaPlayerAdapter` there and pass
+/// the instance to `FlowerAdsManager.changeChannelUrl(..., mediaPlayerAdapter:, ...)` instead of a
+/// `MediaPlayerHook`. The MobileVLCKitLinearTv example does exactly that for MobileVLCKit.
 class MediaPlayerAdapterFactory: sdk_core.SdkContainerBeanFactory {
     private let logger = FLogging(tag: "MediaPlayerAdapterFactory").logger
 
@@ -24,19 +26,11 @@ class MediaPlayerAdapterFactory: sdk_core.SdkContainerBeanFactory {
             return KotlinWrapped(value: AVPlayerAdapter(mediaPlayerHook: mediaPlayerHook, adsManagerListener: adsManagerListener))
         }
 
-        #if canImport(MobileVLCKit)
-        if let vlcMediaListPlayer = player as? VLCMediaListPlayer {
-            logger.info { "Using VLCMediaListPlayerAdapter" }
-            return KotlinWrapped(value: VLCMediaListPlayerAdapter(mediaPlayerHook: mediaPlayerHook, adsManagerListener: adsManagerListener))
-        }
-        #endif
-
         throw Throwable(
             message: UnsupportedMediaPlayerExceptionKt.formatUnsupportedMediaPlayerExceptionString(
                 players: [
                     "AVQueuePlayer",
                     "AVPlayer",
-                    "VLCMediaListPlayer",
                 ],
                 received: player == nil ? "nil" : String(describing: type(of: player!))
             )

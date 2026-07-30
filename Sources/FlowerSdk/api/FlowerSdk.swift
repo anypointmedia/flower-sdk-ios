@@ -11,6 +11,9 @@ public typealias FlowerAdsManagerListener = sdk_core.FlowerAdsManagerListener
 public typealias MediaPlayerHook = sdk_core.MediaPlayerHook
 public typealias FlowerError = sdk_core.FlowerError
 public typealias AdInfo = sdk_core.AdInfo
+public typealias FlowerAd = sdk_core.FlowerAd
+public typealias FlowerCreative = sdk_core.FlowerCreative
+public typealias ChannelAdRequest = sdk_core.ChannelAdRequest
 
 class DefaultSdkLifecycleListener: SdkLifecycleListener {
     func onDestroyed() {

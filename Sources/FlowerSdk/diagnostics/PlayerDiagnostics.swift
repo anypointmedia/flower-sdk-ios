@@ -145,15 +145,9 @@ public final class PlayerDiagnostics {
             }
         )
 
-        playerObservations.append(
-            player.observe(\.rate, options: [.new, .old]) { [weak self] player, change in
-                guard let self = self else { return }
-                self.logger.info {
-                    "player.rate \(change.oldValue ?? -1) -> \(change.newValue ?? -1)"
-                    + ", timeControlStatus: \(self.timeControlStatusText(player.timeControlStatus))"
-                }
-            }
-        )
+        // No separate `\.rate` observer: the transition logged above already carries the rate,
+        // and observing `rate` by key path trips Xcode's indexer, which sees `AVPlayer.rate` as
+        // main-actor-isolated below the iOS 16 deployment target.
     }
 
     // MARK: - Item-level observation

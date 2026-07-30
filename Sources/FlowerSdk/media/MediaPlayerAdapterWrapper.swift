@@ -1,6 +1,8 @@
 import sdk_core
 
-class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter {
+/// `SplicedTimelineReporting` is declared unconditionally even though most players never leave 0, so the
+/// SDK's `as?` for it always succeeds and the decision stays with the value rather than the conformance.
+class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter, SplicedTimelineReporting {
     private let platformMediaPlayerAdapter: MediaPlayerAdapter
 
     init(platformMediaPlayerAdapter: MediaPlayerAdapter) {
@@ -85,6 +87,10 @@ class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter {
 
     func getPlayerVersion() -> String? {
         return platformMediaPlayerAdapter.getPlayerVersion()
+    }
+
+    func getMainTimelineRejoinCount() -> KotlinWrapped<KotlinInt> {
+        KotlinWrapped(value: KotlinInt(value: platformMediaPlayerAdapter.getMainTimelineRejoinCount()))
     }
 }
 

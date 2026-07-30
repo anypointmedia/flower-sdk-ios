@@ -13,6 +13,12 @@ let package = Package(
             targets: ["FlowerSdk"]),
     ],
     dependencies: [
+        // Pulled in automatically so `canImport(ProgrammaticAccessLibrary)` holds and
+        // GooglePalManagerImpl is used instead of GooglePalManagerDummyImpl.
+        .package(
+            url: "https://github.com/googleads/swift-package-manager-google-programmatic-access-library-ios",
+            from: "3.2.3"
+        ),
     ],
     targets: [
         .binaryTarget(
@@ -23,6 +29,10 @@ let package = Package(
             name: "FlowerSdk",
             dependencies: [
                 "sdk_core",
+                .product(
+                    name: "GoogleProgrammaticAccessLibrary",
+                    package: "swift-package-manager-google-programmatic-access-library-ios"
+                ),
             ]
         ),
     ]
