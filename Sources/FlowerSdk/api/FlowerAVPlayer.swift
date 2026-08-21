@@ -407,6 +407,10 @@ open class FlowerAVPlayer: AVQueuePlayer {
     open override nonisolated func advanceToNextItem() {
     }
 
+    internal nonisolated func advanceToNextItemInternal() {
+        super.advanceToNextItem()
+    }
+
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")
     open override nonisolated func canInsert(_ item: AVPlayerItem, after afterItem: AVPlayerItem?) -> Bool {
         false
@@ -424,8 +428,16 @@ open class FlowerAVPlayer: AVQueuePlayer {
     open override nonisolated func remove(_ item: AVPlayerItem) {
     }
 
+    internal nonisolated func removeInternal(_ item: AVPlayerItem) {
+        super.remove(item)
+    }
+
     @available(*, unavailable, message: "FlowerAVPlayer does not support this method")
     open override nonisolated func removeAllItems() {
+    }
+
+    internal nonisolated func removeAllItemsInternal() {
+        super.removeAllItems()
     }
 
     private class MediaPlayerHookImpl: MediaPlayerHook {
@@ -438,5 +450,55 @@ open class FlowerAVPlayer: AVQueuePlayer {
         public func getPlayer() -> Any? {
             getPlayerFn()
         }
+    }
+}
+
+/// Queue access for SDK-internal code that receives its player through a `MediaPlayerHook`.
+///
+/// `FlowerAVPlayer` marks the `AVQueuePlayer` queue API unavailable and overrides it with empty
+/// bodies so integrators cannot reorder a queue the SDK owns. Those overrides are still dispatched
+/// dynamically, so SDK code that calls `advanceToNextItem()`/`remove(_:)`/`insert(_:after:)` on a
+/// hook-supplied player reaches the empty body and the call silently does nothing - an ad skip that
+/// never advances, a pre-buffered item that is never dropped. Every SDK-internal queue operation
+/// must therefore go through these helpers, which route to the internal counterparts when the
+/// player turns out to be a `FlowerAVPlayer`.
+extension AVQueuePlayer {
+    nonisolated func flowerItems() -> [AVPlayerItem] {
+        guard let flowerPlayer = self as? FlowerAVPlayer else {
+            return items()
+        }
+        return flowerPlayer.itemsInternal()
+    }
+
+    nonisolated func flowerInsert(_ item: AVPlayerItem, after afterItem: AVPlayerItem?) {
+        guard let flowerPlayer = self as? FlowerAVPlayer else {
+            insert(item, after: afterItem)
+            return
+        }
+        flowerPlayer.insertInternal(item, after: afterItem)
+    }
+
+    nonisolated func flowerRemove(_ item: AVPlayerItem) {
+        guard let flowerPlayer = self as? FlowerAVPlayer else {
+            remove(item)
+            return
+        }
+        flowerPlayer.removeInternal(item)
+    }
+
+    nonisolated func flowerRemoveAllItems() {
+        guard let flowerPlayer = self as? FlowerAVPlayer else {
+            removeAllItems()
+            return
+        }
+        flowerPlayer.removeAllItemsInternal()
+    }
+
+    nonisolated func flowerAdvanceToNextItem() {
+        guard let flowerPlayer = self as? FlowerAVPlayer else {
+            advanceToNextItem()
+            return
+        }
+        flowerPlayer.advanceToNextItemInternal()
     }
 }

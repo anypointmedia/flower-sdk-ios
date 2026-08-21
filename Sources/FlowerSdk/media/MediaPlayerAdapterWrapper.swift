@@ -49,6 +49,18 @@ class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter, SplicedTimelineReportin
         try platformMediaPlayerAdapter.playNextItem()
     }
 
+    /// Deferring a start is a DASH-only path and the adapters behind this wrapper play HLS, where
+    /// the SDK never hands a start position over. Answering "not deferred" keeps every skip on
+    /// `playNextItem()`, which is what it did before these calls existed. Spelled out rather than
+    /// inherited because a Kotlin interface's default body is not visible to a Swift conformer.
+    func loadNextItemDeferred() throws -> KotlinWrapped<KotlinBoolean> {
+        KotlinWrapped(value: KotlinBoolean(value: false))
+    }
+
+    func startDeferredItemAt(absoluteStartTimeMs: KotlinWrapped<KotlinDouble>?, relativeStartTimeMs: KotlinWrapped<KotlinDouble>?, offsetMs: KotlinWrapped<KotlinDouble>?, windowDurationMs: KotlinWrapped<KotlinDouble>?, periodIndex: KotlinInt?) throws -> KotlinWrapped<KotlinBoolean> {
+        KotlinWrapped(value: KotlinBoolean(value: false))
+    }
+
     func seekToPosition(absoluteStartTimeMs: KotlinWrapped<KotlinDouble>?, relativeStartTimeMs: KotlinWrapped<KotlinDouble>?, offsetMs: KotlinWrapped<KotlinDouble>?, windowDurationMs: KotlinWrapped<KotlinDouble>?, periodIndex: KotlinInt?) throws {
         var absTime: Double? = nil
         var relTime: Double? = nil

@@ -27,6 +27,12 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
     private var originalPosition: Double = 0
     private var adCount: Int = 0
     private var currentIndex: Int = 0
+    /// Ad items prepared by `load()`. They only reach the player when `play()` runs.
+    private var adPlayerItems: [AVPlayerItem] = []
+    /// True once the ad items have displaced whatever the player was showing.
+    private var adItemsAttached = false
+    /// Playback speed the host app was using, restored when the original content comes back.
+    private var originalRate: Float = 1.0
 
     init(player: AVPlayer? = nil) {
         self.externalPlayer = player
@@ -47,44 +53,40 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
             guard let self = self else { return }
 
             do {
-                if let existingPlayer = self.player,
-                   let currentItem = existingPlayer.currentItem,
-                   let urlAsset = currentItem.asset as? AVURLAsset {
-                    self.originalMediaUrls = [urlAsset.url.absoluteString]
-                    self.originalPosition = CMTimeGetSeconds(existingPlayer.currentTime()) * 1000
-                    self.logger.info { "saved original from player: url=\(urlAsset.url.absoluteString), position=\(self.originalPosition)" }
+                // An AVPlayer holds a single item, so "loading" an ad into an external player could
+                // only mean replacing what the host app is showing - which ends the content before
+                // the caller has asked for the ad to start. Loading therefore only prepares the ad
+                // items; displacing the content, and recording what was displaced, happens in
+                // `play()`. Players with a real playlist enqueue instead and have no such problem.
+                if self.externalPlayer == nil {
+                    self.release()
+                } else {
+                    self.cancelReleaseAndStopJob()
+                    self.adItemsAttached = false
                 }
 
-                self.release()
-
                 self.adCount = mediaUrls.count
-                self.mediaUrls = mediaUrls + self.originalMediaUrls
+                self.mediaUrls = mediaUrls
+                self.originalMediaUrls = []
+                self.originalPosition = 0
                 self.totalDuration = totalDuration
                 self.durations = []
                 self.currentIndex = 0
 
-                let playerItems = self.convertMediaSource()
-                for item in playerItems {
+                self.adPlayerItems = self.convertMediaSource()
+                for item in self.adPlayerItems {
                     self.durations.append(CMTimeGetSeconds(item.asset.duration) * 1000)
                 }
 
-                guard let firstItem = playerItems.first else { return }
-                if let externalPlayer = self.externalPlayer {
-                    // Reuse external player
-                    self.logger.info { "Reusing external player (externalPlayer provided)" }
-                    externalPlayer.replaceCurrentItem(with: firstItem)
-                    self.player = externalPlayer
-                } else {
+                guard let firstItem = self.adPlayerItems.first else { return }
+                if self.externalPlayer == nil {
                     self.logger.info { "Creating new AVPlayer (no externalPlayer)" }
                     self.player = AVPlayer(playerItem: firstItem)
+                    self.observeEnd(of: firstItem)
+                    self.adItemsAttached = true
+                } else {
+                    self.logger.info { "Reusing external player (externalPlayer provided) - item swap deferred to play()" }
                 }
-
-                NotificationCenter.default.addObserver(
-                    self,
-                    selector: #selector(self.adPlayerDidFinishPlaying(_:)),
-                    name: .AVPlayerItemDidPlayToEndTime,
-                    object: firstItem
-                )
 
                 self.adPlayerCallbacks.onLoaded(mediaUrl: mediaUrls[0], duration: totalDuration)
             } catch let error {
@@ -103,12 +105,12 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
         logger.info { "play flower ads" }
         self.isAdPlaying = true
 
-        guard let player = self.player else {
-            logger.warn { "ad player is not initialized" }
-            return
-        }
-
         DispatchQueue.main.async {
+            guard let player = self.attachAdItems() else {
+                self.logger.warn { "ad player is not initialized" }
+                return
+            }
+
             do {
                 self.adPlayerView.show()
                 let playerLayer = AVPlayerLayer(player: player)
@@ -121,6 +123,60 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
                 self.adPlayerCallbacks.onError(mediaUrl: self.mediaUrls[0] as! String, t: error as! KotlinThrowable)
             }
         }
+    }
+
+    /// Hands the prepared ad items to the player and returns it, or nil if there is nothing to play.
+    ///
+    /// For an external player this is the moment the content is displaced, and it is deliberately
+    /// not done in `load()`: until the caller asks for the ad to start the host app is still
+    /// playing, and a single-item AVPlayer cannot hold an ad without ending that playback. The
+    /// displaced source and its position are recorded here so the break can hand playback back.
+    private func attachAdItems() -> AVPlayer? {
+        guard let externalPlayer = self.externalPlayer else {
+            return self.player
+        }
+        if adItemsAttached {
+            return self.player
+        }
+        guard let firstItem = adPlayerItems.first else {
+            return nil
+        }
+
+        // Ads always play at normal speed, so a host app watching at 1.5x must get its speed back
+        // with the content. A rate of 0 means the app was paused, which is not a speed to restore.
+        originalRate = externalPlayer.rate > 0 ? externalPlayer.rate : 1.0
+
+        if let currentItem = externalPlayer.currentItem,
+           let urlAsset = currentItem.asset as? AVURLAsset {
+            let position = CMTimeGetSeconds(externalPlayer.currentTime()) * 1000
+            originalMediaUrls = [urlAsset.url.absoluteString]
+            originalPosition = position.isFinite ? max(0, position) : 0
+            mediaUrls = mediaUrls + originalMediaUrls
+            // The original's own duration is never read for ad progress, and measuring it here
+            // would force a synchronous asset load on the main thread. `enqueueNextItem` reports 0
+            // for the same reason.
+            durations.append(0)
+            logger.info { "saved original from player: url=\(urlAsset.url.absoluteString), position=\(self.originalPosition)" }
+        }
+
+        // Pause before the swap. `rate` survives `replaceCurrentItem`, so a host app watching at
+        // 1.5x would otherwise run the ad at 1.5x for the window between the swap and the `play()`
+        // that follows - and `play()` is what puts the ad back at 1.0.
+        externalPlayer.pause()
+        externalPlayer.replaceCurrentItem(with: firstItem)
+        self.player = externalPlayer
+        observeEnd(of: firstItem)
+        adItemsAttached = true
+        return externalPlayer
+    }
+
+    private func observeEnd(of item: AVPlayerItem) {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(adPlayerDidFinishPlaying(_:)),
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: item
+        )
     }
 
     func stop() {
@@ -176,6 +232,8 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
         }
         do {
             isAdPlaying = false
+            adItemsAttached = false
+            adPlayerItems = []
             // Don't nil out external player - it's owned by the caller
             if externalPlayer == nil {
                 player = nil
@@ -274,7 +332,7 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
             statusObservation = newItem.observe(\.status, options: [.new]) { [weak self] item, _ in
                 if item.status == .readyToPlay {
                     self?.player?.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero) { _ in
-                        self?.player?.play()
+                        self?.startPlayback(atIndex: index)
                     }
                     self?.statusObservation?.invalidate()
                     self?.statusObservation = nil
@@ -287,6 +345,19 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
             player.replaceCurrentItem(with: newItem)
         } else {
             player.replaceCurrentItem(with: newItem)
+            startPlayback(atIndex: index)
+        }
+    }
+
+    /// Starts the item at `index`, at normal speed for an ad and at the host app's speed once the
+    /// original content is back. `rate` is a player property, not an item one, so a host app
+    /// watching at 1.5x would otherwise have every ad played at 1.5x and would never get its speed
+    /// back afterwards.
+    private func startPlayback(atIndex index: Int) {
+        guard let player = self.player else { return }
+        if index >= adCount {
+            player.rate = originalRate
+        } else {
             player.play()
         }
     }

@@ -27,6 +27,13 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
     private var originalPosition: Double = 0
     private var adCount: Int = 0
     private var originalItemObservation: NSKeyValueObservation?
+    /// Ad items prepared by `load()`. They only reach the player when `play()` runs.
+    private var adPlayerItems: [AVPlayerItem] = []
+    /// True once the ad items have displaced whatever the player was showing.
+    private var adItemsAttached = false
+    /// Playback speed the host app was using, restored when the original content comes back.
+    private var originalRate: Float = 1.0
+    private var currentItemObservation: NSKeyValueObservation?
 
     init(player: AVQueuePlayer? = nil) {
         self.externalPlayer = player
@@ -47,21 +54,21 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
             guard let self = self else {return}
 
             do {
-                // Save original sources only once, but always update position
-                if let existingPlayer = self.player {
-                    if self.originalMediaUrls.isEmpty {
-                        self.originalMediaUrls = existingPlayer.items().compactMap { item in
-                            (item.asset as? AVURLAsset)?.url.absoluteString
-                        }
-                    }
-                    self.originalPosition = CMTimeGetSeconds(existingPlayer.currentTime()) * 1000
-                    self.logger.info { "saved original from player: urls=\(self.originalMediaUrls.count), position=\(self.originalPosition)" }
+                // Clearing the host queue is how an ad would be "loaded" into an external player,
+                // and that ends the content before the caller has asked for the ad to start.
+                // Loading therefore only prepares the ad items; the queue swap, and recording what
+                // it displaced, happens in `play()`.
+                if self.externalPlayer == nil {
+                    self.release()
+                } else {
+                    self.cancelReleaseAndStopJob()
+                    self.adItemsAttached = false
                 }
 
-                self.release()
-
                 self.adCount = mediaUrls.count
-                self.mediaUrls = mediaUrls + self.originalMediaUrls
+                self.mediaUrls = mediaUrls
+                self.originalMediaUrls = []
+                self.originalPosition = 0
                 self.totalDuration = totalDuration
                 self.durations = []
 
@@ -70,24 +77,17 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
                 for source in mediaSources {
                     durations.append(CMTimeGetSeconds(source.asset.duration)*1000)
                 }
+                self.adPlayerItems = mediaSources
 
-                if let externalPlayer = self.externalPlayer {
-                    // Reuse external player: clear existing items, insert new ones
-                    self.logger.info { "Reusing external player (externalPlayer provided)" }
-                    externalPlayer.removeAllItems()
-                    for source in mediaSources {
-                        externalPlayer.insert(source, after: nil)
-                    }
-                    player = externalPlayer
-                } else {
+                if self.externalPlayer == nil {
                     // Note: Initialize in this order
                     // AVQueuePlayer > AVPlayerLayer > adPlayerView.layer.addSublayer(playerLayer)
                     self.logger.info { "Creating new AVQueuePlayer (no externalPlayer)" }
                     player = AVQueuePlayer(items: mediaSources)
+                    self.adItemsAttached = true
+                } else {
+                    self.logger.info { "Reusing external player (externalPlayer provided) - queue swap deferred to play()" }
                 }
-
-                // Pre-seek original items while ads are still playing
-                self.preSeekOriginalItems()
 
                 adPlayerCallbacks.onLoaded(mediaUrl: mediaUrls[0], duration: totalDuration)
             } catch let error {
@@ -107,12 +107,12 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
         logger.info { "play flower ads" }
         self.isAdPlaying = true
 
-        guard let player = self.player else {
-            logger.warn { "ad player is not initialized" }
-            return
-        }
-
         DispatchQueue.main.async {
+            guard let player = self.attachAdItems() else {
+                self.logger.warn { "ad player is not initialized" }
+                return
+            }
+
             do {
                 self.adPlayerView.show()
                 let playerLayer = AVPlayerLayer(player: player)
@@ -124,6 +124,83 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
                 self.logger.error { "failed to play \(error)" }
                 self.adPlayerCallbacks.onError(mediaUrl: self.mediaUrls[0] as! String, t: error as! KotlinThrowable)
             }
+        }
+    }
+
+    /// Puts the prepared ad items into the player's queue and returns it, or nil if there is
+    /// nothing to play.
+    ///
+    /// For an external player this is the moment the content is displaced, and it is deliberately
+    /// not done in `load()`: until the caller asks for the ad to start the host app is still
+    /// playing, and clearing its queue would end that playback. The displaced sources and the
+    /// position are recorded here so the break can hand playback back afterwards.
+    private func attachAdItems() -> AVQueuePlayer? {
+        guard let externalPlayer = self.externalPlayer else {
+            return self.player
+        }
+        if adItemsAttached {
+            return self.player
+        }
+        if adPlayerItems.isEmpty {
+            return nil
+        }
+
+        // Ads always play at normal speed, so a host app watching at 1.5x must get its speed back
+        // with the content. A rate of 0 means the app was paused, which is not a speed to restore.
+        originalRate = externalPlayer.rate > 0 ? externalPlayer.rate : 1.0
+
+        let existingUrls = externalPlayer.flowerItems().compactMap { item in
+            (item.asset as? AVURLAsset)?.url.absoluteString
+        }
+        if !existingUrls.isEmpty {
+            let position = CMTimeGetSeconds(externalPlayer.currentTime()) * 1000
+            originalMediaUrls = existingUrls
+            originalPosition = position.isFinite ? max(0, position) : 0
+            mediaUrls = mediaUrls + originalMediaUrls
+            logger.info { "saved original from player: urls=\(self.originalMediaUrls.count), position=\(self.originalPosition)" }
+        }
+
+        // Rebuild the original items rather than re-inserting the displaced ones: an AVPlayerItem
+        // cannot be handed back to a queue it has already been removed from.
+        let originalItems = originalMediaUrls.compactMap { URL(string: $0) }.map { AVPlayerItem(url: $0) }
+        for _ in originalItems {
+            // The original's own duration is never read for ad progress, and measuring it here
+            // would force a synchronous asset load on the main thread.
+            durations.append(0)
+        }
+
+        // Pause before the swap. `rate` survives the queue change, so a host app watching at 1.5x
+        // would otherwise run the ad at 1.5x for the window between the swap and the `play()` that
+        // follows - and `play()` is what puts the ad back at 1.0.
+        externalPlayer.pause()
+        externalPlayer.flowerRemoveAllItems()
+        for source in adPlayerItems + originalItems {
+            externalPlayer.flowerInsert(source, after: nil)
+        }
+        self.player = externalPlayer
+        adItemsAttached = true
+        observeReturnToOriginal(on: externalPlayer)
+
+        // Pre-seek original items while ads are still playing
+        preSeekOriginalItems()
+        return externalPlayer
+    }
+
+    /// Restores the host app's playback speed once the queue reaches the original content.
+    ///
+    /// `rate` is a player property, not an item one, so a host app watching at 1.5x would otherwise
+    /// have every ad played at 1.5x and would never get its speed back. An AVQueuePlayer advances
+    /// on its own, so the hand-back has to be observed rather than hooked onto `playNextItem`.
+    private func observeReturnToOriginal(on player: AVQueuePlayer) {
+        currentItemObservation?.invalidate()
+        currentItemObservation = player.observe(\.currentItem, options: [.new]) { [weak self] observed, _ in
+            guard let self = self else { return }
+            // The queue only shrinks, so what is left tells us how far it has advanced.
+            let playedIndex = self.mediaUrls.count - observed.flowerItems().count
+            guard playedIndex >= self.adCount, observed.rate > 0 else { return }
+            observed.rate = self.originalRate
+            self.currentItemObservation?.invalidate()
+            self.currentItemObservation = nil
         }
     }
 
@@ -171,7 +248,7 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
             if player != nil {
                 player!.pause()
                 player!.replaceCurrentItem(with: nil)
-                player!.removeAllItems()
+                player!.flowerRemoveAllItems()
                 adPlayerView.removePlayerLayer()
                 logger.info { "ad player release" }
             }
@@ -180,6 +257,10 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
         }
         do {
             isAdPlaying = false
+            adItemsAttached = false
+            adPlayerItems = []
+            currentItemObservation?.invalidate()
+            currentItemObservation = nil
             // Don't nil out external player - it's owned by the caller
             if externalPlayer == nil {
                 player = nil
@@ -213,7 +294,7 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
         }
         
         let playTime: Double = player.currentTime().seconds * 1000
-        let playingItemCount = player.items().count
+        let playingItemCount = player.flowerItems().count
         
         if playingItemCount == 0 {
             return DeferredStubImpl(task: Task { SendableBox(value: AdProgress.companion.NOT_READY) })
@@ -227,7 +308,7 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
             return 0
         }
 
-        if let playerItems = player?.items(),
+        if let playerItems = player?.flowerItems(),
            let currentIndex = playerItems.firstIndex(of: currentItem) {
             return currentIndex
         }
@@ -294,12 +375,12 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
             return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: false)) })
         }
 
-        let itemCount = player.items().count
+        let itemCount = player.flowerItems().count
         logger.info { "playNextItem_: itemCount=\(itemCount)" }
 
         if itemCount > 1 {
             // Original items are already pre-seeked, just advance
-            player.advanceToNextItem()
+            player.flowerAdvanceToNextItem()
             return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: true)) })
         } else {
             logger.info { "playNextItem_: No more media items to play" }
@@ -316,7 +397,7 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
               !originalMediaUrls.isEmpty,
               originalPosition > 0 else { return }
 
-        let items = player.items()
+        let items = player.flowerItems()
         let seekTime = CMTime(seconds: originalPosition / 1000.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
 
         // Original items start at index adCount
@@ -357,7 +438,7 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
         let time = CMTime(seconds: seconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         if let currentItem = player.currentItem {
             currentItem.seek(to: time)
-        } else if let firstItem = player.items().first {
+        } else if let firstItem = player.flowerItems().first {
             firstItem.seek(to: time)
         }
     }
@@ -372,7 +453,7 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
 
         let url = URL(string: playItem.url)!
         let playerItem = AVPlayerItem(url: url)
-        player.insert(playerItem, after: nil)
+        player.flowerInsert(playerItem, after: nil)
         mediaUrls.append(playItem.url)
         durations.append(0) // Duration will be updated when loaded
     }
@@ -386,9 +467,9 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
         }
 
         if let index = mediaUrls.firstIndex(of: playItem.url) {
-            if index < player.items().count {
-                let item = player.items()[index]
-                player.remove(item)
+            let items = player.flowerItems()
+            if index < items.count {
+                player.flowerRemove(items[index])
             }
             mediaUrls.remove(at: index)
             if index < durations.count {

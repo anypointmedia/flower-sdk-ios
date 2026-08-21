@@ -98,8 +98,11 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
     }
 
     func stop() throws {
-        try self.player.pause()
-        try self.player.removeAllItems()
+        let player = try self.player
+        player.pause()
+        logQueueOperation("stop.removeAllItems", on: player) {
+            player.flowerRemoveAllItems()
+        }
     }
 
     func resume() throws {
@@ -115,24 +118,14 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
         playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new], context: nil)
 
         let player = try self.player
-        if let flowerPlayer = player as? FlowerAVPlayer {
-            flowerPlayer.insertInternal(playerItem, after: nil)
-        } else {
-            player.insert(playerItem, after: nil)
-        }
+        player.flowerInsert(playerItem, after: nil)
+        logger.info { "enqueuePlayItem: queue=\(player.flowerItems().count), url=\(playItem.url)" }
     }
 
     func removePlayItem(playItem: PlayItem) throws {
         let player = try self.player
 
-        let items: [AVPlayerItem]
-        if let flowerPlayer = player as? FlowerAVPlayer {
-            items = flowerPlayer.itemsInternal()
-        } else {
-            items = player.items()
-        }
-
-        guard let playerItem = items.last(where: { item in
+        guard let playerItem = player.flowerItems().last(where: { item in
             if let urlAsset = item.asset as? AVURLAsset {
                 return urlAsset.url.absoluteString == playItem.url
             }
@@ -145,7 +138,9 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
         }
 
         playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
-        player.remove(playerItem)
+        logQueueOperation("removePlayItem url=\(playItem.url)", on: player) {
+            player.flowerRemove(playerItem)
+        }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -167,7 +162,9 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
             default:
                 if let playerItem = object as? AVPlayerItem {
                     playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
-                    player.remove(playerItem)
+                    logQueueOperation("dropFailedItem", on: player) {
+                        player.flowerRemove(playerItem)
+                    }
                 }
             }
         } else if keyPath == #keyPath(AVPlayer.rate) {
@@ -192,7 +189,51 @@ class AVQueuePlayerAdapter: NSObject, MediaPlayerAdapter {
     }
 
     func playNextItem() throws {
-        try self.player.advanceToNextItem()
+        let player = try self.player
+
+        // `flowerAdvanceToNextItem()`, never the public `advanceToNextItem()`: `FlowerAVPlayer`
+        // marks the AVQueuePlayer queue API unavailable and overrides it with empty bodies, those
+        // overrides are dispatched dynamically, and this adapter holds the player as an
+        // `AVQueuePlayer` - so the public call reached the empty body and the skip did nothing.
+        // Nothing else showed it: the beacon went out, the button was hidden, and the ad played
+        // its full 30s. `effect=` on the line below is what says which of the two happened.
+        logQueueOperation("playNextItem", on: player) {
+            player.flowerAdvanceToNextItem()
+        }
+    }
+
+    /// Runs one queue operation and records whether it actually changed the queue.
+    ///
+    /// Every queue call in this adapter goes through the host app's player, and the SDK ships two
+    /// ways of supplying one: the app's own `AVQueuePlayer` (`adsManager` integration), or
+    /// `FlowerAVPlayer`, which subclasses `AVQueuePlayer` and overrides the queue API with empty
+    /// bodies so integrators cannot reorder a queue the SDK owns. Both arrive here as an
+    /// `AVQueuePlayer`, so one line of code is two implementations at runtime and nothing at the
+    /// call site says which one ran.
+    ///
+    /// `effect=none` on an operation that should have moved something is the whole defect,
+    /// visible nowhere else: the beacons still go out, the skip button is still hidden, and the ad
+    /// simply keeps playing. `flowerItems()` is used for the counts deliberately - it reads the
+    /// real queue even on a `FlowerAVPlayer`, so it can observe an operation that did nothing.
+    private func logQueueOperation(_ what: String, on player: AVQueuePlayer, _ body: () -> Void) {
+        let beforeCount = player.flowerItems().count
+        let beforeCurrent = Self.itemUrl(player.currentItem)
+        body()
+        let afterCount = player.flowerItems().count
+        let afterCurrent = Self.itemUrl(player.currentItem)
+        let changed = beforeCount != afterCount || beforeCurrent != afterCurrent
+        logger.info {
+            "\(what): player=\(type(of: player)) flowerPlayer=\(player is FlowerAVPlayer) "
+            + "queue=\(beforeCount)→\(afterCount) effect=\(changed ? "applied" : "none") "
+            + "current=\(beforeCurrent)→\(afterCurrent)"
+        }
+    }
+
+    private static func itemUrl(_ item: AVPlayerItem?) -> String {
+        guard let urlAsset = item?.asset as? AVURLAsset else {
+            return "nil"
+        }
+        return urlAsset.url.absoluteString
     }
 
     func seekToPosition(absoluteStartTimeMs: Double?, relativeStartTimeMs: Double?, offsetMs: Double?, windowDurationMs: Double?, periodIndex: Int32?) throws {
