@@ -61,6 +61,19 @@ class MediaPlayerAdapterWrapper: CoreMediaPlayerAdapter, SplicedTimelineReportin
         KotlinWrapped(value: KotlinBoolean(value: false))
     }
 
+    /// Handed straight to the adapter, which is the only thing that knows: a live edge is the
+    /// player's own construction, not something the manifest can be measured for. Adapters that do
+    /// not track one inherit `nil` from `MediaPlayerAdapter`'s default and `DashManipulator` then
+    /// falls back, so this costs nothing on the AVPlayer paths and answers on Bitmovin - the same
+    /// split the HTML5 side makes between `MediaPlayerAdapter.getLiveEdgeDistanceMs?()` and
+    /// `BitmovinPlayerAdapter`.
+    ///
+    /// Spelled out rather than inherited for the same reason as `loadNextItemDeferred` above: a
+    /// Kotlin interface's default body is not visible to a Swift conformer.
+    func getLiveEdgeDistanceMs() -> KotlinDouble? {
+        platformMediaPlayerAdapter.getLiveEdgeDistanceMs().map { KotlinDouble(value: $0) }
+    }
+
     func seekToPosition(absoluteStartTimeMs: KotlinWrapped<KotlinDouble>?, relativeStartTimeMs: KotlinWrapped<KotlinDouble>?, offsetMs: KotlinWrapped<KotlinDouble>?, windowDurationMs: KotlinWrapped<KotlinDouble>?, periodIndex: KotlinInt?) throws {
         var absTime: Double? = nil
         var relTime: Double? = nil

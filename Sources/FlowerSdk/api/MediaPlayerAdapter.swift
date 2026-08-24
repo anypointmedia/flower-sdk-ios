@@ -82,6 +82,22 @@ public protocol MediaPlayerAdapter {
      * ever re-pinning, which is what those players want.
      */
     func getMainTimelineRejoinCount() -> Int32
+
+    /**
+     * How far behind its own live edge the player believes it is, in milliseconds (>= 0), or nil when it
+     * cannot say - off a live stream, or on a player that does not track an edge.
+     *
+     * The manifest cannot be measured for this. A live edge is the player's own construction: Bitmovin
+     * projects it forward from what `@availabilityTimeOffset` made available and does not retract it
+     * when a later manifest lists less, so the player is the only authority on that distance. The SDK
+     * asks because a manifest whose declared depth has to express it has to know it - see
+     * `CoreMediaPlayerAdapter.getLiveEdgeDistanceMs`, which carries the measurements that rule out
+     * every manifest-side estimate.
+     *
+     * The default nil is what keeps this optional: an adapter that does not answer keeps exactly the
+     * behaviour it had, because the caller falls back rather than guessing.
+     */
+    func getLiveEdgeDistanceMs() -> Double?
 }
 
 /// Defaults for the members a host app should not have to think about.
@@ -101,5 +117,9 @@ extension MediaPlayerAdapter {
 
     public func getMainTimelineRejoinCount() -> Int32 {
         0
+    }
+
+    public func getLiveEdgeDistanceMs() -> Double? {
+        nil
     }
 }

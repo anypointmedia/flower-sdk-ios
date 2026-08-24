@@ -783,6 +783,7 @@ __attribute__((swift_name("AdTracker.Companion")))
 @property (readonly) int64_t AD_CTA_SHOW_DELAY __attribute__((swift_name("AD_CTA_SHOW_DELAY")));
 @property (readonly) int64_t AD_PLAY_TIME_CHECK_INTERVAL __attribute__((swift_name("AD_PLAY_TIME_CHECK_INTERVAL")));
 @property (readonly) int64_t AD_PLAY_TIME_CHECK_INTERVAL_FOR_TV __attribute__((swift_name("AD_PLAY_TIME_CHECK_INTERVAL_FOR_TV")));
+@property (readonly) int64_t AD_PROGRESS_CLAMP_WINDOW __attribute__((swift_name("AD_PROGRESS_CLAMP_WINDOW")));
 @property (readonly) int64_t AD_PROGRESS_CLOCK_SLACK __attribute__((swift_name("AD_PROGRESS_CLOCK_SLACK")));
 @property (readonly) int64_t DEFAULT_AD_SKIP_EXPIRATION_DURATION __attribute__((swift_name("DEFAULT_AD_SKIP_EXPIRATION_DURATION")));
 @property (readonly) int64_t GOOGLE_IMA_POLL_INTERVAL_MILLIS __attribute__((swift_name("GOOGLE_IMA_POLL_INTERVAL_MILLIS")));
@@ -1876,6 +1877,7 @@ __attribute__((swift_name("CoreMediaPlayerAdapter")))
  * @note This method converts all Kotlin exceptions to errors.
 */
 - (Sdk_coreKotlinWrapped<Sdk_coreInt *> * _Nullable)getHeightAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("getHeight_()")));
+- (Sdk_coreDouble * _Nullable)getLiveEdgeDistanceMs __attribute__((swift_name("getLiveEdgeDistanceMs()")));
 - (NSString * _Nullable)getPlayerType __attribute__((swift_name("getPlayerType()")));
 - (NSString * _Nullable)getPlayerVersion __attribute__((swift_name("getPlayerVersion()")));
 
@@ -3953,6 +3955,7 @@ __attribute__((swift_name("PdtAnchoringMediaPlayerAdapter")))
  * @note This method converts all Kotlin exceptions to errors.
 */
 - (Sdk_coreKotlinWrapped<Sdk_coreInt *> * _Nullable)getHeightAndReturnError:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("getHeight_()")));
+- (Sdk_coreDouble * _Nullable)getLiveEdgeDistanceMs __attribute__((swift_name("getLiveEdgeDistanceMs()")));
 - (NSString * _Nullable)getPlayerType __attribute__((swift_name("getPlayerType()")));
 - (NSString * _Nullable)getPlayerVersion __attribute__((swift_name("getPlayerVersion()")));
 
@@ -8570,6 +8573,7 @@ __attribute__((swift_name("KotlinByteArray")))
 - (Sdk_coreLong * _Nullable)segmentEndAtOrBeforeTargetOffsetMs:(int64_t)targetOffsetMs __attribute__((swift_name("segmentEndAtOrBefore(targetOffsetMs:)")));
 - (int64_t)sumDuration __attribute__((swift_name("sumDuration()")));
 - (NSArray<Sdk_coreSegmentTemplateSnapshot *> *)trimSegmentTimelinesToEndOffsetMs:(int64_t)endOffsetMs __attribute__((swift_name("trimSegmentTimelinesTo(endOffsetMs:)")));
+- (NSArray<Sdk_coreSegmentTemplateSnapshot *> *)trimSegmentTimelinesToDurationDurationMs:(int64_t)durationMs __attribute__((swift_name("trimSegmentTimelinesToDuration(durationMs:)")));
 @end
 
 @interface Sdk_corePeriodType (Extensions)
@@ -8591,7 +8595,9 @@ __attribute__((swift_name("KotlinByteArray")))
 - (Sdk_corePeriodType *)shallowCopy __attribute__((swift_name("shallowCopy()")));
 - (int64_t)sumDuration __attribute__((swift_name("sumDuration()")));
 - (NSArray<Sdk_coreSegmentTemplateSnapshot *> *)trimSegmentTimelinesToEndOffsetMs:(int64_t)endOffsetMs __attribute__((swift_name("trimSegmentTimelinesTo(endOffsetMs:)")));
+- (NSArray<Sdk_coreSegmentTemplateSnapshot *> *)trimSegmentTimelinesToDurationDurationMs:(int64_t)durationMs __attribute__((swift_name("trimSegmentTimelinesToDuration(durationMs:)")));
 - (Sdk_corePeriodType *)updatePresentationTimeOffsetPresentationTimeOffset:(Sdk_coreTimeScaled *)presentationTimeOffset __attribute__((swift_name("updatePresentationTimeOffset(presentationTimeOffset:)")));
+- (Sdk_corePeriodType *)withAvailabilityTimeOffsetSeconds:(double)seconds __attribute__((swift_name("withAvailabilityTimeOffset(seconds:)")));
 - (Sdk_corePeriodType *)withBaseURLsNewBaseURLs:(NSArray<NSString *> *)newBaseURLs __attribute__((swift_name("withBaseURLs(newBaseURLs:)")));
 - (Sdk_corePeriodType *)withDurationDuration:(int64_t)duration __attribute__((swift_name("withDuration(duration:)")));
 - (Sdk_corePeriodType *)withIdId:(NSString *)id __attribute__((swift_name("withId(id:)")));
