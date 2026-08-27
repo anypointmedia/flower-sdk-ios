@@ -3808,6 +3808,7 @@ __attribute__((swift_name("ManipulationProxy")))
 */
 @property id<Sdk_coreMediaPlayerHook> _Nullable mediaPlayerHook __attribute__((swift_name("mediaPlayerHook")));
 @property NSString * _Nullable nextMediaId __attribute__((swift_name("nextMediaId")));
+@property (readonly) NSString * _Nullable previousMainMediaId __attribute__((swift_name("previousMainMediaId")));
 @property NSString * _Nullable rootPlaylistUrl __attribute__((swift_name("rootPlaylistUrl")));
 
 /**
@@ -8569,11 +8570,11 @@ __attribute__((swift_name("KotlinByteArray")))
 - (NSArray<Sdk_coreLong *> *)chunkDurationsMs __attribute__((swift_name("chunkDurationsMs()")));
 - (Sdk_coreLong * _Nullable)listedSegmentEndMs __attribute__((swift_name("listedSegmentEndMs()")));
 - (Sdk_coreLong * _Nullable)listedSegmentStartMs __attribute__((swift_name("listedSegmentStartMs()")));
+- (int32_t)listedSegmentsPastOffsetMs:(int64_t)offsetMs __attribute__((swift_name("listedSegmentsPast(offsetMs:)")));
 - (NSArray<Sdk_coreSegmentTemplateSnapshot *> *)rebaseSegmentTimelinesFromOffsetMs:(int64_t)offsetMs publishedUntilMs:(int64_t)publishedUntilMs __attribute__((swift_name("rebaseSegmentTimelinesFrom(offsetMs:publishedUntilMs:)")));
 - (Sdk_coreLong * _Nullable)segmentEndAtOrBeforeTargetOffsetMs:(int64_t)targetOffsetMs __attribute__((swift_name("segmentEndAtOrBefore(targetOffsetMs:)")));
 - (int64_t)sumDuration __attribute__((swift_name("sumDuration()")));
 - (NSArray<Sdk_coreSegmentTemplateSnapshot *> *)trimSegmentTimelinesToEndOffsetMs:(int64_t)endOffsetMs __attribute__((swift_name("trimSegmentTimelinesTo(endOffsetMs:)")));
-- (NSArray<Sdk_coreSegmentTemplateSnapshot *> *)trimSegmentTimelinesToDurationDurationMs:(int64_t)durationMs __attribute__((swift_name("trimSegmentTimelinesToDuration(durationMs:)")));
 @end
 
 @interface Sdk_corePeriodType (Extensions)
@@ -8592,10 +8593,10 @@ __attribute__((swift_name("KotlinByteArray")))
 - (Sdk_coreLong * _Nullable)segmentBoundaryAtOrBeforeTargetOffsetMs:(int64_t)targetOffsetMs __attribute__((swift_name("segmentBoundaryAtOrBefore(targetOffsetMs:)")));
 - (Sdk_coreLong * _Nullable)segmentTimelineEndMs __attribute__((swift_name("segmentTimelineEndMs()")));
 - (Sdk_coreLong * _Nullable)segmentTimelineStartMs __attribute__((swift_name("segmentTimelineStartMs()")));
+- (int32_t)segmentsListedPastOffsetMs:(int64_t)offsetMs __attribute__((swift_name("segmentsListedPast(offsetMs:)")));
 - (Sdk_corePeriodType *)shallowCopy __attribute__((swift_name("shallowCopy()")));
 - (int64_t)sumDuration __attribute__((swift_name("sumDuration()")));
 - (NSArray<Sdk_coreSegmentTemplateSnapshot *> *)trimSegmentTimelinesToEndOffsetMs:(int64_t)endOffsetMs __attribute__((swift_name("trimSegmentTimelinesTo(endOffsetMs:)")));
-- (NSArray<Sdk_coreSegmentTemplateSnapshot *> *)trimSegmentTimelinesToDurationDurationMs:(int64_t)durationMs __attribute__((swift_name("trimSegmentTimelinesToDuration(durationMs:)")));
 - (Sdk_corePeriodType *)updatePresentationTimeOffsetPresentationTimeOffset:(Sdk_coreTimeScaled *)presentationTimeOffset __attribute__((swift_name("updatePresentationTimeOffset(presentationTimeOffset:)")));
 - (Sdk_corePeriodType *)withAvailabilityTimeOffsetSeconds:(double)seconds __attribute__((swift_name("withAvailabilityTimeOffset(seconds:)")));
 - (Sdk_corePeriodType *)withBaseURLsNewBaseURLs:(NSArray<NSString *> *)newBaseURLs __attribute__((swift_name("withBaseURLs(newBaseURLs:)")));
