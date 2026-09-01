@@ -13,6 +13,13 @@ import sdk_core
 ///    same (proxy) URL and seek to the live edge. This costs one notification
 ///    observer per item, so it stays enabled even in production.
 ///
+///    When recovery runs out of attempts the stream is dead as far as the SDK is
+///    concerned, and that is reported to the host app through
+///    ``FlowerAdsManagerListener/onError(error:)`` - see ``reportUnrecoverable``.
+///    Nothing else tells the app: the manipulation layer's own `onError` fires for
+///    single failed playlist fetches too, which a healthy session survives, so it
+///    cannot be read as "playback stopped".
+///
 /// 2. **Verbose health logging** (off by default, opt-in for QA/debug).
 ///    Player `timeControlStatus`/`rate` transitions, buffer state, access/error log
 ///    dumps, and a periodic heartbeat. Useful to analyze a freeze purely from logs,
@@ -48,6 +55,11 @@ public final class PlayerDiagnostics {
     /// When `true`, rebuild the item and resume at the live edge on a fatal stall.
     private let autoRecover: Bool
 
+    /// The SDK's aggregate listener (`FlowerAdsManagerListeners`), so an unrecoverable playback
+    /// failure reaches the host app and not only the log. `nil` only for a diagnostics instance
+    /// built outside the media-player adapter, which has no listener to report to.
+    private let adsManagerListener: FlowerAdsManagerListener?
+
     // MARK: Recovery state
 
     private var isRecovering = false
@@ -59,6 +71,13 @@ public final class PlayerDiagnostics {
     /// If playback stayed healthy this long since the last recovery, the next failure
     /// is treated as a fresh incident and the attempt counter resets.
     private let recoveryAttemptResetInterval: TimeInterval = 60
+    /// One `onError` per incident, not per retry. A dead item keeps re-entering recovery - every
+    /// rebuilt item fails the same way immediately - so the give-up branch is reached over and over
+    /// (measured at ~5Hz for the rest of the session in the 2026-08-31 iOS black-screen logs, where
+    /// the reload URL carried an expired CDN token and answered 403 forever). The app needs the fact
+    /// once. Cleared when the attempt counter resets or when an item reaches `readyToPlay`, so a
+    /// later incident reports again.
+    private var hasReportedUnrecoverable = false
 
     // MARK: Stall watchdog (non-fatal prolonged stall)
 
@@ -83,11 +102,13 @@ public final class PlayerDiagnostics {
     public init(
         player: AVPlayer,
         verboseLogging: Bool = PlayerDiagnostics.verboseLoggingEnabled,
-        autoRecover: Bool = true
+        autoRecover: Bool = true,
+        adsManagerListener: FlowerAdsManagerListener? = nil
     ) {
         self.player = player
         self.verboseLogging = verboseLogging
         self.autoRecover = autoRecover
+        self.adsManagerListener = adsManagerListener
         observePlayer(player)
         attachItem(player.currentItem)
         if autoRecover {
@@ -171,6 +192,9 @@ public final class PlayerDiagnostics {
                     self.dumpErrorLog(item)
                     self.recoverFromPlaybackFailure(item.error)
                 case .readyToPlay:
+                    // An item that loads is the end of the incident, whether recovery or the host
+                    // app produced it, so the next unrecoverable failure reports again.
+                    self.hasReportedUnrecoverable = false
                     if self.verboseLogging { self.logger.info { "item.status -> readyToPlay" } }
                 case .unknown:
                     if self.verboseLogging { self.logger.info { "item.status -> unknown" } }
@@ -282,9 +306,11 @@ public final class PlayerDiagnostics {
         let now = Date()
         if let last = lastRecoveryTime, now.timeIntervalSince(last) > recoveryAttemptResetInterval {
             recoveryAttempts = 0
+            hasReportedUnrecoverable = false
         }
         guard recoveryAttempts < maxRecoveryAttempts else {
             logger.warn { "PlayerDiagnostics: giving up recovery after \(self.recoveryAttempts) attempts - \(url.absoluteString)" }
+            reportUnrecoverable(error, url, trigger: trigger)
             return
         }
 
@@ -320,6 +346,34 @@ public final class PlayerDiagnostics {
             self.isRecovering = false
             self.logger.info { "PlayerDiagnostics: recovery resumed (\(isLive ? "live edge" : "saved position"))" }
         }
+    }
+
+    /// Tells the host app that playback is over, once per incident.
+    ///
+    /// Recovery rebuilds the item from the URL the player already has, so it cannot help when that
+    /// URL itself has stopped working - a channel URL whose CDN token has expired answers 403 to
+    /// every attempt, and the SDK then serves that error body as a playlist. From the app's side
+    /// that is indistinguishable from a live stream that simply went quiet: the screen is black and
+    /// no callback has said why. Only the app can fix it (fetch a fresh tokenized URL, leave the
+    /// channel, show an error), so it gets the failure with the URL that died attached.
+    ///
+    /// `error` is the AVFoundation error that ended playback; it goes on the `cause` so a listener
+    /// can branch on the CoreMedia/NSURLError code without parsing the message.
+    private func reportUnrecoverable(_ error: Error?, _ url: URL, trigger: String) {
+        guard !hasReportedUnrecoverable else { return }
+        hasReportedUnrecoverable = true
+
+        guard let adsManagerListener = adsManagerListener else {
+            logger.warn { "PlayerDiagnostics: no adsManagerListener, unrecoverable failure not reported" }
+            return
+        }
+        adsManagerListener.onError(
+            error: FlowerError(
+                message: "playback unrecoverable after \(maxRecoveryAttempts) recovery attempts"
+                    + " (\(trigger)) - url: \(url.absoluteString)",
+                cause: KotlinThrowable(message: describe(error))
+            )
+        )
     }
 
     // MARK: - Stall watchdog

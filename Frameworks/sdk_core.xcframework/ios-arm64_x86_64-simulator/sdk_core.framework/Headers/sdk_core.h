@@ -3055,6 +3055,7 @@ __attribute__((swift_name("MediaSegment")))
 @property Sdk_coreDateRange * _Nullable dateRange __attribute__((swift_name("dateRange")));
 @property BOOL discontinuity __attribute__((swift_name("discontinuity")));
 @property double duration __attribute__((swift_name("duration")));
+@property Sdk_coreSegmentKey * _Nullable effectiveSegmentKey __attribute__((swift_name("effectiveSegmentKey")));
 @property BOOL gap __attribute__((swift_name("gap")));
 @property Sdk_coreLong * _Nullable mediaSequence __attribute__((swift_name("mediaSequence")));
 @property NSMutableArray<Sdk_corePartialSegment *> *partialSegments __attribute__((swift_name("partialSegments")));
@@ -3458,6 +3459,7 @@ __attribute__((swift_name("MediaPlaylistParser.Builder")))
 @interface Sdk_coreMediaPlaylistParserBuilder : Sdk_coreBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+@property Sdk_coreSegmentKey * _Nullable keyInForce __attribute__((swift_name("keyInForce")));
 @property NSMutableArray<Sdk_corePartialSegment *> *partialSegments __attribute__((swift_name("partialSegments")));
 @property (readonly) Sdk_coreMediaPlaylist *playlistBuilder __attribute__((swift_name("playlistBuilder")));
 @property Sdk_coreMediaSegment *segmentBuilder __attribute__((swift_name("segmentBuilder")));
@@ -6543,6 +6545,7 @@ __attribute__((swift_name("ContentProtectionType")))
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 - (instancetype)initWithSeen0:(int32_t)seen0 schemeIdUri:(NSString * _Nullable)schemeIdUri value:(NSString * _Nullable)value id:(NSString * _Nullable)id otherAttributes:(NSDictionary<id, id> * _Nullable)otherAttributes serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:schemeIdUri:value:id:otherAttributes:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) Sdk_coreContentProtectionTypeCompanion *companion __attribute__((swift_name("companion")));
+@property NSString * _Nullable defaultKID __attribute__((swift_name("defaultKID")));
 @property id<Sdk_coreCoreElement> _Nullable ref __attribute__((swift_name("ref")));
 @property NSString * _Nullable refId __attribute__((swift_name("refId")));
 @property NSString * _Nullable robustness __attribute__((swift_name("robustness")));

@@ -55,7 +55,9 @@ class AVPlayerAdapter: NSObject, MediaPlayerAdapter {
 
     private func setupDiagnostics() {
         guard let player = try? self.player else { return }
-        diagnostics = PlayerDiagnostics(player: player)
+        // The listener goes along so a playback failure recovery cannot fix - a channel URL that has
+        // stopped working - reaches the app instead of ending as a black screen and a log line.
+        diagnostics = PlayerDiagnostics(player: player, adsManagerListener: adsManagerListener)
     }
 
     func getCurrentMedia() throws -> Media {
