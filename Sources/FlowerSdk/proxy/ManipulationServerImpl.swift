@@ -49,7 +49,7 @@ class ManipulationServerImpl: ManipulationServer {
                 observer = MSPlayerObserver(player: player) { player, keyPath in
                     if keyPath == "rate" {
                         if player.status == .readyToPlay && player.rate > 0.0 {
-                            self.checkServerAliveAndRestart()
+                            self.restartServerIfStopped()
                         }
                     }
                 }
@@ -125,18 +125,22 @@ class ManipulationServerImpl: ManipulationServer {
         return port
     }
 
-    private func checkServerAliveAndRestart() {
-        let requestBuilder = Ktor_client_coreHttpRequestBuilder()
-        requestBuilder.ios_url(urlString: localEndpoint + "/ping")
+    /// Called from the `rate` KVO callback, whose thread AVFoundation does not
+    /// guarantee - `play()` from the host delivers it on the caller's thread,
+    /// usually main. So this must never block: no I/O, no synchronous request.
+    ///
+    /// `server.operating` is the whole answer. It flips to false exactly when
+    /// HttpServerIO's accept loop dies and calls stop(), and that is the only
+    /// state a restart can recover from anyway - HttpServerIO.start() returns
+    /// early while operating. A `/ping` round-trip could only ever agree with
+    /// this flag, at the price of blocking the caller until the loopback GET
+    /// returned (the shared client installs no HttpTimeout, so up to the Darwin
+    /// engine's 60s default when the server was listening but stalled).
+    private func restartServerIfStopped() {
+        guard !server.operating else { return }
 
-        logger.verbose { "ping to server: \(self.localEndpoint)"}
-
-        var response = try? httpClient.ios_requestSync(builder: requestBuilder)
-
-        if (response == nil) {
-            logger.info { "Proxy server healthcheck failed. Restarting server." }
-            startServer(address: "0.0.0.0", port: lastServerPort)
-        }
+        logger.info { "Proxy server is not running. Restarting server." }
+        startServer(address: "0.0.0.0", port: lastServerPort)
     }
 
     private func startServer(address: String, port: in_port_t) {
@@ -152,11 +156,6 @@ class ManipulationServerImpl: ManipulationServer {
         }
 
         server["/"] = { [self] request in
-            if request.path == "/ping" {
-                logger.verbose { "pong from server" }
-                return HttpResponse.ok(.data("pong".data(using: .utf8)!))
-            }
-
             let requestUri = request.path + (request.queryParams.count == 0 ? "" : "?" + request.queryParams.reduce("") { (result, param) in
                 result + (result.isEmpty ? "" : "&") + param.0 + "=" + param.1
             })

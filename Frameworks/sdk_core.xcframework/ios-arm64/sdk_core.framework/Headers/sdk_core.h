@@ -712,6 +712,11 @@ __attribute__((swift_name("AdHandler")))
  * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
 */
 @property (readonly) id<Sdk_coreCoreMediaPlayerAdapter> _Nullable mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
+
+/**
+ * @note This property has protected visibility in Kotlin source and is intended only for use by subclasses.
+*/
+@property (readonly) id _Nullable platformMediaPlayerAdapter __attribute__((swift_name("platformMediaPlayerAdapter")));
 @property int64_t requestDuration __attribute__((swift_name("requestDuration")));
 
 /**
@@ -1082,6 +1087,7 @@ __attribute__((swift_name("FlowerAdsManagerImpl")))
 @property id<Sdk_coreCoreMediaPlayerAdapter> _Nullable mediaPlayerAdapter __attribute__((swift_name("mediaPlayerAdapter")));
 @property id<Sdk_coreMediaPlayerHook> _Nullable mediaPlayerHook __attribute__((swift_name("mediaPlayerHook")));
 @property Sdk_coreNormalAdHandler * _Nullable normalAdHandler __attribute__((swift_name("normalAdHandler")));
+@property id _Nullable platformMediaPlayerAdapter __attribute__((swift_name("platformMediaPlayerAdapter")));
 @end
 
 __attribute__((objc_subclassing_restricted))
