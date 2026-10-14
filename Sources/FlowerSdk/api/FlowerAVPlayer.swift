@@ -39,6 +39,7 @@ open class FlowerAVPlayer: AVQueuePlayer {
     }
 
     public func setAdConfig(adConfig: FlowerLinearTvAdConfig) {
+        logger.info { "setAdConfig - adTagUrl: \(adConfig.adTagUrl), channelId: \(adConfig.channelId), prerollAdTagUrl: \(adConfig.prerollAdTagUrl ?? "nil")" }
         self.adConfig = adConfig
     }
 
@@ -141,15 +142,23 @@ open class FlowerAVPlayer: AVQueuePlayer {
             func onCompleted() {
                 logger.info { "Preroll is completed." }
                 flowerAdView.adsManager.removeListener(adsManagerListener: self)
-                onPrerollCompletedProvider()()
 
-                if playFlagProvider() {
-                    setPrerollPrepared(nil)
-                    DispatchQueue.main.async {
-                        self.play()
+                // The SDK calls this from a background coroutine thread, but
+                // onPrerollCompleted and the player state behind the providers belong
+                // to the main actor — calling them here trips Swift 6's runtime
+                // isolation check and crashes. play() stays a separate hop so it still
+                // runs after the replaceCurrentItem that onPrerollCompleted enqueues.
+                DispatchQueue.main.async {
+                    self.onPrerollCompletedProvider()()
+
+                    if self.playFlagProvider() {
+                        self.setPrerollPrepared(nil)
+                        DispatchQueue.main.async {
+                            self.play()
+                        }
+                    } else {
+                        self.setPrerollPrepared(true)
                     }
-                } else {
-                    setPrerollPrepared(true)
                 }
             }
 
@@ -197,7 +206,9 @@ open class FlowerAVPlayer: AVQueuePlayer {
 
             let newMediaItem = AVPlayerItem(url: URL(string: changedChannelUrl)!)
 
-            if let prerollAdTagUrl = linearConfig.prerollAdTagUrl {
+            let adsManagerImpl = flowerAdView.adsManager as? FlowerAdsManagerImpl
+            // A channel entered again right after itself (a restart) does not replay its pre-roll.
+            if let prerollAdTagUrl = linearConfig.prerollAdTagUrl, adsManagerImpl?.isLinearTvPrerollSeen != true {
                 prerollPrepared = false
 
                 onPrerollCompleted = {
@@ -208,15 +219,14 @@ open class FlowerAVPlayer: AVQueuePlayer {
 
                 flowerAdView.adsManager.addListener(adsManagerListener: prerollEventListener)
 
-                if let adsManagerImpl = flowerAdView.adsManager as? FlowerAdsManagerImpl {
-                    adsManagerImpl.requestAdImpl(
-                        adTagUrl: prerollAdTagUrl,
-                        extraParams: linearConfig.extraParams ?? [:],
-                        adTagHeaders: linearConfig.adTagHeaders ?? [:],
-                        contentId: linearConfig.channelId,
-                        mediaPlayerHook: MediaPlayerHookImpl { self },
-                    )
-                }
+                adsManagerImpl?.requestAdImpl(
+                    adTagUrl: prerollAdTagUrl,
+                    extraParams: linearConfig.extraParams ?? [:],
+                    adTagHeaders: linearConfig.adTagHeaders ?? [:],
+                    contentId: linearConfig.channelId,
+                    mediaPlayerHook: MediaPlayerHookImpl { self },
+                    isLinearTvPreroll: true,
+                )
             } else {
                 super.replaceCurrentItem(with: newMediaItem)
             }
@@ -228,13 +238,12 @@ open class FlowerAVPlayer: AVQueuePlayer {
             prerollPrepared = false
 
             onPrerollCompleted = {
-                var currentPosition: Int64 = 0
-                var midrollPrepared = false
-
-                // All captured closures/state are only ever invoked on the main thread (the
-                // `DispatchQueue.main.async`/`.global().async` hops below are the only mutation
-                // points), so this local listener is safe to declare `Sendable` for closure-capture
-                // purposes.
+                // The listener holds no state and touches the player only on the main thread, so it
+                // is safe to declare `Sendable` for closure-capture purposes. It used to keep the
+                // midroll state in pointers to locals of this closure - pointers that dangled once
+                // the closure returned, so a midroll wrote into whatever stack frame was there by
+                // then: the rewind never ran, or the app crashed. The rewind is the SDK's ad player's
+                // now (`setReturnRewind`).
                 final class MidrollEventListener: FlowerAdsManagerListener, @unchecked Sendable {
                     func onAdPlay(adInfo: AdInfo) {
                     
@@ -245,53 +254,28 @@ open class FlowerAVPlayer: AVQueuePlayer {
                     
                     private let logger: Logger_
                     private let flowerAdView: FlowerAdView
-                    private let minPrepareDuration: Int64
-                    private let rewindDuration: Int64
-                    private var midrollPrepared: UnsafeMutablePointer<Bool>
-                    private var currentPosition: UnsafeMutablePointer<Int64>
-                    private let mediaUri: URL
                     private let currentTime: () -> CMTime
-                    private let replaceCurrentItem: (AVPlayerItem) -> Void
-                    private let seek: (CMTime) -> Void
 
                     init(
                         logger: Logger_,
                         flowerAdView: FlowerAdView,
-                        minPrepareDuration: Int64,
-                        rewindDuration: Int64,
-                        midrollPrepared: UnsafeMutablePointer<Bool>,
-                        currentPosition: UnsafeMutablePointer<Int64>,
-                        mediaUri: URL,
                         currentTime: @escaping () -> CMTime,
-                        replaceCurrentItem: @escaping (AVPlayerItem) -> Void,
-                        seek: @escaping (CMTime) -> Void,
                     ) {
                         self.logger = logger
                         self.flowerAdView = flowerAdView
-                        self.minPrepareDuration = minPrepareDuration
-                        self.rewindDuration = rewindDuration
-                        self.midrollPrepared = midrollPrepared
-                        self.currentPosition = currentPosition
-                        self.mediaUri = mediaUri
                         self.currentTime = currentTime
-                        self.replaceCurrentItem = replaceCurrentItem
-                        self.seek = seek
                     }
 
+                    // The SDK holds onPrepare until the content reaches the midroll's offset, so the
+                    // ad plays right away - the same as an app driving adsManager by hand.
                     func onPrepare(adDurationMs: Int32) {
                         logger.info { "Midroll is prepared." }
-                        midrollPrepared.pointee = true
 
-                        DispatchQueue.global().async {
-                            Thread.sleep(forTimeInterval: TimeInterval(self.minPrepareDuration) / 1000.0)
+                        DispatchQueue.main.async {
+                            let seconds = CMTimeGetSeconds(self.currentTime())
+                            let position = (seconds.isInfinite || seconds.isNaN) ? 0 : Int64(seconds * 1000)
 
-                            let position: Int64 = DispatchQueue.main.sync {
-                                let position = CMTimeGetSeconds(self.currentTime())
-
-                                return (position.isInfinite || position.isNaN) ? 0 : Int64(position * 1000)
-                            }
-                            self.currentPosition.pointee = position
-
+                            self.logger.info { "Midroll play - position: \(position)" }
                             self.flowerAdView.adsManager.play()
                         }
                     }
@@ -299,20 +283,10 @@ open class FlowerAVPlayer: AVQueuePlayer {
                     func onPlay() {
                     }
 
+                    // The SDK's ad player hands the content back itself, rewindDuration before
+                    // where the midroll interrupted it.
                     func onCompleted() {
                         logger.info { "Midroll is completed." }
-
-                        if midrollPrepared.pointee {
-                            midrollPrepared.pointee = false
-
-                            DispatchQueue.main.async {
-                                let newPosition = max(self.currentPosition.pointee - self.rewindDuration, 0)
-                                let newMediaItem = AVPlayerItem(url: self.mediaUri)
-
-                                self.replaceCurrentItem(newMediaItem)
-                                self.seek(CMTimeMake(value: newPosition, timescale: 1000))
-                            }
-                        }
                     }
 
                     func onError(error: FlowerError?) {
@@ -325,26 +299,12 @@ open class FlowerAVPlayer: AVQueuePlayer {
                     }
                 }
 
-                var midrollPreparedPtr = midrollPrepared
-                var currentPositionPtr = currentPosition
-
-                withUnsafeMutablePointer(to: &midrollPreparedPtr) { midrollPreparedFlagPtr in
-                    withUnsafeMutablePointer(to: &currentPositionPtr) { currentPositionValPtr in
-                        let midrollListener = MidrollEventListener(
-                            logger: self.logger,
-                            flowerAdView: self.flowerAdView,
-                            minPrepareDuration: minPrepareDuration,
-                            rewindDuration: rewindDuration,
-                            midrollPrepared: midrollPreparedFlagPtr,
-                            currentPosition: currentPositionValPtr,
-                            mediaUri: mediaUri,
-                            currentTime: { super.currentTime() },
-                            replaceCurrentItem: { item in super.replaceCurrentItem(with: item) },
-                            seek: { position in super.seek(to: position) },
-                        )
-                        self.flowerAdView.adsManager.addListener(adsManagerListener: midrollListener)
-                    }
-                }
+                let midrollListener = MidrollEventListener(
+                    logger: self.logger,
+                    flowerAdView: self.flowerAdView,
+                    currentTime: { super.currentTime() },
+                )
+                self.flowerAdView.adsManager.addListener(adsManagerListener: midrollListener)
 
                 DispatchQueue.main.async {
                     super.replaceCurrentItem(with: mediaItem)

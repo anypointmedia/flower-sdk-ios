@@ -65,6 +65,13 @@ public class FlowerAdView: FlowerAdViewStub, ObservableObject, @unchecked Sendab
         @State var width: Int32 = 0
         @State var height: Int32 = 0
 
+        // `View` is main-actor isolated in the current SDK, so the synthesized memberwise init would
+        // be too, and `FlowerAdView`'s nonisolated `lazy` default could no longer call it (an error
+        // under Swift 6 from Xcode 27). It only stores the wrappers, so it needs no isolation.
+        nonisolated init(flowerAdView: FlowerAdView) {
+            _flowerAdView = ObservedObject(wrappedValue: flowerAdView)
+        }
+
         public var body: some View {
             GeometryReader { geometry in
                 ZStack {

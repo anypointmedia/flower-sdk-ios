@@ -25,6 +25,8 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
     private var durations: [Double] = []
     private var originalMediaUrls: [String] = []
     private var originalPosition: Double = 0
+    /// How far before the interrupted position the content comes back - see `setReturnRewind`.
+    private var returnRewindMs: Int32 = 0
     private var adCount: Int = 0
     private var originalItemObservation: NSKeyValueObservation?
     /// Ad items prepared by `load()`. They only reach the player when `play()` runs.
@@ -78,6 +80,7 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
                     durations.append(CMTimeGetSeconds(source.asset.duration)*1000)
                 }
                 self.adPlayerItems = mediaSources
+                self.watchAdItemFailures(mediaSources)
 
                 if self.externalPlayer == nil {
                     // Note: Initialize in this order
@@ -96,6 +99,96 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
             }
         }
         DispatchQueue.main.async(execute: loadJob!)
+    }
+
+    // MARK: - Ad item failures
+
+    /// Ad items that failed to load or play, and whether this break's failure has been reported.
+    /// Main thread only.
+    private var failedAdItems = Set<ObjectIdentifier>()
+    private var adItemFailureReported = false
+    /// How many of this break's ads have played to their end - the index of the ad whose turn it is.
+    private var endedAdItemCount = 0
+    private var adItemStatusObservations: [NSKeyValueObservation] = []
+    private var adItemNotificationTokens: [NSObjectProtocol] = []
+
+    /// Reports an ad whose media cannot play - unreachable, undecodable - as `onError`, the way the
+    /// other ad players do. A queue does not say so by itself: AVQueuePlayer drops a failed item,
+    /// the queue runs dry, and the break sat at "not ready" with its tracking open and the content
+    /// paused until something else stopped it - after `onAdPlay` and the ad's impression had gone
+    /// out for an ad that never showed.
+    ///
+    /// Reported when the failed ad's turn comes - at once if it is playing, otherwise when the ad
+    /// before it ends - so the ads ahead of it in the pod still play out.
+    private func watchAdItemFailures(_ items: [AVPlayerItem]) {
+        adItemStatusObservations.forEach { $0.invalidate() }
+        failedAdItems = []
+        adItemFailureReported = false
+        endedAdItemCount = 0
+        adItemStatusObservations = items.map { item in
+            item.observe(\.status, options: [.initial, .new]) { [weak self] observed, _ in
+                guard observed.status == .failed else { return }
+                DispatchQueue.main.async { self?.adItemFailed(observed) }
+            }
+        }
+        adItemNotificationTokens.forEach { NotificationCenter.default.removeObserver($0) }
+        adItemNotificationTokens = [
+            NotificationCenter.default.addObserver(
+                forName: .AVPlayerItemFailedToPlayToEndTime, object: nil, queue: .main
+            ) { [weak self] notification in
+                // Only the ad that is playing: a queued item can post this for a prefetch that
+                // failed and then plays fine (measured: 12421 marked failed 5s into the ad before it,
+                // and the whole break cut short). A queued item that really cannot play goes to
+                // `status == .failed`, which the observation above catches.
+                guard let self, let item = notification.object as? AVPlayerItem,
+                      let index = self.adPlayerItems.firstIndex(where: { $0 === item }),
+                      index == self.endedAdItemCount, item === self.player?.currentItem else { return }
+                let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? Error
+                self.reportAdItemFailure(item, reason: error?.localizedDescription)
+            },
+            NotificationCenter.default.addObserver(
+                forName: .AVPlayerItemDidPlayToEndTime, object: nil, queue: .main
+            ) { [weak self] notification in
+                guard let self, let item = notification.object as? AVPlayerItem else { return }
+                // The ad before a failed one ending is where the failed one would have started.
+                guard let index = self.adPlayerItems.firstIndex(where: { $0 === item }) else { return }
+                self.endedAdItemCount = max(self.endedAdItemCount, index + 1)
+                guard index + 1 < self.adPlayerItems.count else { return }
+                let next = self.adPlayerItems[index + 1]
+                if self.failedAdItems.contains(ObjectIdentifier(next)), next.status == .failed {
+                    self.reportAdItemFailure(next)
+                }
+            },
+        ]
+    }
+
+    /// The first ad may have failed before `play()` - its turn comes the moment play starts.
+    private func reportFirstAdItemIfFailed() {
+        guard let first = adPlayerItems.first, failedAdItems.contains(ObjectIdentifier(first)),
+              first.status == .failed else { return }
+        reportAdItemFailure(first)
+    }
+
+    private func adItemFailed(_ item: AVPlayerItem) {
+        guard let index = adPlayerItems.firstIndex(where: { $0 === item }) else { return }
+        failedAdItems.insert(ObjectIdentifier(item))
+        logger.warn { "ad item \(index) failed - \(item.error?.localizedDescription ?? "unknown error")" }
+        // Its turn has come once every ad before it has played to its end. Counted rather than read
+        // off `currentItem`: in the app's player the content adapter's recovery swaps a failed item
+        // for a fresh one of the same URL, and a queue drops a failed item on its own.
+        if index == endedAdItemCount {
+            reportAdItemFailure(item)
+        }
+    }
+
+    private func reportAdItemFailure(_ item: AVPlayerItem, reason override: String? = nil) {
+        guard !adItemFailureReported, isAdPlaying,
+              let index = adPlayerItems.firstIndex(where: { $0 === item }), index < mediaUrls.count else { return }
+        let mediaUrl = mediaUrls[index]
+        adItemFailureReported = true
+        let reason = override ?? item.error?.localizedDescription ?? "ad item failed to play"
+        logger.error { "ad item \(index) cannot play - reporting onError: \(reason)" }
+        adPlayerCallbacks.onError(mediaUrl: mediaUrl, t: KotlinThrowable(message: reason))
     }
 
     // Note: Due to OS differences, returning [AVPlayerItem] instead of MediaSource
@@ -120,6 +213,7 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
                 try player.play()
                 self.logger.info { "ad player start to play" }
                 self.adPlayerCallbacks.onPlay(mediaUrl: self.mediaUrls[0] as! String)
+                self.reportFirstAdItemIfFailed()
             } catch let error {
                 self.logger.error { "failed to play \(error)" }
                 self.adPlayerCallbacks.onError(mediaUrl: self.mediaUrls[0] as! String, t: error as! KotlinThrowable)
@@ -154,10 +248,11 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
         }
         if !existingUrls.isEmpty {
             let position = CMTimeGetSeconds(externalPlayer.currentTime()) * 1000
+            let interruptedAt = position.isFinite ? max(0, position) : 0
             originalMediaUrls = existingUrls
-            originalPosition = position.isFinite ? max(0, position) : 0
+            originalPosition = max(0, interruptedAt - Double(returnRewindMs))
             mediaUrls = mediaUrls + originalMediaUrls
-            logger.info { "saved original from player: urls=\(self.originalMediaUrls.count), position=\(self.originalPosition)" }
+            logger.info { "saved original from player: urls=\(self.originalMediaUrls.count), interrupted at \(Int64(interruptedAt)), resumes at \(Int64(self.originalPosition)) (rewind: \(self.returnRewindMs))" }
         }
 
         // Rebuild the original items rather than re-inserting the displaced ones: an AVPlayerItem
@@ -259,6 +354,11 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
             isAdPlaying = false
             adItemsAttached = false
             adPlayerItems = []
+            adItemStatusObservations.forEach { $0.invalidate() }
+            adItemStatusObservations = []
+            adItemNotificationTokens.forEach { NotificationCenter.default.removeObserver($0) }
+            adItemNotificationTokens = []
+            failedAdItems = []
             currentItemObservation?.invalidate()
             currentItemObservation = nil
             // Don't nil out external player - it's owned by the caller
@@ -295,8 +395,13 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
         
         let playTime: Double = player.currentTime().seconds * 1000
         let playingItemCount = player.flowerItems().count
-        
+
         if playingItemCount == 0 {
+            return DeferredStubImpl(task: Task { SendableBox(value: AdProgress.companion.NOT_READY) })
+        }
+        // An item that is not ready - still loading, or failed - reads 0, which the tracker would
+        // take for an ad on screen and start it on: impression and onAdPlay for an ad that never showed.
+        if player.currentItem?.status != .readyToPlay {
             return DeferredStubImpl(task: Task { SendableBox(value: AdProgress.companion.NOT_READY) })
         }
                 
@@ -427,6 +532,44 @@ class AdPlayerImpl: AdPlayer, @unchecked Sendable {
                     }
                 }
             }
+        }
+    }
+
+    func setReturnRewind(rewindMs: Int32) {
+        returnRewindMs = rewindMs
+    }
+
+    /// Only with the app's player behind the hook; the default instance plays in a player of its own.
+    func playsInContentPlayer() -> Bool {
+        externalPlayer != nil
+    }
+
+    /// The displaced items, rebuilt from their URLs, back in the app's queue at the interrupted
+    /// position (less the return rewind) and playing at the app's speed - what the end of a
+    /// played-out break leaves behind. `stop()` has emptied the queue by now (`releasePlayer`), so
+    /// without this a failed break left the app's player with nothing in it.
+    func returnToContent() {
+        let work = {
+            guard let externalPlayer = self.externalPlayer, !self.originalMediaUrls.isEmpty else { return }
+            let items = self.originalMediaUrls.compactMap { URL(string: $0) }.map { AVPlayerItem(url: $0) }
+            guard let first = items.first else { return }
+            externalPlayer.flowerRemoveAllItems()
+            for item in items {
+                externalPlayer.flowerInsert(item, after: nil)
+            }
+            let seekTime = CMTime(seconds: self.originalPosition / 1000.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+            let rate = self.originalRate
+            self.logger.info { "returning to the content after a failed break at \(Int64(self.originalPosition))ms" }
+            first.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero) { _ in
+                DispatchQueue.main.async { externalPlayer.rate = rate }
+            }
+            // A break that played out hands back through the queue; this one did not get that far.
+            self.originalMediaUrls = []
+        }
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.async { work() }
         }
     }
 
