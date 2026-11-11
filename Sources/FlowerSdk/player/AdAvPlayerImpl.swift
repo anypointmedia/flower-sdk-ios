@@ -25,6 +25,8 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
     private var durations: [Double] = []
     private var originalMediaUrls: [String] = []
     private var originalPosition: Double = 0
+    /// How far before the interrupted position the content comes back - see `setReturnRewind`.
+    private var returnRewindMs: Int32 = 0
     private var adCount: Int = 0
     private var currentIndex: Int = 0
     /// Ad items prepared by `load()`. They only reach the player when `play()` runs.
@@ -149,14 +151,15 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
         if let currentItem = externalPlayer.currentItem,
            let urlAsset = currentItem.asset as? AVURLAsset {
             let position = CMTimeGetSeconds(externalPlayer.currentTime()) * 1000
+            let interruptedAt = position.isFinite ? max(0, position) : 0
             originalMediaUrls = [urlAsset.url.absoluteString]
-            originalPosition = position.isFinite ? max(0, position) : 0
+            originalPosition = max(0, interruptedAt - Double(returnRewindMs))
             mediaUrls = mediaUrls + originalMediaUrls
             // The original's own duration is never read for ad progress, and measuring it here
             // would force a synchronous asset load on the main thread. `enqueueNextItem` reports 0
             // for the same reason.
             durations.append(0)
-            logger.info { "saved original from player: url=\(urlAsset.url.absoluteString), position=\(self.originalPosition)" }
+            logger.info { "saved original from player: url=\(urlAsset.url.absoluteString), interrupted at \(Int64(interruptedAt)), resumes at \(Int64(self.originalPosition)) (rewind: \(self.returnRewindMs))" }
         }
 
         // Pause before the swap. `rate` survives `replaceCurrentItem`, so a host app watching at
@@ -272,6 +275,11 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
         if currentIndex >= mediaUrls.count {
             return DeferredStubImpl(task: Task { SendableBox(value: AdProgress.companion.NOT_READY) })
         }
+        // An item that is not ready - still loading, or failed - reads 0, which the tracker would
+        // take for an ad on screen and start it on: impression and onAdPlay for an ad that never showed.
+        if player.currentItem?.status != .readyToPlay {
+            return DeferredStubImpl(task: Task { SendableBox(value: AdProgress.companion.NOT_READY) })
+        }
 
         return DeferredStubImpl(task: Task { SendableBox(value: AdProgress(currentTime: Int32(exactly: playTime.rounded()) ?? 0, duration: Int32(self.durations[self.currentIndex]))) })
     }
@@ -312,6 +320,43 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
         logger.info { "Ad state cleaned up" }
     }
 
+    /// Watch on the ad item now in the player. Main thread only.
+    private var adItemFailureObservation: NSKeyValueObservation?
+    private var adItemFailureToken: NSObjectProtocol?
+
+    /// Reports an ad whose media cannot play - unreachable, undecodable - as `onError`, the way the
+    /// other ad players do. AVPlayer only marks the item failed and stands still, so without this
+    /// the break sat at "not ready" with its tracking open until something else stopped it. One ad
+    /// plays at a time here, so the failed item is always the ad whose turn it is.
+    private func watchAdItemFailure(_ item: AVPlayerItem, mediaUrl: String) {
+        adItemFailureObservation?.invalidate()
+        if let token = adItemFailureToken { NotificationCenter.default.removeObserver(token) }
+        adItemFailureObservation = item.observe(\.status, options: [.new]) { [weak self] observed, _ in
+            guard observed.status == .failed else { return }
+            DispatchQueue.main.async { self?.reportAdItemFailure(observed, mediaUrl: mediaUrl) }
+        }
+        adItemFailureToken = NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemFailedToPlayToEndTime, object: item, queue: .main
+        ) { [weak self] notification in
+            guard let failed = notification.object as? AVPlayerItem else { return }
+            self?.reportAdItemFailure(failed, mediaUrl: mediaUrl)
+        }
+    }
+
+    private func reportAdItemFailure(_ failed: AVPlayerItem, mediaUrl: String) {
+        // By URL, not by item: in the app's player the content adapter's own recovery
+        // (`PlayerDiagnostics`) answers the failure by swapping in a fresh item of the same URL.
+        guard isAdPlaying, currentIndex < adCount, currentIndex < mediaUrls.count,
+              mediaUrls[currentIndex] == mediaUrl else { return }
+        adItemFailureObservation?.invalidate()
+        adItemFailureObservation = nil
+        if let token = adItemFailureToken { NotificationCenter.default.removeObserver(token) }
+        adItemFailureToken = nil
+        let reason = failed.error?.localizedDescription ?? "ad item failed to play"
+        logger.error { "ad item cannot play - reporting onError: \(reason)" }
+        adPlayerCallbacks.onError(mediaUrl: mediaUrl, t: KotlinThrowable(message: reason))
+    }
+
     private func playItem(at index: Int, seekToOriginal: Bool = false) {
         guard let player = self.player, index < mediaUrls.count else { return }
 
@@ -324,6 +369,9 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
             name: .AVPlayerItemDidPlayToEndTime,
             object: newItem
         )
+        if index < adCount {
+            watchAdItemFailure(newItem, mediaUrl: mediaUrls[index])
+        }
 
         let shouldSeek = seekToOriginal || (index >= adCount && !originalMediaUrls.isEmpty && originalPosition > 0)
         if shouldSeek {
@@ -386,6 +434,46 @@ class AdAvPlayerImpl: AdPlayer, @unchecked Sendable {
         } else {
             logger.info { "No more media items to play" }
             return DeferredStubImpl(task: Task { SendableBox(value: KotlinBoolean(value: false)) })
+        }
+    }
+
+    func setReturnRewind(rewindMs: Int32) {
+        returnRewindMs = rewindMs
+    }
+
+    func playsInContentPlayer() -> Bool {
+        true
+    }
+
+    /// The displaced item, rebuilt from its URL, back in the app's player at the interrupted position
+    /// (less the return rewind) and playing at the app's speed - what the end of a played-out break
+    /// leaves behind. `stop()` has emptied the player by now (`releasePlayer`), so without this a
+    /// failed break left the app's player with nothing in it.
+    func returnToContent() {
+        let work = {
+            guard let player = self.player, let url = self.originalMediaUrls.first.flatMap({ URL(string: $0) }) else { return }
+            let item = AVPlayerItem(url: url)
+            let seekTime = CMTime(seconds: self.originalPosition / 1000.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+            let rate = self.originalRate
+            self.logger.info { "returning to the content after a failed break at \(Int64(self.originalPosition))ms" }
+            self.statusObservation?.invalidate()
+            self.statusObservation = item.observe(\.status, options: [.new]) { [weak self] observed, _ in
+                guard observed.status != .unknown else { return }
+                self?.statusObservation?.invalidate()
+                self?.statusObservation = nil
+                guard observed.status == .readyToPlay else { return }
+                player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero) { _ in
+                    DispatchQueue.main.async { player.rate = rate }
+                }
+            }
+            player.replaceCurrentItem(with: item)
+            // A break that played out hands back through playItem; this one did not get that far.
+            self.originalMediaUrls = []
+        }
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.async { work() }
         }
     }
 

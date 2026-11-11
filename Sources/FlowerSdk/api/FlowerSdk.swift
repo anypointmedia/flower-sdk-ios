@@ -73,6 +73,28 @@ public class FlowerSdk {
                 ])
         )
 
+        applyClientOverride()
+    }
+
+    /// Reads the tester's override from the app's Documents directory (`Documents/flower-override.json`),
+    /// placed there through the simulator container, `xcrun devicectl`, or Finder file sharing.
+    /// See e2e/docs/CLIENT_APP.md.
+    ///
+    /// Applied on every init, file or not, so an override from an earlier init in this process does
+    /// not outlive its file.
+    private static func applyClientOverride() {
+        let fileName = sdk_core.ClientOverride.shared.FILE_NAME
+        let file = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent(fileName)
+
+        var raw: String? = nil
+        if let file = file, FileManager.default.fileExists(atPath: file.path) {
+            raw = try? String(contentsOf: file, encoding: .utf8)
+            if raw == nil {
+                logger.warn { "failed to read client override: \(file.path)" }
+            }
+        }
+        sdk_core.LifecycleManager().applyClientOverride(raw: raw, source: file?.path ?? fileName)
     }
 
     public static func getVersion() -> String {
@@ -91,44 +113,16 @@ public class FlowerSdk {
             ")"
         }
 
-        // Parse env string for remote logging support
-        // Format: "local-log-192.168.0.1:9898" -> env: "local", logServer: "192.168.0.1:9898"
-        var actualEnv = env
-        var logServerURL: String? = nil
-
-        if env.contains("-log-") {
-            let components = env.components(separatedBy: "-log-")
-            if components.count == 2 {
-                actualEnv = components[0]
-                logServerURL = components[1]
-            }
-        }
-
-        switch actualEnv {
+        switch env {
         case "local",
              "dev",
              "prod":
-            sdk_core.SdkContainer.companion.getInstance().env = actualEnv
+            // Through setEnvironment, as on Android/HTML5, so the env's log level applies here too.
+            sdk_core.SdkContainer.companion.getInstance().setEnvironment(env: env)
             break;
         default:
             // Throw an error if env is not one of "local", "dev", or "prod"
             fatalError("env must be one of local, dev, prod")
-        }
-
-        // Configure remote logger if log server URL is provided
-        if let logServer = logServerURL {
-            // Configure RemoteLogger
-            RemoteLogger.shared.configure(serverURL: logServer)
-
-            // Bridge Kotlin logs to RemoteLogger via the SDK's global listener API
-            GlobalLogListener.shared.setListener(listener: LogListenerImpl())
-
-            logger.info {
-                "Remote logging enabled - sending logs to: http://\(logServer)"
-            }
-        } else {
-            // Disable remote logging by clearing the listener
-            GlobalLogListener.shared.setListener(listener: nil)
         }
     }
 
@@ -160,8 +154,18 @@ public class FlowerSdk {
         SdkContainer.companion.getInstance().ignoreSkip = true
     }
 
+    @available(*, deprecated, renamed: "notifyUserLeftApp(_:)", message: "Report the user leaving the app instead, whether or not the app enters PIP.")
     public static func notifyPictureInPictureModeChanged(_ isInPictureInPictureMode: Bool) {
-        SdkContainer.companion.getInstance().isInPictureInPictureMode = isInPictureInPictureMode
+        notifyUserLeftApp(isInPictureInPictureMode)
+    }
+
+    /// Tells the SDK the user left the app (`true`) - to the home screen, another app, or a PIP
+    /// window - or came back to it (`false`). With `setIgnoreAdBreakInPIPMode(true)`, the default,
+    /// an ad playing when the user leaves pauses until the user comes back, and VOD mid/post-rolls
+    /// are not requested meanwhile. Report it whether or not the app enters PIP: while an ad plays,
+    /// the app should not put the content player into PIP at all.
+    public static func notifyUserLeftApp(_ hasLeftApp: Bool) {
+        SdkContainer.companion.getInstance().isInPictureInPictureMode = hasLeftApp
     }
 
     public static func setIgnoreAdBreakInPIPMode(_ ignore: Bool) {

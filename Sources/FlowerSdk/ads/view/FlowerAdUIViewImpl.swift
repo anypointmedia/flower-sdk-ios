@@ -133,6 +133,7 @@ class FlowerAdUIViewImpl: FlowerAdUIView, @unchecked Sendable {
                                 if let clickThroughUrl = ad.click?.clickThroughUrl {
                                     if let url = URL(string: clickThroughUrl), let scheme = url.scheme {
                                         if UIApplication.shared.canOpenURL(url) {
+                                            logger.info { "Opening web browser - clickThroughUrl: \(clickThroughUrl)" }
                                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
                                         } else {
                                             logger.warn { "Cannot open URL. URL: \(url)" }

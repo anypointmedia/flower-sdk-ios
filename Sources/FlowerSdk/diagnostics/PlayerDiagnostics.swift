@@ -16,6 +16,10 @@ import sdk_core
 ///    When recovery runs out of attempts the stream is dead as far as the SDK is
 ///    concerned, and that is reported to the host app through
 ///    ``FlowerAdsManagerListener/onError(error:)`` - see ``reportUnrecoverable``.
+///
+///    Recovery runs only when FlowerConfig `autoRecoverPlaybackFailure` (ARPF) is on. Off (default),
+///    the first fatal failure goes straight to `onError` and the stall watchdog stands down -
+///    recovering is the app's call.
 ///    Nothing else tells the app: the manipulation layer's own `onError` fires for
 ///    single failed playlist fetches too, which a healthy session survives, so it
 ///    cannot be read as "playback stopped".
@@ -63,6 +67,9 @@ public final class PlayerDiagnostics {
     // MARK: Recovery state
 
     private var isRecovering = false
+    /// The item the recovery in progress swapped in. A failure from it means the rebuild itself
+    /// failed, and its seek completion is the only one allowed to end the recovery.
+    private var recoveryItem: AVPlayerItem?
     private var recoveryAttempts = 0
     private var lastRecoveryTime: Date?
     /// Max consecutive recovery attempts before giving up (avoids a tight retry loop
@@ -146,6 +153,13 @@ public final class PlayerDiagnostics {
                 guard let self = self else { return }
                 if self.verboseLogging {
                     self.logger.info { "player.currentItem changed -> \(self.describe(player.currentItem))" }
+                }
+                // Another item taking over (the app's own replace) ends the recovery: its seek
+                // completion is no longer the one that will, and failures of the new item must be
+                // handled. `nil` is the AVQueuePlayer swap's own `removeAllItems`, not a takeover.
+                if self.isRecovering, let current = player.currentItem, current !== self.recoveryItem {
+                    self.isRecovering = false
+                    self.recoveryItem = nil
                 }
                 self.detachItem()
                 self.attachItem(player.currentItem)
@@ -290,16 +304,33 @@ public final class PlayerDiagnostics {
     /// For VOD it seeks back to the position where playback stalled (seeking a VOD asset to the live
     /// edge would jump it to its end). Invoked both by the fatal-failure path (item `.failed` /
     /// `FailedToPlayToEndTime`) and by the non-fatal stall watchdog.
+    ///
+    /// A failure while a recovery is in progress is ignored only when it is not from the rebuilt
+    /// item. When it is, the rebuild has failed - an expired CDN token answers 403 before the seek
+    /// completes - and the item raises nothing more afterwards, nor does the stall watchdog arm on an
+    /// item that never played. Ignoring that one too left a frozen picture with no `onError`, so it
+    /// ends the recovery and counts as the next attempt.
     private func recoverFromPlaybackFailure(_ error: Error?, trigger: String = "fatal-failure") {
         guard autoRecover else { return }
-        guard !isRecovering else {
-            logger.debug { "PlayerDiagnostics: already recovering, ignoring" }
-            return
-        }
         guard let player = player,
               let item = player.currentItem,
               let url = (item.asset as? AVURLAsset)?.url else {
             logger.warn { "PlayerDiagnostics: no current item URL, cannot recover" }
+            return
+        }
+        if isRecovering {
+            guard item === recoveryItem else {
+                logger.debug { "PlayerDiagnostics: already recovering, ignoring" }
+                return
+            }
+            logger.warn { "PlayerDiagnostics: the rebuilt item failed before its seek completed (\(trigger))" }
+            isRecovering = false
+            recoveryItem = nil
+        }
+
+        guard Self.sdkRecoveryEnabled else {
+            logger.warn { "PlayerDiagnostics: SDK playback recovery disabled by FlowerConfig - reporting \(trigger) to the app" }
+            reportUnrecoverable(error, url, reason: "\(trigger), sdk recovery disabled")
             return
         }
 
@@ -310,7 +341,7 @@ public final class PlayerDiagnostics {
         }
         guard recoveryAttempts < maxRecoveryAttempts else {
             logger.warn { "PlayerDiagnostics: giving up recovery after \(self.recoveryAttempts) attempts - \(url.absoluteString)" }
-            reportUnrecoverable(error, url, trigger: trigger)
+            reportUnrecoverable(error, url, reason: "\(trigger) after \(maxRecoveryAttempts) recovery attempts")
             return
         }
 
@@ -330,6 +361,7 @@ public final class PlayerDiagnostics {
         // Rebuild from the same URL. Use the player-type-appropriate item swap; for
         // FlowerAVPlayer go through its recovery hook so the ad pipeline is not re-initialized.
         let newItem = AVPlayerItem(url: url)
+        recoveryItem = newItem
         switch player {
         case let flowerPlayer as FlowerAVPlayer:
             flowerPlayer.replaceCurrentItemForRecovery(newItem)
@@ -341,9 +373,12 @@ public final class PlayerDiagnostics {
         }
         let seekTarget = isLive ? CMTime.positiveInfinity : resumePosition
         player.seek(to: seekTarget) { [weak self] _ in
-            guard let self = self else { return }
+            // A completion arriving after its item failed belongs to a recovery already ended (or
+            // replaced) above, and must not end the one now in progress.
+            guard let self = self, self.isRecovering, self.recoveryItem === newItem else { return }
             self.player?.play()
             self.isRecovering = false
+            self.recoveryItem = nil
             self.logger.info { "PlayerDiagnostics: recovery resumed (\(isLive ? "live edge" : "saved position"))" }
         }
     }
@@ -359,7 +394,7 @@ public final class PlayerDiagnostics {
     ///
     /// `error` is the AVFoundation error that ended playback; it goes on the `cause` so a listener
     /// can branch on the CoreMedia/NSURLError code without parsing the message.
-    private func reportUnrecoverable(_ error: Error?, _ url: URL, trigger: String) {
+    private func reportUnrecoverable(_ error: Error?, _ url: URL, reason: String) {
         guard !hasReportedUnrecoverable else { return }
         hasReportedUnrecoverable = true
 
@@ -369,11 +404,16 @@ public final class PlayerDiagnostics {
         }
         adsManagerListener.onError(
             error: FlowerError(
-                message: "playback unrecoverable after \(maxRecoveryAttempts) recovery attempts"
-                    + " (\(trigger)) - url: \(url.absoluteString)",
+                message: "playback unrecoverable (\(reason)) - url: \(url.absoluteString)",
                 cause: KotlinThrowable(message: describe(error))
             )
         )
+    }
+
+    /// FlowerConfig `autoRecoverPlaybackFailure`, read per failure because the config can arrive
+    /// with an ad response after playback has started.
+    private static var sdkRecoveryEnabled: Bool {
+        SdkContainer.companion.getInstance().flowerConfigService.flowerConfig.autoRecoverPlaybackFailure
     }
 
     // MARK: - Stall watchdog
@@ -396,7 +436,7 @@ public final class PlayerDiagnostics {
     /// rebuffering (playhead resumes before the threshold), seeking (playhead moves), and slow
     /// initial buffering (gated behind `hasStartedPlaying`).
     private func checkStall() {
-        guard autoRecover, !isRecovering,
+        guard autoRecover, Self.sdkRecoveryEnabled, !isRecovering,
               let player = player, let item = player.currentItem else { return }
 
         if player.timeControlStatus == .playing {

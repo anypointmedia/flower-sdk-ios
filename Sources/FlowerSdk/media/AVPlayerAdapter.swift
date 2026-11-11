@@ -14,7 +14,7 @@ class AVPlayerAdapter: NSObject, MediaPlayerAdapter {
     private var currentPlayerItem: AVPlayerItem?
 
     /// Health monitoring + auto-recovery for the player received via the media player hook.
-    /// Verbose logging is off by default (production-safe); fatal-stall recovery is always on.
+    /// Verbose logging is off by default (production-safe); recovery follows FlowerConfig ARPF (default off).
     private var diagnostics: PlayerDiagnostics?
 
     private var player: AVPlayer {
