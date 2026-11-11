@@ -789,6 +789,7 @@ __attribute__((swift_name("AdTracker.Companion")))
 - (instancetype)initWithTag:(NSString * _Nullable)tag __attribute__((swift_name("init(tag:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) Sdk_coreAdTrackerCompanion *shared __attribute__((swift_name("shared")));
+- (int64_t)playtimeCheckInterval __attribute__((swift_name("playtimeCheckInterval()")));
 @property (readonly) int64_t AD_COMPLETE_TIME_THRESHOLD __attribute__((swift_name("AD_COMPLETE_TIME_THRESHOLD")));
 @property (readonly) int64_t AD_CTA_EXPIRATION_DURATION __attribute__((swift_name("AD_CTA_EXPIRATION_DURATION")));
 @property (readonly) int64_t AD_CTA_SHOW_DELAY __attribute__((swift_name("AD_CTA_SHOW_DELAY")));
@@ -2553,13 +2554,14 @@ __attribute__((swift_name("GoogleAdView")))
 __attribute__((swift_name("GoogleAdsLoaderListener")))
 @protocol Sdk_coreGoogleAdsLoaderListener
 @required
-- (void)responseAdMediaUrl:(NSString *)mediaUrl duration:(int32_t)duration width:(int32_t)width height:(int32_t)height __attribute__((swift_name("responseAd(mediaUrl:duration:width:height:)")));
+- (void)responseAdMediaUrl:(NSString *)mediaUrl duration:(int32_t)duration width:(int32_t)width height:(int32_t)height skipTimeOffsetMs:(Sdk_coreLong * _Nullable)skipTimeOffsetMs __attribute__((swift_name("responseAd(mediaUrl:duration:width:height:skipTimeOffsetMs:)")));
 - (void)sendBeaconLogTransactionId:(NSString *)transactionId logEvent:(Sdk_coreGoogleAdReportLogEvent *)logEvent errorCode:(NSString * _Nullable)errorCode __attribute__((swift_name("sendBeaconLog(transactionId:logEvent:errorCode:)")));
 @end
 
 __attribute__((swift_name("GoogleAdsManager")))
 @protocol Sdk_coreGoogleAdsManager <Sdk_coreGoogleAdsLoaderListener>
 @required
+- (void)blockSkipLoaderKey:(NSString *)loaderKey __attribute__((swift_name("blockSkip(loaderKey:)")));
 - (void)release_ __attribute__((swift_name("release()")));
 - (void)releaseLoaderKey:(NSString *)loaderKey __attribute__((swift_name("release(loaderKey:)")));
 - (void)requestAdsWrapperAd:(Sdk_coreAd *)wrapperAd loaderKey:(NSString *)loaderKey googleAdView:(id<Sdk_coreGoogleAdView>)googleAdView timeout:(int64_t)timeout googleAdsLoaderListener:(id<Sdk_coreGoogleAdsLoaderListener>)googleAdsLoaderListener __attribute__((swift_name("requestAds(wrapperAd:loaderKey:googleAdView:timeout:googleAdsLoaderListener:)")));
