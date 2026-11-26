@@ -954,6 +954,7 @@ __attribute__((swift_name("AdsLoaderListenerAdNotAvailableReason")))
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly) Sdk_coreAdsLoaderListenerAdNotAvailableReason *noAd __attribute__((swift_name("noAd")));
+@property (class, readonly) Sdk_coreAdsLoaderListenerAdNotAvailableReason *notInitialized __attribute__((swift_name("notInitialized")));
 @property (class, readonly) Sdk_coreAdsLoaderListenerAdNotAvailableReason *timeout __attribute__((swift_name("timeout")));
 @property (class, readonly) Sdk_coreAdsLoaderListenerAdNotAvailableReason *error __attribute__((swift_name("error")));
 + (Sdk_coreKotlinArray<Sdk_coreAdsLoaderListenerAdNotAvailableReason *> *)values __attribute__((swift_name("values()")));
@@ -8737,6 +8738,7 @@ __attribute__((swift_name("FlowerAdsManagerListenerKt")))
 @property (class, readonly) NSString *AD_USER_ACTION_LEARN_MORE __attribute__((swift_name("AD_USER_ACTION_LEARN_MORE")));
 @property (class, readonly) NSString *AD_USER_ACTION_SKIP __attribute__((swift_name("AD_USER_ACTION_SKIP")));
 @property (class, readonly) int32_t SKIPPED_AD_BREAK_REASON_ERROR __attribute__((swift_name("SKIPPED_AD_BREAK_REASON_ERROR")));
+@property (class, readonly) int32_t SKIPPED_AD_BREAK_REASON_NOT_INITIALIZED __attribute__((swift_name("SKIPPED_AD_BREAK_REASON_NOT_INITIALIZED")));
 @property (class, readonly) int32_t SKIPPED_AD_BREAK_REASON_NO_AD __attribute__((swift_name("SKIPPED_AD_BREAK_REASON_NO_AD")));
 @property (class, readonly) int32_t SKIPPED_AD_BREAK_REASON_TIMEOUT __attribute__((swift_name("SKIPPED_AD_BREAK_REASON_TIMEOUT")));
 @end
